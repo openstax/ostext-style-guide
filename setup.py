@@ -8,7 +8,7 @@ setup(name='ostext_style_guide',
       author='Derek Ford',
       author_email='gdf1@rice.edu',
       license='MIT',
-      packages=['ostext_style_guide', 'ostext_kss'],
+      packages=['ostext_style_guide_scripts', 'ostext_kss'],
       install_requires=[
         'Jinja2',
         'pyyaml',
@@ -16,8 +16,8 @@ setup(name='ostext_style_guide',
         'jsonpickle',
       ],
       entry_points={
-          'console_scripts': ['build-style-guide=ostext_style_guide.build_style_guide:main',
-                              'style-guide-data=ostext_style_guide.style_guide_data:main'],
+          'console_scripts': ['build-style-guide=ostext_style_guide_scripts.build_style_guide:main',
+                              'style-guide-data=ostext_style_guide_scripts.style_guide_data:main'],
       },
       zip_safe=False
     )
