@@ -13,9 +13,11 @@ setup(name='ostext_style_guide',
         'Jinja2',
         'pyyaml',
         'Pygments',
+        'jsonpickle',
       ],
       entry_points={
-          'console_scripts': ['build-style-guide=ostext_style_guide.build_style_guide:main'],
+          'console_scripts': ['build-style-guide=ostext_style_guide.build_style_guide:main',
+                              'style-guide-data=ostext_style_guide.style_guide_data:main'],
       },
       zip_safe=False
     )
