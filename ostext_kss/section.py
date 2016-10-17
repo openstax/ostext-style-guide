@@ -11,7 +11,7 @@ COOKED_HTML_START = 'Cooked HTML:'
 RULE_SET_START = 'Ruleset:'
 REFERENCE_START = 'Section'
 
-reference_re = re.compile(r'%s ([\d\w\.]+)' % REFERENCE_START)
+reference_re = re.compile(r'%s ([\s\d\w\.,]+)' % REFERENCE_START)
 optional_re = re.compile(r'\[(.*)\]\?')
 multiline_modifier_re = re.compile(r'^\s+(\w.*)')
 
