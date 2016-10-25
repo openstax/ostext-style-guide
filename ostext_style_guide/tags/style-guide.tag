@@ -52,15 +52,13 @@
       // Section data has been changed, so update the search index.
       this.resetSearchIndex();
 
-      var len = this.sections.length;
-      for(var i = 0; i < len; i++) {
-        var section = this.sections[i];
+      this.sections.map(function(section) {
         this.index.add({
           id: section['name'].split(',')[0],
           name: section['name'].split(',')[1],
           description: section['description']
         });
-      }
+      }.bind(this));
 
       // Section data has been changed, so update the tags.
       this.update();

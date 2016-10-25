@@ -13,16 +13,18 @@
   search(e) {
    this.result_refs = opts.index.search(e.target.value);
    this.results = [];
-   for (result in this.result_refs) {
-     var len = opts.sections.length;
-     for(var i = 0; i < len; i++) {
-       var section = opts.sections[i];
-       if (section['name'].split(',')[0] == this.result_refs[result].ref) {
+
+   // If a section number matches a search result reference
+   // section number, add it to the list of search results.
+   this.result_refs.map(function(result_ref) {
+     opts.sections.map(function(section) {
+       if (section['name'].split(',')[0] == result_ref.ref) {
          this.results.push({id: section['name'].split(',')[0],
                             name: section['name'].split(',')[1]});
        }
-     }
-   }
+     }.bind(this));
+   }.bind(this));
+
    this.update();
   }
 </style-guide-search>
