@@ -4,6 +4,7 @@
     "gulp-riot": "^0.5",
     "gulp-concat": "^2.6",
     "gulp-less": "^3.1.0",
-    "event-stream": "^3.3.4"
+    "event-stream": "^3.3.4",
+    "babel-polyfill":"^6.16.0"
   }
 }
