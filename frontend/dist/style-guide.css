@@ -1,0 +1,41 @@
+body {
+  font-size: 12px;
+  font-family: "Noto Sans", "Noto Sans CJK {JP, KR, SC, TC}", sans-serif;
+}
+.sg-search {
+  overflow: visible;
+}
+.sg-search .sg-search-box-container {
+  background-color: #fff;
+  height: 28px;
+  vertical-align: top;
+  border: 1px solid #d9d9d9;
+  overflow: hidden;
+}
+.sg-search .sg-search-box-container .sg-search-box {
+  padding: 6px 9px 0;
+  height: 100%;
+}
+.sg-search .sg-search-box-container .sg-search-box input {
+  border: none;
+  width: 100%;
+  font-size: 12px;
+}
+.sg-search .sg-search-box-container .sg-search-box input:focus {
+  outline-width: 0;
+}
+.sg-search .sg-search-results {
+  position: absolute;
+}
+.sg-sections > .sg-section > h2 {
+  font-size: 16px;
+}
+.sg-navigation {
+  display: inline-block;
+  width: 200px;
+  vertical-align: top;
+}
+.sg-sections {
+  display: inline-block;
+  width: 400px;
+}
