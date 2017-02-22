@@ -1,8 +1,21 @@
+/*! bulma.io v0.3.1 | MIT License | github.com/jgthms/bulma */
+@charset "utf-8";
 
-body {
-  font-size: 12px; //16px;
-  font-family: "Noto Sans", "Noto Sans CJK {JP, KR, SC, TC}", sans-serif;
-}
+// Override initial variables here
+// You can add new ones or update existing ones:
+$os-blue: #0DC0DC;
+$family-sans-serif: "Noto Sans", "Noto Sans CJK {JP, KR, SC, TC}", sans-serif;
+
+// Override generated variables here
+$primary: $os-blue;
+$family-primary: $family-sans-serif;
+
+@import "sass/utilities/_all";
+@import "sass/base/_all";
+@import "sass/elements/_all";
+@import "sass/components/_all";
+@import "sass/grid/_all";
+@import "sass/layout/_all";
 
 .sg-search {
   overflow: visible;

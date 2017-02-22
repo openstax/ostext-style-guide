@@ -15,6 +15,7 @@ riot.tag2('style-guide-navigation', '<p each="{sections}"><a href="#{id}">{name}
       this.update();
     });
 });
+
 riot.tag2('style-guide-search', '<div class="sg-search-box-container"> <div class="sg-search-box"><input class="sg-search-input" type="text" onkeyup="{search}"></input></div> </div> <div class="sg-search-results"> <div each="{results}" class="sg-search-result"> <a href="#{id}">{name}</a> </div> </div>', '', '', function(opts) {
 
   this.results = [];

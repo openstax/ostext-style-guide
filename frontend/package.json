@@ -1,10 +1,17 @@
 {
+  "name": "DesignGuide",
+  "version": "0.0.1",
+  "description": "Design Guide for Openstax",
+  "author": "Openstax",
   "devDependencies": {
-    "gulp": "^3.0",
-    "gulp-riot": "^0.5",
-    "gulp-concat": "^2.6",
-    "gulp-less": "^3.1.0",
+    "babel-polyfill": "^6.16.0",
+    "browser-sync": "^2.18.8",
     "event-stream": "^3.3.4",
-    "babel-polyfill":"^6.16.0"
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-concat": "^2.6",
+    "gulp-riot": "^0.5",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.4.1"
   }
 }
