@@ -4,6 +4,8 @@
 // Override initial variables here
 // You can add new ones or update existing ones:
 $os-blue: #0DC0DC;
+$os-blue-s60: #054C58;
+$os-blue-s20: #0A99B0;
 $family-sans-serif: "Noto Sans", "Noto Sans CJK {JP, KR, SC, TC}", sans-serif;
 
 // Override generated variables here
@@ -17,47 +19,159 @@ $family-primary: $family-sans-serif;
 @import "sass/grid/_all";
 @import "sass/layout/_all";
 
-.sg-search {
-  overflow: visible;
 
-  .sg-search-box-container {
-    background-color: #fff;
-    height: 28px;
-    vertical-align: top;
-    border: 1px solid #d9d9d9;
-    overflow: hidden;
+/* Layout */
 
-    .sg-search-box {
-      padding: 6px 9px 0;
-      height: 100%;
+body {
+  display: flex;
+  height: 100%;
+  height: 100vh;
+  flex-direction: column;
+}
 
-      input {
-        border: none;
-        width: 100%;
-        font-size: 12px;
-      }
-      input:focus {
-        outline-width: 0;
+.header,
+.footer {
+  flex: none;
+}
+
+.body {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+
+  @include tablet {
+    flex-direction: row;
+  }
+
+  .side-nav {
+    @include tablet {
+      flex: 0 0 20rem;
+    }
+  }
+
+  .main.section {
+    @include tablet {
+      flex: 1;
+      margin: 0;
+    }
+  }
+}
+
+/* Custom styles */
+
+body {
+  background-color: #fbfbfb;
+}
+
+.header .nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+
+  @include tablet {
+    background-color: $primary;
+  }
+  .nav-left {
+    @include tablet {
+      flex: 0 0 20rem;
+      background-color: #fff;
+    }
+  }
+
+  .logo {
+    max-height: 2rem;
+  }
+
+  .nav-toggle {
+    background-color: #f7f7f7;
+    border-radius: 10rem;
+    width: 2rem;
+    height: 2rem;
+    margin: 1rem;
+
+    @include tablet {
+      display: inherit;
+      left: -4rem;
+    }
+
+    span {
+      width: 12px;
+      margin-left: -6px;
+    }
+
+    span:nth-child(1) {
+      margin-top: -4px;
+    }
+
+    span:nth-child(3) {
+      margin-top: 2px;
+    }
+  }
+}
+
+.body {
+  margin-top: 56px;
+
+  .side-nav {
+    background-color: #f7f7f7;
+    color: #3b3b3b;
+
+    a {
+      color: #3b3b3b;
+      &:hover,
+      &:active,
+      &:focus {
+        color: $primary;
       }
     }
   }
-  .sg-search-results {
-    position: absolute;
-  }
-}
+  .main {
+    background-color: #fbfbfb;
 
-.sg-sections > .sg-section {
-  & > h2 {
-    font-size: 16px; //24px;
-  }
-}
+    .search {
+      padding: 1.5rem;
+      display: block;
+      background-color: #fff;
+      margin-bottom: 3rem;
 
-.sg-navigation {
-  display: inline-block;
-  width: 200px;
-  vertical-align: top;
-}
-.sg-sections {
-  display: inline-block;
-  width: 400px;
+      .control.is-grouped {
+        margin-bottom: 0;
+      }
+
+      .input {
+        box-shadow: none;
+        border-radius: 0;
+        border: none;
+        padding-left: 4.5em;
+      }
+    }
+
+    .search-results {
+      position: absolute;
+      background-color: #fff;
+    }
+
+    .section {
+      background-color: #fff;
+    }
+
+    .content .title {
+      color: $os-blue-s60;
+      position: relative;
+
+      &::before {
+        display: inline-block;
+        width: 6px;
+        height: 1.75em;
+        content: '';
+        background-color: $os-blue-s20;
+        position: absolute;
+        left: -1.5rem;
+        top: 50%;
+        margin-top: -0.875em;
+      }
+    }
+  }
 }

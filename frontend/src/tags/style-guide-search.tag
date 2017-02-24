@@ -1,8 +1,14 @@
 <style-guide-search>
-  <div class="sg-search-box-container">
-    <div class="sg-search-box"><input class="sg-search-input" type="text" onkeyup={ search }></input></div>
+  <div class="control is-grouped">
+    <p class="control is-expanded has-icon">
+      <input class="input" type="text" onkeyup={ search } placeholder="Search for content, elements, layout, typography...">
+      <span class="icon is-medium">
+        <i class="fa fa-search"></i>
+      </span>
+    </p>
   </div>
-  <div class="sg-search-results">
+
+  <div class="search-results">
     <div each={results} class="sg-search-result">
      <a href="#{id}">{name}</a>
     </div>

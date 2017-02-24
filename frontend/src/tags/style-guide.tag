@@ -1,21 +1,34 @@
 <style-guide>
+  <nav class="side-nav menu is-hidden-touch menu">
   <!-- Left-side navigation of Style Guide sections -->
   <style-guide-navigation class="sg-navigation" sections={sections}></style-guide-navigation>
+  </nav>
+  <main class="main section">
+    <div class="container">
+      <!-- Style Guide section data -->
+      <style-guide-sections class="sg-sections">
+        <!-- Search elements -->
+        <style-guide-search class="search" index={index} sections={sections}></style-guide-search>
 
-  <!-- Style Guide section data -->
-  <style-guide-sections class="sg-sections">
-    <!-- Search elements -->
-    <style-guide-search class="sg-search" index={index} sections={sections}></style-guide-search>
-
-    <section each={sections} id="{name.split(',')[0]}" class="sg-section">
-      <h2>{name.split(',')[1]}</h2>
-      <p>{description}</p>
-      <div class="sg-html-example"><p>Raw HMTL</p>{raw_html}</div>
-      <div class="sg-html-example"><p>Cooked HTML</p>{cooked_html}</div>
-      <div class="sg-css-example"><p>Rule Set CSS</p>{rule_set}</div>
-    </section>
-  </style-guide-sections>
-
+        <section each={sections} id="{name.split(',')[0]}" class="section">
+          <div class="columns">
+            <div class="column is-three-quarters-desktop is-12-tablet">
+              <div class="content">
+                <h2 class="title is-2">{name.split(',')[1]}</h2>
+                <p>{description}</p>
+                <div class="sg-html-example"><p>Raw HMTL</p>{raw_html}</div>
+                <div class="sg-html-example"><p>Cooked HTML</p>{cooked_html}</div>
+                <div class="sg-css-example"><p>Rule Set CSS</p>{rule_set}</div>
+              </div>
+            </div>
+            <div class="column is-hidden-touch">
+            <h3>In this section</h3>
+            </div>
+          </div>
+        </section>
+      </style-guide-sections>
+    </div>
+  </main>
   <script>
     this.sections = [];
 
