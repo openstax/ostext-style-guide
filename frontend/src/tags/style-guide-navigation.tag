@@ -1,5 +1,5 @@
 <style-guide-navigation>
-  <p each={sections}><a href="#{id}">{name}</a></p>
+  <li each={sections}><a href="#{id}">{name}</a></li>
   <script>
     this.sections = [];
 

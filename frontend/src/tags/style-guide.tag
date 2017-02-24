@@ -1,7 +1,9 @@
 <style-guide>
   <nav class="side-nav menu is-hidden-touch menu">
   <!-- Left-side navigation of Style Guide sections -->
-  <style-guide-navigation class="sg-navigation" sections={sections}></style-guide-navigation>
+    <ul class="menu-list">
+      <style-guide-navigation class="sg-navigation" sections={sections}></style-guide-navigation>
+    </ul>
   </nav>
   <main class="main section">
     <div class="container">

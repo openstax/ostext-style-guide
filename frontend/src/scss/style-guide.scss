@@ -132,6 +132,7 @@ body {
 
     .search {
       padding: 1.5rem;
+      position: relative;
       display: block;
       background-color: #fff;
       margin-bottom: 3rem;
@@ -151,6 +152,15 @@ body {
     .search-results {
       position: absolute;
       background-color: #fff;
+      z-index: 1;
+      width: 100%;
+      left: 0;
+      border-top: 1px solid #ebebeb;
+      top: 100%;
+
+      a {
+        padding-left: 6rem;
+      }
     }
 
     .section {

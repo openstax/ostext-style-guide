@@ -8,10 +8,10 @@
     </p>
   </div>
 
-  <div class="search-results">
-    <div each={results} class="sg-search-result">
-     <a href="#{id}">{name}</a>
-    </div>
+  <div class="search-results menu">
+    <ul each={results} class="menu-list sg-search-result">
+     <li><a href="#{id}">{name}</a></li>
+    </ul>
   </div>
 
   this.results = [];
