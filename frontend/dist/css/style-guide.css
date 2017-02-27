@@ -4693,34 +4693,138 @@ label.panel-block {
   background-color: whitesmoke;
   padding: 3rem 1.5rem 6rem; }
 
-.sg-search {
-  overflow: visible; }
-  .sg-search .sg-search-box-container {
-    background-color: #fff;
-    height: 28px;
-    vertical-align: top;
-    border: 1px solid #d9d9d9;
-    overflow: hidden; }
-    .sg-search .sg-search-box-container .sg-search-box {
-      padding: 6px 9px 0;
-      height: 100%; }
-      .sg-search .sg-search-box-container .sg-search-box input {
+/* Layout */
+body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+  height: 100vh;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column; }
+
+.header,
+.footer {
+  -webkit-box-flex: 0;
+      -ms-flex: none;
+          flex: none; }
+
+.body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 auto;
+          flex: 1 0 auto;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column; }
+  @media screen and (min-width: 769px) {
+    .body {
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: row;
+              flex-direction: row; } }
+  @media screen and (min-width: 769px) {
+    .body .side-nav {
+      -webkit-box-flex: 0;
+          -ms-flex: 0 0 20rem;
+              flex: 0 0 20rem; } }
+  @media screen and (min-width: 769px) {
+    .body .main.section {
+      -webkit-box-flex: 1;
+          -ms-flex: 1;
+              flex: 1;
+      margin: 0; } }
+
+/* Custom styles */
+body {
+  background-color: #fbfbfb; }
+
+.header .nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999; }
+  @media screen and (min-width: 769px) {
+    .header .nav {
+      background-color: #0DC0DC; } }
+  @media screen and (min-width: 769px) {
+    .header .nav .nav-left {
+      -webkit-box-flex: 0;
+          -ms-flex: 0 0 20rem;
+              flex: 0 0 20rem;
+      background-color: #fff; } }
+  .header .nav .logo {
+    max-height: 2rem; }
+  .header .nav .nav-toggle {
+    background-color: #f7f7f7;
+    border-radius: 10rem;
+    width: 2rem;
+    height: 2rem;
+    margin: 1rem; }
+    @media screen and (min-width: 769px) {
+      .header .nav .nav-toggle {
+        display: inherit;
+        left: -4rem; } }
+    .header .nav .nav-toggle span {
+      width: 12px;
+      margin-left: -6px; }
+    .header .nav .nav-toggle span:nth-child(1) {
+      margin-top: -4px; }
+    .header .nav .nav-toggle span:nth-child(3) {
+      margin-top: 2px; }
+
+.body {
+  margin-top: 56px; }
+  .body .side-nav {
+    background-color: #f7f7f7;
+    color: #3b3b3b; }
+    .body .side-nav a {
+      color: #3b3b3b; }
+      .body .side-nav a:hover, .body .side-nav a:active, .body .side-nav a:focus {
+        color: #0DC0DC; }
+  .body .main {
+    background-color: #fbfbfb; }
+    .body .main .search {
+      padding: 1.5rem;
+      position: relative;
+      display: block;
+      background-color: #fff;
+      margin-bottom: 3rem; }
+      .body .main .search .control.is-grouped {
+        margin-bottom: 0; }
+      .body .main .search .input {
+        box-shadow: none;
+        border-radius: 0;
         border: none;
-        width: 100%;
-        font-size: 12px; }
-      .sg-search .sg-search-box-container .sg-search-box input:focus {
-        outline-width: 0; }
-  .sg-search .sg-search-results {
-    position: absolute; }
-
-.sg-sections > .sg-section > h2 {
-  font-size: 16px; }
-
-.sg-navigation {
-  display: inline-block;
-  width: 200px;
-  vertical-align: top; }
-
-.sg-sections {
-  display: inline-block;
-  width: 400px; }
+        padding-left: 4.5em; }
+    .body .main .search-results {
+      position: absolute;
+      background-color: #fff;
+      z-index: 1;
+      width: 100%;
+      left: 0;
+      border-top: 1px solid #ebebeb;
+      top: 100%; }
+      .body .main .search-results a {
+        padding-left: 6rem; }
+    .body .main .section {
+      background-color: #fff; }
+    .body .main .content .title {
+      color: #054C58;
+      position: relative; }
+      .body .main .content .title::before {
+        display: inline-block;
+        width: 6px;
+        height: 1.75em;
+        content: '';
+        background-color: #0A99B0;
+        position: absolute;
+        left: -1.5rem;
+        top: 50%;
+        margin-top: -0.875em; }

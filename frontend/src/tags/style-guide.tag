@@ -1,5 +1,5 @@
 <style-guide>
-  <nav class="side-nav menu is-hidden-touch menu">
+  <nav class="side-nav menu">
   <!-- Left-side navigation of Style Guide sections -->
     <ul class="menu-list">
       <style-guide-navigation class="sg-navigation" sections={sections}></style-guide-navigation>

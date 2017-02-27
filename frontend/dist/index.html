@@ -18,9 +18,46 @@
   </head>
   <body>
     <!-- Mount the Style Guide application. -->
-    <header><a href="/" aria-label="Home Page"><img class="logo-color" src="http://www.openstax.org/images/logo.svg" alt="OpenStax logo"></a></header>
-    <style-guide></style-guide>
-    <footer>&copy; Openstax</footer>
+    <header class="header">
+      <nav class="nav has-shadow">
+        <div class="nav-left">
+          <a class="nav-item">
+            <img src="http://www.openstax.org/images/logo.svg" class="logo" alt="OpenStax logo">
+          </a>
+        </div>
+        <!-- This "nav-toggle" hamburger menu is only visible on mobile -->
+        <!-- You need JavaScript to toggle the "is-active" class on "nav-menu" -->
+        <span class="nav-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+
+        <!-- This "nav-menu" is hidden on mobile -->
+        <!-- Add the modifier "is-active" to display it on mobile -->
+        <!-- <div class="nav-right nav-menu">
+
+
+        </div> -->
+      </nav>
+    </header>
+    <style-guide class="body"></style-guide>
+    <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <p>
+          <strong>Design Guide</strong> by <a href="http://www.openstax.org">Openstax</a>. The source code is licensed
+          <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
+          is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC ANS 4.0</a>.
+        </p>
+        <p>
+          <a class="icon" href="https://github.com/openstax/ostext-style-guide">
+            <i class="fa fa-github"></i>
+          </a>
+        </p>
+      </div>
+    </div>
+  </footer>
     <script> riot.mount('*') </script>
   </body>
 </html>

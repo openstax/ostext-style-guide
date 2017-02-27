@@ -32,6 +32,7 @@ gulp.task('serve', ['sass','riot'], function() {
 
   gulp.watch(paths.sass, ['sass']);
   gulp.watch(paths.tags, ['js-watch']);
+  gulp.watch(paths.js, ['js-watch']);
   gulp.watch('src/*.html').on('change', browserSync.reload);
 });
 
