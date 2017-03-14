@@ -41,8 +41,8 @@ var removeOpenClasses = function(event) {
   removeClass(document.querySelector('.body'), 'is-active');
 }
 
-window.onload=function(){
-document.querySelector('.nav-toggle').addEventListener('click', navClickEventHandler);
-window.addEventListener('resize', removeOpenClasses);
-document.querySelector('.side-nav').addEventListener('click', removeOpenClasses);
+window.onload = function () {
+  document.querySelector('.nav-toggle').addEventListener('click', navClickEventHandler);
+  window.addEventListener('resize', removeOpenClasses);
+  document.querySelector('.side-nav').addEventListener('click', removeOpenClasses);
 }

@@ -5,7 +5,7 @@ const config = {
   entry: ['babel-polyfill', path.resolve(__dirname, 'src/assets/js/app.js')],
   output: {
     path: path.resolve(__dirname, 'dist/assets/js'),
-    filename: 'style-guide.js'
+    filename: 'app.js'
   },
   module: {
     loaders: [{

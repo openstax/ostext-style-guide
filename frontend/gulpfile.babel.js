@@ -94,20 +94,11 @@ function javascript() {
       if (!isSourceMap) this.push(file);
       cb();
     }))
-    .pipe($.concat('app.js'))
     .pipe($.if(PRODUCTION, $.uglify()
       .on('error', e => { console.log(e); })
     ))
     .pipe($.if(!PRODUCTION, $.sourcemaps.write('./')))
     .pipe(gulp.dest(PATHS.dist + '/assets/js'));
-}
-
-//Riot JS task
-function riot() {
-  return gulp.src(PATHS.tags)
-  .pipe($.riot())
-  .pipe($.concat('tags.js'))
-  .pipe(gulp.dest(PATHS.dist + '/assets/js'));
 }
 
 // Copy images to the "dist" folder
@@ -139,7 +130,7 @@ function watch() {
   gulp.watch(PATHS.assets, copy);
   gulp.watch('src/*.html').on('all', gulp.series(pages, browser.reload));
   gulp.watch('src/assets/scss/**/*.scss').on('all', sass);
-  gulp.watch('src/assets/js/**/*.js').on('all', gulp.series(javascript, browser.reload));
+  gulp.watch('src/assets/js/**/*.js').on('all', gulp.series(javascript, reload));
   gulp.watch('src/assets/img/**/*').on('all', gulp.series(images, browser.reload));
   // gulp.watch('src/styleguide/**').on('all', gulp.series(styleGuide, browser.reload));
 }
