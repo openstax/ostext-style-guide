@@ -6,9 +6,10 @@ import lunr from 'lunr';
 riot.tag2('style-guide-navigation',
 
   `<ul class="menu-list">
-  <li each="{sections}">
-    <a href="#{id}">{name}</a>
-   </li>
+    <li class="changelog"><a href="#0.0.0">v0.0.1</a></li>
+    <li each="{sections}" class="{id}">
+      <a href="#{id}">{name}</a>
+    </li>
    </ul>`,
 
   '', '',
@@ -73,10 +74,8 @@ riot.tag2('style-guide-search',
 riot.tag2('style-guide',
 
   `<nav class="side-nav menu">
-  <!-- Left-side navigation of Style Guide sections -->
-    <ul class="menu-list">
-      <style-guide-navigation class="sg-navigation" sections={sections}></style-guide-navigation>
-    </ul>
+    <!-- Left-side navigation of Style Guide sections -->
+    <style-guide-navigation class="sg-navigation" sections={sections}></style-guide-navigation>
   </nav>
   <main class="main section">
     <div class="container">

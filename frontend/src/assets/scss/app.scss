@@ -69,13 +69,15 @@ body {
 }
 
 .header .nav {
-  // position: fixed;
-  // top: 0;
-  // left: 0;
-  // right: 0;
   z-index: 9999;
   min-height: 4rem;
 
+@include mobile {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
 
   @include tablet {
     background-color: $primary;
@@ -131,7 +133,9 @@ body {
 }
 
 .body {
-  // margin-top: 56px;
+  @include mobile {
+    margin-top: 56px;
+  }
 
   .side-nav {
     background-color: #f7f7f7;
@@ -140,8 +144,10 @@ body {
     @include mobile {
       width: 0;
       height: 0;
+      opacity: 0;
 
       @at-root .is-active#{&} {
+        opacity: 1;
         width: inherit;
         height: inherit;
         position: fixed;
@@ -170,6 +176,26 @@ body {
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
         transition: 0.2s transform ease-out 0.1s;
+      }
+    }
+
+    li[class$=".0.0"] {
+      margin-top: 1.5em;
+      position: relative;
+
+      &::before {
+        content: '';
+        display: block;
+        height: 1px;
+        width: 100%;
+        background-color: #d8d8d8;
+        top: -.75em;
+        position: absolute;
+      }
+
+      a {
+        text-transform: uppercase;
+        font-weight: 600;
       }
     }
 
@@ -257,6 +283,24 @@ body {
         left: -1.5rem;
         top: 50%;
         margin-top: -0.875em;
+      }
+    }
+  }
+}
+
+.footer {
+  color: #fff;
+  background-color: #077384;
+
+  .meta {
+    margin-bottom: 10px;
+
+    a {
+      font-weight: 600;
+
+      &:nth-child(2) {
+        margin-left: 20px;
+        margin-right: 20px;
       }
     }
   }
