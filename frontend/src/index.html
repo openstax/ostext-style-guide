@@ -12,9 +12,8 @@
       // JS resources.
       var json_request = pegasus('assets/data/style-guide.json');
     </script>
-    <script src="https://cdn.jsdelivr.net/riot/2.6/riot.min.js"></script>
-    <script src="assets/js/tags.js" type="text/javascript"></script>
-    <script src="assets/js/app.js" type="text/javascript" defer></script>
+    <script src="assets/js/app.js" type="text/javascript"></script>
+
   </head>
   <body>
     <!-- Mount the Style Guide application. -->
@@ -58,6 +57,6 @@
       </div>
     </div>
   </footer>
-    <script> riot.mount('*') </script>
+  <script> riot.mount('*', app) </script>
   </body>
 </html>

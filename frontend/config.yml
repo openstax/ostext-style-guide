@@ -29,7 +29,4 @@ PATHS:
   # Paths to JavaScript libraries, which are combined into one file
   javascript:
     # Paths to your own project code are here
-    - "src/assets/js/!(app).js"
-    - "src/assets/js/app.js"
-  tags:
-    - "src/assets/tags/**/*.tag"
+    - "src/assets/js/**/*.js"

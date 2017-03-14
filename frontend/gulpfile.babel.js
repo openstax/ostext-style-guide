@@ -4,6 +4,7 @@ import plugins  from 'gulp-load-plugins';
 import yargs    from 'yargs';
 import browser  from 'browser-sync';
 import gulp     from 'gulp';
+import webpack from 'webpack-stream';
 import rimraf   from 'rimraf';
 // import sherpa   from 'style-sherpa';
 import yaml     from 'js-yaml';
@@ -25,7 +26,7 @@ function loadConfig() {
 
 // Build the "dist" folder by running all of the below tasks
 gulp.task('build',
- gulp.series(clean, gulp.parallel(pages, sass, riot, javascript, images, copy)));
+ gulp.series(clean, gulp.parallel(pages, sass, javascript, images, copy)));
 
 // Build the site, run the server, and watch for file changes
 gulp.task('default',
@@ -84,7 +85,18 @@ function sass() {
 function javascript() {
   return gulp.src(PATHS.javascript)
     .pipe($.sourcemaps.init())
-    .pipe($.babel({ignore: ['lunr.min.js']}))
+    .pipe($.babel())
+    .pipe(webpack({ entry: process.cwd() + '/src/assets/js/app.js',
+                    output: {
+                      path: process.cwd() + '/dist/assets/js',
+                      filename: 'style-guide.js'
+                    },
+                    module: {
+                      loaders: [{
+                        exclude: /node_modules/,
+                        loader: 'babel-loader'
+                      }]
+                    }}))
     .pipe($.concat('app.js'))
     .pipe($.if(PRODUCTION, $.uglify()
       .on('error', e => { console.log(e); })
@@ -130,7 +142,6 @@ function watch() {
   gulp.watch(PATHS.assets, copy);
   gulp.watch('src/*.html').on('all', gulp.series(pages, browser.reload));
   gulp.watch('src/assets/scss/**/*.scss').on('all', sass);
-  gulp.watch('src/assets/tags/**/*.tag').on('all', gulp.series(riot, browser.reload));
   gulp.watch('src/assets/js/**/*.js').on('all', gulp.series(javascript, browser.reload));
   gulp.watch('src/assets/img/**/*').on('all', gulp.series(images, browser.reload));
   // gulp.watch('src/styleguide/**').on('all', gulp.series(styleGuide, browser.reload));
