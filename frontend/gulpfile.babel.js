@@ -4,11 +4,12 @@ import plugins  from 'gulp-load-plugins';
 import yargs    from 'yargs';
 import browser  from 'browser-sync';
 import gulp     from 'gulp';
-import webpack from 'webpack-stream';
+import webpack  from 'webpack-stream';
 import rimraf   from 'rimraf';
 // import sherpa   from 'style-sherpa';
 import yaml     from 'js-yaml';
 import fs       from 'fs';
+import through  from 'through2';
 
 // Load all Gulp plugins into one variable
 const $ = plugins();
@@ -84,19 +85,15 @@ function sass() {
 // In production, the file is minified
 function javascript() {
   return gulp.src(PATHS.javascript)
-    .pipe($.sourcemaps.init())
-    .pipe($.babel())
-    .pipe(webpack({ entry: process.cwd() + '/src/assets/js/app.js',
-                    output: {
-                      path: process.cwd() + '/dist/assets/js',
-                      filename: 'style-guide.js'
-                    },
-                    module: {
-                      loaders: [{
-                        exclude: /node_modules/,
-                        loader: 'babel-loader'
-                      }]
-                    }}))
+    .pipe(webpack(require('./webpack.config.js')))
+    .pipe($.sourcemaps.init({loadMaps: true}))
+    .pipe(through.obj(function (file, enc, cb) {
+      // Dont pipe through any source map files as it will be handled
+      // by gulp-sourcemaps
+      var isSourceMap = /\.map$/.test(file.path);
+      if (!isSourceMap) this.push(file);
+      cb();
+    }))
     .pipe($.concat('app.js'))
     .pipe($.if(PRODUCTION, $.uglify()
       .on('error', e => { console.log(e); })
