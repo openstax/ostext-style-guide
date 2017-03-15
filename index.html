@@ -12,9 +12,8 @@
       // JS resources.
       var json_request = pegasus('assets/data/style-guide.json');
     </script>
-    <script src="https://cdn.jsdelivr.net/riot/2.6/riot.min.js"></script>
-    <script src="assets/js/tags.js" type="text/javascript"></script>
-    <script src="assets/js/app.js" type="text/javascript" defer></script>
+    <script src="assets/js/app.js" type="text/javascript"></script>
+
   </head>
   <body>
     <!-- Mount the Style Guide application. -->
@@ -44,20 +43,32 @@
     <style-guide class="body"></style-guide>
     <footer class="footer">
     <div class="container">
-      <div class="content has-text-centered">
-        <p>
-          <strong>Design Guide</strong> by <a href="http://www.openstax.org">Openstax</a>. The source code is licensed
-          <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
-          is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC ANS 4.0</a>.
-        </p>
-        <p>
-          <a class="icon" href="https://github.com/openstax/ostext-style-guide">
-            <i class="fa fa-github"></i>
-          </a>
-        </p>
+      <div class="columns is-vcentered">
+        <div class="column is-two-thirds">
+        <div class="meta">
+          <a href="http://www.openstax.org/about" target="_blank">About</a>
+          <a href="http://www.openstax.org/blog" target="_blank">Blog</a>
+          <a href="http://www.openstax.org/contact" target="_blank">Contact</a>
+        </div>
+          <p>
+            Design Guide by <a href="http://www.openstax.org">Openstax</a>. The source code is licensed
+            <a href="http://opensource.org/licenses/mit-license.php">MIT</a>.
+          </p>
+          <p>
+            The website content is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC ANS 4.0</a>.
+          </p>
+        </div>
+        <div class="column has-text-right">
+        <a class="icon" href="https://github.com/openstax/ostext-style-guide">
+          <i class="fa fa-github"></i>
+        </a>
+        <a class="icon" href="https://github.com/openstax/ostext-style-guide">
+          <i class="fa fa-twitter"></i>
+        </a>
+        </div>
       </div>
     </div>
   </footer>
-    <script> riot.mount('*') </script>
+  <script> riot.mount('*', app) </script>
   </body>
 </html>
