@@ -18,39 +18,32 @@ const $ = plugins();
 const PRODUCTION = !!(yargs.argv.production);
 
 // Load settings from config.yml
-const { COMPATIBILITY, PORT, UNCSS_OPTIONS, PATHS } = loadConfig();
-
-function loadConfig() {
+// const { COMPATIBILITY, PORT, UNCSS_OPTIONS, PATHS } = loadConfig();
+export const loadConfig = () => yaml.load(ymlFile)
   let ymlFile = fs.readFileSync('config.yml', 'utf8');
-  return yaml.load(ymlFile);
-}
 
-// Build the "dist" folder by running all of the below tasks
-gulp.task('build',
- gulp.series(clean, gulp.parallel(pages, sass, javascript, images, copy)));
-
-// Build the site, run the server, and watch for file changes
-gulp.task('default',
-  gulp.series('build', server, watch));
+const config =  loadConfig(),
+      COMPATIBILITY = config.COMPATIBILITY,
+      PORT = config.PORT,
+      UNCSS_OPTIONS = config.UNCSS_OPTIONS,
+      PATHS = config.PATHS
 
 // Delete the "dist" folder
 // This happens every time a build starts
-function clean(done) {
+export const clean = (done) => {
   rimraf(PATHS.dist, done);
 }
 
 // Copy files out of the assets folder
 // This task skips over the "img", "js", and "scss" folders, which are parsed separately
-function copy() {
-  return gulp.src(PATHS.assets)
-    .pipe(gulp.dest(PATHS.dist + '/assets/data'));
-}
+export const copy = () => gulp.src(PATHS.assets)
+  .pipe(gulp.dest(PATHS.dist + '/assets/data'));
+
 
 // Copy page templates into finished HTML files
-function pages() {
-  return gulp.src('src/*.{html,hbs,handlebars}')
-    .pipe(gulp.dest(PATHS.dist));
-}
+export const pages = () => gulp.src('src/*.{html,hbs,handlebars}')
+  .pipe(gulp.dest(PATHS.dist));
+
 
 
 // Generate a style guide from the Markdown content and HTML template in styleguide/
@@ -63,56 +56,51 @@ function pages() {
 
 // Compile Sass into CSS
 // In production, the CSS is compressed
-function sass() {
-  return gulp.src('src/assets/scss/app.scss')
-    .pipe($.sourcemaps.init())
-    .pipe($.sass({
-      includePaths: PATHS.sass
-    })
-      .on('error', $.sass.logError))
-    .pipe($.autoprefixer({
-      browsers: COMPATIBILITY
-    }))
-    // Comment in the pipe below to run UnCSS in production
-    //.pipe($.if(PRODUCTION, $.uncss(UNCSS_OPTIONS)))
-    .pipe($.if(PRODUCTION, $.cssnano()))
-    .pipe($.if(!PRODUCTION, $.sourcemaps.write('./')))
-    .pipe(gulp.dest(PATHS.dist + '/assets/css'))
-    .pipe(browser.reload({ stream: true }));
-}
+export const sass = () => gulp.src('src/assets/scss/app.scss')
+  .pipe($.sourcemaps.init())
+  .pipe($.sass({
+    includePaths: PATHS.sass
+  }).on('error', $.sass.logError))
+  .pipe($.autoprefixer({
+    browsers: COMPATIBILITY
+  }))
+  // Comment in the pipe below to run UnCSS in production
+  //.pipe($.if(PRODUCTION, $.uncss(UNCSS_OPTIONS)))
+  .pipe($.if(PRODUCTION, $.cssnano()))
+  .pipe($.if(!PRODUCTION, $.sourcemaps.write('./')))
+  .pipe(gulp.dest(PATHS.dist + '/assets/css'))
+  .pipe(browser.reload({ stream: true }));
 
 // Combine JavaScript into one file
 // In production, the file is minified
-function javascript() {
-  return gulp.src(PATHS.javascript)
-    .pipe(webpack(require('./webpack.config.js')))
-    .pipe($.sourcemaps.init({loadMaps: true}))
-    .pipe(through.obj(function (file, enc, cb) {
-      // Dont pipe through any source map files as it will be handled
-      // by gulp-sourcemaps
-      var isSourceMap = /\.map$/.test(file.path);
-      if (!isSourceMap) this.push(file);
-      cb();
-    }))
-    .pipe($.if(PRODUCTION, $.uglify()
-      .on('error', e => { console.log(e); })
-    ))
-    .pipe($.if(!PRODUCTION, $.sourcemaps.write('./')))
-    .pipe(gulp.dest(PATHS.dist + '/assets/js'));
-}
+export const javascript = () => gulp.src(PATHS.javascript)
+  .pipe(webpack(require('./webpack.config.js')))
+  .pipe($.sourcemaps.init({loadMaps: true}))
+  .pipe(through.obj(function (file, enc, cb) {
+    // Dont pipe through any source map files as it will be handled
+    // by gulp-sourcemaps
+    let isSourceMap = /\.map$/.test(file.path);
+    if (!isSourceMap) this.push(file);
+    cb();
+  }))
+  .pipe($.if(PRODUCTION, $.uglify()
+    .on('error', e => { console.log(e); })
+  ))
+  .pipe($.if(!PRODUCTION, $.sourcemaps.write('./')))
+  .pipe(gulp.dest(PATHS.dist + '/assets/js'));
+
 
 // Copy images to the "dist" folder
 // In production, the images are compressed
-function images() {
-  return gulp.src('src/assets/img/**/*')
-    .pipe($.if(PRODUCTION, $.imagemin({
-      progressive: true
-    })))
-    .pipe(gulp.dest(PATHS.dist + '/assets/img'));
-}
+export const images = () => gulp.src('src/assets/img/**/*')
+  .pipe($.if(PRODUCTION, $.imagemin({
+    progressive: true
+  })))
+  .pipe(gulp.dest(PATHS.dist + '/assets/img'));
+
 
 // Start a server with BrowserSync to preview the site in
-function server(done) {
+export const server = (done) => {
   browser.init({
     server: PATHS.dist, port: PORT
   });
@@ -120,13 +108,13 @@ function server(done) {
 }
 
 // Reload the browser with BrowserSync
-function reload(done) {
+export const reload = (done) => {
   browser.reload();
   done();
 }
 
 // Watch for changes to static assets, pages, Sass, and JavaScript
-function watch() {
+export const watch = () => {
   gulp.watch(PATHS.assets, copy);
   gulp.watch('src/*.html').on('all', gulp.series(pages, browser.reload));
   gulp.watch('src/assets/scss/**/*.scss').on('all', sass);
@@ -134,3 +122,15 @@ function watch() {
   gulp.watch('src/assets/img/**/*').on('all', gulp.series(images, browser.reload));
   // gulp.watch('src/styleguide/**').on('all', gulp.series(styleGuide, browser.reload));
 }
+
+// Build the "dist" folder by running all of the below tasks
+// gulp.task('build',
+//  gulp.series(clean, gulp.parallel(pages, sass, javascript, images, copy)));
+export const build = gulp.series(clean, gulp.parallel(pages, sass, javascript, images, copy));
+
+// Build the site, run the server, and watch for file changes
+// gulp.task('default',
+//   gulp.series('build', server, watch));
+export const dev =  gulp.series(build, server, watch);
+
+export default dev;
