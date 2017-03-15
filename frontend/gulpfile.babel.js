@@ -39,12 +39,9 @@ export const clean = (done) => {
 export const copy = () => gulp.src(PATHS.assets)
   .pipe(gulp.dest(PATHS.dist + '/assets/data'));
 
-
 // Copy page templates into finished HTML files
 export const pages = () => gulp.src('src/*.{html,hbs,handlebars}')
   .pipe(gulp.dest(PATHS.dist));
-
-
 
 // Generate a style guide from the Markdown content and HTML template in styleguide/
 // function styleGuide(done) {
@@ -89,7 +86,6 @@ export const javascript = () => gulp.src(PATHS.javascript)
   .pipe($.if(!PRODUCTION, $.sourcemaps.write('./')))
   .pipe(gulp.dest(PATHS.dist + '/assets/js'));
 
-
 // Copy images to the "dist" folder
 // In production, the images are compressed
 export const images = () => gulp.src('src/assets/img/**/*')
@@ -97,7 +93,6 @@ export const images = () => gulp.src('src/assets/img/**/*')
     progressive: true
   })))
   .pipe(gulp.dest(PATHS.dist + '/assets/img'));
-
 
 // Start a server with BrowserSync to preview the site in
 export const server = (done) => {
@@ -116,7 +111,7 @@ export const reload = (done) => {
 // Watch for changes to static assets, pages, Sass, and JavaScript
 export const watch = () => {
   gulp.watch(PATHS.assets, copy);
-  gulp.watch('src/*.html').on('all', gulp.series(pages, browser.reload));
+  gulp.watch('src/*.html').on('all', gulp.series(pages, reload));
   gulp.watch('src/assets/scss/**/*.scss').on('all', sass);
   gulp.watch('src/assets/js/**/*.js').on('all', gulp.series(javascript, reload));
   gulp.watch('src/assets/img/**/*').on('all', gulp.series(images, browser.reload));
