@@ -1,0 +1,556 @@
+/**
+@Section
+  Getting Started
+  =========
+
+  Lorem ipsum dolor sit amet, est ex dolore assueverit, nisl esse eum ad, nec sint assum ea.
+  Vidit soleat no mea. Iusto tation mediocrem mea id, te forensibus appellantur eos, liber
+  essent vituperatoribus ei pri. Nam offendit inciderint delicatissimi at, eum ne graeci
+  inimicus. Eu nec error numquam probatus, nisl aeterno persecuti cu eum, magna nonumes
+  dignissim est te.
+
+
+  *single asterisks*
+
+  _single underscores_
+
+  **double asterisks**
+
+  __double underscores__
+
+  Markdown is nice.
+
+
+  MathML
+  ---------
+
+  <math>
+    <mstyle displaystyle="true">
+      <mrow>
+        <msub>
+          <mi mathvariant="normal">R</mi>
+          <mstyle scriptlevel="1">
+            <mrow><mi>μ</mi><mi>ν</mi></mrow>
+          </mstyle>
+        </msub>
+        <mo>-</mo>
+        <mfrac>
+          <mn>1</mn>
+          <mn>2</mn>
+        </mfrac>
+        <msub>
+          <mi>g</mi>
+          <mstyle scriptlevel="1">
+            <mrow><mi>μ</mi><mi>ν</mi></mrow>
+          </mstyle>
+        </msub>
+        <mi mathvariant="normal">R</mi>
+        <mo>=</mo>
+        <mfrac>
+          <mrow>
+            <mn>8</mn>
+            <mi>π</mi>
+            <mi mathvariant="normal">G</mi>
+          </mrow>
+          <msup>
+            <mi>c</mi>
+            <mn>4</mn>
+          </msup>
+        </mfrac>
+        <msub>
+          <mi mathvariant="normal">T</mi>
+          <mstyle scriptlevel="1">
+            <mrow><mi>μ</mi><mi>ν</mi></mrow>
+          </mstyle>
+        </msub>
+      </mrow>
+    </mstyle>
+  </math>
+
+  Examples, styled or markup
+  ---------
+
+
+  `
+  <div data-type="section">
+   This is a code example.
+  </div>
+  `
+
+
+  That's all, folks.
+
+  @Markup
+    @Type highlighted
+    @Source blockquote-raw.html
+  @Markup
+    @Type highlighted
+    @Source blockquote-cooked.html
+  @Markup
+    @Type styled
+    @Source blockquote-cooked.html
+
+  @Number '1.0.0'
+  @Id #section-100
+*/
+
+/**
+@Section
+  Our Process
+  =========
+
+  Github
+  ---------
+
+  The primary venue of collaboration between OpenStax and vendors is
+  [GitHub](www.github.com), where our code repositories and project
+  management tools reside.
+
+  Our code repository is available ([privately](#new-collaborators)) at
+  <https://github.com/Connexions/oer.exports>.
+
+  Lorem ipsum dolor sit amet, est ex dolore assueverit, nisl esse eum ad, nec sint assum ea.
+  Vidit soleat no mea. Iusto tation mediocrem mea id, te forensibus appellantur eos, liber
+  essent vituperatoribus ei pri. Nam offendit inciderint delicatissimi at, eum ne graeci
+  inimicus. Eu nec error numquam probatus, nisl aeterno persecuti cu eum, magna nonumes
+  dignissim est te.
+
+  New collaborators
+  ---------
+
+  In order to gain access to the OpenStax repository, oer.exports, which holds our
+  code and issue management tools, perform the following tasks:
+
+  1. If you do not have a GitHub account, create one.
+    * Go to <http://www.github.com/>.
+    * Enter the requested information and click **Sign up for GitHub**.
+  2. Send your GitHub username to Alana Lemay-Gibson <nyxer@rice.edu>, and
+     Alina Slavik <alinams@rice.edu>.
+
+     Our A-team will then setup your access to the Connexions / oer.exports repository.
+     You will receive an invitation email from GitHub with a link to follow to accept
+     access, or you may visit <https://github.com/Connexions> where you can find a link
+     to accept access at the top.
+  3. Visit the OpenStax repository at <https://github.com/Connexions/oer.exports>.
+
+     ![OpenStax repository](assets/img/process-00.png)
+
+  Report and track an issue with a textbook template
+  ---------
+
+  To submit an issue for an OpenStax textbook, perform the following tasks:
+
+  1. Ensure that you are logged into GitHub:
+    * If you are not logged into GitHub,  the Sign in button displays in the upper,
+    right corner of the page.
+    * If you are logged into GitHub, your username display in the upper, right corner
+    of the page.
+  2. From the links menu on the top of the page, click **Issues**.
+
+    ![GitHub Issues](assets/img/process-01.png)
+  3. Click **New Issue**.
+
+    ![New GitHub Issue](assets/img/process-02.png)
+  4. To create the issue, enter the following information:
+
+    ![Github Issue Information](assets/img/process-03.png)
+
+    * At **Title**, enter a title for the issue. Please include the name of the
+      textbook in the title, then use a colon and type a summary of the issue, e.g.
+      "Economics: Feature titles 10 pixels too far left".
+    * At **no one is assigned**, click the gear button and select **nyxer95** to assign
+      the issue to the Project Manager.
+    * At **Leave a comment**, enter the following information:
+      1. Rendition in which you encountered the issue, e.g. HTML, PDF, etc.
+      2. Chapter and Module number.
+      3. A detailed (quantitative and qualitative) description of the issue.
+    * At **Add Labels**, click to select a value from all of the following label groups:
+      1. book
+      2. env
+      3. prio
+      4. type
+
+      ![Creating an Issue](assets/img/process-04.png)
+    * Locate the screen captures of the issue and drag them into the comment section
+      of the page.
+
+      To ensure that your screen captures are inserted properly, click **Preview**.
+
+      ![Preview an Issue](assets/img/process-05.png)
+    * Click **Submit new issue**
+
+      ![Submitted Issue](assets/img/process-06.png)
+
+  To track issues that you submitted, perform the following tasks:
+
+  1. Go to <https://github.com/Connexions/oer.exports/issues?state=open>.
+  2. From **Browse Issues**, click **Created by you**.
+
+     ![Track Issues](assets/img/process-07.png)
+  3. If you want to see only the issues related to a specific book, click one of the
+     book labels.
+
+  Questions
+  ---------
+
+  If you have any questions about how to use GitHub to track issues related to OpenStax
+  textbook development, please contact the Project Manager for OpenStax, Alana Lemay-Gibson,
+  at <nxyer@rice.edu>
+
+  Report and track an issue with this document.
+  ---------
+
+  ![:)](https://emoji.slack-edge.com/T0F5B5PGQ/fiestaparrot/53961a732fb32de3.gif)
+
+  Report an issue with a content development staging server.
+  ---------
+
+  1. Complete the following email template:
+    * **Subject Line**: URGENT: Work Stoppage on Textbook Staging Server
+    * **Message Body**: We don't have access to the server at address: \_\_\_\_\_\_\_\_\_\_\_\_\_.  It has been down for \_\_ \[minutes/hour\(s\)\].  This is causing work stoppage.
+
+  2. Include a brief statement of the nature of the outage (text or screenshot of the error message, etc.).
+  3. Email the completed template to **[partner name]@openstax.org**.
+
+     Cc other members of your team as appropriate.
+
+
+  @Markup
+    <div>This is a <em>test</em> of the emergency broadcast system...</div>
+    @Type highlighted
+
+  @Number '1.1.0'
+*/
+
+/**
+@Section
+  Limitations
+  =========
+
+  Lorem ipsum dolor sit amet, est ex dolore assueverit, nisl esse eum ad, nec sint assum ea. Vidit soleat no mea. Iusto tation mediocrem mea id, te forensibus appellantur eos, liber essent vituperatoribus ei pri. Nam offendit inciderint delicatissimi at, eum ne graeci inimicus. Eu nec error numquam probatus, nisl aeterno persecuti cu eum, magna nonumes dignissim est te.
+
+  @Number '1.2.0'
+*/
+
+/**
+@Section
+  GENERAL COMPOSITION
+  =========
+
+  Lorem ipsum dolor sit amet, est ex dolore assueverit, nisl esse eum ad, nec sint assum ea. Vidit soleat no mea. Iusto tation mediocrem mea id, te forensibus appellantur eos, liber essent vituperatoribus ei pri. Nam offendit inciderint delicatissimi at, eum ne graeci inimicus. Eu nec error numquam probatus, nisl aeterno persecuti cu eum, magna nonumes dignissim est te.
+
+  @Number '2.0.0'
+*/
+
+/**
+@Section
+  Color
+  =========
+
+  Lorem ipsum dolor sit amet, est ex dolore assueverit, nisl esse eum ad, nec sint assum ea. Vidit soleat no mea. Iusto tation mediocrem mea id, te forensibus appellantur eos, liber essent vituperatoribus ei pri. Nam offendit inciderint delicatissimi at, eum ne graeci inimicus. Eu nec error numquam probatus, nisl aeterno persecuti cu eum, magna nonumes dignissim est te.
+
+  @Number '2.1.0'
+*/
+
+/**
+@Section
+  Typography
+  =========
+
+  Lorem ipsum dolor sit amet, est ex dolore assueverit, nisl esse eum ad, nec sint assum ea. Vidit soleat no mea. Iusto tation mediocrem mea id, te forensibus appellantur eos, liber essent vituperatoribus ei pri. Nam offendit inciderint delicatissimi at, eum ne graeci inimicus. Eu nec error numquam probatus, nisl aeterno persecuti cu eum, magna nonumes dignissim est te.
+
+  @Number '2.2.0'
+*/
+
+/**
+@Section
+  Page Layout
+  =========
+
+  Lorem ipsum dolor sit amet, est ex dolore assueverit, nisl esse eum ad, nec sint assum ea. Vidit soleat no mea. Iusto tation mediocrem mea id, te forensibus appellantur eos, liber essent vituperatoribus ei pri. Nam offendit inciderint delicatissimi at, eum ne graeci inimicus. Eu nec error numquam probatus, nisl aeterno persecuti cu eum, magna nonumes dignissim est te.
+
+  @Number '2.3.0'
+*/
+
+/**
+@Section
+  Image Layout
+  =========
+
+  Lorem ipsum dolor sit amet, est ex dolore assueverit, nisl esse eum ad, nec sint assum ea. Vidit soleat no mea. Iusto tation mediocrem mea id, te forensibus appellantur eos, liber essent vituperatoribus ei pri. Nam offendit inciderint delicatissimi at, eum ne graeci inimicus. Eu nec error numquam probatus, nisl aeterno persecuti cu eum, magna nonumes dignissim est te.
+
+  @Number '2.4.0'
+*/
+
+/**
+@Section
+  CONTENT ELEMENTS
+  =========
+
+  Lorem ipsum dolor sit amet, est ex dolore assueverit, nisl esse eum ad, nec sint assum ea. Vidit soleat no mea. Iusto tation mediocrem mea id, te forensibus appellantur eos, liber essent vituperatoribus ei pri. Nam offendit inciderint delicatissimi at, eum ne graeci inimicus. Eu nec error numquam probatus, nisl aeterno persecuti cu eum, magna nonumes dignissim est te.
+
+  @Number '3.0.0'
+*/
+
+/**
+@Section
+  Folio
+  =========
+
+  Lorem ipsum dolor sit amet, est ex dolore assueverit, nisl esse eum ad, nec sint assum ea. Vidit soleat no mea. Iusto tation mediocrem mea id, te forensibus appellantur eos, liber essent vituperatoribus ei pri. Nam offendit inciderint delicatissimi at, eum ne graeci inimicus. Eu nec error numquam probatus, nisl aeterno persecuti cu eum, magna nonumes dignissim est te.
+
+  @Number '3.1.0'
+*/
+
+/**
+@Section
+  Headers
+  =========
+
+  Lorem ipsum dolor sit amet, est ex dolore assueverit, nisl esse eum ad, nec sint assum ea. Vidit soleat no mea. Iusto tation mediocrem mea id, te forensibus appellantur eos, liber essent vituperatoribus ei pri. Nam offendit inciderint delicatissimi at, eum ne graeci inimicus. Eu nec error numquam probatus, nisl aeterno persecuti cu eum, magna nonumes dignissim est te.
+
+  @Number '3.2.0'
+*/
+
+/**
+@Section
+  Paragraphs
+  =========
+
+  Lorem ipsum dolor sit amet, est ex dolore assueverit, nisl esse eum ad, nec sint assum ea. Vidit soleat no mea. Iusto tation mediocrem mea id, te forensibus appellantur eos, liber essent vituperatoribus ei pri. Nam offendit inciderint delicatissimi at, eum ne graeci inimicus. Eu nec error numquam probatus, nisl aeterno persecuti cu eum, magna nonumes dignissim est te.
+
+  @Number '3.3.0'
+*/
+
+/**
+@Section
+  Links
+  =========
+
+  Lorem ipsum dolor sit amet, est ex dolore assueverit, nisl esse eum ad, nec sint assum ea. Vidit soleat no mea. Iusto tation mediocrem mea id, te forensibus appellantur eos, liber essent vituperatoribus ei pri. Nam offendit inciderint delicatissimi at, eum ne graeci inimicus. Eu nec error numquam probatus, nisl aeterno persecuti cu eum, magna nonumes dignissim est te.
+
+  @Number '3.4.0'
+*/
+
+/**
+@Section
+  Figure Captions
+  =========
+
+  `
+  <figure data-type="figure">
+    <img src="https://emoji.slack-edge.com/T0F5B5PGQ/fiestaparrot/53961a732fb32de3.gif" alt="Textbook team mascot" />
+    <figcaption>Textbook team mascot</figcaption>
+  </figure>
+  `
+
+  <figure data-type="figure">
+    <img src="https://emoji.slack-edge.com/T0F5B5PGQ/fiestaparrot/53961a732fb32de3.gif" alt="Textbook team mascot" />
+    <figcaption>Textbook team mascot</figcaption>
+  </figure>
+
+  @Number '3.5.0'
+*/
+
+/**
+@Section
+  Lists
+  =========
+
+
+  `
+  <ul data-type="unordered-list">
+    <li>The presence of sulfate in soil would not make a difference.</li>
+    <li>Soils which contain acid sulfate are rich in iron sulfides.</li>
+    <li>These soils may produce sulphuric acid when disturbed.</li>
+  </ul>
+  `
+
+  <ul data-type="unordered-list">
+    <li>The presence of sulfate in soil would not make a difference.</li>
+    <li>Soils which contain acid sulfate are rich in iron sulfides.</li>
+    <li>These soils may produce sulphuric acid when disturbed.</li>
+  </ul>
+
+  @Number '3.6.0'
+*/
+
+/**
+@Section
+  Blockquotes
+  =========
+
+  Lorem ipsum dolor sit amet, est ex dolore assueverit, nisl esse eum ad, nec sint assum ea. Vidit soleat no mea. Iusto tation mediocrem mea id, te forensibus appellantur eos, liber essent vituperatoribus ei pri. Nam offendit inciderint delicatissimi at, eum ne graeci inimicus. Eu nec error numquam probatus, nisl aeterno persecuti cu eum, magna nonumes dignissim est te.
+
+  @Number '3.7.0'
+*/
+
+/**
+@Section
+  Dividers
+  =========
+
+  Lorem ipsum dolor sit amet, est ex dolore assueverit, nisl esse eum ad, nec sint assum ea. Vidit soleat no mea. Iusto tation mediocrem mea id, te forensibus appellantur eos, liber essent vituperatoribus ei pri. Nam offendit inciderint delicatissimi at, eum ne graeci inimicus. Eu nec error numquam probatus, nisl aeterno persecuti cu eum, magna nonumes dignissim est te.
+
+  @Number '3.8.0'
+*/
+
+/**
+@Section
+  Footnotes
+  =========
+
+  Lorem ipsum dolor sit amet, est ex dolore assueverit, nisl esse eum ad, nec sint assum ea. Vidit soleat no mea. Iusto tation mediocrem mea id, te forensibus appellantur eos, liber essent vituperatoribus ei pri. Nam offendit inciderint delicatissimi at, eum ne graeci inimicus. Eu nec error numquam probatus, nisl aeterno persecuti cu eum, magna nonumes dignissim est te.
+
+  @Number '3.9.0'
+*/
+
+/**
+@Section
+  Footer
+  =========
+
+  Lorem ipsum dolor sit amet, est ex dolore assueverit, nisl esse eum ad, nec sint assum ea. Vidit soleat no mea. Iusto tation mediocrem mea id, te forensibus appellantur eos, liber essent vituperatoribus ei pri. Nam offendit inciderint delicatissimi at, eum ne graeci inimicus. Eu nec error numquam probatus, nisl aeterno persecuti cu eum, magna nonumes dignissim est te.
+
+  @Number '3.10.0'
+*/
+
+/**
+@Section
+  Images
+  =========
+
+  Lorem ipsum dolor sit amet, est ex dolore assueverit, nisl esse eum ad, nec sint assum ea. Vidit soleat no mea. Iusto tation mediocrem mea id, te forensibus appellantur eos, liber essent vituperatoribus ei pri. Nam offendit inciderint delicatissimi at, eum ne graeci inimicus. Eu nec error numquam probatus, nisl aeterno persecuti cu eum, magna nonumes dignissim est te.
+
+  @Number '3.11.0'
+*/
+
+/**
+@Section
+  UI Elements
+  =========
+
+  Lorem ipsum dolor sit amet, est ex dolore assueverit, nisl esse eum ad, nec sint assum ea. Vidit soleat no mea. Iusto tation mediocrem mea id, te forensibus appellantur eos, liber essent vituperatoribus ei pri. Nam offendit inciderint delicatissimi at, eum ne graeci inimicus. Eu nec error numquam probatus, nisl aeterno persecuti cu eum, magna nonumes dignissim est te.
+
+  @Number '3.12.0'
+*/
+
+/**
+@Section
+  Features
+  =========
+
+  Lorem ipsum dolor sit amet, est ex dolore assueverit, nisl esse eum ad, nec sint assum ea. Vidit soleat no mea. Iusto tation mediocrem mea id, te forensibus appellantur eos, liber essent vituperatoribus ei pri. Nam offendit inciderint delicatissimi at, eum ne graeci inimicus. Eu nec error numquam probatus, nisl aeterno persecuti cu eum, magna nonumes dignissim est te.
+
+  @Number '3.13.0'
+*/
+
+/**
+@Section
+  Tables
+  =========
+
+  Lorem ipsum dolor sit amet, est ex dolore assueverit, nisl esse eum ad, nec sint assum ea. Vidit soleat no mea. Iusto tation mediocrem mea id, te forensibus appellantur eos, liber essent vituperatoribus ei pri. Nam offendit inciderint delicatissimi at, eum ne graeci inimicus. Eu nec error numquam probatus, nisl aeterno persecuti cu eum, magna nonumes dignissim est te.
+
+  @Number '3.14.0'
+*/
+
+/**
+@Section
+  Book Map
+  =========
+
+  Lorem ipsum dolor sit amet, est ex dolore assueverit, nisl esse eum ad, nec sint assum ea. Vidit soleat no mea. Iusto tation mediocrem mea id, te forensibus appellantur eos, liber essent vituperatoribus ei pri. Nam offendit inciderint delicatissimi at, eum ne graeci inimicus. Eu nec error numquam probatus, nisl aeterno persecuti cu eum, magna nonumes dignissim est te.
+
+  @Number '4.0.0'
+*/
+
+/**
+@Section
+  Folio (manually added)
+  =========
+
+  Lorem ipsum dolor sit amet, est ex dolore assueverit, nisl esse eum ad, nec sint assum ea. Vidit soleat no mea. Iusto tation mediocrem mea id, te forensibus appellantur eos, liber essent vituperatoribus ei pri. Nam offendit inciderint delicatissimi at, eum ne graeci inimicus. Eu nec error numquam probatus, nisl aeterno persecuti cu eum, magna nonumes dignissim est te.
+
+  @Number '4.1.0'
+*/
+
+/**
+@Section
+  Headers
+  =========
+
+  Lorem ipsum dolor sit amet, est ex dolore assueverit, nisl esse eum ad, nec sint assum ea. Vidit soleat no mea. Iusto tation mediocrem mea id, te forensibus appellantur eos, liber essent vituperatoribus ei pri. Nam offendit inciderint delicatissimi at, eum ne graeci inimicus. Eu nec error numquam probatus, nisl aeterno persecuti cu eum, magna nonumes dignissim est te.
+
+  @Number '4.2.0'
+*/
+
+/**
+@Section
+  Table of Contents
+  =========
+
+  Lorem ipsum dolor sit amet, est ex dolore assueverit, nisl esse eum ad, nec sint assum ea. Vidit soleat no mea. Iusto tation mediocrem mea id, te forensibus appellantur eos, liber essent vituperatoribus ei pri. Nam offendit inciderint delicatissimi at, eum ne graeci inimicus. Eu nec error numquam probatus, nisl aeterno persecuti cu eum, magna nonumes dignissim est te.
+
+  @Number '4.3.0'
+*/
+
+/**
+@Section
+  Chapter
+  =========
+
+  Lorem ipsum dolor sit amet, est ex dolore assueverit, nisl esse eum ad, nec sint assum ea. Vidit soleat no mea. Iusto tation mediocrem mea id, te forensibus appellantur eos, liber essent vituperatoribus ei pri. Nam offendit inciderint delicatissimi at, eum ne graeci inimicus. Eu nec error numquam probatus, nisl aeterno persecuti cu eum, magna nonumes dignissim est te.
+
+  @Number '4.4.0'
+*/
+
+/**
+@Section
+  Answer Key
+  =========
+
+  Lorem ipsum dolor sit amet, est ex dolore assueverit, nisl esse eum ad, nec sint assum ea. Vidit soleat no mea. Iusto tation mediocrem mea id, te forensibus appellantur eos, liber essent vituperatoribus ei pri. Nam offendit inciderint delicatissimi at, eum ne graeci inimicus. Eu nec error numquam probatus, nisl aeterno persecuti cu eum, magna nonumes dignissim est te.
+
+  @Number '4.5.0'
+*/
+
+/**
+@Section
+  References
+  =========
+
+  Lorem ipsum dolor sit amet, est ex dolore assueverit, nisl esse eum ad, nec sint assum ea. Vidit soleat no mea. Iusto tation mediocrem mea id, te forensibus appellantur eos, liber essent vituperatoribus ei pri. Nam offendit inciderint delicatissimi at, eum ne graeci inimicus. Eu nec error numquam probatus, nisl aeterno persecuti cu eum, magna nonumes dignissim est te.
+
+  @Number '4.6.0'
+*/
+
+/**
+@Section
+  Appendix
+  =========
+
+  Lorem ipsum dolor sit amet, est ex dolore assueverit, nisl esse eum ad, nec sint assum ea. Vidit soleat no mea. Iusto tation mediocrem mea id, te forensibus appellantur eos, liber essent vituperatoribus ei pri. Nam offendit inciderint delicatissimi at, eum ne graeci inimicus. Eu nec error numquam probatus, nisl aeterno persecuti cu eum, magna nonumes dignissim est te.
+
+  @Number '4.7.0'
+*/
+
+/**
+@Section
+  Index
+  =========
+
+  Lorem ipsum dolor sit amet, est ex dolore assueverit, nisl esse eum ad, nec sint assum ea. Vidit soleat no mea. Iusto tation mediocrem mea id, te forensibus appellantur eos, liber essent vituperatoribus ei pri. Nam offendit inciderint delicatissimi at, eum ne graeci inimicus. Eu nec error numquam probatus, nisl aeterno persecuti cu eum, magna nonumes dignissim est te.
+
+  @Number '4.8.0'
+*/
+
+/**
+@Section
+  Back Matter
+  =========
+
+  Lorem ipsum dolor sit amet, est ex dolore assueverit, nisl esse eum ad, nec sint assum ea. Vidit soleat no mea. Iusto tation mediocrem mea id, te forensibus appellantur eos, liber essent vituperatoribus ei pri. Nam offendit inciderint delicatissimi at, eum ne graeci inimicus. Eu nec error numquam probatus, nisl aeterno persecuti cu eum, magna nonumes dignissim est te.
+
+  @Number '4.9.0'
+*/
