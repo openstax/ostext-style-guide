@@ -53,21 +53,20 @@ riot.tag2('style-guide-search',
   function(opts) {
     this.results = [];
 
-    this.search = function(e) {
+    this.search = (e) => {
       this.result_refs = opts.index.search(e.target.value);
       this.results = [];
 
-      this.result_refs.map(function(result_ref) {
-        opts.sections.map(function(section) {
+      this.result_refs.map((result_ref) => {
+        opts.sections.map((section) => {
           if (section['name'].split(',')[0] == result_ref.ref) {
             this.results.push({id: section['name'].split(',')[0],
                                name: section['name'].split(',')[1]});
           }
-        }.bind(this));
-      }.bind(this));
-
+        })
+      })
       this.update();
-    }.bind(this)
+    }
 
     this.reset = (e) => {
       this.result = '';
