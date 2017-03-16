@@ -3,6 +3,14 @@
 import riot from 'riot';
 import lunr from 'lunr';
 
+riot.tag2('raw',
+  ``,
+  '', '',
+  function(opts) {
+    this.root.innerHTML = opts.content;
+  }
+);
+
 riot.tag2('style-guide-navigation',
 
   `<ul class="menu-list">
@@ -96,7 +104,7 @@ riot.tag2('style-guide',
             <div class="column is-three-quarters-desktop is-12-tablet">
               <div class="content">
                 <h2 class="title is-2">{name.split(',')[1]}</h2>
-                <p>{description}</p>
+                <raw content="{ description }"/>
                 <div class="sg-html-example"><p>Raw HMTL</p>{raw_html}</div>
                 <div class="sg-html-example"><p>Cooked HTML</p>{cooked_html}</div>
                 <div class="sg-css-example"><p>Rule Set CSS</p>{rule_set}</div>
