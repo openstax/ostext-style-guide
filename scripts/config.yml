@@ -1,5 +1,5 @@
 template_path: test/templates               # Path containing Jinja2 template files.
-documentation_path: test/documentation      # Path containing documentation comments in LESS/SASS/SCSS/CSS files.
+documentation_path: test/cod_documentation      # Path containing documentation comments in LESS/SASS/SCSS/CSS files.
 style_guide_template: style-guide.html      # The template file used to render a Style Guide.
-style_guide_path: test/dist                 # The Path where the Style Guide will be stored. style_guide_path/[style_guide_template]
+style_guide_path: ../frontend/src/assets/data                 # The Path where the Style Guide will be stored. style_guide_path/[style_guide_template]
 style_guide_data: style-guide.json
