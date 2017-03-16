@@ -36,7 +36,7 @@ riot.tag2('style-guide-search',
 
   `<div class="control is-grouped">
     <p class="control is-expanded has-icon">
-      <input class="input" type="text" onkeyup="{search}" placeholder="Search for content, elements, layout, typography...">
+      <input class="input" ref="input" type="text" onkeyup="{search}" placeholder="Search for content, elements, layout, typography...">
       <span class="icon is-medium">
         <i class="fa fa-search"></i>
       </span>
@@ -44,8 +44,8 @@ riot.tag2('style-guide-search',
   </div>
 
   <div class="search-results menu">
-    <ul each={results} class="menu-list sg-search-result">
-     <li><a href="#{id}">{name}</a></li>
+    <ul class="menu-list sg-search-result">
+     <li each={results} onclick="{reset}"><a href="#{id}">{name}</a></li>
     </ul>
   </div>`,
 
@@ -68,6 +68,14 @@ riot.tag2('style-guide-search',
 
       this.update();
     }.bind(this)
+
+    this.reset = (e) => {
+      this.result = '';
+      this.result = e.target.text;
+      this.results = [];
+      this.refs.input.value = this.result;
+      this.update();
+    }
   }
 );
 
