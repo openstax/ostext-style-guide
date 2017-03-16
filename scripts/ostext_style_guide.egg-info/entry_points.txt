@@ -1,0 +1,4 @@
+[console_scripts]
+style-guide-data = ostext_style_guide_scripts.style_guide_data:main
+build-style-guide = ostext_style_guide_scripts.build_style_guide:main
+

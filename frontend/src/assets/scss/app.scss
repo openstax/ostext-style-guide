@@ -1,0 +1,307 @@
+/*! bulma.io v0.3.1 | MIT License | github.com/jgthms/bulma */
+@charset "utf-8";
+
+// Override initial variables here
+// You can add new ones or update existing ones:
+$os-blue: #0DC0DC;
+$os-blue-s60: #054C58;
+$os-blue-s20: #0A99B0;
+$os-blue-s40: #147383;
+$family-sans-serif: "Noto Sans", "Noto Sans CJK {JP, KR, SC, TC}", sans-serif;
+
+// Override generated variables here
+$primary: $os-blue;
+$family-primary: $family-sans-serif;
+
+@import "sass/utilities/_all";
+@import "sass/base/_all";
+@import "sass/elements/_all";
+@import "sass/components/_all";
+@import "sass/grid/_all";
+@import "sass/layout/_all";
+
+
+/* Layout */
+
+body {
+  display: flex;
+  height: 100%;
+  height: 100vh;
+  flex-direction: column;
+}
+
+.header,
+.footer {
+  flex: none;
+}
+
+.body {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+
+  @include tablet {
+    flex-direction: row;
+  }
+
+  .side-nav {
+    @include tablet {
+      flex: 0 0 20rem;
+    }
+  }
+
+  .main.section {
+    @include tablet {
+      flex: 1;
+      margin: 0;
+    }
+  }
+}
+
+/* Custom styles */
+
+body {
+  background-color: #fbfbfb;
+
+  &.fixed {
+    position: fixed;
+  }
+}
+
+.header .nav {
+  z-index: 9999;
+  min-height: 4rem;
+
+@include mobile {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+  @include tablet {
+    background-color: $primary;
+  }
+  .nav-left {
+    @include tablet {
+      flex: 0 0 20rem;
+      background-color: #fff;
+    }
+  }
+
+  .logo {
+    max-height: 2rem;
+  }
+
+  .nav-toggle {
+    background-color: #f7f7f7;
+    border-radius: 10rem;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-self: center;
+    margin: 0.5rem 0.75rem;
+
+    @include tablet-only {
+      left: -4rem;
+    }
+
+    &.is-active {
+      span:nth-child(1) {
+        transform-origin: 50% 50%;
+        margin-top: -1px;
+      }
+      span:nth-child(3) {
+        transform-origin: 50% 50%;
+        margin-top: -1px;
+      }
+    }
+
+    span {
+      width: 12px;
+      margin-left: -6px;
+    }
+
+    span:nth-child(1) {
+      margin-top: -4px;
+    }
+
+    span:nth-child(3) {
+      margin-top: 2px;
+    }
+  }
+}
+
+.body {
+  @include mobile {
+    margin-top: 56px;
+  }
+
+  .side-nav {
+    background-color: #f7f7f7;
+    color: #3b3b3b;
+
+    @include mobile {
+      width: 0;
+      height: 0;
+      opacity: 0;
+
+      @at-root .is-active#{&} {
+        opacity: 1;
+        width: inherit;
+        height: inherit;
+        position: fixed;
+        top: 56px;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        z-index: 999;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+      }
+    }
+
+    @include tablet-only {
+      z-index: 999;
+      margin-left: -280px;
+      // transition: 0.2s transform ease-out 0.1s;
+      position: fixed;
+      top: 56px;
+      left: 0;
+      bottom: 0;
+      width: 20rem;
+
+      @at-root .is-active#{&} {
+        transform: translate3d(280px, 0, 0);
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+        transition: 0.2s transform ease-out 0.1s;
+      }
+    }
+
+    li[class$=".0.0"] {
+      margin-top: 1.5em;
+      position: relative;
+
+      &::before {
+        content: '';
+        display: block;
+        height: 1px;
+        width: 100%;
+        background-color: #d8d8d8;
+        top: -.75em;
+        position: absolute;
+      }
+
+      a {
+        text-transform: uppercase;
+        font-weight: 600;
+      }
+    }
+
+    a {
+      color: #3b3b3b;
+      &:hover,
+      &:active,
+      &:focus {
+        color: $primary;
+      }
+    }
+  }
+
+  .main {
+    background-color: #fbfbfb;
+
+    &::before {
+      opacity: 0;
+      content: '';
+      transition: opacity 0.3s 0.1s;
+
+      @at-root .is-active#{&} {
+        display: block;
+        position: fixed;
+        top: 56px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: $os-blue-s40;
+        opacity: 0.95;
+        z-index: 99;
+      }
+    }
+
+    .search {
+      padding: 1.5rem;
+      position: relative;
+      display: block;
+      background-color: #fff;
+      margin-bottom: 3rem;
+
+      .control.is-grouped {
+        margin-bottom: 0;
+      }
+
+      .input {
+        box-shadow: none;
+        border-radius: 0;
+        border: none;
+        padding-left: 4.5em;
+      }
+    }
+
+    .search-results {
+      position: absolute;
+      background-color: #fff;
+      z-index: 1;
+      width: 100%;
+      left: 0;
+      border-top: 1px solid #ebebeb;
+      top: 100%;
+
+      a {
+        padding-left: 6rem;
+      }
+    }
+
+    .section {
+      background-color: #fff;
+      margin-bottom: 3rem;
+      border-bottom: 1px solid #ebebeb;
+    }
+
+    .content .title {
+      color: $os-blue-s60;
+      position: relative;
+
+      &::before {
+        display: inline-block;
+        width: 6px;
+        height: 1.75em;
+        content: '';
+        background-color: $os-blue-s20;
+        position: absolute;
+        left: -1.5rem;
+        top: 50%;
+        margin-top: -0.875em;
+      }
+    }
+  }
+}
+
+.footer {
+  color: #fff;
+  background-color: #077384;
+
+  .meta {
+    margin-bottom: 10px;
+
+    a {
+      font-weight: 600;
+
+      &:nth-child(2) {
+        margin-left: 20px;
+        margin-right: 20px;
+      }
+    }
+  }
+}

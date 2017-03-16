@@ -1,0 +1,16 @@
+setup.py
+ostext_kss/__init__.py
+ostext_kss/comment.py
+ostext_kss/modifier.py
+ostext_kss/parser.py
+ostext_kss/section.py
+ostext_style_guide.egg-info/PKG-INFO
+ostext_style_guide.egg-info/SOURCES.txt
+ostext_style_guide.egg-info/dependency_links.txt
+ostext_style_guide.egg-info/entry_points.txt
+ostext_style_guide.egg-info/not-zip-safe
+ostext_style_guide.egg-info/requires.txt
+ostext_style_guide.egg-info/top_level.txt
+ostext_style_guide_scripts/__init__.py
+ostext_style_guide_scripts/build_style_guide.py
+ostext_style_guide_scripts/style_guide_data.py
