@@ -7,8 +7,9 @@ You will need the following properly installed on your computer.
 
 * [Git](http://git-scm.com/)
 * [Node.js](http://nodejs.org/) (with NPM)
-* [Python 2.7](https://www.python.org/downloads/) or above.
-  * If using version 2.7 then you must install [subprocess32](https://pypi.python.org/pypi/subprocess32). Download zip file then run `python setup.py install` inside of unzipped downloaded folder
+* [Python 2.7](https://www.python.org/downloads/) or above
+  * If using version 2.7 then you must install [subprocess32](https://pypi.python.org/pypi/subprocess32)
+  * Download zip file then run `python setup.py install` inside of unzipped downloaded folder
 * Gulp CLI `npm install gulp-cli -g`
 
 ## Backend Installation (Content Entry)
@@ -23,11 +24,11 @@ You will need the following properly installed on your computer.
 
 ### Building JSON output file
 
-1. `style-guide-codmark` will generate json files based on `config.yml` in `scripts/`
+1. Running `style-guide-codmark` will generate json files based on `config.yml` in `scripts/`
 
 ## Content Entry with Cod
 1. Open `scripts/test/cod_documentation/style-guide.scss`
-2. You will see comments with the Cod
+2. You will see Cod style comments and `@Markup` tags
 ```
 /**
 @Section
