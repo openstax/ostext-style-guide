@@ -5,7 +5,6 @@ Design Guide is an application used by OpenStax as a living style guide document
 
 * Git
 * Node.js (with NPM)
-* Bower
 * Python 2.7 or above
 
 ## Backend Installation (Content Entry)
