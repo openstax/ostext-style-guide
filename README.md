@@ -1,11 +1,15 @@
 # ostext-style-guide
-Design Guide is an application used by OpenStax as a living style guide document for our book templates and will eventually house style elements for all products
 
-## Prerequisites
+Design Guide is an application used by OpenStax as a living style guide document for our book templates.
 
-* Git
-* Node.js (with NPM)
-* Python 2.7 or above
+## Requirements
+You will need the following properly installed on your computer.
+
+* [Git](http://git-scm.com/)
+* [Node.js](http://nodejs.org/) (with NPM)
+* [Python 2.7](https://www.python.org/downloads/) or above.
+  * If using version 2.7 then you must install [subprocess32](https://pypi.python.org/pypi/subprocess32). Download zip file then run `python setup.py install` inside of unzipped downloaded folder
+* Gulp CLI `npm install gulp-cli -g`
 
 ## Backend Installation (Content Entry)
 
@@ -16,7 +20,10 @@ Design Guide is an application used by OpenStax as a living style guide document
 5. Source your venv `. venv/bin/activate`
 6. Run `python setup.py develop`
 7. Run `style-guide-codmark --help` to see help options
-8. `style-guide-codmark` will generate json files based on `config.yml` in `scripts/`
+
+### Building JSON output file
+
+1. `style-guide-codmark` will generate json files based on `config.yml` in `scripts/`
 
 ## Content Entry with Cod
 1. Open `scripts/test/cod_documentation/style-guide.scss`
@@ -58,5 +65,9 @@ Design Guide is an application used by OpenStax as a living style guide document
 2. change into the new directory
 3. Change to the `frontend` directory
 4. `npm install`
-5. Run `gulp`
-6. Run `npm run build` or `gulp build --production` for minified dist files
+
+### Running / Development
+
+* Run `gulp` (development)
+  * This opens [http://localhost:8000](http://localhost:8000) in your browser.
+* Run `npm run build` or `gulp build --production` (production)
