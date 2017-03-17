@@ -2,3 +2,5 @@ Jinja2
 pyyaml
 Pygments
 jsonpickle
+markdown
+subprocess32

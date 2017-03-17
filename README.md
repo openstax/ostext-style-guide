@@ -8,19 +8,13 @@ You will need the following properly installed on your computer.
 * [Git](http://git-scm.com/)
 * [Node.js](http://nodejs.org/) (with NPM)
 * [Python 2.7](https://www.python.org/downloads/) or above
-  * If using version 2.7 then you must install [subprocess32](https://pypi.python.org/pypi/subprocess32)
-  * Download zip file then run `python setup.py install` inside of unzipped downloaded folder
-* Gulp CLI `npm install gulp-cli -g`
 
 ## Backend Installation (Content Entry)
 
 1. `git clone <repository-url>` this repository
-2. change into the new directory
-3. Create python virtual environment `python -m virtualenv venv`
-4. `cd scripts`
-5. Source your venv `. venv/bin/activate`
-6. Run `python setup.py develop`
-7. Run `style-guide-codmark --help` to see help options
+1. change into the new directory
+1. run `./script/setup` to install all the dependencies
+1. run `source ./venv/bin/activate && style-guide-codmark --help` to see help options
 
 ### Building JSON output file
 
@@ -63,12 +57,8 @@ You will need the following properly installed on your computer.
 ## Frontend Installation (application GUI)
 
 1. `git clone <repository-url>` this repository (**if not done in Backend Installation above**)
-2. change into the new directory
-3. Change to the `frontend` directory
-4. `npm install`
-
-### Running / Development
-
-* Run `gulp` (development)
+1. run `./script/setup` (**if not done in Backend Installation above**)
+2. run `./script/start`
   * This opens [http://localhost:8000](http://localhost:8000) in your browser.
-* Run `npm run build` or `gulp build --production` (production)
+
+To build the production files run `./script/build` or `./script/build --production` (production)

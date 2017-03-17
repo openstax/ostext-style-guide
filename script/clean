@@ -1,0 +1,3 @@
+#!/bin/bash
+rm -rf ./venv/
+rm -rf ./frontend/node_modules/

@@ -13,4 +13,5 @@ ostext_style_guide.egg-info/requires.txt
 ostext_style_guide.egg-info/top_level.txt
 ostext_style_guide_scripts/__init__.py
 ostext_style_guide_scripts/build_style_guide.py
+ostext_style_guide_scripts/style_guide_codmark.py
 ostext_style_guide_scripts/style_guide_data.py
