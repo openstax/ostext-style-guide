@@ -6,3 +6,10 @@ node_modules/
 
 # dist directory
 dist/
+
+*.pyc
+
+scripts/ostext_style_guide.egg-info/entry_points.txt
+scripts/ostext_style_guide.egg-info/PKG-INFO
+scripts/ostext_style_guide.egg-info/requires.txt
+scripts/venv/

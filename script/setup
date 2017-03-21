@@ -1,0 +1,34 @@
+#!/bin/bash
+set -e
+
+echo "==> Using nvm to switch to the correct version of node"
+if [[ "${NVM_DIR}" ]]; then
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm just in case
+  echo "current directory: $(pwd)"
+  nvm install
+else
+  echo "WARNING: It seems nvm is not installed. Please install it by going to https://github.com/creationix/nvm#install-script . Using system version of node as a fallback (fingers crossed!)"
+fi
+
+echo "==> Installing node dependencies"
+cd ./frontend/
+npm install
+cd ..
+
+echo "==> Installing python dependencies"
+
+if [[ -z "$(which virtualenv)" ]]
+then
+  echo "==> Installing Python virtualenv (pip install virtualenv)"
+  pip install virtualenv
+fi
+
+virtualenv ./scripts/venv/
+source ./scripts/venv/bin/activate
+cd ./scripts/
+python setup.py develop
+
+# Verify that the code runs
+style-guide-codmark --help
+
+cd ..

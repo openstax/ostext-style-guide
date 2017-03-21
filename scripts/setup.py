@@ -15,6 +15,7 @@ setup(name='ostext_style_guide',
         'Pygments',
         'jsonpickle',
         'markdown',
+        'subprocess32',
       ],
       entry_points={
           'console_scripts': ['build-style-guide=ostext_style_guide_scripts.build_style_guide:main',
