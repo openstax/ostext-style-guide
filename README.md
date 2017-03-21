@@ -14,7 +14,7 @@ You will need the following properly installed on your computer.
 1. `git clone <repository-url>` this repository
 1. change into the new directory
 1. run `./script/setup` to install all the dependencies
-1. run `source ./venv/bin/activate && style-guide-codmark --help` to see help options
+1. run `source ./scripts/venv/bin/activate && style-guide-codmark --help` to see help options
 
 ### Building JSON output file
 
