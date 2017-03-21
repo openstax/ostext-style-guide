@@ -1,6 +1,5 @@
 from __future__ import print_function
 import ostext_style_guide_scripts
-from ostext_kss import Parser
 import yaml
 import argparse
 import sys, os, io

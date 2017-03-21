@@ -1,5 +1,0 @@
-[console_scripts]
-build-style-guide = ostext_style_guide_scripts.build_style_guide:main
-style-guide-codmark = ostext_style_guide_scripts.style_guide_codmark:main
-style-guide-data = ostext_style_guide_scripts.style_guide_data:main
-
