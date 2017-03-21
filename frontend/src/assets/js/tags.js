@@ -15,8 +15,8 @@ riot.tag2('style-guide-navigation',
 
   `<ul class="menu-list">
     <li class="changelog"><a href="#0.0.0">v0.0.1</a></li>
-    <li each="{sections}" class="{id}">
-      <a href="#{id}">{name}</a>
+    <li each="{sections}" class="{number}">
+      <a href="#{number}">{name}</a>
     </li>
    </ul>`,
 
@@ -28,8 +28,8 @@ riot.tag2('style-guide-navigation',
       this.sections = [];
 
       opts.sections.map(function(section) {
-        this.sections.push({id: section['name'].split(',')[0],
-                            name: section['name'].split(',')[1]});
+        this.sections.push({number: section['Number'],
+                            name: section['Name']});
       }.bind(this));
     }.bind(this)
 
@@ -53,7 +53,7 @@ riot.tag2('style-guide-search',
 
   <div class="search-results menu">
     <ul class="menu-list sg-search-result">
-     <li each={results} onclick="{reset}"><a href="#{id}">{name}</a></li>
+     <li each={results} onclick="{reset}"><a href="#{number}">{name}</a></li>
     </ul>
   </div>`,
 
@@ -67,9 +67,9 @@ riot.tag2('style-guide-search',
 
       this.result_refs.map((result_ref) => {
         opts.sections.map((section) => {
-          if (section['name'].split(',')[0] == result_ref.ref) {
-            this.results.push({id: section['name'].split(',')[0],
-                               name: section['name'].split(',')[1]});
+          if (section['Number'] == result_ref.ref) {
+            this.results.push({number: section['Number'],
+                               name: section['Name']});
           }
         })
       })
@@ -98,12 +98,11 @@ riot.tag2('style-guide',
       <style-guide-sections class="sg-sections">
         <!-- Search elements -->
         <style-guide-search class="search" index={index} sections={sections}></style-guide-search>
-
-        <section each={sections} id="{name.split(',')[0]}" class="section">
+        <section each={sections} id="{Number}" class="section">
           <div class="columns">
             <div class="column is-three-quarters-desktop is-12-tablet">
               <div class="content">
-                <h2 class="title is-2">{name.split(',')[1]}</h2>
+                <h2 class="title is-2">{ Name }</h2>
                 <raw content="{ description }"/>
                 <div class="sg-html-example"><p>Raw HMTL</p>{raw_html}</div>
                 <div class="sg-html-example"><p>Cooked HTML</p>{cooked_html}</div>
@@ -127,7 +126,7 @@ riot.tag2('style-guide',
       this.index = lunr(function() {
         this.field('name', {boost:10});
         this.field('description', {boost:6});
-        this.ref('id');
+        this.ref('number');
       });
     }.bind(this)
 
@@ -139,12 +138,13 @@ riot.tag2('style-guide',
 
       this.sections.map(function(section) {
         this.index.add({
-          id: section['name'].split(',')[0],
-          name: section['name'].split(',')[1],
-          description: section['description']
+          description: section['description'],
+          name: section['Name'],
+          id: section['Id'],
+          markup: section['Markup'],
+          number: section['Number']
         });
       }.bind(this));
-
       this.update();
       this.tags['style-guide-navigation'].trigger('sections-updated');
     }.bind(this)
