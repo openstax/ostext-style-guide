@@ -13,15 +13,13 @@
       // JS resources.
       var json_request = pegasus('assets/data/style-guide.json');
     </script>
-    <script src="assets/js/app.js" type="text/javascript"></script>
-
   </head>
   <body>
     <!-- Mount the Style Guide application. -->
     <header class="header">
       <nav class="nav has-shadow">
         <div class="nav-left">
-          <a class="nav-item">
+          <a href="/" class="nav-item">
             <img src="assets/img/logo.svg" class="logo" alt="OpenStax logo">
           </a>
         </div>
@@ -68,6 +66,6 @@
         </div>
       </div>
   </footer>
-  <script> riot.mount('*', app) </script>
+  <script src="assets/js/app.js" type="text/javascript"></script>
   </body>
 </html>
