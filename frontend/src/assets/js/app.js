@@ -4,6 +4,7 @@
 'use strict';
 
 import riot from 'riot';
+import route from 'riot-route';
 import './tags.js';
 import './interactions.js';
 
@@ -51,3 +52,18 @@ let app = new StyleGuideApp();
 // Clean this up.
 window.riot = riot;
 window.app = app;
+
+riot.mount('*', app);
+
+route(function() {
+  riot.mount('style-guide-sections', 'style-guide-sections', app.model.data[1]);
+})
+
+route.stop();
+route.start(true);
+
+route.base('#/');
+
+route('/section/*', function(id) {
+  riot.mount('style-guide-sections', 'style-guide-sections', app.model.data[id]);
+});
