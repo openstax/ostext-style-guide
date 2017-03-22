@@ -15,8 +15,8 @@ riot.tag2('style-guide-navigation',
 
   `<ul class="menu-list">
     <li class="changelog"><a href="#0.0.0">v0.0.1</a></li>
-    <li each="{sections}" class="{id}">
-      <a href="#{id}">{name}</a>
+    <li each="{section, i in sections}" class="{section.number}">
+      <a href="#/section/{i}">{section.name}</a>
     </li>
    </ul>`,
 
@@ -28,8 +28,8 @@ riot.tag2('style-guide-navigation',
       this.sections = [];
 
       opts.sections.map(function(section) {
-        this.sections.push({id: section['name'].split(',')[0],
-                            name: section['name'].split(',')[1]});
+        this.sections.push({number: section['Number'],
+                            name: section['Name']});
       }.bind(this));
     }.bind(this)
 
@@ -53,7 +53,7 @@ riot.tag2('style-guide-search',
 
   <div class="search-results menu">
     <ul class="menu-list sg-search-result">
-     <li each={results} onclick="{reset}"><a href="#{id}">{name}</a></li>
+     <li each={results} onclick="{reset}"><a href="#/section/{urlId}">{name}</a></li>
     </ul>
   </div>`,
 
@@ -67,9 +67,10 @@ riot.tag2('style-guide-search',
 
       this.result_refs.map((result_ref) => {
         opts.sections.map((section) => {
-          if (section['name'].split(',')[0] == result_ref.ref) {
-            this.results.push({id: section['name'].split(',')[0],
-                               name: section['name'].split(',')[1]});
+          if (section['Number'] == result_ref.ref) {
+            this.results.push({number: section['Number'],
+                               name: section['Name'],
+                               urlId: opts.sections.findIndex(x => x.Number==section['Number'])});
           }
         })
       })
@@ -94,28 +95,9 @@ riot.tag2('style-guide',
   </nav>
   <main class="main section">
     <div class="container">
-      <!-- Style Guide section data -->
-      <style-guide-sections class="sg-sections">
-        <!-- Search elements -->
-        <style-guide-search class="search" index={index} sections={sections}></style-guide-search>
-
-        <section each={sections} id="{name.split(',')[0]}" class="section">
-          <div class="columns">
-            <div class="column is-three-quarters-desktop is-12-tablet">
-              <div class="content">
-                <h2 class="title is-2">{name.split(',')[1]}</h2>
-                <raw content="{ description }"/>
-                <div class="sg-html-example"><p>Raw HMTL</p>{raw_html}</div>
-                <div class="sg-html-example"><p>Cooked HTML</p>{cooked_html}</div>
-                <div class="sg-css-example"><p>Rule Set CSS</p>{rule_set}</div>
-              </div>
-            </div>
-            <div class="column is-hidden-touch">
-            <h3>In this section</h3>
-            </div>
-          </div>
-        </section>
-      </style-guide-sections>
+      <!-- Search elements -->
+      <style-guide-search class="search" index={index} sections={sections}></style-guide-search>
+      <style-guide-sections></style-guide-sections>
     </div>
   </main>`,
 
@@ -127,7 +109,7 @@ riot.tag2('style-guide',
       this.index = lunr(function() {
         this.field('name', {boost:10});
         this.field('description', {boost:6});
-        this.ref('id');
+        this.ref('number');
       });
     }.bind(this)
 
@@ -139,12 +121,13 @@ riot.tag2('style-guide',
 
       this.sections.map(function(section) {
         this.index.add({
-          id: section['name'].split(',')[0],
-          name: section['name'].split(',')[1],
-          description: section['description']
+          description: section['description'],
+          name: section['Name'],
+          id: section['Id'],
+          markup: section['Markup'],
+          number: section['Number']
         });
       }.bind(this));
-
       this.update();
       this.tags['style-guide-navigation'].trigger('sections-updated');
     }.bind(this)
@@ -153,4 +136,27 @@ riot.tag2('style-guide',
       this.setSections(data);
     }.bind(this));
   }
+);
+
+riot.tag2('style-guide-sections',
+  `
+  <!-- Style Guide section data -->
+  <section id="{opts.Number}" class="section">
+    <div class="columns">
+      <div class="column is-three-quarters-desktop is-12-tablet">
+        <div class="content">
+          <h2 class="title is-2">{ opts.Name }</h2>
+          <raw content="{ opts.description }"/>
+          <div class="sg-html-example"><p>Raw HMTL</p>{raw_html}</div>
+          <div class="sg-html-example"><p>Cooked HTML</p>{cooked_html}</div>
+          <div class="sg-css-example"><p>Rule Set CSS</p>{rule_set}</div>
+        </div>
+      </div>
+      <div class="column is-hidden-touch">
+        <h3>In this section</h3>
+      </div>
+    </div>
+  </section>`,
+  '', '',
+  function(opts) {}
 );

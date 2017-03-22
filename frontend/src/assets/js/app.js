@@ -4,6 +4,7 @@
 'use strict';
 
 import riot from 'riot';
+import route from 'riot-route';
 import './tags.js';
 import './interactions.js';
 
@@ -13,29 +14,21 @@ class AbstractDataModel {
 
     // This request is made asynchronously in the <head>
     // of the main html chunk in order to load JSON data quickly.
-    json_request.then((data, xhr) => { this.setModelData(data) },          // success
+    json_request.then((data, xhr) => { this.setModelData(data['Section']) },          // success
                       (data, xhr) => { console.error(data, xhr.status) }); // error
   }
 
   setModelData(data) {
-    this.data = data.sort(function(a,b) {
-      var va = a['name'].split(',')[0].split('.');
-      var vb = b['name'].split(',')[0].split('.');
-      for (var i = 0; i < va.length; ++i) {
-        va[i] = Number(va[i]);
-      }
-      for (var i = 0; i < vb.length; ++i) {
-        vb[i] = Number(vb[i]);
-      }
-      if (va[0] > vb[0]) return 1;
-      if (va[0] < vb[0]) return -1;
-      if (va[1] > vb[1]) return 1;
-      if (va[1] < vb[1]) return -1;
-      if (va[2] > vb[2]) return 1;
-      if (va[2] < vb[2]) return -1;
+    this.data = data;
+    let newArray = this.data;
 
-      return 0;
-    });
+    for (var key in newArray) {
+      newArray[key].description = newArray[key]["!text"];
+      newArray[key].Number = newArray[key].Number.replace(/'/g,"");
+      delete newArray[key]["!text"];
+    }
+
+    this.data = newArray;
     this.trigger('updated', data);
   }
   setItem(idx, val) {
@@ -59,3 +52,18 @@ let app = new StyleGuideApp();
 // Clean this up.
 window.riot = riot;
 window.app = app;
+
+riot.mount('*', app);
+
+route(function() {
+  riot.mount('style-guide-sections', 'style-guide-sections', app.model.data[1]);
+})
+
+route.stop();
+route.start(true);
+
+route.base('#/');
+
+route('/section/*', function(id) {
+  riot.mount('style-guide-sections', 'style-guide-sections', app.model.data[id]);
+});
