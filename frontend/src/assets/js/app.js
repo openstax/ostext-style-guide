@@ -26,6 +26,21 @@ class AbstractDataModel {
       newArray[key].description = newArray[key]["!text"];
       newArray[key].Number = newArray[key].Number.replace(/'/g,"");
       delete newArray[key]["!text"];
+
+      if (newArray[key].Number.endsWith('.0.0')) {
+        newArray[key].Category = newArray[key].Name;
+      } else {
+        let newKey = key;
+
+        do {
+          newKey--;
+
+          if (newArray[newKey].Number.endsWith('.0.0')) {
+            newArray[key].Category = newArray[newKey].Name;
+          }
+        }
+        while (!newArray[newKey].Number.endsWith('.0.0'));
+      }
     }
 
     this.data = newArray;

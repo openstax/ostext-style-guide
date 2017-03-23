@@ -29,7 +29,8 @@ riot.tag2('style-guide-navigation',
 
       opts.sections.map(function(section) {
         this.sections.push({number: section['Number'],
-                            name: section['Name']});
+                            name: section['Name'],
+                            category: section['Category']});
       }.bind(this));
     }.bind(this)
 
@@ -53,7 +54,7 @@ riot.tag2('style-guide-search',
 
   <div class="search-results menu">
     <ul class="menu-list sg-search-result">
-     <li each={results} onclick="{reset}"><a href="#/section/{urlId}">{name}</a></li>
+     <li each={results} onclick="{reset}"><a href="#/section/{urlId}"><span>in {category}</span>{name}</a></li>
     </ul>
   </div>`,
 
@@ -70,6 +71,7 @@ riot.tag2('style-guide-search',
           if (section['Number'] == result_ref.ref) {
             this.results.push({number: section['Number'],
                                name: section['Name'],
+                               category: section['Category'],
                                urlId: opts.sections.findIndex(x => x.Number==section['Number'])});
           }
         })
@@ -78,8 +80,10 @@ riot.tag2('style-guide-search',
     }
 
     this.reset = (e) => {
-      this.result = '';
-      this.result = e.target.text;
+      let category = e.currentTarget.childNodes[0].firstChild.textContent;
+      let section = e.currentTarget.childNodes[0].lastChild.textContent;
+
+      this.result = section + ' ' + category;
       this.results = [];
       this.refs.input.value = this.result;
       this.update();
@@ -109,6 +113,7 @@ riot.tag2('style-guide',
       this.index = lunr(function() {
         this.field('name', {boost:10});
         this.field('description', {boost:6});
+        this.field('category');
         this.ref('number');
       });
     }.bind(this)
@@ -125,7 +130,8 @@ riot.tag2('style-guide',
           name: section['Name'],
           id: section['Id'],
           markup: section['Markup'],
-          number: section['Number']
+          number: section['Number'],
+          category: section['Category']
         });
       }.bind(this));
       this.update();
