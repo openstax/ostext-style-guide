@@ -179,24 +179,22 @@ body {
       }
     }
 
-    li[class$=".0.0"] {
-      margin-top: 1.5em;
-      position: relative;
+    .menu {
+      padding-top: 1.3em;
+      padding-bottom: 1.3em;
+      border-bottom: 1px solid #d8d8d8;
 
-      &::before {
-        content: '';
-        display: block;
-        height: 1px;
-        width: 100%;
-        background-color: #d8d8d8;
-        top: -.75em;
-        position: absolute;
+      &:last-child {
+        border-bottom: none;
       }
+    }
 
-      a {
-        text-transform: uppercase;
-        font-weight: 600;
-      }
+    p {
+      text-transform: uppercase;
+      margin-bottom: 1em;
+      font-weight: 600;
+      padding-left: 0.75em;
+      padding-right: 0.75em;
     }
 
     a {
@@ -259,7 +257,18 @@ body {
       top: 100%;
 
       a {
-        padding-left: 6rem;
+        color: #000;
+        font-weight: 500;
+        border-bottom: 1px solid #ebebeb;
+        padding: 1rem 1rem 1rem 6rem;
+
+        span:first-child {
+          font-size: 12px;
+          color: #aaa;
+          text-transform: uppercase;
+          display: block;
+          padding-bottom: 0.5rem;
+        }
       }
     }
 

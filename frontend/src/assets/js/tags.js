@@ -13,12 +13,22 @@ riot.tag2('raw',
 
 riot.tag2('style-guide-navigation',
 
-  `<ul class="menu-list">
-    <li class="changelog"><a href="#0.0.0">v0.0.1</a></li>
-    <li each="{section, i in sections}" class="{section.number}">
-      <a href="#/section/{i}">{section.name}</a>
+  `
+  <div class="menu">
+    <p>Changelog</p>
+    <ul class="menu-list">
+      <li class="changelog"><a href="#0.0.0">v0.0.1</a></li>
+    </ul>
+  </div>
+  <div each="{category, i in sections}" class="menu">
+  <p>{category.category}</p>
+  <ul class="menu-list">
+    <li each="{el, i in category.sections}" class="{el.number}">
+      <a href="#{el.number}">{el.name}</a>
     </li>
-   </ul>`,
+   </ul>
+   </div>
+   `,
 
   '', '',
   function(opts) {
@@ -29,8 +39,30 @@ riot.tag2('style-guide-navigation',
 
       opts.sections.map(function(section) {
         this.sections.push({number: section['Number'],
-                            name: section['Name']});
+                            name: section['Name'],
+                            category: section['Category']});
       }.bind(this));
+
+      let groups = {};
+
+      for (var i = 0; i < this.sections.length; i++) {
+        let groupName = this.sections[i].category;
+          if (!groups[groupName]) {
+            groups[groupName] = [];
+          }
+          if (this.sections[i].number.endsWith('.0.0')) {
+            continue;
+          }
+
+        groups[groupName].push({name: this.sections[i].name,
+                              number:this.sections[i].number});
+      }
+
+      this.sections = [];
+
+      for (var groupName in groups) {
+        this.sections.push({category: groupName, sections: groups[groupName]});
+      }
     }.bind(this)
 
     this.on('sections-updated', function() {
@@ -53,7 +85,7 @@ riot.tag2('style-guide-search',
 
   <div class="search-results menu">
     <ul class="menu-list sg-search-result">
-     <li each={results} onclick="{reset}"><a href="#/section/{urlId}">{name}</a></li>
+     <li each={results} onclick="{reset}"><a href="#{number}"><span>in {category}</span>{name}</a></li>
     </ul>
   </div>`,
 
@@ -70,7 +102,9 @@ riot.tag2('style-guide-search',
           if (section['Number'] == result_ref.ref) {
             this.results.push({number: section['Number'],
                                name: section['Name'],
-                               urlId: opts.sections.findIndex(x => x.Number==section['Number'])});
+                               category: section['Category'],
+                              // urlId: opts.sections.findIndex(x => x.Number==section['Number']),
+                               urlId: section['id']});
           }
         })
       })
@@ -78,8 +112,10 @@ riot.tag2('style-guide-search',
     }
 
     this.reset = (e) => {
-      this.result = '';
-      this.result = e.target.text;
+      let category = e.currentTarget.childNodes[0].firstChild.textContent;
+      let section = e.currentTarget.childNodes[0].lastChild.textContent;
+
+      this.result = section + ' ' + category;
       this.results = [];
       this.refs.input.value = this.result;
       this.update();
@@ -109,6 +145,7 @@ riot.tag2('style-guide',
       this.index = lunr(function() {
         this.field('name', {boost:10});
         this.field('description', {boost:6});
+        this.field('category');
         this.ref('number');
       });
     }.bind(this)
@@ -125,7 +162,8 @@ riot.tag2('style-guide',
           name: section['Name'],
           id: section['Id'],
           markup: section['Markup'],
-          number: section['Number']
+          number: section['Number'],
+          category: section['Category']
         });
       }.bind(this));
       this.update();
@@ -143,20 +181,52 @@ riot.tag2('style-guide-sections',
   <!-- Style Guide section data -->
   <section id="{opts.Number}" class="section">
     <div class="columns">
-      <div class="column is-three-quarters-desktop is-12-tablet">
+      <div class="column {is-three-quarters-desktop: hasSubSection} is-12-tablet">
         <div class="content">
-          <h2 class="title is-2">{ opts.Name }</h2>
+          <h1 class="title is-2">{ opts.Name }</h1>
           <raw content="{ opts.description }"/>
           <div class="sg-html-example"><p>Raw HMTL</p>{raw_html}</div>
           <div class="sg-html-example"><p>Cooked HTML</p>{cooked_html}</div>
           <div class="sg-css-example"><p>Rule Set CSS</p>{rule_set}</div>
         </div>
       </div>
-      <div class="column is-hidden-touch">
+      <div class="column is-hidden-touch {is-hidden-desktop: !hasSubSection}">
         <h3>In this section</h3>
+        <ul>
+        <li each={subSection}><a href="#{parent.opts.Number}/{headingID}">{title}</a></li>
+        </ul>
       </div>
     </div>
   </section>`,
   '', '',
-  function(opts) {}
+  function(opts) {
+  this.subSection = [];
+  this.hasSubSection = true;
+
+  this.setID = function() {
+    for (var i=0; i < this.root.getElementsByTagName('h2').length; i++ ) {
+      this.root.getElementsByTagName('h2')[i].id = 'heading' + i;
+    }
+  }
+
+  this.setSubSection = function() {
+    this.subSection = [];
+
+    for (let i in opts.subSection) {
+      this.subSection.push({ title: opts.subSection[i],
+                                id: opts.id,
+                                headingID: `heading${i}`});
+    }
+
+    if (this.subSection.length == 0) {
+      this.hasSubSection = false;
+    }
+  }.bind(this)
+
+  this.on('mount', function() {
+    this.setSubSection();
+    this.setID();
+    this.update();
+  });
+}
 );
