@@ -102,7 +102,7 @@ riot.tag2('style-guide',
     <div class="container">
       <!-- Search elements -->
       <style-guide-search class="search" index={index} sections={sections}></style-guide-search>
-      <style-guide-sections sections={sections}></style-guide-sections>
+      <style-guide-sections></style-guide-sections>
     </div>
   </main>`,
 
@@ -162,7 +162,7 @@ riot.tag2('style-guide-sections',
       <div class="column is-hidden-touch {is-hidden-desktop: !hasSubSection}">
         <h3>In this section</h3>
         <ul>
-        <li each={subSection}><a href="#{parent.opts.Number}#{headingID}">{title}</a></li>
+        <li each={subSection}><a href="#{parent.opts.Number}/{headingID}">{title}</a></li>
         </ul>
       </div>
     </div>

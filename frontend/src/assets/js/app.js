@@ -5,6 +5,7 @@
 
 import riot from 'riot';
 import route from 'riot-route';
+import scrollToY from './scrollTo.js';
 import './tags.js';
 import './interactions.js';
 
@@ -93,6 +94,7 @@ route.start(true);
 let r = route.create();
 r('', home)
 r('*', detail)
+r('*/heading*', heading)
 r(home) // `notfound` would be nicer!
 
 function home() {
@@ -103,4 +105,14 @@ function home() {
 function detail(id) {
   let selected = app.model.data.filter(function(d) { return d.Number == id })[0] || {}
   riot.mount('style-guide-sections', 'style-guide-sections', selected);
+}
+
+function heading(id,heading) {
+  let selected = app.model.data.filter(function(d) { return d.Number == id })[0] || {}
+  riot.mount('style-guide-sections', 'style-guide-sections', selected);
+  
+  let el = document.getElementById('heading' + heading);
+  let rect = el.getBoundingClientRect();
+
+  scrollToY(rect.top, 2000, 'easeInOutQuint');
 }
