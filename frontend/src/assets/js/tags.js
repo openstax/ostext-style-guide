@@ -16,7 +16,7 @@ riot.tag2('style-guide-navigation',
   `<ul class="menu-list">
     <li class="changelog"><a href="#0.0.0">v0.0.1</a></li>
     <li each="{section, i in sections}" class="{section.number}">
-      <a href="#/section/{i}">{section.name}</a>
+      <a href="#{section.number}">{section.name}</a>
     </li>
    </ul>`,
 
@@ -54,7 +54,7 @@ riot.tag2('style-guide-search',
 
   <div class="search-results menu">
     <ul class="menu-list sg-search-result">
-     <li each={results} onclick="{reset}"><a href="#/section/{urlId}"><span>in {category}</span>{name}</a></li>
+     <li each={results} onclick="{reset}"><a href="#{number}"><span>in {category}</span>{name}</a></li>
     </ul>
   </div>`,
 
@@ -162,7 +162,7 @@ riot.tag2('style-guide-sections',
       <div class="column is-hidden-touch {is-hidden-desktop: !hasSubSection}">
         <h3>In this section</h3>
         <ul>
-        <li each={subSection}><a href="#/section/{id}/#{headingID}">{title}</a></li>
+        <li each={subSection}><a href="#{parent.opts.Number}#{headingID}">{title}</a></li>
         </ul>
       </div>
     </div>

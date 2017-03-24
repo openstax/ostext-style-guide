@@ -87,16 +87,20 @@ window.riot = riot;
 window.app = app;
 
 riot.mount('*', app);
-
-route(function() {
-  riot.mount('style-guide-sections', 'style-guide-sections', app.model.data[1]);
-})
-
 route.stop();
 route.start(true);
 
-// route.base('#/');
+let r = route.create();
+r('', home)
+r('*', detail)
+r(home) // `notfound` would be nicer!
 
-route('/section/*', function(id) {
-  riot.mount('style-guide-sections', 'style-guide-sections', app.model.data[id]);
-});
+function home() {
+  let selected = app.model.data.filter(function(d) { return d.Number == '1.1.0'})[0] || {}
+  riot.mount('style-guide-sections', 'style-guide-sections', selected);
+}
+
+function detail(id) {
+  let selected = app.model.data.filter(function(d) { return d.Number == id })[0] || {}
+  riot.mount('style-guide-sections', 'style-guide-sections', selected);
+}
