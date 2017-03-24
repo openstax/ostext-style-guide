@@ -72,7 +72,8 @@ riot.tag2('style-guide-search',
             this.results.push({number: section['Number'],
                                name: section['Name'],
                                category: section['Category'],
-                               urlId: opts.sections.findIndex(x => x.Number==section['Number'])});
+                              // urlId: opts.sections.findIndex(x => x.Number==section['Number']),
+                               urlId: section['id']});
           }
         })
       })
@@ -101,7 +102,7 @@ riot.tag2('style-guide',
     <div class="container">
       <!-- Search elements -->
       <style-guide-search class="search" index={index} sections={sections}></style-guide-search>
-      <style-guide-sections></style-guide-sections>
+      <style-guide-sections sections={sections}></style-guide-sections>
     </div>
   </main>`,
 
@@ -149,20 +150,52 @@ riot.tag2('style-guide-sections',
   <!-- Style Guide section data -->
   <section id="{opts.Number}" class="section">
     <div class="columns">
-      <div class="column is-three-quarters-desktop is-12-tablet">
+      <div class="column {is-three-quarters-desktop: hasSubSection} is-12-tablet">
         <div class="content">
-          <h2 class="title is-2">{ opts.Name }</h2>
+          <h1 class="title is-2">{ opts.Name }</h1>
           <raw content="{ opts.description }"/>
           <div class="sg-html-example"><p>Raw HMTL</p>{raw_html}</div>
           <div class="sg-html-example"><p>Cooked HTML</p>{cooked_html}</div>
           <div class="sg-css-example"><p>Rule Set CSS</p>{rule_set}</div>
         </div>
       </div>
-      <div class="column is-hidden-touch">
+      <div class="column is-hidden-touch {is-hidden-desktop: !hasSubSection}">
         <h3>In this section</h3>
+        <ul>
+        <li each={subSection}><a href="#/section/{id}/#{headingID}">{title}</a></li>
+        </ul>
       </div>
     </div>
   </section>`,
   '', '',
-  function(opts) {}
+  function(opts) {
+  this.subSection = [];
+  this.hasSubSection = true;
+
+  this.setID = function() {
+    for (var i=0; i < this.root.getElementsByTagName('h2').length; i++ ) {
+      this.root.getElementsByTagName('h2')[i].id = 'heading' + i;
+    }
+  }
+
+  this.setSubSection = function() {
+    this.subSection = [];
+
+    for (let i in opts.subSection) {
+      this.subSection.push({ title: opts.subSection[i],
+                                id: opts.id,
+                                headingID: `heading${i}`});
+    }
+
+    if (this.subSection.length == 0) {
+      this.hasSubSection = false;
+    }
+  }.bind(this)
+
+  this.on('mount', function() {
+    this.setSubSection();
+    this.setID();
+    this.update();
+  });
+}
 );

@@ -23,9 +23,25 @@ class AbstractDataModel {
     let newArray = this.data;
 
     for (var key in newArray) {
-      newArray[key].description = newArray[key]["!text"];
+      newArray[key].id = key;
+      newArray[key].Name = newArray[key]["!text"].split('</h1>')[0].replace(/<h1>/g,"");
+      newArray[key].description = newArray[key]["!text"].split('</h1>')[1];
       newArray[key].Number = newArray[key].Number.replace(/'/g,"");
       delete newArray[key]["!text"];
+
+      // get subsection values for "In this Section" navigation
+      // matches any h2's in the description field
+      // removes h2 tags and store value in subSection field
+      let str = newArray[key].description;
+      let subStr = str.match(/<h2>(.*?)<\/h2>/g)
+
+      if (subStr) {
+        subStr = subStr.map(function(val){
+          return val.replace(/<\/?h2>/g,'');
+        });
+      }
+
+      newArray[key].subSection = subStr;
 
       if (newArray[key].Number.endsWith('.0.0')) {
         newArray[key].Category = newArray[key].Name;
@@ -46,9 +62,11 @@ class AbstractDataModel {
     this.data = newArray;
     this.trigger('updated', data);
   }
+
   setItem(idx, val) {
     this.data[idx] = val;
   }
+
   getItem(idx) {
     return this.data[idx];
   }
@@ -77,7 +95,7 @@ route(function() {
 route.stop();
 route.start(true);
 
-route.base('#/');
+// route.base('#/');
 
 route('/section/*', function(id) {
   riot.mount('style-guide-sections', 'style-guide-sections', app.model.data[id]);
