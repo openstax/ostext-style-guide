@@ -13,12 +13,22 @@ riot.tag2('raw',
 
 riot.tag2('style-guide-navigation',
 
-  `<ul class="menu-list">
-    <li class="changelog"><a href="#0.0.0">v0.0.1</a></li>
-    <li each="{section, i in sections}" class="{section.number}">
-      <a href="#{section.number}">{section.name}</a>
+  `
+  <div class="menu">
+    <p>Changelog</p>
+    <ul class="menu-list">
+      <li class="changelog"><a href="#0.0.0">v0.0.1</a></li>
+    </ul>
+  </div>
+  <div each="{category, i in sections}" class="menu">
+  <p>{category.category}</p>
+  <ul class="menu-list">
+    <li each="{el, i in category.sections}" class="{el.number}">
+      <a href="#{el.number}">{el.name}</a>
     </li>
-   </ul>`,
+   </ul>
+   </div>
+   `,
 
   '', '',
   function(opts) {
@@ -32,6 +42,27 @@ riot.tag2('style-guide-navigation',
                             name: section['Name'],
                             category: section['Category']});
       }.bind(this));
+
+      let groups = {};
+
+      for (var i = 0; i < this.sections.length; i++) {
+        let groupName = this.sections[i].category;
+          if (!groups[groupName]) {
+            groups[groupName] = [];
+          }
+          if (this.sections[i].number.endsWith('.0.0')) {
+            continue;
+          }
+
+        groups[groupName].push({name: this.sections[i].name,
+                              number:this.sections[i].number});
+      }
+
+      this.sections = [];
+
+      for (var groupName in groups) {
+        this.sections.push({category: groupName, sections: groups[groupName]});
+      }
     }.bind(this)
 
     this.on('sections-updated', function() {

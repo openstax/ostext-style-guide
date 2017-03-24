@@ -99,20 +99,30 @@ r(home) // `notfound` would be nicer!
 
 function home() {
   let selected = app.model.data.filter(function(d) { return d.Number == '1.1.0'})[0] || {}
-  riot.mount('style-guide-sections', 'style-guide-sections', selected);
+  riot.mount('style-guide-sections', selected);
+  window.scrollTo(0,0);
 }
+function goToSection(id) {
+  if (id.endsWith('.0.0')) {
+    let categoryID = id.split('.')[0];
+    id = categoryID + '.1.0';
+  }
 
-function detail(id) {
   let selected = app.model.data.filter(function(d) { return d.Number == id })[0] || {}
-  riot.mount('style-guide-sections', 'style-guide-sections', selected);
+  riot.mount('style-guide-sections', selected);
+}
+function detail(id) {
+  goToSection(id);
+  window.scrollTo(0,0);
 }
 
 function heading(id,heading) {
-  let selected = app.model.data.filter(function(d) { return d.Number == id })[0] || {}
-  riot.mount('style-guide-sections', 'style-guide-sections', selected);
-  
-  let el = document.getElementById('heading' + heading);
-  let rect = el.getBoundingClientRect();
+  goToSection(id);
 
-  scrollToY(rect.top, 2000, 'easeInOutQuint');
+  let el = document.getElementById('heading' + heading);
+
+  if (el) {
+    let rect = el.getBoundingClientRect();
+    scrollToY(rect.top, 2000, 'easeInOutQuint');
+  }
 }
