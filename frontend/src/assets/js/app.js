@@ -15,12 +15,12 @@ class AbstractDataModel {
 
     // This request is made asynchronously in the <head>
     // of the main html chunk in order to load JSON data quickly.
-    json_request.then((data, xhr) => { this.setModelData(data['Section']) },          // success
+    json_request.then((data, xhr) => { this.setModelData(data) },          // success
                       (data, xhr) => { console.error(data, xhr.status) }); // error
   }
 
   setModelData(data) {
-    this.data = data;
+    this.data = data['Section'];
     let newArray = this.data;
 
     for (var key in newArray) {
@@ -61,7 +61,7 @@ class AbstractDataModel {
     }
 
     this.data = newArray;
-    this.trigger('updated', data);
+    this.trigger('updated', this.data);
   }
 
   setItem(idx, val) {
@@ -84,12 +84,8 @@ class StyleGuideApp {
 let app = new StyleGuideApp();
 
 // Clean this up.
-window.riot = riot;
-window.app = app;
-
-riot.mount('*', app);
-route.stop();
-route.start(true);
+// window.riot = riot;
+// window.app = app;
 
 let r = route.create();
 r('', home)
@@ -98,19 +94,32 @@ r('*/heading*', heading)
 r(home) // `notfound` would be nicer!
 
 function home() {
-  let selected = app.model.data.filter(function(d) { return d.Number == '1.1.0'})[0] || {}
-  riot.mount('style-guide-sections', selected);
+  goToSection('1.1.0');
   window.scrollTo(0,0);
 }
-function goToSection(id) {
-  if (id.endsWith('.0.0')) {
-    let categoryID = id.split('.')[0];
-    id = categoryID + '.1.0';
-  }
 
-  let selected = app.model.data.filter(function(d) { return d.Number == id })[0] || {}
-  riot.mount('style-guide-sections', selected);
+function goToSection(id) {
+  if (app.model.data != undefined) {
+    if (id.endsWith('.0.0')) {
+      let categoryID = id.split('.')[0];
+      id = categoryID + '.1.0';
+    }
+
+    let selected = app.model.data.filter(function(d) { return d.Number == id })[0] || {}
+    riot.mount('#section','style-guide-sections', selected);
+  } else {
+    app.model.on('updated', function(data) {
+      if (id.endsWith('.0.0')) {
+        let categoryID = id.split('.')[0];
+        id = categoryID + '.1.0';
+      }
+
+       let selected = data.filter(function(d) { return d.Number == id })[0] || {}
+       riot.mount('#section','style-guide-sections', selected);
+    });
+  }
 }
+
 function detail(id) {
   goToSection(id);
   window.scrollTo(0,0);
@@ -118,7 +127,6 @@ function detail(id) {
 
 function heading(id,heading) {
   goToSection(id);
-
   let el = document.getElementById('heading' + heading);
 
   if (el) {
@@ -126,3 +134,7 @@ function heading(id,heading) {
     scrollToY(rect.top, 2000, 'easeInOutQuint');
   }
 }
+
+riot.mount('style-guide', app);
+route.stop();
+route.start(true);

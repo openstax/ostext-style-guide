@@ -145,7 +145,8 @@ body {
       width: 0;
       height: 0;
       opacity: 0;
-
+      overflow: hidden;
+      
       @at-root .is-active#{&} {
         opacity: 1;
         width: inherit;

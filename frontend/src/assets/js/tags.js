@@ -133,7 +133,7 @@ riot.tag2('style-guide',
     <div class="container">
       <!-- Search elements -->
       <style-guide-search class="search" index={index} sections={sections}></style-guide-search>
-      <style-guide-sections></style-guide-sections>
+      <div id="section" sections={sections}></div>
     </div>
   </main>`,
 
