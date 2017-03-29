@@ -90,7 +90,7 @@ let app = new StyleGuideApp();
 let r = route.create();
 r('', home)
 r('*', detail)
-r('*/heading*', heading)
+r('*/*', heading)
 r(home) // `notfound` would be nicer!
 
 function home() {
@@ -99,23 +99,20 @@ function home() {
 }
 
 function goToSection(id) {
-  if (app.model.data != undefined) {
-    if (id.endsWith('.0.0')) {
-      let categoryID = id.split('.')[0];
-      id = categoryID + '.1.0';
-    }
+  if (id.endsWith('.0.0')) {
+    let categoryID = id.split('.')[0];
+    id = categoryID + '.1.0';
+  }
 
+  if (app.model.data != undefined) {
     let selected = app.model.data.filter(function(d) { return d.Number == id })[0] || {}
+
     riot.mount('#section','style-guide-sections', selected);
   } else {
     app.model.on('updated', function(data) {
-      if (id.endsWith('.0.0')) {
-        let categoryID = id.split('.')[0];
-        id = categoryID + '.1.0';
-      }
+      let selected = data.filter(function(d) { return d.Number == id })[0] || {}
 
-       let selected = data.filter(function(d) { return d.Number == id })[0] || {}
-       riot.mount('#section','style-guide-sections', selected);
+      riot.mount('#section','style-guide-sections', selected);
     });
   }
 }
@@ -127,7 +124,7 @@ function detail(id) {
 
 function heading(id,heading) {
   goToSection(id);
-  let el = document.getElementById('heading' + heading);
+  let el = document.getElementById(heading);
 
   if (el) {
     let rect = el.getBoundingClientRect();

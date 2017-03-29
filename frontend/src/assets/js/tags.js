@@ -200,33 +200,37 @@ riot.tag2('style-guide-sections',
   </section>`,
   '', '',
   function(opts) {
-  this.subSection = [];
-  this.hasSubSection = true;
-
-  this.setID = function() {
-    for (var i=0; i < this.root.getElementsByTagName('h2').length; i++ ) {
-      this.root.getElementsByTagName('h2')[i].id = 'heading' + i;
-    }
-  }
-
-  this.setSubSection = function() {
     this.subSection = [];
+    this.hasSubSection = true;
 
-    for (let i in opts.subSection) {
-      this.subSection.push({ title: opts.subSection[i],
-                                id: opts.id,
-                                headingID: `heading${i}`});
+    this.setID = function() {
+      for (var i=0; i < this.root.getElementsByTagName('h2').length; i++ ) {
+        let headingID = this.root.getElementsByTagName('h2')[i].textContent.replace(/ +/g, '-').toLowerCase();
+
+        this.root.getElementsByTagName('h2')[i].id = headingID;
+      }
     }
 
-    if (this.subSection.length == 0) {
-      this.hasSubSection = false;
-    }
-  }.bind(this)
+    this.setSubSection = function() {
+      this.subSection = [];
 
-  this.on('mount', function() {
-    this.setSubSection();
-    this.setID();
-    this.update();
-  });
-}
+      for (let i in opts.subSection) {
+        this.subSection.push({ title: opts.subSection[i],
+                               headingID: this.root.getElementsByTagName('h2')[i].id});
+      }
+
+      if (this.subSection.length == 0) {
+        this.hasSubSection = false;
+      }
+    }.bind(this)
+
+    this.on('mount', function() {
+      this.setID();
+      this.setSubSection();
+      this.update();
+
+      // //queue MathJax to load MathML after tag mount
+      // MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+    });
+  }
 );
