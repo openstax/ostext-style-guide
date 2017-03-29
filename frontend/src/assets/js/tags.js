@@ -201,31 +201,27 @@ riot.tag2('style-guide-sections',
   '', '',
   function(opts) {
     this.subSection = [];
-    this.hasSubSection = true;
-
-    this.setID = function() {
-      for (var i=0; i < this.root.getElementsByTagName('h2').length; i++ ) {
-        let headingID = this.root.getElementsByTagName('h2')[i].textContent.replace(/ +/g, '-').toLowerCase();
-
-        this.root.getElementsByTagName('h2')[i].id = headingID;
-      }
-    }
+    this.hasSubSection = false;
 
     this.setSubSection = function() {
       this.subSection = [];
 
-      for (let i in opts.subSection) {
-        this.subSection.push({ title: opts.subSection[i],
-                               headingID: this.root.getElementsByTagName('h2')[i].id});
+      for (var i=0; i < this.root.getElementsByTagName('h2').length; i++ ) {
+        let title = this.root.getElementsByTagName('h2')[i].textContent;
+        let headingID = title.replace(/ +/g, '-').toLowerCase();
+
+        this.root.getElementsByTagName('h2')[i].id = headingID;
+
+        this.subSection.push({ title: title,
+                               headingID: headingID});
       }
 
-      if (this.subSection.length == 0) {
-        this.hasSubSection = false;
+      if (this.subSection.length) {
+        this.hasSubSection = true;
       }
     }.bind(this)
 
     this.on('mount', function() {
-      this.setID();
       this.setSubSection();
       this.update();
 

@@ -30,20 +30,6 @@ class AbstractDataModel {
       newArray[key].Number = newArray[key].Number.replace(/'/g,"");
       delete newArray[key]["!text"];
 
-      // get subsection values for "In this Section" navigation
-      // matches any h2's in the description field
-      // removes h2 tags and store value in subSection field
-      let str = newArray[key].description;
-      let subStr = str.match(/<h2>(.*?)<\/h2>/g)
-
-      if (subStr) {
-        subStr = subStr.map(function(val){
-          return val.replace(/<\/?h2>/g,'');
-        });
-      }
-
-      newArray[key].subSection = subStr;
-
       if (newArray[key].Number.endsWith('.0.0')) {
         newArray[key].Category = newArray[key].Name;
       } else {
