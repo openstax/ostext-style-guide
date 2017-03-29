@@ -24,7 +24,7 @@ riot.tag2('style-guide-navigation',
   <p>{category.category}</p>
   <ul class="menu-list">
     <li each="{el, i in category.sections}" class="{el.number}">
-      <a href="#{el.number}">{el.name}</a>
+      <a href="/#/{category.category.replace(/ +/g, '-').toLowerCase()}/{el.name.replace(/ +/g, '-').toLowerCase()}">{el.name}</a>
     </li>
    </ul>
    </div>
@@ -85,7 +85,7 @@ riot.tag2('style-guide-search',
 
   <div class="search-results menu">
     <ul class="menu-list sg-search-result">
-     <li each={results} onclick="{reset}"><a href="#{number}"><span>in {category}</span>{name}</a></li>
+     <li each={results} onclick="{reset}"><a href="/#/{category.replace(/ +/g, '-').toLowerCase()}/{name.replace(/ +/g, '-').toLowerCase()}"><span>in {category}</span>{name}</a></li>
     </ul>
   </div>`,
 
@@ -133,7 +133,7 @@ riot.tag2('style-guide',
     <div class="container">
       <!-- Search elements -->
       <style-guide-search class="search" index={index} sections={sections}></style-guide-search>
-      <style-guide-sections></style-guide-sections>
+      <div id="section" sections={sections}></div>
     </div>
   </main>`,
 
@@ -193,40 +193,40 @@ riot.tag2('style-guide-sections',
       <div class="column is-hidden-touch {is-hidden-desktop: !hasSubSection}">
         <h3>In this section</h3>
         <ul>
-        <li each={subSection}><a href="#{parent.opts.Number}/{headingID}">{title}</a></li>
+        <li each={subSection}><a href="/#/{parent.opts.Category.replace(/ +/g, '-').toLowerCase()}/{parent.opts.Name.replace(/ +/g, '-').toLowerCase()}/#{headingID}">{title}</a></li>
         </ul>
       </div>
     </div>
   </section>`,
   '', '',
   function(opts) {
-  this.subSection = [];
-  this.hasSubSection = true;
-
-  this.setID = function() {
-    for (var i=0; i < this.root.getElementsByTagName('h2').length; i++ ) {
-      this.root.getElementsByTagName('h2')[i].id = 'heading' + i;
-    }
-  }
-
-  this.setSubSection = function() {
     this.subSection = [];
+    this.hasSubSection = false;
 
-    for (let i in opts.subSection) {
-      this.subSection.push({ title: opts.subSection[i],
-                                id: opts.id,
-                                headingID: `heading${i}`});
-    }
+    this.setSubSection = function() {
+      this.subSection = [];
 
-    if (this.subSection.length == 0) {
-      this.hasSubSection = false;
-    }
-  }.bind(this)
+      for (var i=0; i < this.root.getElementsByTagName('h2').length; i++ ) {
+        let title = this.root.getElementsByTagName('h2')[i].textContent;
+        let headingID = title.replace(/ +/g, '-').toLowerCase();
 
-  this.on('mount', function() {
-    this.setSubSection();
-    this.setID();
-    this.update();
-  });
-}
+        this.root.getElementsByTagName('h2')[i].id = headingID;
+
+        this.subSection.push({ title: title,
+                               headingID: headingID});
+      }
+
+      if (this.subSection.length) {
+        this.hasSubSection = true;
+      }
+    }.bind(this)
+
+    this.on('mount', function() {
+      this.setSubSection();
+      this.update();
+
+      // //queue MathJax to load MathML after tag mount
+      // MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+    });
+  }
 );

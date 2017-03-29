@@ -15,12 +15,12 @@ class AbstractDataModel {
 
     // This request is made asynchronously in the <head>
     // of the main html chunk in order to load JSON data quickly.
-    json_request.then((data, xhr) => { this.setModelData(data['Section']) },          // success
+    json_request.then((data, xhr) => { this.setModelData(data) },          // success
                       (data, xhr) => { console.error(data, xhr.status) }); // error
   }
 
   setModelData(data) {
-    this.data = data;
+    this.data = data['Section'];
     let newArray = this.data;
 
     for (var key in newArray) {
@@ -29,20 +29,6 @@ class AbstractDataModel {
       newArray[key].description = newArray[key]["!text"].split('</h1>')[1];
       newArray[key].Number = newArray[key].Number.replace(/'/g,"");
       delete newArray[key]["!text"];
-
-      // get subsection values for "In this Section" navigation
-      // matches any h2's in the description field
-      // removes h2 tags and store value in subSection field
-      let str = newArray[key].description;
-      let subStr = str.match(/<h2>(.*?)<\/h2>/g)
-
-      if (subStr) {
-        subStr = subStr.map(function(val){
-          return val.replace(/<\/?h2>/g,'');
-        });
-      }
-
-      newArray[key].subSection = subStr;
 
       if (newArray[key].Number.endsWith('.0.0')) {
         newArray[key].Category = newArray[key].Name;
@@ -61,7 +47,7 @@ class AbstractDataModel {
     }
 
     this.data = newArray;
-    this.trigger('updated', data);
+    this.trigger('updated', this.data);
   }
 
   setItem(idx, val) {
@@ -84,45 +70,75 @@ class StyleGuideApp {
 let app = new StyleGuideApp();
 
 // Clean this up.
-window.riot = riot;
-window.app = app;
-
-riot.mount('*', app);
-route.stop();
-route.start(true);
+// window.riot = riot;
+// window.app = app;
 
 let r = route.create();
-r('', home)
-r('*', detail)
-r('*/heading*', heading)
-r(home) // `notfound` would be nicer!
+r('/', home)
+r('*/*', detail)
+r('*/*/#*', heading)
+r(notfound)
+
+function isEmpty(obj) {
+    for(var key in obj) {
+        if(obj.hasOwnProperty(key))
+            return false;
+    }
+    return true;
+}
 
 function home() {
-  let selected = app.model.data.filter(function(d) { return d.Number == '1.1.0'})[0] || {}
-  riot.mount('style-guide-sections', selected);
-  window.scrollTo(0,0);
-}
-function goToSection(id) {
-  if (id.endsWith('.0.0')) {
-    let categoryID = id.split('.')[0];
-    id = categoryID + '.1.0';
-  }
-
-  let selected = app.model.data.filter(function(d) { return d.Number == id })[0] || {}
-  riot.mount('style-guide-sections', selected);
-}
-function detail(id) {
-  goToSection(id);
+  route('getting-started/background');
   window.scrollTo(0,0);
 }
 
-function heading(id,heading) {
-  goToSection(id);
+function goToSection(category, id) {
+  if (app.model.data != undefined) {
+    let selected = app.model.data.filter(function(d) { return d.Name.replace(/ +/g, '-').toLowerCase() == id })[0] || {}
 
-  let el = document.getElementById('heading' + heading);
+    if(isEmpty(selected)) {
+      selected = {Name:'404 Not Found', description: 'Nothing to see here.' };
+    }
 
-  if (el) {
-    let rect = el.getBoundingClientRect();
-    scrollToY(rect.top, 2000, 'easeInOutQuint');
+    riot.mount('#section','style-guide-sections', selected);
+  } else {
+    app.model.on('updated', function(data) {
+      let selected = data.filter(function(d) { return d.Name.replace(/ +/g, '-').toLowerCase() == id })[0] || {}
+
+      if(isEmpty(selected)) {
+        selected = {Name:'404 Not Found', description: 'Nothing to see here.' };
+      }
+
+      riot.mount('#section','style-guide-sections', selected);
+    });
   }
 }
+
+function detail(category, id) {
+  goToSection(category, id);
+  window.scrollTo(0,0);
+}
+
+function heading(category, id, heading) {
+  goToSection(category, id);
+
+  setTimeout(function(){
+    let el = document.getElementById(heading);
+
+    if (el) {
+      let rect = el.getBoundingClientRect();
+      scrollToY(rect.top, 2000, 'easeInOutQuint');
+    }
+  }, 500);
+}
+
+function notfound() {
+  let selected = {Name:'404 Not Found', description: 'Nothing to see here.' };
+
+  riot.mount('#section','style-guide-sections', selected);
+}
+
+riot.mount('style-guide', app);
+route.base('/#/');
+route.stop();
+route.start(true);
