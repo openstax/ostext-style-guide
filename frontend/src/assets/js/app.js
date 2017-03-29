@@ -74,50 +74,71 @@ let app = new StyleGuideApp();
 // window.app = app;
 
 let r = route.create();
-r('', home)
-r('*', detail)
-r('*/*', heading)
-r(home) // `notfound` would be nicer!
+r('/', home)
+r('*/*', detail)
+r('*/*/#*', heading)
+r(notfound)
+
+function isEmpty(obj) {
+    for(var key in obj) {
+        if(obj.hasOwnProperty(key))
+            return false;
+    }
+    return true;
+}
 
 function home() {
-  goToSection('1.1.0');
+  route('getting-started/background');
   window.scrollTo(0,0);
 }
 
-function goToSection(id) {
-  if (id.endsWith('.0.0')) {
-    let categoryID = id.split('.')[0];
-    id = categoryID + '.1.0';
-  }
-
+function goToSection(category, id) {
   if (app.model.data != undefined) {
-    let selected = app.model.data.filter(function(d) { return d.Number == id })[0] || {}
+    let selected = app.model.data.filter(function(d) { return d.Name.replace(/ +/g, '-').toLowerCase() == id })[0] || {}
+
+    if(isEmpty(selected)) {
+      selected = {Name:'404 Not Found', description: 'Nothing to see here.' };
+    }
 
     riot.mount('#section','style-guide-sections', selected);
   } else {
     app.model.on('updated', function(data) {
-      let selected = data.filter(function(d) { return d.Number == id })[0] || {}
+      let selected = data.filter(function(d) { return d.Name.replace(/ +/g, '-').toLowerCase() == id })[0] || {}
+
+      if(isEmpty(selected)) {
+        selected = {Name:'404 Not Found', description: 'Nothing to see here.' };
+      }
 
       riot.mount('#section','style-guide-sections', selected);
     });
   }
 }
 
-function detail(id) {
-  goToSection(id);
+function detail(category, id) {
+  goToSection(category, id);
   window.scrollTo(0,0);
 }
 
-function heading(id,heading) {
-  goToSection(id);
-  let el = document.getElementById(heading);
+function heading(category, id, heading) {
+  goToSection(category, id);
 
-  if (el) {
-    let rect = el.getBoundingClientRect();
-    scrollToY(rect.top, 2000, 'easeInOutQuint');
-  }
+  setTimeout(function(){
+    let el = document.getElementById(heading);
+
+    if (el) {
+      let rect = el.getBoundingClientRect();
+      scrollToY(rect.top, 2000, 'easeInOutQuint');
+    }
+  }, 500);
+}
+
+function notfound() {
+  let selected = {Name:'404 Not Found', description: 'Nothing to see here.' };
+
+  riot.mount('#section','style-guide-sections', selected);
 }
 
 riot.mount('style-guide', app);
+route.base('/#/');
 route.stop();
 route.start(true);

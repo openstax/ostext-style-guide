@@ -24,7 +24,7 @@ riot.tag2('style-guide-navigation',
   <p>{category.category}</p>
   <ul class="menu-list">
     <li each="{el, i in category.sections}" class="{el.number}">
-      <a href="#{el.number}">{el.name}</a>
+      <a href="/#/{category.category.replace(/ +/g, '-').toLowerCase()}/{el.name.replace(/ +/g, '-').toLowerCase()}">{el.name}</a>
     </li>
    </ul>
    </div>
@@ -85,7 +85,7 @@ riot.tag2('style-guide-search',
 
   <div class="search-results menu">
     <ul class="menu-list sg-search-result">
-     <li each={results} onclick="{reset}"><a href="#{number}"><span>in {category}</span>{name}</a></li>
+     <li each={results} onclick="{reset}"><a href="/#/{category.replace(/ +/g, '-').toLowerCase()}/{name.replace(/ +/g, '-').toLowerCase()}"><span>in {category}</span>{name}</a></li>
     </ul>
   </div>`,
 
@@ -193,7 +193,7 @@ riot.tag2('style-guide-sections',
       <div class="column is-hidden-touch {is-hidden-desktop: !hasSubSection}">
         <h3>In this section</h3>
         <ul>
-        <li each={subSection}><a href="#{parent.opts.Number}/{headingID}">{title}</a></li>
+        <li each={subSection}><a href="/#/{parent.opts.Category.replace(/ +/g, '-').toLowerCase()}/{parent.opts.Name.replace(/ +/g, '-').toLowerCase()}/#{headingID}">{title}</a></li>
         </ul>
       </div>
     </div>

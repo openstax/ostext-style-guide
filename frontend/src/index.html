@@ -11,7 +11,13 @@
     <script>
       // Optimization -- load JSON data (asynchronously) at the same time as other
       // JS resources.
-      var json_request = pegasus('assets/data/style-guide.json');
+      let getURL = window.location.hash.split('?url=')[1];
+
+      if (getURL) {
+        var json_request = pegasus(getURL);
+      } else {
+        var json_request = pegasus('assets/data/style-guide.json');
+      }
     </script>
   </head>
   <body>
@@ -19,7 +25,7 @@
     <header class="header">
       <nav class="nav has-shadow">
         <div class="nav-left">
-          <a href="#1.1.0" class="nav-item">
+          <a href="#/" class="nav-item">
             <img src="assets/img/logo.svg" class="logo" alt="OpenStax logo">
           </a>
         </div>
