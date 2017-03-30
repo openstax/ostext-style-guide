@@ -6,13 +6,27 @@
     <title>OpenStax Textbook Style Guide</title>
     <link rel="stylesheet" type="text/css" href="assets/css/app.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-    <!-- <script src="assets/js/pegasus.min.js"></script> -->
     <script src="https://unpkg.com/@typicode/pegasus/dist/pegasus.min.js"></script>
-    <!-- <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=MML_CHTML"></script> -->
+    <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=MML_CHTML"></script>
     <script>
       // Optimization -- load JSON data (asynchronously) at the same time as other
       // JS resources.
-      var json_request = pegasus('assets/data/style-guide.json');
+      let getURL = window.location.hash.split('?url=')[1];
+
+      if (getURL) {
+        var json_request = pegasus(getURL);
+        window.location = "#/getting-started/background";
+        document.addEventListener("DOMContentLoaded", function(event) {
+          let s = document.body.firstChild;
+          let elemDiv = document.createElement('div');
+
+          elemDiv.style.cssText = 'background-color:#24292e;color:rgba(255,255,255,0.75);padding:0.5em 3em;text-align:center;';
+          elemDiv.innerHTML = 'WARNING: You are using external data file: ' + getURL;
+          s.parentNode.insertBefore(elemDiv, s);
+        });
+      } else {
+        var json_request = pegasus('assets/data/style-guide.json');
+      }
     </script>
   </head>
   <body>
@@ -20,7 +34,7 @@
     <header class="header">
       <nav class="nav has-shadow">
         <div class="nav-left">
-          <a href="#1.1.0" class="nav-item">
+          <a href="#/" class="nav-item">
             <img src="assets/img/logo.svg" class="logo" alt="OpenStax logo">
           </a>
         </div>
