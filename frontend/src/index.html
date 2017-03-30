@@ -15,6 +15,14 @@
 
       if (getURL) {
         var json_request = pegasus(getURL);
+        document.addEventListener("DOMContentLoaded", function(event) {
+          let s = document.body.firstChild;
+          let elemDiv = document.createElement('div');
+
+          elemDiv.style.cssText = 'background-color:#24292e;color:rgba(255,255,255,0.75);padding:0.5em 3em;text-align:center;';
+          elemDiv.innerHTML = 'WARNING: You are using external data file: ' + getURL;
+          s.parentNode.insertBefore(elemDiv, s);
+        });
       } else {
         var json_request = pegasus('assets/data/style-guide.json');
       }
