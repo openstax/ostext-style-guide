@@ -15,6 +15,7 @@
 
       if (getURL) {
         var json_request = pegasus(getURL);
+        window.location = "/#/getting-started/background";
         document.addEventListener("DOMContentLoaded", function(event) {
           let s = document.body.firstChild;
           let elemDiv = document.createElement('div');
@@ -33,7 +34,7 @@
     <header class="header">
       <nav class="nav has-shadow">
         <div class="nav-left">
-          <a href="#/" class="nav-item">
+          <a href="/#/getting-started/background" class="nav-item">
             <img src="assets/img/logo.svg" class="logo" alt="OpenStax logo">
           </a>
         </div>

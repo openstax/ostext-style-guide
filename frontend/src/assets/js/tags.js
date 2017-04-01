@@ -1,6 +1,7 @@
 'use strict';
 
 import riot from 'riot';
+import scrollToY from './scrollTo.js';
 import lunr from 'lunr';
 
 riot.tag2('raw',
@@ -15,9 +16,7 @@ riot.tag2('style-guide-navigation',
 
   `
   <div class="menu">
-    <p>Changelog</p>
-    <ul class="menu-list">
-      <li class="changelog"><a href="#0.0.0">v0.0.1</a></li>
+      <p class="changelog">v0.0.2 <a href="https://github.com/openstax/ostext-style-guide/releases" target="_blank">(Changelog)</a></p>
     </ul>
   </div>
   <div each="{category, i in sections}" class="menu">
@@ -183,7 +182,7 @@ riot.tag2('style-guide-sections',
     <div class="columns">
       <div class="column {is-three-quarters-desktop: hasSubSection} is-12-tablet">
         <div class="content">
-          <h1 class="title is-2">{ opts.Name }</h1>
+          <h1 class="title">{ opts.Name }</h1>
           <raw content="{ opts.description }"/>
           <div class="sg-html-example"><p>Raw HMTL</p>{raw_html}</div>
           <div class="sg-html-example"><p>Cooked HTML</p>{cooked_html}</div>
@@ -191,10 +190,12 @@ riot.tag2('style-guide-sections',
         </div>
       </div>
       <div class="column is-hidden-touch {is-hidden-desktop: !hasSubSection}">
-        <h3>In this section</h3>
-        <ul>
-        <li each={subSection}><a href="/#/{parent.opts.Category.replace(/ +/g, '-').toLowerCase()}/{parent.opts.Name.replace(/ +/g, '-').toLowerCase()}/#{headingID}">{title}</a></li>
-        </ul>
+        <div class="menu subsection">
+          <h3>In this section</h3>
+          <ul class="menu-list">
+            <li each={subSection}><a href="/#/{parent.opts.Category.replace(/ +/g, '-').toLowerCase()}/{parent.opts.Name.replace(/ +/g, '-').toLowerCase()}/#{headingID}" onclick="{goToSection}">{title}</a></li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>`,
@@ -228,5 +229,20 @@ riot.tag2('style-guide-sections',
       // //queue MathJax to load MathML after tag mount
       // MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
     });
+
+    this.goToSection = (e) => {
+      e.preventDefault();
+      let url = e.target.hash.split('#')[1];
+      let heading = e.target.hash.split('#')[2];
+      let el = document.getElementById(heading);
+
+      if (el) {
+        let rect = el.getBoundingClientRect();
+
+        scrollToY(rect.top + pageYOffset, 2000, 'easeInOutSine');
+      }
+
+      history.pushState(null, '', `#${url}#${heading}`);
+    }
   }
 );

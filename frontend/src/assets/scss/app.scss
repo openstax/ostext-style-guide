@@ -8,7 +8,7 @@ $os-blue-s60: #054C58;
 $os-blue-s20: #0A99B0;
 $os-blue-s40: #147383;
 $family-sans-serif: "Noto Sans", "Noto Sans CJK {JP, KR, SC, TC}", sans-serif;
-
+$family-helvetica: "Helvetica Neue", Helvetica, Arial, sans-serif;
 // Override generated variables here
 $primary: $os-blue;
 $family-primary: $family-sans-serif;
@@ -22,11 +22,15 @@ $family-primary: $family-sans-serif;
 
 
 /* Layout */
+html {
+  font-size: 16px;
+}
 
 body {
   display: flex;
   height: 100%;
   height: 100vh;
+  font-size: 100%;
   flex-direction: column;
 }
 
@@ -46,7 +50,7 @@ body {
 
   .side-nav {
     @include tablet {
-      flex: 0 0 20rem;
+      flex: 0 0 18rem;
     }
   }
 
@@ -84,7 +88,7 @@ body {
   }
   .nav-left {
     @include tablet {
-      flex: 0 0 20rem;
+      flex: 0 0 18rem;
       background-color: #fff;
     }
   }
@@ -146,7 +150,7 @@ body {
       height: 0;
       opacity: 0;
       overflow: hidden;
-      
+
       @at-root .is-active#{&} {
         opacity: 1;
         width: inherit;
@@ -164,16 +168,16 @@ body {
 
     @include tablet-only {
       z-index: 999;
-      margin-left: -280px;
+      margin-left: -18rem;
       // transition: 0.2s transform ease-out 0.1s;
       position: fixed;
       top: 56px;
       left: 0;
       bottom: 0;
-      width: 20rem;
+      width: 18rem;
 
       @at-root .is-active#{&} {
-        transform: translate3d(280px, 0, 0);
+        transform: translate3d(18rem, 0, 0);
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
         transition: 0.2s transform ease-out 0.1s;
@@ -190,16 +194,33 @@ body {
       }
     }
 
+    .changelog {
+      padding-left: 0.75em;
+      padding-right: 0.75em;
+      text-transform: none;
+      margin-bottom: 0;
+
+      a {
+        color: $os-blue;
+        margin-left: 1em;
+      }
+    }
+
     p {
+      font-family: $family-helvetica;
       text-transform: uppercase;
-      margin-bottom: 1em;
+      margin-bottom: 0.5em;
       font-weight: 600;
       padding-left: 0.75em;
       padding-right: 0.75em;
+      letter-spacing: -1px;
     }
 
     a {
       color: #3b3b3b;
+      padding: 0.25em 0.75em;
+      font-size: 14px;
+
       &:hover,
       &:active,
       &:focus {
@@ -279,20 +300,75 @@ body {
       border-bottom: 1px solid #ebebeb;
     }
 
-    .content .title {
-      color: $os-blue-s60;
-      position: relative;
+    .content {
+      h2 {
+        font-family: $family-helvetica;
+        font-size: 24px;
+      }
 
-      &::before {
-        display: inline-block;
-        width: 6px;
-        height: 1.75em;
-        content: '';
-        background-color: $os-blue-s20;
+      h3 {
+        font-family: $family-helvetica;
+        font-size: 18px;
+      }
+
+      .title {
+        font-family: $family-helvetica;
+        color: $os-blue-s60;
+        position: relative;
+        letter-spacing: -1.8px;
+        font-weight: 600;
+        font-size: 36px;
+
+        &::before {
+          display: inline-block;
+          width: 6px;
+          height: 1.75em;
+          content: '';
+          background-color: $os-blue-s20;
+          position: absolute;
+          left: -1.5rem;
+          top: 50%;
+          margin-top: -0.875em;
+        }
+      }
+    }
+    .subsection {
+
+      &.is-fixed {
+        position: fixed;
+        top: 0;
+      }
+
+      &.is-bottom {
         position: absolute;
-        left: -1.5rem;
-        top: 50%;
-        margin-top: -0.875em;
+        top: auto;
+        bottom: 3rem;
+      }
+
+      h3 {
+        font-family: $family-helvetica;
+        font-size: 18px;
+        font-weight: 600;
+        color: #077384;
+        letter-spacing: -1px;
+        text-transform: uppercase;
+        margin-bottom: 0.5em;
+      }
+
+      .menu-list {
+        a {
+          font-size: 14px;
+          border-left: 6px solid transparent;
+
+          &:hover,
+          &.is-active {
+            color: $os-blue;
+            background-color: transparent;
+          }
+          &.is-active {
+            border-color: $os-blue;
+          }
+        }
       }
     }
   }

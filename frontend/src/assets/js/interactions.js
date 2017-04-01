@@ -22,6 +22,79 @@ function removeClass(el, className) {
   }
 }
 
+// get document coordinates of the element
+var getCoords = (elem) => {
+  let box = elem.getBoundingClientRect();
+
+  return {
+    top: box.top + pageYOffset,
+    left: box.left + pageXOffset
+  };
+}
+
+var toggleFixedClass = () => {
+    const floatingMenu = document.querySelector('.subsection');
+    const body = document.body;
+    const html = document.documentElement;
+    const height = Math.max(body.scrollHeight, body.offsetHeight,
+                   html.clientHeight, html.scrollHeight, html.offsetHeight);
+
+    if (floatingMenu) {
+        const footer = document.querySelector('.footer');
+        const footerHeight = Math.max(footer.scrollHeight, footer.offsetHeight);
+        const floatingMenuHeight = Math.max(floatingMenu.scrollHeight, floatingMenu.offsetHeight)+210;
+        const menuOffset = height - footerHeight - floatingMenuHeight;
+        const content = document.querySelector('.section>.columns');
+
+        if (window.pageYOffset > getCoords(content).top) {
+          addClass(floatingMenu, 'is-fixed');
+        } else {
+          removeClass(floatingMenu, 'is-fixed');
+        }
+
+        if ((window.pageYOffset > menuOffset)) {
+            addClass(floatingMenu, 'is-bottom');
+        } else {
+          removeClass(floatingMenu, 'is-bottom');
+        }
+    }
+}
+
+ var isActive = () => {
+  let content = document.getElementsByTagName('raw')[0];
+  let headings = content.getElementsByTagName('h2');
+  let subSection = document.querySelector('.menu.subsection');
+  let menuItems = subSection.getElementsByTagName('a');
+
+  for (var i=0; i < headings.length; i++ ) {
+    let el = headings[i];
+    let nextEl = headings[i+1];
+    let link = menuItems[i];
+
+    if (nextEl != undefined) {
+      if ((window.pageYOffset > (getCoords(el).top - 1))  && (window.pageYOffset < getCoords(nextEl).top - 1)) {
+        addClass(link, 'is-active');
+      } else {
+        removeClass(link, 'is-active');
+      }
+    } else {
+      if ((window.pageYOffset > (getCoords(el).top - 1))) {
+        addClass(link, 'is-active');
+      } else {
+        removeClass(link, 'is-active');
+      }
+    }
+  }
+}
+
+var setWidth = () => {
+  let sideNav = document.querySelector('.menu.subsection');
+
+  if (hasClass(sideNav, 'is-fixed') && !(hasClass(sideNav, 'is-bottom'))) {
+    sideNav.setAttribute('style', `width:${sideNav.parentNode.offsetWidth - 24}px;`);
+  }
+}
+
 var navClickEventHandler = function(event) {
     if (!hasClass(this, 'is-active')) {
       addClass(this, 'is-active');
@@ -42,7 +115,16 @@ var removeOpenClasses = function(event) {
 }
 
 window.onload = function () {
+  toggleFixedClass();
+  setWidth();
+  isActive();
   document.querySelector('.nav-toggle').addEventListener('click', navClickEventHandler);
-  window.addEventListener('resize', removeOpenClasses);
   document.querySelector('.side-nav').addEventListener('click', removeOpenClasses);
+  window.addEventListener('resize', removeOpenClasses);
+  window.addEventListener('scroll', toggleFixedClass);
+  window.addEventListener('resize', toggleFixedClass);
+  window.addEventListener('scroll', setWidth);
+  window.addEventListener('resize', setWidth);
+  window.addEventListener('scroll', isActive);
+  window.addEventListener('resize', isActive);
 }

@@ -69,12 +69,11 @@ class StyleGuideApp {
 
 let app = new StyleGuideApp();
 
-// Clean this up.
-// window.riot = riot;
-// window.app = app;
+route.base('/#/');
 
 let r = route.create();
-r('/', home)
+r('', home)
+r('*', number)
 r('*/*', detail)
 r('*/*/#*', heading)
 r(notfound)
@@ -88,13 +87,26 @@ function isEmpty(obj) {
 }
 
 function home() {
-  route('getting-started/background');
+  route('/getting-started/background');
+  //goToSection('background');
   window.scrollTo(0,0);
 }
 
-function goToSection(category, id) {
+function number(id) {
+  if (id.endsWith('.0.0')) {
+    let categoryID = id.split('.')[0];
+    id = categoryID + '.1.0';
+  }
+  goToSection(id);
+}
+
+function goToSection(id) {
   if (app.model.data != undefined) {
     let selected = app.model.data.filter(function(d) { return d.Name.replace(/ +/g, '-').toLowerCase() == id })[0] || {}
+
+    if ( !isNaN(parseInt(id)) ) {
+      selected = app.model.data.filter(function(d) { return d.Number == id })[0] || {}
+    }
 
     if(isEmpty(selected)) {
       selected = {Name:'404 Not Found', description: 'Nothing to see here.' };
@@ -104,6 +116,10 @@ function goToSection(category, id) {
   } else {
     app.model.on('updated', function(data) {
       let selected = data.filter(function(d) { return d.Name.replace(/ +/g, '-').toLowerCase() == id })[0] || {}
+
+      if ( !isNaN(parseInt(id)) ) {
+        selected = app.model.data.filter(function(d) { return d.Number == id })[0] || {}
+      }
 
       if(isEmpty(selected)) {
         selected = {Name:'404 Not Found', description: 'Nothing to see here.' };
@@ -115,21 +131,21 @@ function goToSection(category, id) {
 }
 
 function detail(category, id) {
-  goToSection(category, id);
+  goToSection(id);
   window.scrollTo(0,0);
 }
 
 function heading(category, id, heading) {
-  goToSection(category, id);
+  goToSection(id);
 
   setTimeout(function(){
     let el = document.getElementById(heading);
 
     if (el) {
       let rect = el.getBoundingClientRect();
-      scrollToY(rect.top, 2000, 'easeInOutQuint');
+      window.scrollTo(0, rect.top + pageYOffset);
     }
-  }, 500);
+  }, 400);
 }
 
 function notfound() {
@@ -139,6 +155,5 @@ function notfound() {
 }
 
 riot.mount('style-guide', app);
-route.base('/#/');
 route.stop();
 route.start(true);
