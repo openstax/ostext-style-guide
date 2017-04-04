@@ -310,6 +310,8 @@ body {
       h2 {
         font-family: $family-helvetica;
         font-size: 24px;
+        font-weight: 600;
+        letter-spacing: -1px;
       }
 
       h3 {
@@ -364,8 +366,8 @@ body {
       .back-to-top {
         color: #4a4a4a;
         position: fixed;
-        bottom: 0;
-        right: 0;
+        bottom: 10px;
+        right: 10px;
         opacity: 0;
         transform: translate3d(100%, 0, 0);
         transition: opacity 0.2s, transform 0.2s;
@@ -388,7 +390,8 @@ body {
       .menu-list {
         a {
           font-size: 14px;
-          border-left: 6px solid transparent;
+          border-left: 4px solid transparent;
+          border-radius: 0;
 
           &:hover,
           &.is-active {

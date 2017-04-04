@@ -77,10 +77,8 @@ riot.tag2('style-guide-navigation',
         isActive.className = '';
       }
 
-      if (selectedId.href.split('#')[1] === `/${category}/${id}`) {
+      if (selectedId) {
         selectedId.className += "is-active";
-      } else {
-        selectedId.className = "";
       }
     }
 
@@ -215,11 +213,13 @@ riot.tag2('style-guide-sections',
           <ul class="menu-list">
             <li each={subSection}><a href="/#/{parent.opts.Category.replace(/ +/g, '-').toLowerCase()}/{parent.opts.Name.replace(/ +/g, '-').toLowerCase()}/#{headingID}" onclick="{goToSection}">{title}</a></li>
           </ul>
-          <a href="/#/{opts.Category.replace(/ +/g, '-').toLowerCase()}/{opts.Name.replace(/ +/g, '-').toLowerCase()}/#top" class="back-to-top" onclick="{goToSection}">
-          <span class="icon is-large">
-            <i class="fa fa-arrow-circle-o-up"></i>
-          </span>
-          </a>
+          <virtual if={hasSubSection}>
+            <a href="/#/{opts.Category.replace(/ +/g, '-').toLowerCase()}/{opts.Name.replace(/ +/g, '-').toLowerCase()}/#top" class="back-to-top" onclick="{goToSection}">
+              <span class="icon is-large">
+                <i class="fa fa-arrow-circle-o-up"></i>
+              </span>
+            </a>
+          </virtual>
         </div>
       </div>
     </div>
