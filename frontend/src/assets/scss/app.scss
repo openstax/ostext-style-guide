@@ -13,6 +13,7 @@ $family-helvetica: "Helvetica Neue", Helvetica, Arial, sans-serif;
 $primary: $os-blue;
 $family-primary: $family-sans-serif;
 
+@import "scss/font-awesome";
 @import "sass/utilities/_all";
 @import "sass/base/_all";
 @import "sass/elements/_all";
@@ -226,6 +227,11 @@ body {
       &:focus {
         color: $primary;
       }
+
+      &.is-active {
+        background-color: #fbfbfb;
+        color: inherit;
+      }
     }
   }
 
@@ -333,16 +339,40 @@ body {
       }
     }
     .subsection {
+      padding: 2rem 0;
 
       &.is-fixed {
         position: fixed;
-        top: 0;
+        top: 2rem;
+        padding: 0;
       }
 
       &.is-bottom {
         position: absolute;
         top: auto;
         bottom: 3rem;
+      }
+
+      &.is-fixed,
+      &.is-bottom {
+        .back-to-top {
+          opacity: 1;
+          transform: translate3d(0, 0, 0);
+        }
+      }
+
+      .back-to-top {
+        color: #4a4a4a;
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        opacity: 0;
+        transform: translate3d(100%, 0, 0);
+        transition: opacity 0.2s, transform 0.2s;
+
+        &:hover {
+          color: $os-blue;
+        }
       }
 
       h3 {

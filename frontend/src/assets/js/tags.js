@@ -1,6 +1,7 @@
 'use strict';
 
 import riot from 'riot';
+import route from 'riot-route';
 import scrollToY from './scrollTo.js';
 import lunr from 'lunr';
 
@@ -63,6 +64,25 @@ riot.tag2('style-guide-navigation',
         this.sections.push({category: groupName, sections: groups[groupName]});
       }
     }.bind(this)
+
+    var r = route.create();
+    r(highlightCurrent);
+
+    function highlightCurrent(category, id) {
+      let isActive = document.querySelector('.side-nav .menu-list a.is-active');
+      let selected = `.menu-list a[href*='/${category}/${id}']`;
+      let selectedId = document.querySelector(selected);
+
+      if (isActive) {
+        isActive.className = '';
+      }
+
+      if (selectedId.href.split('#')[1] === `/${category}/${id}`) {
+        selectedId.className += "is-active";
+      } else {
+        selectedId.className = "";
+      }
+    }
 
     this.on('sections-updated', function() {
       this.setSections();
@@ -195,6 +215,11 @@ riot.tag2('style-guide-sections',
           <ul class="menu-list">
             <li each={subSection}><a href="/#/{parent.opts.Category.replace(/ +/g, '-').toLowerCase()}/{parent.opts.Name.replace(/ +/g, '-').toLowerCase()}/#{headingID}" onclick="{goToSection}">{title}</a></li>
           </ul>
+          <a href="/#/{opts.Category.replace(/ +/g, '-').toLowerCase()}/{opts.Name.replace(/ +/g, '-').toLowerCase()}/#top" class="back-to-top" onclick="{goToSection}">
+          <span class="icon is-large">
+            <i class="fa fa-arrow-circle-o-up"></i>
+          </span>
+          </a>
         </div>
       </div>
     </div>
@@ -232,14 +257,18 @@ riot.tag2('style-guide-sections',
 
     this.goToSection = (e) => {
       e.preventDefault();
-      let url = e.target.hash.split('#')[1];
-      let heading = e.target.hash.split('#')[2];
+      let url = e.currentTarget.href.split('#')[1];
+      let heading = e.currentTarget.href.split('#')[2];
       let el = document.getElementById(heading);
 
       if (el) {
         let rect = el.getBoundingClientRect();
 
-        scrollToY(rect.top + pageYOffset, 2000, 'easeInOutSine');
+        if (heading != 'top') {
+          scrollToY(rect.top + pageYOffset, 2000, 'easeInOutSine');
+        } else {
+          window.scrollTo(0, rect.top + pageYOffset);
+        }
       }
 
       history.pushState(null, '', `#${url}#${heading}`);

@@ -19,13 +19,17 @@ PATHS:
   # Path to dist folder
   dist: "dist"
   # Paths to static assets that aren't images, CSS, or JavaScript
-  assets:
-    # - "src/assets/**/*"
-    # - "!src/assets/{img,js,scss,tag}/**/*"
+  data:
     - "src/assets/data/**/*"
+    # - "!src/assets/{img,js,scss,tag}/**/*"
+    # - "!src/assets/{img,js,scss}/**/*"
+  fonts:
+    - "node_modules/font-awesome/fonts/**/*"
+
   # Paths to Sass libraries, which can then be loaded with @import
   sass:
     - "./node_modules/bulma"
+    - "./node_modules/font-awesome"
   # Paths to JavaScript libraries, which are combined into one file
   javascript:
     # Paths to your own project code are here

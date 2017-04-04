@@ -36,8 +36,11 @@ export const clean = (done) => {
 
 // Copy files out of the assets folder
 // This task skips over the "img", "js", and "scss" folders, which are parsed separately
-export const copy = () => gulp.src(PATHS.assets)
+export const data = () => gulp.src(PATHS.data)
   .pipe(gulp.dest(PATHS.dist + '/assets/data'));
+
+export const fonts = () => gulp.src(PATHS.fonts)
+  .pipe(gulp.dest(PATHS.dist + '/assets/fonts'));
 
 // Copy page templates into finished HTML files
 export const pages = () => gulp.src('src/*.{html,hbs,handlebars}')
@@ -110,7 +113,8 @@ export const reload = (done) => {
 
 // Watch for changes to static assets, pages, Sass, and JavaScript
 export const watch = () => {
-  gulp.watch(PATHS.assets, copy);
+  gulp.watch(PATHS.data, data);
+  gulp.watch(PATHS.fonts, fonts);
   gulp.watch('src/*.html').on('all', gulp.series(pages, reload));
   gulp.watch('src/assets/scss/**/*.scss').on('all', sass);
   gulp.watch('src/assets/js/**/*.js').on('all', gulp.series(javascript, reload));
@@ -121,7 +125,7 @@ export const watch = () => {
 // Build the "dist" folder by running all of the below tasks
 // gulp.task('build',
 //  gulp.series(clean, gulp.parallel(pages, sass, javascript, images, copy)));
-export const build = gulp.series(clean, gulp.parallel(pages, sass, javascript, images, copy));
+export const build = gulp.series(clean, gulp.parallel(pages, sass, javascript, images, data, fonts));
 
 // Build the site, run the server, and watch for file changes
 // gulp.task('default',

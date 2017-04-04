@@ -17,6 +17,7 @@
     "browser-sync": "^2.18.8",
     "bulma": "^0.3.2",
     "cod": "^0.4.3",
+    "font-awesome": "^4.7.0",
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-autoprefixer": "^3.1.1",
     "gulp-cli": "^1.2.2",
