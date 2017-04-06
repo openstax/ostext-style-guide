@@ -1,21 +1,30 @@
 from __future__ import print_function
+import sys, os, io
+if os.name == 'posix' and sys.version_info[0] < 3:
+  import subprocess32 as subprocess
+else:
+  import subprocess
 import ostext_style_guide_scripts
 import yaml
 import argparse
-import sys, os, io
 import jsonpickle
 import json
 import markdown
 import re
 
-if os.name == 'posix' and sys.version_info[0] < 3:
-  import subprocess32 as subprocess
-else:
-  import subprocess
+from pygments import highlight
+from pygments.lexers import guess_lexer
+from pygments.formatters import HtmlFormatter
 
 extensions =  ['.less', '.css', '.sass', '.scss']
-
 markup_blocks = {}
+formatter = HtmlFormatter(cssclass='source-highlight')
+
+def highlight_source(source):
+  if not source: return ''
+  lexer = guess_lexer(source)
+  return highlight(source, lexer, formatter)
+
 def add_markup_block(block):
   markup_blocks[block["Id"]] = block
 
@@ -88,8 +97,8 @@ A configuration file which consists of the following settings -
         with open("{}/{}".format(config["documentation_path"],
                                  markup_blocks[reference_id]["Source"])) as src:
           _code_highlighted = "Type" in markup_blocks[reference_id] and markup_blocks[reference_id]["Type"] == "highlighted"
-          _src = "<code>{}</code>".format(src.read()) if _code_highlighted else src.read()
-          _section['!text'] = re.sub('\[\#[^\[]+\]', _src, _section['!text'], 1)
+          _src = "<code>{}</code>".format(highlight_source(src.read())) if _code_highlighted else src.read()
+          _section['!text'] = re.sub('<p>\[\#[^\[]+\]<\/p>', _src, _section['!text'], 1)
   print("Markup blocks found: {}".format(markup_blocks))
 
   style_guide_filename = "{}/{}".format(config["style_guide_path"], config["style_guide_data"])
