@@ -24,7 +24,7 @@ riot.tag2('style-guide-navigation',
   <p>{category.category}</p>
   <ul class="menu-list">
     <li each="{el, i in category.sections}" class="{el.number}">
-      <a href="/#/{category.category.replace(/ +/g, '-').toLowerCase()}/{el.name.replace(/ +/g, '-').toLowerCase()}">{el.name}</a>
+      <a href="{el.url}" class="{is-active: parent.selectedUrl === el.url}">{el.name}</a>
     </li>
    </ul>
    </div>
@@ -32,6 +32,7 @@ riot.tag2('style-guide-navigation',
 
   '', '',
   function(opts) {
+    var self = this;
     this.sections = [];
 
     this.setSections = function() {
@@ -55,7 +56,8 @@ riot.tag2('style-guide-navigation',
           }
 
         groups[groupName].push({name: this.sections[i].name,
-                              number:this.sections[i].number});
+                              number:this.sections[i].number,
+                              url: `/#/${this.sections[i].category.replace(/ +/g, '-').toLowerCase()}/${this.sections[i].name.replace(/ +/g, '-').toLowerCase()}`});
       }
 
       this.sections = [];
@@ -65,21 +67,12 @@ riot.tag2('style-guide-navigation',
       }
     }.bind(this)
 
-    var r = route.create();
-    r(highlightCurrent);
+    let subRoute = route.create();
+    subRoute(highlightCurrent);
 
     function highlightCurrent(category, id) {
-      let isActive = document.querySelector('.side-nav .menu-list a.is-active');
-      let selected = `.menu-list a[href*='/${category}/${id}']`;
-      let selectedId = document.querySelector(selected);
-
-      if (isActive) {
-        isActive.className = '';
-      }
-
-      if (selectedId) {
-        selectedId.className += "is-active";
-      }
+      self.selectedUrl = `/#/${category}/${id}`;
+      self.update();
     }
 
     this.on('sections-updated', function() {
