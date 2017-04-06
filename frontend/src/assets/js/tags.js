@@ -188,6 +188,9 @@ riot.tag2('style-guide',
 
 riot.tag2('style-guide-sections',
   `
+  <section>
+    <p class="title h1">Textbook Design Guide</p>
+  </section>
   <!-- Style Guide section data -->
   <section id="{opts.Number}" class="section">
     <div class="columns">

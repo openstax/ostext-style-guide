@@ -61,6 +61,10 @@ body {
       margin: 0;
     }
   }
+
+  .title {
+    font-family: $family-helvetica;
+  }
 }
 
 /* Custom styles */
@@ -116,6 +120,7 @@ body {
         transform-origin: 50% 50%;
         margin-top: -1px;
       }
+
       span:nth-child(3) {
         transform-origin: 50% 50%;
         margin-top: -1px;
@@ -298,6 +303,16 @@ body {
           padding-bottom: 0.5rem;
         }
       }
+    }
+
+    .h1 {
+      color: #0A99B0;
+      letter-spacing: -1px;
+      font-weight: bold;
+      font-size: 18px;
+      background-color: #fff;
+      padding: 1.5rem;
+      border-bottom: 1px solid #ebebeb;
     }
 
     .section {
