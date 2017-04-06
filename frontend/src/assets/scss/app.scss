@@ -334,8 +334,23 @@ body {
         font-size: 18px;
       }
 
+      h1,h2,h3 {
+        &:hover {
+          .heading-link {
+            opacity: 1;
+          }
+        }
+
+        .heading-link {
+          opacity: 0;
+
+          .icon {
+            vertical-align: middle;
+          }
+        }
+      }
+
       .title {
-        font-family: $family-helvetica;
         color: $os-blue-s60;
         position: relative;
         letter-spacing: -1.8px;

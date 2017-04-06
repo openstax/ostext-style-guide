@@ -109,7 +109,7 @@ function goToSection(id) {
     }
 
     if(isEmpty(selected)) {
-      selected = {Name:'404 Not Found', description: 'Nothing to see here.' };
+      selected = {Name:'Page not found', description: 'Nothing to see here.' };
     }
 
     riot.mount('#section','style-guide-sections', selected);
@@ -122,7 +122,7 @@ function goToSection(id) {
       }
 
       if(isEmpty(selected)) {
-        selected = {Name:'404 Not Found', description: 'Nothing to see here.' };
+        selected = {Name:'Page not found', description: 'Nothing to see here.' };
       }
 
       riot.mount('#section','style-guide-sections', selected);
@@ -149,7 +149,7 @@ function heading(category, id, heading) {
 }
 
 function notfound() {
-  let selected = {Name:'404 Not Found', description: 'Nothing to see here.' };
+  let selected = {Name:'Page not found', description: 'Nothing to see here.' };
 
   riot.mount('#section','style-guide-sections', selected);
 }

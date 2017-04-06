@@ -229,12 +229,11 @@ riot.tag2('style-guide-sections',
       this.subSection = [];
 
       for (var i=0; i < this.root.getElementsByTagName('h2').length; i++ ) {
-        let title = this.root.getElementsByTagName('h2')[i].textContent;
-        let headingID = title.replace(/ +/g, '-').toLowerCase();
+        let title = this.root.getElementsByTagName('h2')[i];
+        let titleContent = title.innerText;
+        let headingID = titleContent.trim().replace(/ +/g, '-').toLowerCase();
 
-        this.root.getElementsByTagName('h2')[i].id = headingID;
-
-        this.subSection.push({ title: title,
+        this.subSection.push({ title: titleContent,
                                headingID: headingID});
       }
 
@@ -243,7 +242,25 @@ riot.tag2('style-guide-sections',
       }
     }.bind(this)
 
+    this.setHeadingId = () => {
+      let headings = this.root.querySelectorAll('.content h1,.content h2,.content h3');
+      for (var i=0; i < headings.length; i++ ) {
+        let title = headings[i];
+        let titleContent = title.textContent;
+        let headingID = titleContent.trim().replace(/ +/g, '-').toLowerCase();
+
+        title.id = headingID;
+        title.innerHTML = `${titleContent}<a class="heading-link" href="/#/${opts.Category.replace(/ +/g, '-').toLowerCase()}/${opts.Name.replace(/ +/g, '-').toLowerCase()}/#${headingID}">
+                              <span class="icon is-small">
+                                <i class="fa fa-link"></i>
+                              </span>
+                            </a>`;
+        title.querySelector('.heading-link').addEventListener('click', this.goToSection);
+      }
+    };
+
     this.on('mount', function() {
+      this.setHeadingId();
       this.setSubSection();
       this.update();
 
