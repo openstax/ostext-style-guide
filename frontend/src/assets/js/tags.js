@@ -252,8 +252,10 @@ riot.tag('style-guide-sections',
       this.setSubSection();
       this.update();
 
-      // //queue MathJax to load MathML after tag mount
-      // MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+      if (window.MathJax) {
+       //queue MathJax to load MathML after tag mount
+       window.MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+      }
     });
 
     this.goToSection = (e) => {
