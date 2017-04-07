@@ -104,18 +104,26 @@ function number(id) {
 function goToSection(category, id) {
   if (app.model.data != undefined) {
     let selected = app.model.data.filter(function(d) { return (d.Name.replace(/ +/g, '-').toLowerCase() == id) && (d.Category.replace(/ +/g, '-').toLowerCase() == category) })[0] || {}
+    let newTitle = `${id.replace(/-/g, ' ').replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()})} | ${category.replace(/-/g, ' ').replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()})} | OpenGuide`;
+
     if ( !isNaN(parseInt(id)) ) {
       selected = app.model.data.filter(function(d) { return d.Number == id })[0] || {}
     }
 
     if(isEmpty(selected)) {
       selected = {Name:'Page not found', description: 'Nothing to see here.', Category: ''};
+      newTitle = '404 | Not Found | OpenGuide';
+    }
+
+    if (document.title != newTitle) {
+      document.title = newTitle;
     }
 
     riot.mount('#section','style-guide-sections', selected);
   } else {
     app.model.on('updated', function(data) {
       let selected = data.filter(function(d) { return (d.Name.replace(/ +/g, '-').toLowerCase() == id) && (d.Category.replace(/ +/g, '-').toLowerCase() == category) })[0] || {}
+      let newTitle = `${id.replace(/-/g, ' ').replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()})} | ${category.replace(/-/g, ' ').replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()})} | OpenGuide`;
 
       if ( !isNaN(parseInt(id)) ) {
         selected = app.model.data.filter(function(d) { return d.Number == id })[0] || {}
@@ -123,6 +131,11 @@ function goToSection(category, id) {
 
       if(isEmpty(selected)) {
         selected = {Name:'Page not found', description: 'Nothing to see here.', Category: ''};
+        newTitle = '404 | Not Found | OpenGuide';
+      }
+
+      if (document.title != newTitle) {
+        document.title = newTitle;
       }
 
       riot.mount('#section','style-guide-sections', selected);
