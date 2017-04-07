@@ -226,6 +226,7 @@ body {
       color: #3b3b3b;
       padding: 0.25em 0.75em;
       font-size: 14px;
+      letter-spacing: -1px;
 
       &:hover,
       &:active,
@@ -267,6 +268,11 @@ body {
       display: block;
       background-color: #fff;
       margin-bottom: 3rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+      &:hover {
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      }
 
       .control.is-grouped {
         margin-bottom: 0;
@@ -277,6 +283,7 @@ body {
         border-radius: 0;
         border: none;
         padding-left: 4.5em;
+        letter-spacing: -1px;
       }
     }
 
@@ -288,12 +295,16 @@ body {
       left: 0;
       border-top: 1px solid #ebebeb;
       top: 100%;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      max-height: 20rem;
+      overflow-y: auto;
 
       a {
         color: #000;
         font-weight: 500;
         border-bottom: 1px solid #ebebeb;
         padding: 1rem 1rem 1rem 6rem;
+        letter-spacing: -1px;
 
         span:first-child {
           font-size: 12px;
@@ -301,6 +312,7 @@ body {
           text-transform: uppercase;
           display: block;
           padding-bottom: 0.5rem;
+          font-family: $family-helvetica;
         }
       }
     }
@@ -326,7 +338,6 @@ body {
         font-family: $family-helvetica;
         font-size: 24px;
         font-weight: 600;
-        letter-spacing: -1px;
       }
 
       h3 {
@@ -335,14 +346,21 @@ body {
       }
 
       h1,h2,h3 {
+        letter-spacing: -1px;
+
         &:hover {
           .heading-link {
+            color: #363636;
             opacity: 1;
           }
         }
 
         .heading-link {
           opacity: 0;
+
+          &:hover {
+            color: #0DC0DC;
+          }
 
           .icon {
             vertical-align: middle;
@@ -370,6 +388,7 @@ body {
         }
       }
     }
+
     .subsection {
       padding: 2rem 0;
 
@@ -394,7 +413,7 @@ body {
       }
 
       .back-to-top {
-        color: #4a4a4a;
+        color: #363636;
         position: fixed;
         bottom: 10px;
         right: 10px;
@@ -428,6 +447,7 @@ body {
             color: $os-blue;
             background-color: transparent;
           }
+
           &.is-active {
             border-color: $os-blue;
           }
@@ -440,6 +460,17 @@ body {
 .footer {
   color: #fff;
   background-color: #077384;
+  color: #363636;
+  padding-bottom: 3rem;
+  font-size: 14px;
+
+  a {
+    color: #363636;
+
+    &:hover {
+      color: #0DC0DC;
+    }
+  }
 
   .meta {
     margin-bottom: 10px;
