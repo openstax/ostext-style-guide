@@ -66,22 +66,25 @@ var toggleFixedClass = () => {
   let subSection = document.querySelector('.menu.subsection');
   let menuItems = subSection.getElementsByTagName('a');
 
-  for (var i=0; i < headings.length; i++ ) {
-    let el = headings[i];
-    let nextEl = headings[i+1];
-    let link = menuItems[i];
 
-    if (nextEl != undefined) {
-      if ((window.pageYOffset > (getCoords(el).top - 21))  && (window.pageYOffset < getCoords(nextEl).top - 21)) {
-        addClass(link, 'is-active');
+  if (headings) {
+    for (var i=0; i < headings.length; i++ ) {
+      let el = headings[i];
+      let nextEl = headings[i+1];
+      let link = menuItems[i];
+
+      if (nextEl != undefined) {
+        if ((window.pageYOffset > (getCoords(el).top - 21))  && (window.pageYOffset < getCoords(nextEl).top - 21)) {
+          addClass(link, 'is-active');
+        } else {
+          removeClass(link, 'is-active');
+        }
       } else {
-        removeClass(link, 'is-active');
-      }
-    } else {
-      if ((window.pageYOffset > (getCoords(el).top - 21))) {
-        addClass(link, 'is-active');
-      } else {
-        removeClass(link, 'is-active');
+        if ((window.pageYOffset > (getCoords(el).top - 21))) {
+          addClass(link, 'is-active');
+        } else {
+          removeClass(link, 'is-active');
+        }
       }
     }
   }
