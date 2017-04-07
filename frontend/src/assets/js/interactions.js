@@ -90,8 +90,10 @@ var toggleFixedClass = () => {
 var setWidth = () => {
   let sideNav = document.querySelector('.menu.subsection');
 
-  if (hasClass(sideNav, 'is-fixed') && !(hasClass(sideNav, 'is-bottom'))) {
-    sideNav.setAttribute('style', `width:${sideNav.parentNode.offsetWidth - 24}px;`);
+  if (sideNav) {
+    if (hasClass(sideNav, 'is-fixed') && !(hasClass(sideNav, 'is-bottom'))) {
+      sideNav.setAttribute('style', `width:${sideNav.parentNode.offsetWidth - 24}px;`);
+    }
   }
 }
 

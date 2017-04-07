@@ -254,7 +254,7 @@ riot.tag('style-guide-sections',
 
       if (window.MathJax) {
        //queue MathJax to load MathML after tag mount
-       window.MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+       window.MathJax.Hub.Queue(["Typeset",window.MathJax.Hub]);
       }
     });
 
