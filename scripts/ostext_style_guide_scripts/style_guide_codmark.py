@@ -16,6 +16,13 @@ from pygments import highlight
 from pygments.lexers import guess_lexer
 from pygments.formatters import HtmlFormatter
 
+from pyparsing import makeHTMLTags, replaceWith, withAttribute
+
+spanOpen,spanClose = makeHTMLTags("span")
+emptySpans = spanOpen.copy().setParseAction(withAttribute(empty=True))
+removeSpans = emptySpans | spanOpen+spanClose
+removeSpans.setParseAction(replaceWith(" "))
+
 extensions =  ['.less', '.css', '.sass', '.scss']
 markup_blocks = {}
 formatter = HtmlFormatter(cssclass='source-highlight')
@@ -97,7 +104,7 @@ A configuration file which consists of the following settings -
         with open("{}/{}".format(config["documentation_path"],
                                  markup_blocks[reference_id]["Source"])) as src:
           _code_highlighted = "Type" in markup_blocks[reference_id] and markup_blocks[reference_id]["Type"] == "highlighted"
-          _src = "<code>{}</code>".format(highlight_source(src.read())) if _code_highlighted else src.read()
+          _src = "{}".format(removeSpans.transformString(highlight_source(src.read()))) if _code_highlighted else src.read()
           _section['!text'] = re.sub('<p>\[\#[^\[]+\]<\/p>', _src, _section['!text'], 1)
   print("Markup blocks found: {}".format(markup_blocks))
 

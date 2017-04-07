@@ -10,6 +10,7 @@ setup(name='ostext_style_guide',
       license='MIT',
       packages=['ostext_style_guide_scripts'],
       install_requires=[
+        'pyparsing',
         'Jinja2',
         'pyyaml',
         'Pygments',
