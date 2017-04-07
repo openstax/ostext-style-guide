@@ -76,7 +76,7 @@ r('', home)
 r('*', number)
 r('*/*', detail)
 r('*/*/#*', heading)
-r(notfound)
+// r(notfound)
 
 function isEmpty(obj) {
     for(var key in obj) {
@@ -97,33 +97,32 @@ function number(id) {
     let categoryID = id.split('.')[0];
     id = categoryID + '.1.0';
   }
-  goToSection(id);
+  goToSection(category, id);
   window.scrollTo(0,0);
 }
 
-function goToSection(id) {
+function goToSection(category, id) {
   if (app.model.data != undefined) {
-    let selected = app.model.data.filter(function(d) { return d.Name.replace(/ +/g, '-').toLowerCase() == id })[0] || {}
-
+    let selected = app.model.data.filter(function(d) { return (d.Name.replace(/ +/g, '-').toLowerCase() == id) && (d.Category.replace(/ +/g, '-').toLowerCase() == category) })[0] || {}
     if ( !isNaN(parseInt(id)) ) {
       selected = app.model.data.filter(function(d) { return d.Number == id })[0] || {}
     }
 
     if(isEmpty(selected)) {
-      selected = {Name:'Page not found', description: 'Nothing to see here.' };
+      selected = {Name:'Page not found', description: 'Nothing to see here.', Category: ''};
     }
 
     riot.mount('#section','style-guide-sections', selected);
   } else {
     app.model.on('updated', function(data) {
-      let selected = data.filter(function(d) { return d.Name.replace(/ +/g, '-').toLowerCase() == id })[0] || {}
+      let selected = data.filter(function(d) { return (d.Name.replace(/ +/g, '-').toLowerCase() == id) && (d.Category.replace(/ +/g, '-').toLowerCase() == category) })[0] || {}
 
       if ( !isNaN(parseInt(id)) ) {
         selected = app.model.data.filter(function(d) { return d.Number == id })[0] || {}
       }
 
       if(isEmpty(selected)) {
-        selected = {Name:'Page not found', description: 'Nothing to see here.' };
+        selected = {Name:'Page not found', description: 'Nothing to see here.', Category: ''};
       }
 
       riot.mount('#section','style-guide-sections', selected);
@@ -132,12 +131,12 @@ function goToSection(id) {
 }
 
 function detail(category, id) {
-  goToSection(id);
+  goToSection(category, id);
   window.scrollTo(0,0);
 }
 
 function heading(category, id, heading) {
-  goToSection(id);
+  goToSection(category, id);
 
   setTimeout(function(){
     let el = document.getElementById(heading);
@@ -149,10 +148,10 @@ function heading(category, id, heading) {
   }, 400);
 }
 
-function notfound() {
-  let selected = {Name:'Page not found', description: 'Nothing to see here.' };
-
-  riot.mount('#section','style-guide-sections', selected);
+function notfound(category, id) {
+  //let selected = {Name:'Page not found', description: 'Nothing to see here.', Category: getting started };
+  //goToSection(category, id)
+  //riot.mount('#section','style-guide-sections', selected);
 }
 
 riot.mount('style-guide', app);
