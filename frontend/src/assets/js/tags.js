@@ -5,16 +5,14 @@ import route from 'riot-route';
 import scrollToY from './scrollTo.js';
 import lunr from 'lunr';
 
-riot.tag2('raw',
+riot.tag('raw',
   ``,
-  '', '',
   function(opts) {
     this.root.innerHTML = opts.content;
   }
 );
 
-riot.tag2('style-guide-navigation',
-
+riot.tag('style-guide-navigation',
   `
   <div class="menu">
       <p class="changelog">v0.0.2 <a href="https://github.com/openstax/ostext-style-guide/releases" target="_blank">(Changelog)</a></p>
@@ -27,11 +25,8 @@ riot.tag2('style-guide-navigation',
       <a href="{el.url}" class="{is-active: parent.selectedUrl === el.url}">{el.name}</a>
     </li>
    </ul>
-   </div>
-   `,
-
-  '', '',
-  function(opts) {
+   </div>`,
+   function(opts) {
     var self = this;
     this.sections = [];
 
@@ -82,8 +77,7 @@ riot.tag2('style-guide-navigation',
   }
 );
 
-riot.tag2('style-guide-search',
-
+riot.tag('style-guide-search',
   `<div class="control is-grouped">
     <p class="control is-expanded has-icon">
       <input class="input" ref="input" type="text" onkeyup="{search}" placeholder="Search for content, elements, layout, typography...">
@@ -98,8 +92,6 @@ riot.tag2('style-guide-search',
      <li each={results} onclick="{reset}"><a href="/#/{category.replace(/ +/g, '-').toLowerCase()}/{name.replace(/ +/g, '-').toLowerCase()}"><span>in {category}</span>{name}</a></li>
     </ul>
   </div>`,
-
-  '', '',
   function(opts) {
     this.results = [];
 
@@ -133,8 +125,7 @@ riot.tag2('style-guide-search',
   }
 );
 
-riot.tag2('style-guide',
-
+riot.tag('style-guide',
   `<nav class="side-nav menu">
     <!-- Left-side navigation of Style Guide sections -->
     <style-guide-navigation class="sg-navigation" sections={sections}></style-guide-navigation>
@@ -146,8 +137,6 @@ riot.tag2('style-guide',
       <div id="section" sections={sections}></div>
     </div>
   </main>`,
-
-  '', '',
   function(opts) {
     this.sections = [];
 
@@ -186,7 +175,7 @@ riot.tag2('style-guide',
   }
 );
 
-riot.tag2('style-guide-sections',
+riot.tag('style-guide-sections',
   `
   <section>
     <p class="title h1">Textbook Design Guide</p>
@@ -220,7 +209,6 @@ riot.tag2('style-guide-sections',
       </div>
     </div>
   </section>`,
-  '', '',
   function(opts) {
     this.subSection = [];
     this.hasSubSection = false;
@@ -278,7 +266,7 @@ riot.tag2('style-guide-sections',
         let rect = el.getBoundingClientRect();
 
         if (heading != 'top') {
-          scrollToY(rect.top + pageYOffset, 2000, 'easeInOutSine');
+          scrollToY(rect.top + pageYOffset - 20, 2000, 'easeInOutSine');
         } else {
           window.scrollTo(0, rect.top + pageYOffset);
         }

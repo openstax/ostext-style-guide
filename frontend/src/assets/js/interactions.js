@@ -72,13 +72,13 @@ var toggleFixedClass = () => {
     let link = menuItems[i];
 
     if (nextEl != undefined) {
-      if ((window.pageYOffset > (getCoords(el).top - 1))  && (window.pageYOffset < getCoords(nextEl).top - 1)) {
+      if ((window.pageYOffset > (getCoords(el).top - 21))  && (window.pageYOffset < getCoords(nextEl).top - 21)) {
         addClass(link, 'is-active');
       } else {
         removeClass(link, 'is-active');
       }
     } else {
-      if ((window.pageYOffset > (getCoords(el).top - 1))) {
+      if ((window.pageYOffset > (getCoords(el).top - 21))) {
         addClass(link, 'is-active');
       } else {
         removeClass(link, 'is-active');

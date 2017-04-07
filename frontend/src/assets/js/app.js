@@ -98,6 +98,7 @@ function number(id) {
     id = categoryID + '.1.0';
   }
   goToSection(id);
+  window.scrollTo(0,0);
 }
 
 function goToSection(id) {
@@ -143,7 +144,7 @@ function heading(category, id, heading) {
 
     if (el) {
       let rect = el.getBoundingClientRect();
-      window.scrollTo(0, rect.top + pageYOffset);
+      window.scrollTo(0, rect.top + pageYOffset - 20);
     }
   }, 400);
 }
