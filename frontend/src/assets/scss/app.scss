@@ -224,9 +224,10 @@ body {
 
     a {
       color: #3b3b3b;
-      padding: 0.25em 0.75em;
       font-size: 14px;
       letter-spacing: -1px;
+      border-left: 4px solid transparent;
+      border-radius: 0;
 
       &:hover,
       &:active,
@@ -235,8 +236,9 @@ body {
       }
 
       &.is-active {
-        background-color: #fbfbfb;
-        color: inherit;
+        background-color: whitesmoke;
+        color: $primary;
+        border-color: $primary;
       }
     }
   }
@@ -441,6 +443,7 @@ body {
           font-size: 14px;
           border-left: 4px solid transparent;
           border-radius: 0;
+          letter-spacing: -1px;
 
           &:hover,
           &.is-active {
