@@ -219,7 +219,7 @@ riot.tag('style-guide-sections',
       for (var i=0; i < this.root.getElementsByTagName('h2').length; i++ ) {
         let title = this.root.getElementsByTagName('h2')[i];
         let titleContent = title.innerText;
-        let headingID = titleContent.trim().replace(/ +/g, '-').toLowerCase();
+        let headingID = titleContent.trim().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"").replace(/\s{2,}/g,"").replace(/ +/g, '-').toLowerCase();
 
         this.subSection.push({ title: titleContent,
                                headingID: headingID});
@@ -232,12 +232,19 @@ riot.tag('style-guide-sections',
 
     this.setHeadingId = () => {
       let headings = this.root.querySelectorAll('.content h1,.content h2,.content h3');
+
       for (var i=0; i < headings.length; i++ ) {
         let title = headings[i];
         let titleContent = title.textContent;
-        let headingID = titleContent.trim().replace(/ +/g, '-').toLowerCase();
+        let headingID = titleContent.trim().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"").replace(/\s{2,}/g,"").replace(/ +/g, '-').toLowerCase();
 
         title.id = headingID;
+
+        if (document.querySelectorAll(`#${title.id}`).length > 1) {
+          headingID = headingID + i;
+          title.id = headingID;
+        }
+
         title.innerHTML = `${titleContent}<a class="heading-link" href="/#/${opts.Category.replace(/ +/g, '-').toLowerCase()}/${opts.Name.replace(/ +/g, '-').toLowerCase()}/#${headingID}">
                               <span class="icon is-small">
                                 <i class="fa fa-link"></i>

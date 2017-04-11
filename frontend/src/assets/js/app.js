@@ -7,7 +7,8 @@ import riot from 'riot';
 import route from 'riot-route';
 import scrollToY from './scrollTo.js';
 import './tags.js';
-import './interactions.js';
+// import './interactions.js';
+import * as interactions from './interactions.js';
 
 class AbstractDataModel {
   constructor(request) {
@@ -111,6 +112,8 @@ function goToSection(category, id) {
     }
 
     if(isEmpty(selected)) {
+      console.log(interactions.similarity(category, 'getting-started'));
+      console.log(interactions.similarity('Stack Overflow','Stack Ovrflw'));
       selected = {Name:'Page not found', description: 'Nothing to see here.', Category: ''};
       newTitle = '404 | Not Found | OpenGuide';
     }

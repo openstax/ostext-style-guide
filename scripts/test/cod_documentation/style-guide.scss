@@ -68,19 +68,6 @@
    This is a small code example.
   </div>
   `
-
-  [#blockquote-example-1]
-
-  [#blockquote-example-2]
-
-  @Markup
-    @Type highlighted
-    @Source blockquote-raw.html
-    @Id #blockquote-example-1
-  @Markup
-    @Type styled
-    @Source blockquote-cooked.html
-    @Id #blockquote-example-2
   @Number '1.0.0'
   @Id #section-100
 */
@@ -367,7 +354,7 @@
 @Section
   Content Elements
   =========
-  
+
   @Number '4.0.0'
 */
 /**
@@ -425,6 +412,20 @@
 
   Blockquotes are indented and may have a specified font style, and use the <quote> tag.
 
+  <h2>Code Example</h2>
+  [#blockquote-example-1]
+
+  <h2>Styled Example</h2>
+  [#blockquote-example-2]
+
+  @Markup
+    @Type highlighted
+    @Source blockquote-raw.html
+    @Id #blockquote-example-1
+  @Markup
+    @Type styled
+    @Source blockquote-cooked.html
+    @Id #blockquote-example-2
   @Number '4.6.0'
 */
 /**
@@ -507,9 +508,23 @@
   Examples
   =========
 
-  + Examples may contain exercises with solutions (an `<exercise>` tag contains a `<problem>` tag and may also contain one or more `<solution>` tags; `<commentary>` is another available child of the `<exercise>` tag). Solutions to exercises inside Examples have automatic numbering corresponding to the Example numbers.
-  + Examples may have subtitles, with either only a visual distinction (bolded manually in a paragraph enclosed inside the example), but the subtitles may also be created by applying specific classes to the `<example>` tag.
+  Examples may contain exercises with solutions (an `<exercise>` tag contains a `<problem>` tag and may also contain one or more `<solution>` tags; `<commentary>` is another available child of the `<exercise>` tag). Solutions to exercises inside Examples have automatic numbering corresponding to the Example numbers.
+  Examples may have subtitles, with either only a visual distinction (bolded manually in a paragraph enclosed inside the example), but the subtitles may also be created by applying specific classes to the `<example>` tag.
 
+  <h2>Code Example</h2>
+  [#examples-example-1]
+
+  <h2>Styled Example</h2>
+  [#examples-example-2]
+
+  @Markup
+    @Type highlighted
+    @Source examples-raw.html
+    @Id #examples-example-1
+  @Markup
+    @Type styled
+    @Source examples-cooked.html
+    @Id #examples-example-2
   @Number '4.13.0'
 */
 /**
@@ -527,6 +542,66 @@
   + To create a **column header** in a table, use the class "column-header" on the `<table>` tag.
   + To create **"header" rows inside a table**, merge the cells in the row and bold the text in the markup for the merged cell. More styling, such as colored text or colored background of the cells, is not supported by the platform.
 
+  <h2>Unstyled Table</h2>
+  <h3>Code Example</h3>
+  [#tables-unstyled-example-1]
+
+  <h3>Styled Example</h3>
+  [#tables-unstyled-example-2]
+
+  <h2>Column Header Table</h2>
+  <h3>Code Example</h3>
+  [#tables-column-header-example-1]
+
+  <h3>Styled Example</h3>
+  [#tables-column-header-example-2]
+
+  <h2>Fake Title Table</h2>
+  <h3>Code Example</h3>
+  [#tables-fake-title-example-1]
+
+  <h3>Styled Example</h3>
+  [#tables-fake-title-example-2]
+
+  <h2>Table with cells merged vertically</h2>
+  <h3>Code Example</h3>
+  [#tables-cells-merged-vertically-example-1]
+
+  <h3>Styled Example</h3>
+  [#tables-cells-merged-vertically-example-2]
+
+  @Markup
+    @Type highlighted
+    @Source tables-unstyled-raw.html
+    @Id #tables-unstyled-example-1
+  @Markup
+    @Type styled
+    @Source tables-unstyled-cooked.html
+    @Id #tables-unstyled-example-2
+  @Markup
+    @Type highlighted
+    @Source tables-column-header-raw.html
+    @Id #tables-column-header-example-1
+  @Markup
+    @Type styled
+    @Source tables-column-header-cooked.html
+    @Id #tables-column-header-example-2
+  @Markup
+    @Type highlighted
+    @Source tables-fake-title-raw.html
+    @Id #tables-fake-title-example-1
+  @Markup
+    @Type styled
+    @Source tables-cells-merged-vertically-cooked.html
+    @Id #tables-cells-merged-vertically-example-2
+  @Markup
+    @Type highlighted
+    @Source tables-cells-merged-vertically-raw.html
+    @Id #tables-cells-merged-vertically-example-1
+  @Markup
+    @Type styled
+    @Source tables-fake-title-cooked.html
+    @Id #tables-fake-title-example-2
   @Number '4.14.0'
 */
 /**

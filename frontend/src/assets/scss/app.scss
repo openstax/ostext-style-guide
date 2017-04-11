@@ -75,6 +75,8 @@ body {
 
   &.fixed {
     position: fixed;
+    width: 100%;
+    height: 100%;
   }
 }
 
@@ -225,7 +227,7 @@ body {
 
     a {
       color: #3b3b3b;
-      font-size: 14px;
+      font-size: 16px;
       letter-spacing: -1px;
       border-left: 4px solid transparent;
       border-radius: 0;
@@ -390,6 +392,47 @@ body {
           margin-top: -0.875em;
         }
       }
+
+      .styled-example {
+        font-size: 12px;
+
+        .title {
+          &::before {
+            display: none;
+          }
+        }
+
+        .body {
+          flex: none;
+          display: block;
+
+          .title {
+            margin: initial;
+            font-size: initial;
+            letter-spacing: normal;
+            font-weight: initial;
+            line-height: initial;
+            font-size: 12px;
+            font-family: $family-sans-serif;
+
+            span {
+              font-weight: initial;
+            }
+          }
+        }
+
+        p {
+          margin: initial;
+          line-height: initial;
+        }
+
+        @import "./ccap-astronomy";
+
+        .section {
+          padding: 0;
+          border-bottom: 0;
+        }
+      }
     }
 
     .source-highlight {
@@ -397,6 +440,7 @@ body {
         font-size: 14px;
         overflow-x: auto;
         padding: 1.25rem 1.5rem;
+        white-space: pre-wrap;
       }
     }
 
