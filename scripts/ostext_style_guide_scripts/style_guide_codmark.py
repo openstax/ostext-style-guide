@@ -104,7 +104,7 @@ A configuration file which consists of the following settings -
         with open("{}/{}".format(config["documentation_path"],
                                  markup_blocks[reference_id]["Source"])) as src:
           _code_highlighted = "Type" in markup_blocks[reference_id] and markup_blocks[reference_id]["Type"] == "highlighted"
-          _src = "{}".format(removeSpans.transformString(highlight_source(src.read()))) if _code_highlighted else src.read()
+          _src = u"{}".format(removeSpans.transformString(highlight_source(src.read().decode('utf-8')))) if _code_highlighted else src.read().decode('utf-8')
           _section['!text'] = re.sub('<p>\[\#[^\[]+\]<\/p>', _src, _section['!text'], 1)
   print("Markup blocks found: {}".format(markup_blocks))
 
