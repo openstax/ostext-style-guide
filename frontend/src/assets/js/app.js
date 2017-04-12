@@ -7,7 +7,6 @@ import riot from 'riot';
 import route from 'riot-route';
 import scrollToY from './scrollTo.js';
 import './tags.js';
-// import './interactions.js';
 import * as interactions from './interactions.js';
 
 class AbstractDataModel {
@@ -112,9 +111,23 @@ function goToSection(category, id) {
     }
 
     if(isEmpty(selected)) {
-      console.log(interactions.similarity(category, 'getting-started'));
-      console.log(interactions.similarity('Stack Overflow','Stack Ovrflw'));
-      selected = {Name:'Page not found', description: 'Nothing to see here.', Category: ''};
+      let results = search(id);
+      let buildDescription = '';
+
+      if (results.length > 0) {
+        buildDescription = `<p>Did you mean to visit one of these pages? </p>`;
+        buildDescription += `<ol>`;
+
+        results.forEach(function(result) {
+          buildDescription += `<li><a href="/#/${result.category.replace(/ +/g, '-').toLowerCase()}/${result.name.replace(/ +/g, '-').toLowerCase()}">${result.name} in ${result.category}</li>`;
+        })
+
+        buildDescription += `</ol>`;
+      } else {
+        buildDescription = `<p>Nothing found here.</p>`;
+      }
+
+      selected = {Name:'Page not found', description: buildDescription, Category: ''};
       newTitle = '404 | Not Found | OpenGuide';
     }
 
@@ -144,6 +157,24 @@ function goToSection(category, id) {
       riot.mount('#section','style-guide-sections', selected);
     });
   }
+}
+
+let search = (term) => {
+  let result_refs = window.index.search(term);
+  let results = [];
+
+  result_refs.map((result_ref) => {
+    app.model.data.map((section) => {
+
+      if (section['Number'] == result_ref.ref) {
+        results.push({number: section['Number'],
+                           name: section['Name'],
+                           category: section['Category'],
+                           urlId: section['id']});
+      }
+    })
+  })
+  return results;
 }
 
 function detail(category, id) {

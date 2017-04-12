@@ -101,11 +101,11 @@ riot.tag('style-guide-search',
 
       this.result_refs.map((result_ref) => {
         opts.sections.map((section) => {
+
           if (section['Number'] == result_ref.ref) {
             this.results.push({number: section['Number'],
                                name: section['Name'],
                                category: section['Category'],
-                              // urlId: opts.sections.findIndex(x => x.Number==section['Number']),
                                urlId: section['id']});
           }
         })
@@ -143,10 +143,10 @@ riot.tag('style-guide',
     this.resetSearchIndex = function() {
       this.index = lunr(function() {
         this.field('name', {boost:10});
-        this.field('description', {boost:6});
-        this.field('category');
+        this.field('category', {boost:6});
         this.ref('number');
       });
+      window.index = this.index;
     }.bind(this)
 
     this.setSections = function(data) {
