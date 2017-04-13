@@ -4,6 +4,7 @@ import riot from 'riot';
 import route from 'riot-route';
 import scrollToY from './scrollTo.js';
 import lunr from 'lunr';
+import * as interactions from './interactions.js';
 
 riot.tag('raw',
   ``,
@@ -80,7 +81,7 @@ riot.tag('style-guide-navigation',
 riot.tag('style-guide-search',
   `<div class="control is-grouped">
     <p class="control is-expanded has-icon">
-      <input class="input" ref="input" type="text" onkeyup="{search}" placeholder="Search for content, elements, layout, typography...">
+      <input class="input" ref="input" type="text" onclick="{addClass}" onkeyup="{search}" placeholder="Search for content, elements, layout, typography...">
       <span class="icon is-medium">
         <i class="fa fa-search"></i>
       </span>
@@ -120,6 +121,24 @@ riot.tag('style-guide-search',
       this.result = section + ' ' + category;
       this.results = [];
       this.refs.input.value = this.result;
+      this.update();
+    }
+
+    this.addClass = (e) => {
+      let search = document.querySelector('.search');
+      let inputSelected = e.currentTarget;
+
+      if (!interactions.hasClass(search, 'is-focus')) {
+        interactions.addClass(search, 'is-focus');
+        interactions.addClass(document.querySelector('.search-results'), 'is-visible');
+      }
+
+      document.addEventListener('click', function(e) {
+        if (e.target != inputSelected) {
+          interactions.removeClass(search, 'is-focus');
+          interactions.removeClass(document.querySelector('.search-results'), 'is-visible');
+        }
+      });
       this.update();
     }
   }

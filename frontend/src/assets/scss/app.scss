@@ -276,7 +276,8 @@ body {
       margin-bottom: 3rem;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 
-      &:hover {
+      &:hover,
+      &.is-focus {
         box-shadow: 0 2px 10px rgba(0,0,0,0.1);
       }
 
@@ -304,6 +305,11 @@ body {
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       max-height: 20rem;
       overflow-y: auto;
+      opacity: 0;
+
+      &.is-visible {
+        opacity: 1;
+      }
 
       a {
         color: #000;
