@@ -76,7 +76,29 @@ r('', home)
 r('*', number)
 r('*/*', detail)
 r('*/*/#*', heading)
+r('/search..', searchPage);
 // r(notfound)
+
+function searchPage() {
+  let q = route.query()
+  let results = search(q.keyword);
+  let buildDescription = '';
+
+  if (results.length > 0) {
+    buildDescription = `<ol>`;
+
+    results.forEach(function(result) {
+      buildDescription += `<li><a href="/#/${result.category.replace(/ +/g, '-').toLowerCase()}/${result.name.replace(/ +/g, '-').toLowerCase()}">${result.name} in ${result.category}</li>`;
+    })
+
+    buildDescription += `</ol>`;
+  } else {
+    buildDescription = `<p>Nothing found here.</p>`;
+  }
+
+  let selected = {Name:`Search Results for ${q.keyword}` , description: buildDescription, Category: ''};
+  riot.mount('#section','style-guide-sections', selected);
+}
 
 function isEmpty(obj) {
     for(var key in obj) {

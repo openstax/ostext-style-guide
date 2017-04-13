@@ -91,6 +91,9 @@ riot.tag('style-guide-search',
   <div class="search-results menu">
     <ul class="menu-list sg-search-result">
      <li each={results} onclick="{reset}"><a href="/#/{category.replace(/ +/g, '-').toLowerCase()}/{name.replace(/ +/g, '-').toLowerCase()}"><span>in {category}</span>{name}</a></li>
+     <virtual if="{results.length == 4}">
+      <li><a class="view-more" href="/#/search?keyword={refs.input.value}"><span>in search</span>View more results</a></li>
+     </virtual>
     </ul>
   </div>`,
   function(opts) {
@@ -100,7 +103,7 @@ riot.tag('style-guide-search',
       this.result_refs = opts.index.search(e.target.value);
       this.results = [];
 
-      this.result_refs.map((result_ref) => {
+      this.result_refs.slice(0, 4).map((result_ref) => {
         opts.sections.map((section) => {
 
           if (section['Number'] == result_ref.ref) {
