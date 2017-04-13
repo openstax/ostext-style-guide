@@ -4,6 +4,7 @@ import riot from 'riot';
 import route from 'riot-route';
 import scrollToY from './scrollTo.js';
 import lunr from 'lunr';
+import * as interactions from './interactions.js';
 
 riot.tag('raw',
   ``,
@@ -80,7 +81,7 @@ riot.tag('style-guide-navigation',
 riot.tag('style-guide-search',
   `<div class="control is-grouped">
     <p class="control is-expanded has-icon">
-      <input class="input" ref="input" type="text" onkeyup="{search}" placeholder="Search for content, elements, layout, typography...">
+      <input class="input" ref="input" type="text" onclick="{addClass}" onkeyup="{search}" placeholder="Search for content, elements, layout, typography...">
       <span class="icon is-medium">
         <i class="fa fa-search"></i>
       </span>
@@ -90,6 +91,9 @@ riot.tag('style-guide-search',
   <div class="search-results menu">
     <ul class="menu-list sg-search-result">
      <li each={results} onclick="{reset}"><a href="/#/{category.replace(/ +/g, '-').toLowerCase()}/{name.replace(/ +/g, '-').toLowerCase()}"><span>in {category}</span>{name}</a></li>
+     <virtual if="{results.length == 4}">
+      <li><a class="view-more" href="/#/search?keyword={refs.input.value}"><span>in search</span>View more results</a></li>
+     </virtual>
     </ul>
   </div>`,
   function(opts) {
@@ -99,13 +103,13 @@ riot.tag('style-guide-search',
       this.result_refs = opts.index.search(e.target.value);
       this.results = [];
 
-      this.result_refs.map((result_ref) => {
+      this.result_refs.slice(0, 4).map((result_ref) => {
         opts.sections.map((section) => {
+
           if (section['Number'] == result_ref.ref) {
             this.results.push({number: section['Number'],
                                name: section['Name'],
                                category: section['Category'],
-                              // urlId: opts.sections.findIndex(x => x.Number==section['Number']),
                                urlId: section['id']});
           }
         })
@@ -120,6 +124,24 @@ riot.tag('style-guide-search',
       this.result = section + ' ' + category;
       this.results = [];
       this.refs.input.value = this.result;
+      this.update();
+    }
+
+    this.addClass = (e) => {
+      let search = document.querySelector('.search');
+      let inputSelected = e.currentTarget;
+
+      if (!interactions.hasClass(search, 'is-focus')) {
+        interactions.addClass(search, 'is-focus');
+        interactions.addClass(document.querySelector('.search-results'), 'is-visible');
+      }
+
+      document.addEventListener('click', function(e) {
+        if (e.target != inputSelected) {
+          interactions.removeClass(search, 'is-focus');
+          interactions.removeClass(document.querySelector('.search-results'), 'is-visible');
+        }
+      });
       this.update();
     }
   }
@@ -143,10 +165,10 @@ riot.tag('style-guide',
     this.resetSearchIndex = function() {
       this.index = lunr(function() {
         this.field('name', {boost:10});
-        this.field('description', {boost:6});
-        this.field('category');
+        this.field('category', {boost:6});
         this.ref('number');
       });
+      window.index = this.index;
     }.bind(this)
 
     this.setSections = function(data) {
@@ -219,7 +241,7 @@ riot.tag('style-guide-sections',
       for (var i=0; i < this.root.getElementsByTagName('h2').length; i++ ) {
         let title = this.root.getElementsByTagName('h2')[i];
         let titleContent = title.innerText;
-        let headingID = titleContent.trim().replace(/ +/g, '-').toLowerCase();
+        let headingID = titleContent.trim().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"").replace(/\s{2,}/g,"").replace(/ +/g, '-').toLowerCase();
 
         this.subSection.push({ title: titleContent,
                                headingID: headingID});
@@ -232,12 +254,19 @@ riot.tag('style-guide-sections',
 
     this.setHeadingId = () => {
       let headings = this.root.querySelectorAll('.content h1,.content h2,.content h3');
+
       for (var i=0; i < headings.length; i++ ) {
         let title = headings[i];
         let titleContent = title.textContent;
-        let headingID = titleContent.trim().replace(/ +/g, '-').toLowerCase();
+        let headingID = titleContent.trim().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"").replace(/\s{2,}/g,"").replace(/ +/g, '-').toLowerCase();
 
         title.id = headingID;
+
+        if (document.querySelectorAll(`#${title.id}`).length > 1) {
+          headingID = headingID + i;
+          title.id = headingID;
+        }
+
         title.innerHTML = `${titleContent}<a class="heading-link" href="/#/${opts.Category.replace(/ +/g, '-').toLowerCase()}/${opts.Name.replace(/ +/g, '-').toLowerCase()}/#${headingID}">
                               <span class="icon is-small">
                                 <i class="fa fa-link"></i>

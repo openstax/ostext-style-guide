@@ -1,19 +1,19 @@
 'use strict';
 
-function hasClass(el, className) {
+export const hasClass = (el, className) => {
   if (el.classList)
     return el.classList.contains(className)
   else
     return !!el.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'))
 }
 
-function addClass(el, className) {
+export const addClass = (el, className) => {
   if (el.classList)
     el.classList.add(className)
   else if (!hasClass(el, className)) el.className += " " + className
 }
 
-function removeClass(el, className) {
+export const removeClass = (el, className) => {
   if (el.classList)
     el.classList.remove(className)
   else if (hasClass(el, className)) {
@@ -23,7 +23,7 @@ function removeClass(el, className) {
 }
 
 // get document coordinates of the element
-var getCoords = (elem) => {
+export const getCoords = (elem) => {
   let box = elem.getBoundingClientRect();
 
   return {
@@ -32,7 +32,7 @@ var getCoords = (elem) => {
   };
 }
 
-var toggleFixedClass = () => {
+export const toggleFixedClass = () => {
     const floatingMenu = document.querySelector('.subsection');
     const body = document.body;
     const html = document.documentElement;
@@ -60,14 +60,13 @@ var toggleFixedClass = () => {
     }
 }
 
- var isActive = () => {
+export const isActive = () => {
   let content = document.getElementsByTagName('raw')[0];
   let headings = content.getElementsByTagName('h2');
   let subSection = document.querySelector('.menu.subsection');
   let menuItems = subSection.getElementsByTagName('a');
 
-
-  if (headings) {
+  if (headings != undefined) {
     for (var i=0; i < headings.length; i++ ) {
       let el = headings[i];
       let nextEl = headings[i+1];
@@ -90,7 +89,7 @@ var toggleFixedClass = () => {
   }
 }
 
-var setWidth = () => {
+export const setWidth = () => {
   let sideNav = document.querySelector('.menu.subsection');
 
   if (sideNav) {
@@ -100,20 +99,20 @@ var setWidth = () => {
   }
 }
 
-var navClickEventHandler = function(event) {
-    if (!hasClass(this, 'is-active')) {
-      addClass(this, 'is-active');
+export const navClickEventHandler = (event) => {
+    if (!hasClass(event.currentTarget, 'is-active')) {
+      addClass(event.currentTarget, 'is-active');
       addClass(document.querySelector('.body'), 'is-active');
       addClass(document.body, 'fixed');
     } else {
       removeClass(document.body, 'fixed');
-      removeClass(this, 'is-active');
+      removeClass(event.currentTarget, 'is-active');
       removeClass(document.querySelector('.body'), 'is-active');
     }
     event.stopPropagation();
 }
 
-var removeOpenClasses = function(event) {
+export const removeOpenClasses = (event) => {
   removeClass(document.body, 'fixed');
   removeClass(document.querySelector('.nav-toggle'), 'is-active');
   removeClass(document.querySelector('.body'), 'is-active');
