@@ -81,10 +81,6 @@ body {
   }
 }
 
-.is-visible {
-  opacity: 1 !important;
-}
-
 .header .nav {
   z-index: 9999;
   min-height: 4rem;
@@ -308,6 +304,13 @@ body {
       top: 100%;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       opacity: 0;
+      height: 0;
+      overflow: hidden;
+
+      &.is-visible {
+        opacity: 1;
+        height: auto;
+      }
 
       a {
         color: #000;
