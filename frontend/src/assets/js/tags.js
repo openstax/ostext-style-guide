@@ -130,18 +130,19 @@ riot.tag('style-guide-search',
     }
 
     this.addClass = (e) => {
-      let search = document.querySelector('.search');
+      let search = this.root;
       let inputSelected = e.currentTarget;
+      let results = this.root.querySelector('.search-results');
 
       if (!interactions.hasClass(search, 'is-focus')) {
         interactions.addClass(search, 'is-focus');
-        interactions.addClass(document.querySelector('.search-results'), 'is-visible');
+        interactions.addClass(results, 'is-visible');
       }
 
       document.addEventListener('click', function(e) {
         if (e.target != inputSelected) {
           interactions.removeClass(search, 'is-focus');
-          interactions.removeClass(document.querySelector('.search-results'), 'is-visible');
+          interactions.removeClass(results, 'is-visible');
         }
       });
       this.update();
@@ -157,7 +158,7 @@ riot.tag('style-guide',
   <main class="main section">
     <div class="container">
       <!-- Search elements -->
-      <style-guide-search class="search" index={index} sections={sections}></style-guide-search>
+      <style-guide-search class="search"></style-guide-search>
       <div id="section" sections={sections}></div>
     </div>
   </main>`,
@@ -190,6 +191,7 @@ riot.tag('style-guide',
         });
       }.bind(this));
       this.update();
+      riot.mount('style-guide-search', {index:this.index, sections: this.sections});
       this.tags['style-guide-navigation'].trigger('sections-updated');
     }.bind(this)
 
