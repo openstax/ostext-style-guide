@@ -23,7 +23,7 @@ riot.tag('style-guide-navigation',
   <p>{category.category}</p>
   <ul class="menu-list">
     <li each="{el, i in category.sections}" class="{el.number}">
-      <a href="{el.url}" class="{is-active: parent.selectedUrl === el.url}">{el.name}</a>
+      <a href="{el.url}" class="{is-active: parent.selectedUrl === el.url}" onclick="{removeOpenClasses}">{el.name}</a>
     </li>
    </ul>
    </div>`,
@@ -70,6 +70,8 @@ riot.tag('style-guide-navigation',
       self.selectedUrl = `/#/${category}/${id}`;
       self.update();
     }
+
+    this.removeOpenClasses = interactions.removeOpenClasses;
 
     this.on('sections-updated', function() {
       this.setSections();

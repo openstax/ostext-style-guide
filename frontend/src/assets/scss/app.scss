@@ -83,7 +83,7 @@ body {
 
 .header .nav {
   z-index: 9999;
-  min-height: 4rem;
+  min-height: 5rem;
 
 @include mobile {
   position: fixed;
@@ -103,7 +103,7 @@ body {
   }
 
   .logo {
-    max-height: 2rem;
+    max-height: 100%;
   }
 
   .nav-toggle {
@@ -166,7 +166,7 @@ body {
         width: inherit;
         height: inherit;
         position: fixed;
-        top: 56px;
+        top: 5rem;
         left: 0;
         bottom: 0;
         right: 0;
@@ -181,7 +181,7 @@ body {
       margin-left: -18rem;
       // transition: 0.2s transform ease-out 0.1s;
       position: fixed;
-      top: 56px;
+      top: 5rem;
       left: 0;
       bottom: 0;
       width: 18rem;
