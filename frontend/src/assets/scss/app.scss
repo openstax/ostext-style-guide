@@ -292,7 +292,7 @@ body {
   li:nth-child(4) a {
     border-bottom: none;
   }
-  
+
   a {
     color: #5F6163;
     font-weight: 600;
@@ -651,16 +651,24 @@ body {
 
 .footer {
   color: #fff;
-  background-color: #077384;
-  color: #363636;
-  padding-bottom: 3rem;
+  background-color: transparent;
+  color: #9B9B9B;
+  padding: 0 0 3rem;
   font-size: 14px;
 
-  a {
-    color: #363636;
+  .columns {
+    @media screen and (min-width: 1200px) {
+      width: 75%
+    }
+  }
 
-    &:hover {
-      color: #0DC0DC;
+  a {
+    &.icon {
+      color: #9B9B9B;
+
+      &:hover {
+        color: #363636;
+      }
     }
   }
 

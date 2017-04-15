@@ -165,6 +165,36 @@ riot.tag('style-guide',
       <style-guide-search class="search"></style-guide-search>
       <div id="section" sections={sections}></div>
     </div>
+    <div class="container">
+      <footer class="footer">
+        <div class="columns is-vcentered is-gapless is-mobile">
+          <div class="column is-two-thirds">
+          <div class="meta">
+            <a href="http://www.openstax.org/about" target="_blank">About</a>
+            <a href="http://www.openstax.org/blog" target="_blank">Blog</a>
+            <a href="http://www.openstax.org/contact" target="_blank">Contact</a>
+          </div>
+            <p>
+              Design Guide by <a href="http://www.openstax.org">OpenStax</a>. All Rights Reserved.
+            </p>
+          </div>
+          <div class="column has-text-right">
+          <a class="icon is-medium" href="https://github.com/openstax/ostext-style-guide" target="_blank">
+            <i class="fa fa-github"></i>
+          </a>
+          <a class="icon is-medium" href="https://www.facebook.com/openstax" target="_blank">
+            <i class="fa fa-facebook"></i>
+          </a>
+          <a class="icon is-medium" href="https://twitter.com/openstax" target="_blank">
+            <i class="fa fa-twitter"></i>
+          </a>
+          <a class="icon is-medium" href="https://www.linkedin.com/company/openstax" target="_blank">
+            <i class="fa fa-linkedin"></i>
+          </a>
+          </div>
+        </div>
+    </footer>
+  </div>
   </main>`,
   function(opts) {
     this.sections = [];
