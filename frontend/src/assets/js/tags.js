@@ -92,9 +92,13 @@ riot.tag('style-guide-search',
 
   <div class="search-results menu">
     <ul class="menu-list sg-search-result">
-     <li each={results} onclick="{reset}"><a href="/#/{category.replace(/ +/g, '-').toLowerCase()}/{name.replace(/ +/g, '-').toLowerCase()}"><span>in {category}</span>{name}</a></li>
+     <li each={results} onclick="{reset}" class="{category.replace(/ +/g, '-').toLowerCase()}"><a href="/#/{category.replace(/ +/g, '-').toLowerCase()}/{name.replace(/ +/g, '-').toLowerCase()}"><span>in {category}</span>{name}</a></li>
      <virtual if="{results.length == 4}">
-      <li><a class="view-more" href="/#/search?keyword={refs.input.value}"><span>in search</span>View more results</a></li>
+      <li><a class="view-more" href="/#/search?keyword={refs.input.value}">See all results for {this.refs.input.value}
+      <span class="icon">
+        <i class="fa fa-chevron-right"></i>
+      </span>
+      </a></li>
      </virtual>
     </ul>
   </div>`,
@@ -203,13 +207,10 @@ riot.tag('style-guide',
 
 riot.tag('style-guide-sections',
   `
-  <section>
-    <p class="title h1">Textbook Design Guide</p>
-  </section>
   <!-- Style Guide section data -->
   <section id="{opts.Number}" class="section">
     <div class="columns">
-      <div class="column {is-three-quarters-desktop: hasSubSection} is-12-tablet">
+      <div class="column is-three-quarters-desktop is-12-tablet">
         <div class="content">
           <h1 class="title">{ opts.Name }</h1>
           <raw content="{ opts.description }"/>

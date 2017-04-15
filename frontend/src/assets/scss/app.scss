@@ -53,7 +53,7 @@ body {
 
   .side-nav {
     @include tablet {
-      flex: 0 0 18rem;
+      flex: 0 0 250px;
     }
   }
 
@@ -97,7 +97,7 @@ body {
   }
   .nav-left {
     @include tablet {
-      flex: 0 0 18rem;
+      flex: 0 0 250px;
       background-color: #fff;
     }
   }
@@ -167,22 +167,32 @@ body {
     padding: 0 1.5rem;
     margin-bottom: 0;
     border-radius: 3px;
+    width: 75%;
+
+    @media screen and (max-width: 1200px) {
+      width: 100%;
+    }
+
+    &.is-focus {
+      background-color: rgba(255,255,255,1);
+    }
   }
 
   .control.is-grouped {
     margin-bottom: 0;
+  }
 
-    .icon {
-      @include desktop {
-        color: #008596;
-        top: 1.5rem;
-      }
+  .control.has-icon .input + .icon {
+    @include desktop {
+      color: #008596;
+      top: 1.5rem;
     }
   }
 
-  .control.has-icon .input:focus + .icon {
+  .control.has-icon .input:focus + .icon,
+  &.is-focus .control.has-icon .input + .icon {
     @include desktop {
-      color: #054C58;
+      color: #7a7a7a;
     }
   }
 
@@ -195,12 +205,21 @@ body {
 
     @include desktop {
       background-color: transparent;
-      color: #077384;
       height: 50px;
       padding-left: 3.5em !important;
+      color: #077384;
 
       &::placeholder {
         color: #077384;
+      }
+      @at-root .search.is-focus {
+        .input {
+          color: #4B4B4B;
+
+          &::placeholder {
+            color: #4B4B4B;
+          }
+        }
       }
     }
   }
@@ -234,7 +253,6 @@ body {
   z-index: 1;
   width: 100%;
   left: 0;
-  border-top: 1px solid #ebebeb;
   top: 100%;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   opacity: 0;
@@ -249,18 +267,59 @@ body {
 
   @include desktop {
     border-top: none;
+    top: 48px;
   }
 
+  li.getting-started {
+    background: url('/assets/img/svg/icon-getting-started.svg') 1.5rem 50% no-repeat;
+  }
+  li.general-composition {
+    background: url('/assets/img/svg/icon-general-composition.svg') 1.5rem 50% no-repeat;
+  }
+  li.content-elements {
+    background: url('/assets/img/svg/icon-content-elements.svg') 1.5rem 50% no-repeat;
+  }
+  li.book-skeleton {
+    background: url('/assets/img/svg/icon-book-skeleton.svg') 1.5rem 50% no-repeat;
+  }
+  li.themes {
+    background: url('/assets/img/svg/icon-themes.svg') 1.5rem 50% no-repeat;
+  }
+  li:first-child a {
+    border-top: 1px solid #ebebeb;
+  }
+
+  li:nth-child(4) a {
+    border-bottom: none;
+  }
+  
   a {
-    color: #000;
-    font-weight: 500;
+    color: #5F6163;
+    font-weight: 600;
     border-bottom: 1px solid #ebebeb;
     padding: 1rem 1rem 1rem 6rem;
-    letter-spacing: -1px;
+
+    &:hover {
+      background: transparent;
+    }
+
+    &.view-more {
+      color: $primary;
+      font-weight: 400;
+
+      span:first-child {
+        color: $primary;
+        padding-bottom: 0;
+        font-size: 10px;
+        vertical-align: text-top;
+        display: inline-block;
+      }
+    }
 
     span:first-child {
       font-size: 12px;
       color: #aaa;
+      font-weight: 400;
       text-transform: uppercase;
       display: block;
       padding-bottom: 0.5rem;
@@ -301,19 +360,18 @@ body {
 
     @include tablet-only {
       z-index: 999;
-      margin-left: -18rem;
-      // transition: 0.2s transform ease-out 0.1s;
+      margin-left: -250px;
+      transition: 0.2s transform ease-out;
       position: fixed;
       top: 5rem;
       left: 0;
       bottom: 0;
-      width: 18rem;
+      width: 250px;
 
       @at-root .is-active#{&} {
-        transform: translate3d(18rem, 0, 0);
+        transform: translate3d(250px, 0, 0);
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
-        transition: 0.2s transform ease-out 0.1s;
       }
     }
 
@@ -402,12 +460,21 @@ body {
     }
 
     .section {
-      background-color: #fff;
+      background-color: transparent;
       margin-bottom: 3rem;
-      border-bottom: 1px solid #ebebeb;
+      padding: 0;
+    }
+    .column.is-three-quarters-desktop {
+      @media screen and (max-width: 1200px) {
+        width: 100%;
+      }
     }
 
     .content {
+      background: #fff;
+      padding: 3rem 1.5rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
       h2 {
         font-family: $family-helvetica;
         font-size: 24px;
