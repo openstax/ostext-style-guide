@@ -97,6 +97,8 @@ function searchPage() {
   }
 
   let selected = {Name:`Search Results for ${q.keyword}` , description: buildDescription, Category: ''};
+
+  document.title = 'Search Results';
   riot.mount('#section','style-guide-sections', selected);
 }
 

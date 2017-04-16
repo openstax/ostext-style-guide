@@ -104,10 +104,12 @@ export const navClickEventHandler = (event) => {
       addClass(event.currentTarget, 'is-active');
       addClass(document.querySelector('.body'), 'is-active');
       addClass(document.body, 'fixed');
+      document.querySelector('.main').addEventListener('click', removeOpenClasses);
     } else {
       removeClass(document.body, 'fixed');
       removeClass(event.currentTarget, 'is-active');
       removeClass(document.querySelector('.body'), 'is-active');
+      document.querySelector('.main').removeEventListener('click', removeOpenClasses);
     }
     event.stopPropagation();
 }
@@ -116,6 +118,7 @@ export const removeOpenClasses = (event) => {
   removeClass(document.body, 'fixed');
   removeClass(document.querySelector('.nav-toggle'), 'is-active');
   removeClass(document.querySelector('.body'), 'is-active');
+  document.querySelector('.main').removeEventListener('click', removeOpenClasses);
 }
 
 window.onload = function () {
@@ -123,7 +126,7 @@ window.onload = function () {
   setWidth();
   isActive();
   document.querySelector('.nav-toggle').addEventListener('click', navClickEventHandler);
-  document.querySelector('.side-nav').addEventListener('click', removeOpenClasses);
+  document.querySelector('.logo').addEventListener('click', removeOpenClasses);
   window.addEventListener('resize', removeOpenClasses);
   window.addEventListener('scroll', toggleFixedClass);
   window.addEventListener('resize', toggleFixedClass);

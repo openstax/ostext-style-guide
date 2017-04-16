@@ -23,7 +23,7 @@ riot.tag('style-guide-navigation',
   <p>{category.category}</p>
   <ul class="menu-list">
     <li each="{el, i in category.sections}" class="{el.number}">
-      <a href="{el.url}" class="{is-active: parent.selectedUrl === el.url}">{el.name}</a>
+      <a href="{el.url}" class="{is-active: parent.selectedUrl === el.url}" onclick="{removeOpenClasses}">{el.name}</a>
     </li>
    </ul>
    </div>`,
@@ -71,6 +71,8 @@ riot.tag('style-guide-navigation',
       self.update();
     }
 
+    this.removeOpenClasses = interactions.removeOpenClasses;
+
     this.on('sections-updated', function() {
       this.setSections();
       this.update();
@@ -90,9 +92,13 @@ riot.tag('style-guide-search',
 
   <div class="search-results menu">
     <ul class="menu-list sg-search-result">
-     <li each={results} onclick="{reset}"><a href="/#/{category.replace(/ +/g, '-').toLowerCase()}/{name.replace(/ +/g, '-').toLowerCase()}"><span>in {category}</span>{name}</a></li>
+     <li each={results} onclick="{reset}" class="{category.replace(/ +/g, '-').toLowerCase()}"><a href="/#/{category.replace(/ +/g, '-').toLowerCase()}/{name.replace(/ +/g, '-').toLowerCase()}"><span>in {category}</span>{name}</a></li>
      <virtual if="{results.length == 4}">
-      <li><a class="view-more" href="/#/search?keyword={refs.input.value}"><span>in search</span>View more results</a></li>
+      <li><a class="view-more" href="/#/search?keyword={refs.input.value}">See all results for {this.refs.input.value}
+      <span class="icon">
+        <i class="fa fa-chevron-right"></i>
+      </span>
+      </a></li>
      </virtual>
     </ul>
   </div>`,
@@ -128,18 +134,19 @@ riot.tag('style-guide-search',
     }
 
     this.addClass = (e) => {
-      let search = document.querySelector('.search');
+      let search = this.root;
       let inputSelected = e.currentTarget;
+      let results = this.root.querySelector('.search-results');
 
       if (!interactions.hasClass(search, 'is-focus')) {
         interactions.addClass(search, 'is-focus');
-        interactions.addClass(document.querySelector('.search-results'), 'is-visible');
+        interactions.addClass(results, 'is-visible');
       }
 
       document.addEventListener('click', function(e) {
         if (e.target != inputSelected) {
           interactions.removeClass(search, 'is-focus');
-          interactions.removeClass(document.querySelector('.search-results'), 'is-visible');
+          interactions.removeClass(results, 'is-visible');
         }
       });
       this.update();
@@ -155,9 +162,39 @@ riot.tag('style-guide',
   <main class="main section">
     <div class="container">
       <!-- Search elements -->
-      <style-guide-search class="search" index={index} sections={sections}></style-guide-search>
+      <style-guide-search class="search"></style-guide-search>
       <div id="section" sections={sections}></div>
     </div>
+    <div class="container">
+      <footer class="footer">
+        <div class="columns is-vcentered is-gapless is-mobile">
+          <div class="column is-two-thirds">
+          <div class="meta">
+            <a href="http://www.openstax.org/about" target="_blank">About</a>
+            <a href="http://www.openstax.org/blog" target="_blank">Blog</a>
+            <a href="http://www.openstax.org/contact" target="_blank">Contact</a>
+          </div>
+            <p>
+              Design Guide by <a href="http://www.openstax.org">OpenStax</a>. All Rights Reserved.
+            </p>
+          </div>
+          <div class="column has-text-right">
+          <a class="icon is-medium" href="https://github.com/openstax/ostext-style-guide" target="_blank">
+            <i class="fa fa-github"></i>
+          </a>
+          <a class="icon is-medium" href="https://www.facebook.com/openstax" target="_blank">
+            <i class="fa fa-facebook"></i>
+          </a>
+          <a class="icon is-medium" href="https://twitter.com/openstax" target="_blank">
+            <i class="fa fa-twitter"></i>
+          </a>
+          <a class="icon is-medium" href="https://www.linkedin.com/company/openstax" target="_blank">
+            <i class="fa fa-linkedin"></i>
+          </a>
+          </div>
+        </div>
+    </footer>
+  </div>
   </main>`,
   function(opts) {
     this.sections = [];
@@ -188,6 +225,7 @@ riot.tag('style-guide',
         });
       }.bind(this));
       this.update();
+      riot.mount('style-guide-search', {index:this.index, sections: this.sections});
       this.tags['style-guide-navigation'].trigger('sections-updated');
     }.bind(this)
 
@@ -199,13 +237,10 @@ riot.tag('style-guide',
 
 riot.tag('style-guide-sections',
   `
-  <section>
-    <p class="title h1">Textbook Design Guide</p>
-  </section>
   <!-- Style Guide section data -->
   <section id="{opts.Number}" class="section">
     <div class="columns">
-      <div class="column {is-three-quarters-desktop: hasSubSection} is-12-tablet">
+      <div class="column is-three-quarters-desktop is-12-tablet">
         <div class="content">
           <h1 class="title">{ opts.Name }</h1>
           <raw content="{ opts.description }"/>

@@ -355,7 +355,7 @@
   Content Elements
   =========
 
-  @Number '4.0.0'
+  @Number '3.0.0'
 */
 /**
 @Section
@@ -364,7 +364,7 @@
 
   All OpenStax books have folio text at the top of the page on all pages after the table of contents. This text includes the number and title of the chapter (or Preface, Appendix, or Index) aligned to the inside of the page, opposite the page number. These folios are automatically generated in the pdf and cannot be edited manually.
 
-  @Number '4.1.0'
+  @Number '3.1.0'
 */
 /**
 @Section
@@ -373,7 +373,7 @@
 
   OpenStax books use nested headers; they include chapter titles (H1), module titles (H2), inside-module section titles (H3), and further nested section headers (e.g. H4, H5). These header levels can be distinguished from each other by CSS-assigned font size and style.
 
-  @Number '4.2.0'
+  @Number '3.2.0'
 */
 /**
 @Section
@@ -382,7 +382,7 @@
 
   Paragraphs cannot be referred or linked to in OpenStax books, nor can they be indented without being enclosed by some other container.
 
-  @Number '4.3.0'
+  @Number '3.3.0'
 */
 /**
 @Section
@@ -394,7 +394,7 @@
      + Intramodule links, which go to an element inside the same module as the link, and are marked up with <link target-id="id of the target element"/> with no anchor text, since the linked feature’s title or number will be automatically generated when the link displays
      + extramodule links, which go to another module inside the book collection, marked up with <link document="other module number">Module Title anchor text</link> (these links may also go to a specific feature inside the other module, in which case the link markup will include  target-id="id of the target element" inside the link tag, and the link will not require anchor text)
 
-  @Number '4.4.0'
+  @Number '3.4.0'
 */
 /**
 @Section
@@ -403,7 +403,7 @@
 
   Lists may be bulleted, unmarked, stepwise, numbered, alphabetical, or tokened. Certain lists may also be comma-separated and not vertically separated by item.
 
-  @Number '4.5.0'
+  @Number '3.5.0'
 */
 /**
 @Section
@@ -426,14 +426,14 @@
     @Type styled
     @Source blockquote-cooked.html
     @Id #blockquote-example-2
-  @Number '4.6.0'
+  @Number '3.6.0'
 */
 /**
 @Section
   Dividers
   =========
 
-  @Number '4.7.0'
+  @Number '3.7.0'
 */
 /**
 @Section
@@ -442,7 +442,7 @@
 
   Numbered footnotes are available in OpenStax books with the `<footnote>` tag, which encloses the text of the footnote and moves it to the bottom of the page on which the tag appears.
 
-  @Number '4.7.0'
+  @Number '3.8.0'
 */
 /**
 @Section
@@ -453,7 +453,7 @@
 
   [Footer Image](link to image)
 
-  @Number '4.8.0'
+  @Number '3.9.0'
 */
 /**
 @Section
@@ -462,7 +462,7 @@
 
   A `<figure>` tag is a container for a media tag, and figures are numbered by default. To remove numbering from a figure, the unnumbered class must be applied in the figure tag (the markup is `<figure class="unnumbered">`), and an empty label tag (`<label/>`) must also be enclosed inside the figure tag. Figures may have captions (the markup `<caption>` goes inside the figure tag), but they are not required.
 
-  @Number '4.9.0'
+  @Number '3.10.0'
 */
 /**
 @Section
@@ -480,7 +480,7 @@
   + Image files supported: png (including transparency), svg, jpg, gif
   + [[target for image sizes from figure] Image can be 3 sizes: ⅓, ½, full width. Exact measurements to be provided at a later date
 
-  @Number '4.10.0'
+  @Number '3.11.0'
 */
 /**
 @Section
@@ -490,7 +490,7 @@
   + Icons
   + Borders
 
-  @Number '4.11.0'
+  @Number '3.12.0'
 */
 /**
 @Section
@@ -501,7 +501,7 @@
   + Subtitled features: some features have an automatically generated feature title as well as manually applied subtitles for each individual feature. These subtitles are sometimes applied in the `<title>` tag of the note, but other times they are text inside a paragraph in the note.
   + Features may or may not be numbered according to their class.
 
-  @Number '4.12.0'
+  @Number '3.13.0'
 */
 /**
 @Section
@@ -525,7 +525,7 @@
     @Type styled
     @Source examples-cooked.html
     @Id #examples-example-2
-  @Number '4.13.0'
+  @Number '3.14.0'
 */
 /**
 @Section
@@ -602,21 +602,21 @@
     @Type styled
     @Source tables-fake-title-cooked.html
     @Id #tables-fake-title-example-2
-  @Number '4.14.0'
+  @Number '3.15.0'
 */
 /**
 @Section
   Book Skeleton
   =========
 
-  @Number '5.0.0'
+  @Number '4.0.0'
 */
 /**
 @Section
   Front Matter
   =========
 
-  @Number '5.1.0'
+  @Number '4.1.0'
 */
 /**
 @Section
@@ -625,7 +625,7 @@
 
   The `<document>` tag of a preface must contain the preface class: `<document class="preface">`.
 
-  @Number '5.2.0'
+  @Number '4.2.0'
 */
 /**
 @Section
@@ -634,7 +634,7 @@
 
   The platform automatically generates a table of contents; it cannot be edited manually.
 
-  @Number '5.3.0'
+  @Number '4.3.0'
 */
 /**
 @Section
@@ -657,7 +657,7 @@
   + Collating elements are created by adding a specific class to a `<section>` tag at the end of a module (these elements must always appear in the same order in the module markup). Collating elements common to most OpenStax books include Section Summary (class="section-summary"), Key Terms (class="key-terms"), Key Concepts (class="concepts"), Key Equations, various types of problems and exercises (often separated in collation by type). More flexible book-specific collated elements sometimes include Practice Tests and References [link to References](insert link).
   + Collating elements are usually located inside the relevant modules and collated together at the end of the chapter, using a collation instruction in the introduction module of each chapter. The collated elements may be separated by headers indicating the module they came from, or they may not, according to their class.
 
-  @Number '5.3.1'
+  @Number '4.4.0'
 */
 /**
 @Section
@@ -667,7 +667,7 @@
   + The Answer Key has exercise solutions that are separated by chapter in the back of the book.
   + Collation instructions for the Answer Key are included in the Introduction module of every chapter. There are two options; one will move any solutions inside the matched section to the end of chapter and add a copy of that to the answer key. Another will COPY any solutions inside the matched section to the answer key, also leaving it in place in the chapter.
 
-  @Number '5.4.0'
+  @Number '4.5.0'
 */
 /**
 @Section
@@ -677,7 +677,7 @@
   + May appear at the end of section, chapter, or book.
   + If displaying at the end of a book, they cannot be sorted at the book-level.
 
-  @Number '5.5.0'
+  @Number '4.6.0'
 */
 /**
 @Section
@@ -689,7 +689,7 @@
   + The folio displays usual page numbers and appendix titles (Appendix A for example) instead of chapter title.
   + The appendix styling is similar to the rest of the book.
 
-  @Number '5.6.0'
+  @Number '4.7.0'
 */
 /**
 @Section
@@ -698,5 +698,40 @@
 
   + Index terms are based on how they are referenced in the text and can only contain one word, e.g. “bank” and “banks” would be separate entries. An entry for “Clinton”, 2, 5, 25, 178 could refer to either Bill or Hillary.
 
-  @Number '5.7.0'
+  @Number '4.8.0'
+*/
+/**
+@Section
+  Themes
+  =========
+
+  @Number '5.0.0'
+*/
+/**
+@Section
+  Business
+  =========
+
+  @Number '5.1.0'
+*/
+/**
+@Section
+  Math
+  =========
+
+  @Number '5.2.0'
+*/
+/**
+@Section
+  Science
+  =========
+
+  @Number '5.3.0'
+*/
+/**
+@Section
+  Humanities
+  =========
+
+  @Number '5.4.0'
 */
