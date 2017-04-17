@@ -58,9 +58,17 @@ body {
   }
 
   .main.section {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
     @include tablet {
-      flex: 1;
       margin: 0;
+    }
+
+    .container {
+      flex: 1;
+      width: 100%;
     }
   }
 
@@ -474,6 +482,7 @@ body {
       background: #fff;
       padding: 3rem 1.5rem;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      word-wrap: break-word;
 
       h2 {
         font-family: $family-helvetica;
@@ -653,7 +662,7 @@ body {
   color: #fff;
   background-color: transparent;
   color: #9B9B9B;
-  padding: 0 0 3rem;
+  padding: 0;
   font-size: 14px;
 
   .columns {
