@@ -214,7 +214,7 @@ function heading(category, id, heading) {
 
     if (el) {
       let rect = el.getBoundingClientRect();
-      window.scrollTo(0, rect.top + pageYOffset - 20);
+      window.scrollTo(0, rect.top + pageYOffset - interactions.offsetValue());
     }
   }, 400);
 }
