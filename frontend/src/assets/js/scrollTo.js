@@ -52,7 +52,7 @@ function scrollToY(scrollTargetY, speed, easing) {
 
             window.scrollTo(0, scrollY + ((scrollTargetY - scrollY) * t));
         } else {
-            console.log('scroll done');
+            // console.log('scroll done');
             window.scrollTo(0, scrollTargetY);
         }
     }

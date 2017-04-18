@@ -100,6 +100,7 @@ function searchPage() {
 
   document.title = 'Search Results';
   riot.mount('#section','style-guide-sections', selected);
+  window.scrollTo(0,0);
 }
 
 function isEmpty(obj) {
@@ -214,7 +215,7 @@ function heading(category, id, heading) {
 
     if (el) {
       let rect = el.getBoundingClientRect();
-      window.scrollTo(0, rect.top + pageYOffset - 20);
+      window.scrollTo(0, rect.top + pageYOffset - interactions.offsetValue());
     }
   }, 400);
 }
