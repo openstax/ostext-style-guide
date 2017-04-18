@@ -138,6 +138,9 @@ riot.tag('style-guide-search',
       let inputSelected = e.currentTarget;
       let results = this.root.querySelector('.search-results');
       let input = this.root.querySelector('.input');
+      let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      let scrollWindowDown = lastScrollTop + 300;
+      let scrollWindowUp = lastScrollTop - 300;
 
       if (!interactions.hasClass(search, 'is-focus')) {
         interactions.addClass(search, 'is-focus');
@@ -149,14 +152,29 @@ riot.tag('style-guide-search',
           interactions.removeClass(search, 'is-focus');
           interactions.removeClass(results, 'is-visible');
           document.removeEventListener('click', this);
+          document.removeEventListener('scroll', closeSearchOnScroll);
         }
       });
 
-      document.addEventListener('scroll', function(e) {
-        //interactions.removeClass(search, 'is-focus');
-        //interactions.removeClass(results, 'is-visible');
-        //input.blur();
-      });
+      let closeSearchOnScroll = (e) => {
+        let st = window.pageYOffset || document.documentElement.scrollTop;
+
+        if (st > lastScrollTop) {
+          // downscroll code
+          if (st > scrollWindowDown) {
+            document.querySelector('.main').click();
+            input.blur();
+          }
+        } else {
+          // upscroll code
+         if (st < scrollWindowUp) {
+           document.querySelector('.main').click();
+           input.blur();
+         }
+        }
+        lastScrollTop = st;
+      }
+      document.addEventListener('scroll', closeSearchOnScroll);
       this.update();
     }
   }

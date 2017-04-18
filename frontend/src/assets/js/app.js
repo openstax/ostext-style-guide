@@ -100,6 +100,7 @@ function searchPage() {
 
   document.title = 'Search Results';
   riot.mount('#section','style-guide-sections', selected);
+  window.scrollTo(0,0);
 }
 
 function isEmpty(obj) {

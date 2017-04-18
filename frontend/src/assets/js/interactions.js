@@ -2,16 +2,7 @@
 
 import Headroom from './headroom.js';
 
-export const offsetValue = () => {
-  let offsetValue = 80;
-
-  if (window.isPinned) {
-    offsetValue = 80
-  } else {
-    offsetValue = 80;
-  }
-  return offsetValue;
-}
+export const offsetValue = () => 100;
 
 export const hasClass = (el, className) => {
   if (el.classList)
@@ -136,7 +127,7 @@ let myElement = document.querySelector("header");
 let headroom  = new Headroom(myElement, {
   offset: 80,
   tolerance : {
-    up : 5,
+    up : 10,
     down : 0
   },
 
