@@ -16,7 +16,7 @@ riot.tag('raw',
 riot.tag('style-guide-navigation',
   `
   <div class="menu">
-      <p class="changelog">v0.0.2 <a href="https://github.com/openstax/ostext-style-guide/releases" target="_blank">(Changelog)</a></p>
+      <p class="changelog">v1.0.0 <a href="https://github.com/openstax/ostext-style-guide/releases" target="_blank">(Changelog)</a></p>
     </ul>
   </div>
   <div each="{category, i in sections}" class="menu">
@@ -137,6 +137,7 @@ riot.tag('style-guide-search',
       let search = this.root;
       let inputSelected = e.currentTarget;
       let results = this.root.querySelector('.search-results');
+      let input = this.root.querySelector('.input');
 
       if (!interactions.hasClass(search, 'is-focus')) {
         interactions.addClass(search, 'is-focus');
@@ -147,7 +148,14 @@ riot.tag('style-guide-search',
         if (e.target != inputSelected) {
           interactions.removeClass(search, 'is-focus');
           interactions.removeClass(results, 'is-visible');
+          document.removeEventListener('click', this);
         }
+      });
+
+      document.addEventListener('scroll', function(e) {
+        //interactions.removeClass(search, 'is-focus');
+        //interactions.removeClass(results, 'is-visible');
+        //input.blur();
       });
       this.update();
     }
@@ -159,42 +167,42 @@ riot.tag('style-guide',
     <!-- Left-side navigation of Style Guide sections -->
     <style-guide-navigation class="sg-navigation" sections={sections}></style-guide-navigation>
   </nav>
-  <main class="main section">
+  <main class="main section" id="top">
     <div class="container">
       <!-- Search elements -->
       <style-guide-search class="search"></style-guide-search>
       <div id="section" sections={sections}></div>
     </div>
-    <div class="container">
-      <footer class="footer">
+    <footer class="footer">
+      <div class="container">
         <div class="columns is-vcentered is-gapless is-mobile">
-          <div class="column is-two-thirds">
-          <div class="meta">
-            <a href="http://www.openstax.org/about" target="_blank">About</a>
-            <a href="http://www.openstax.org/blog" target="_blank">Blog</a>
-            <a href="http://www.openstax.org/contact" target="_blank">Contact</a>
-          </div>
+          <div class="column is-half">
+            <div class="meta">
+              <a href="http://www.openstax.org/about" target="_blank">About</a>
+              <a href="http://www.openstax.org/blog" target="_blank">Blog</a>
+              <a href="http://www.openstax.org/contact" target="_blank">Contact</a>
+            </div>
             <p>
               Design Guide by <a href="http://www.openstax.org">OpenStax</a>. All Rights Reserved.
             </p>
           </div>
           <div class="column has-text-right">
-          <a class="icon is-medium" href="https://github.com/openstax/ostext-style-guide" target="_blank">
-            <i class="fa fa-github"></i>
-          </a>
-          <a class="icon is-medium" href="https://www.facebook.com/openstax" target="_blank">
-            <i class="fa fa-facebook"></i>
-          </a>
-          <a class="icon is-medium" href="https://twitter.com/openstax" target="_blank">
-            <i class="fa fa-twitter"></i>
-          </a>
-          <a class="icon is-medium" href="https://www.linkedin.com/company/openstax" target="_blank">
-            <i class="fa fa-linkedin"></i>
-          </a>
+            <a class="icon is-medium" href="https://github.com/openstax/ostext-style-guide" target="_blank">
+              <i class="fa fa-github"></i>
+            </a>
+            <a class="icon is-medium" href="https://www.facebook.com/openstax" target="_blank">
+              <i class="fa fa-facebook"></i>
+            </a>
+            <a class="icon is-medium" href="https://twitter.com/openstax" target="_blank">
+              <i class="fa fa-twitter"></i>
+            </a>
+            <a class="icon is-medium" href="https://www.linkedin.com/company/openstax" target="_blank">
+              <i class="fa fa-linkedin"></i>
+            </a>
           </div>
         </div>
+      </div>
     </footer>
-  </div>
   </main>`,
   function(opts) {
     this.sections = [];
@@ -244,9 +252,6 @@ riot.tag('style-guide-sections',
         <div class="content">
           <h1 class="title">{ opts.Name }</h1>
           <raw content="{ opts.description }"/>
-          <div class="sg-html-example"><p>Raw HMTL</p>{raw_html}</div>
-          <div class="sg-html-example"><p>Cooked HTML</p>{cooked_html}</div>
-          <div class="sg-css-example"><p>Rule Set CSS</p>{rule_set}</div>
         </div>
       </div>
       <div class="column is-hidden-touch {is-hidden-desktop: !hasSubSection}">
@@ -255,14 +260,14 @@ riot.tag('style-guide-sections',
           <ul class="menu-list">
             <li each={subSection}><a href="/#/{parent.opts.Category.replace(/ +/g, '-').toLowerCase()}/{parent.opts.Name.replace(/ +/g, '-').toLowerCase()}/#{headingID}" onclick="{goToSection}">{title}</a></li>
           </ul>
-          <virtual if={hasSubSection}>
-            <a href="/#/{opts.Category.replace(/ +/g, '-').toLowerCase()}/{opts.Name.replace(/ +/g, '-').toLowerCase()}/#top" class="back-to-top" onclick="{goToSection}">
-              <span class="icon is-large">
-                <i class="fa fa-arrow-circle-o-up"></i>
-              </span>
-            </a>
-          </virtual>
         </div>
+        <virtual if={hasSubSection}>
+          <a href="/#/{opts.Category.replace(/ +/g, '-').toLowerCase()}/{opts.Name.replace(/ +/g, '-').toLowerCase()}/#top" class="back-to-top" onclick="{goToSection}">
+            <span class="icon is-large">
+              <i class="fa fa-arrow-circle-o-up"></i>
+            </span>
+          </a>
+        </virtual>
       </div>
     </div>
   </section>`,
@@ -332,7 +337,7 @@ riot.tag('style-guide-sections',
         let rect = el.getBoundingClientRect();
 
         if (heading != 'top') {
-          scrollToY(rect.top + pageYOffset - 20, 2000, 'easeInOutSine');
+          scrollToY(rect.top + pageYOffset - interactions.offsetValue(), 2000, 'easeInOutSine');
         } else {
           window.scrollTo(0, rect.top + pageYOffset);
         }

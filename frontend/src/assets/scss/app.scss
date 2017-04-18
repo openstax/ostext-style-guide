@@ -23,6 +23,24 @@ $family-primary: $family-sans-serif;
 @import "highlight";
 
 
+.headroom {
+  will-change: transform;
+  transition: transform 200ms linear;
+  position: fixed;
+  z-index: 10;
+  right: 0;
+  left: 0;
+  top: 0;
+}
+
+.headroom--pinned {
+  transform: translateY(0%);
+}
+
+.headroom--unpinned {
+  transform: translateY(-100%);
+}
+
 /* Layout */
 html {
   font-size: 16px;
@@ -58,9 +76,17 @@ body {
   }
 
   .main.section {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
     @include tablet {
-      flex: 1;
       margin: 0;
+    }
+
+    .container {
+      flex: 1;
+      width: 100%;
     }
   }
 
@@ -84,13 +110,6 @@ body {
 .header .nav {
   z-index: 9999;
   min-height: 5rem;
-
-@include mobile {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-}
 
   @include tablet {
     background-color: $primary;
@@ -162,7 +181,6 @@ body {
   @include desktop {
     background-color: rgba(255,255,255,0.2);
     align-self: center;
-    width: 100%;
     box-shadow: none;
     padding: 0 1.5rem;
     margin-bottom: 0;
@@ -189,7 +207,12 @@ body {
     }
   }
 
-  .control.has-icon .input:focus + .icon,
+  .control.has-icon .input:focus + .icon {
+    @include desktop {
+      color: #008596;
+    }
+  }
+
   &.is-focus .control.has-icon .input + .icon {
     @include desktop {
       color: #7a7a7a;
@@ -227,7 +250,7 @@ body {
   @at-root .header .nav-center {
     display: none;
     flex: 1 0;
-    margin: 0 1.5rem;
+    margin: 0 2rem 0 1.5rem;
     min-height: inherit;
 
     @include desktop {
@@ -329,9 +352,7 @@ body {
 }
 
 .body {
-  @include mobile {
-    margin-top: 5rem;
-  }
+  margin-top: 5rem;
 
   .side-nav {
     background-color: #f7f7f7;
@@ -463,10 +484,33 @@ body {
       background-color: transparent;
       margin-bottom: 3rem;
       padding: 0;
+      position: relative;
     }
+
     .column.is-three-quarters-desktop {
       @media screen and (max-width: 1200px) {
         width: 100%;
+      }
+    }
+
+    .back-to-top {
+      color: #363636;
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      opacity: 0;
+      transform: translate3d(100%, 0, 0);
+      transition: opacity 0.2s, transform 0.2s;
+
+      &:hover {
+        color: $os-blue;
+      }
+
+      @at-root .menu.subsection.is-fixed {
+        & + .back-to-top {
+          opacity: 1;
+          transform: translate3d(0, 0, 0);
+        }
       }
     }
 
@@ -474,6 +518,7 @@ body {
       background: #fff;
       padding: 3rem 1.5rem;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      word-wrap: break-word;
 
       h2 {
         font-family: $family-helvetica;
@@ -581,40 +626,22 @@ body {
     }
 
     .subsection {
-      padding: 2rem 0;
+      padding: 2rem 0 0;
+      transition: transform 0.2s linear;
 
       &.is-fixed {
         position: fixed;
-        top: 2rem;
-        padding: 0;
+        top: 0;
+
+        @at-root .is-pinned#{&}:not(.is-bottom) {
+          transform: translate3d(0,5rem,0);
+        }
       }
 
       &.is-bottom {
         position: absolute;
         top: auto;
-        bottom: 3rem;
-      }
-
-      &.is-fixed,
-      &.is-bottom {
-        .back-to-top {
-          opacity: 1;
-          transform: translate3d(0, 0, 0);
-        }
-      }
-
-      .back-to-top {
-        color: #363636;
-        position: fixed;
-        bottom: 10px;
-        right: 10px;
-        opacity: 0;
-        transform: translate3d(100%, 0, 0);
-        transition: opacity 0.2s, transform 0.2s;
-
-        &:hover {
-          color: $os-blue;
-        }
+        bottom: 4rem;
       }
 
       h3 {
@@ -653,7 +680,7 @@ body {
   color: #fff;
   background-color: transparent;
   color: #9B9B9B;
-  padding: 0 0 3rem;
+  padding: 0;
   font-size: 14px;
 
   .columns {
