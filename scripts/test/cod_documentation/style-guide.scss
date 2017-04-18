@@ -301,20 +301,268 @@
   Typography
   =========
 
-  [A double-stranded scale (Perfect Fifth and Perfect Fourth)](http://www.modularscale.com/?1&em&1.5,1.333&web&text) is used to determine text sizes. Vertical space, padding or margin, will be determined using a method that will ensure that all text is composed in such a way that vertical space is divided into portions equal in height to the product of font size and line height.
+  [A double-stranded scale (Perfect Fifth and Perfect Fourth)](http://www.modularscale.com/?1&em&1.5,1.333&web&text) is used to determine text sizes.
 
-  All text will land on a vertical position that is an integer multiple of (base font size * base line height). Base font size, as well as line height, can be changed during production for a number of reasons, the most common being textbook length. Longer titles may require text to have less line height, or a smaller font size. Limiting text sizes to specific ratios, and determining vertical spaces relative to that text size, ensures that we can change text properties in a predictable way. All vertical spaces will adjust at the same ratios as text sizes change.
+  Base font size can be changed during production for a number of reasons, the most common being textbook length. Longer titles may require text to have less leading, or a smaller font size. Limiting text sizes to specific ratios, and determining vertical spaces relative to that text size, ensures that we can change text properties in a predictable way. All vertical spaces will adjust at the same ratios as text sizes change.
 
   ![OpenStax Typographic Scale](assets/img/typography-chart.png)
 
   Fonts
   ---------
 
-  Our books generally use a combination of Noto Sans, Noto Serif, and Dosis.
+  <!--
+  <div class="typography-font-family typography-font-family-1">
+    <p class="title">Font Name</p>
+    <div class="columns">
+      <div class="column is-one-third">
+       <p class="title">FONT STYLES</p>
+       <p class="typography-regular">Regular</p>
+       <p class="typography-regular-italic">Regular Italic</p>
+       <p class="typography-bold">Bold</p>
+       <p class="typography-bold-italic">Bold Italic</p>
+      </div>
+      <div class="column">
+       <p class="title">FONT SIZES</p>
+       <p class="typography-size-1">Math is everywhere</p>
+       <p class="typography-size-2">Math is everywhere</p>
+       <p class="typography-size-3">Math is everywhere</p>
+       <p class="typography-size-4">Math is everywhere</p>
+       <p class="typography-size-5">Math is everywhere</p>
+       <p class="typography-size-6">Math is everywhere</p>
+       <p class="typography-source">Source</p>
+       <p class="typography-source-link"></p>
+      </div>
+    </div>
+    <p class="title">NUMBERS</p>
+    <p class="typography-numbers">1234567890</p>
+    <p class="title">PAIRINGS</p>
+    <div class="columns">
+      <div class="column is-one-quarter">
+        <p class="typography-pairing">FONT ONE</p>
+        <p class="typography-pairing">FONT TWO</p>
+      </div>
+      <div class="column">
+       <p class="title typography-example-title">Learning Objectives</p>
+       <p class="typography-example">Math is everywhere, even in places we might not immediately recognize. For
+       example, mathematical relationships describe the transmission of images, light,
+       and sound. The sinusoidal graph in Figure 7.1 models music playing on a phone,
+       radio, or computer. Such graphs are described using trigonometric equations and
+       functions.</p>
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column is-one-quarter">
+        <p class="typography-pairing">FONT ONE</p>
+        <p class="typography-pairing">FONT TWO</p>
+      </div>
+      <div class="column">
+       <p class="title typography-example-title">Learning Objectives</p>
+       <p class="typography-example">Math is everywhere, even in places we might not immediately recognize. For example, mathematical relationships describe the transmission of images, light, and sound. The sinusoidal graph in Figure 7.1 models music playing on a phone, radio, or computer. Such graphs are described using trigonometric equations and
+       functions.</p>
+      </div>
+    </div>
+  </div>
+  -->
 
-  - Noto Sans, Noto Serif
-  - Dosis, Noto Sans
-  - Dosis, Noto Serif
+  <div class="typography-font-family typography-font-family-1">
+    <p class="title">Noto Sans</p>
+    <div class="columns">
+      <div class="column is-one-third">
+       <p class="title">FONT STYLES</p>
+       <p class="typography-regular">Regular</p>
+       <p class="typography-regular-italic">Regular Italic</p>
+       <p class="typography-bold">Bold</p>
+       <p class="typography-bold-italic">Bold Italic</p>
+      </div>
+      <div class="column">
+       <p class="title">FONT SIZES</p>
+       <p class="typography-size-1">Math is everywhere</p>
+       <p class="typography-size-2">Math is everywhere</p>
+       <p class="typography-size-3">Math is everywhere</p>
+       <p class="typography-size-4">Math is everywhere</p>
+       <p class="typography-size-5">Math is everywhere</p>
+       <p class="typography-size-6">Math is everywhere</p>
+       <p class="typography-source">Source</p>
+       <p class="typography-source-link"><a href="https://fonts.google.com/specimen/Noto+Sans?selection.family=Open+Sans">https://fonts.google.com/specimen/Noto+Sans?selection.family=Open+Sans</a></p>
+      </div>
+    </div>
+    <p class="title">NUMBERS</p>
+    <p class="typography-numbers">1234567890</p>
+    <p class="title">PAIRINGS</p>
+    <div class="columns typography-example-first">
+      <div class="column is-one-quarter">
+        <p class="typography-pairing">Dosis</p>
+        <p class="typography-pairing">Noto Sans</p>
+      </div>
+      <div class="column">
+       <p class="title typography-example-title">Learning Objectives</p>
+       <p class="typography-example">Math is everywhere, even in places we might not immediately recognize. For
+       example, mathematical relationships describe the transmission of images, light,
+       and sound. The sinusoidal graph in Figure 7.1 models music playing on a phone,
+       radio, or computer. Such graphs are described using trigonometric equations and
+       functions.</p>
+      </div>
+    </div>
+    <div class="columns typography-example-second">
+      <div class="column is-one-quarter">
+        <p class="typography-pairing">Noto Sans</p>
+        <p class="typography-pairing">Noto Serif</p>
+      </div>
+      <div class="column">
+       <p class="title typography-example-title">Learning Objectives</p>
+       <p class="typography-example">Math is everywhere, even in places we might not immediately recognize. For
+       example, mathematical relationships describe the transmission of images, light,
+       and sound. The sinusoidal graph in Figure 7.1 models music playing on a phone,
+       radio, or computer. Such graphs are described using trigonometric equations and
+       functions.</p>
+      </div>
+    </div>
+  </div>
+  <div class="typography-font-family typography-font-family-2">
+    <p class="title">Noto Serif</p>
+    <div class="columns">
+      <div class="column is-one-third">
+       <p class="title">FONT STYLES</p>
+       <p class="typography-regular">Regular</p>
+       <p class="typography-regular-italic">Regular Italic</p>
+       <p class="typography-bold">Bold</p>
+       <p class="typography-bold-italic">Bold Italic</p>
+      </div>
+      <div class="column">
+       <p class="title">FONT SIZES</p>
+       <p class="typography-size-1">Math is everywhere</p>
+       <p class="typography-size-2">Math is everywhere</p>
+       <p class="typography-size-3">Math is everywhere</p>
+       <p class="typography-size-4">Math is everywhere</p>
+       <p class="typography-size-5">Math is everywhere</p>
+       <p class="typography-size-6">Math is everywhere</p>
+       <p class="typography-source">Source</p>
+       <p class="typography-source-link"><a href="https://fonts.google.com/specimen/Noto+Serif?selection.family=Open+Sans">https://fonts.google.com/specimen/Noto+Serif?selection.family=Open+Sans</a></p>
+      </div>
+    </div>
+    <p class="title">NUMBERS</p>
+    <p class="typography-numbers">1234567890</p>
+    <p class="title">PAIRINGS</p>
+    <div class="columns typography-example-first">
+      <div class="column is-one-quarter">
+        <p class="typography-pairing">Noto Sans</p>
+        <p class="typography-pairing">Noto Serif</p>
+      </div>
+      <div class="column">
+       <p class="title typography-example-title">Learning Objectives</p>
+       <p class="typography-example">Math is everywhere, even in places we might not immediately recognize. For
+       example, mathematical relationships describe the transmission of images, light,
+       and sound. The sinusoidal graph in Figure 7.1 models music playing on a phone,
+       radio, or computer. Such graphs are described using trigonometric equations and
+       functions.</p>
+      </div>
+    </div>
+    <div class="columns typography-example-second">
+      <div class="column is-one-quarter">
+        <p class="typography-pairing">Dosis</p>
+        <p class="typography-pairing">Noto Serif</p>
+      </div>
+      <div class="column">
+       <p class="title typography-example-title">Learning Objectives</p>
+       <p class="typography-example">Math is everywhere, even in places we might not immediately recognize. For
+       example, mathematical relationships describe the transmission of images, light,
+       and sound. The sinusoidal graph in Figure 7.1 models music playing on a phone,
+       radio, or computer. Such graphs are described using trigonometric equations and
+       functions.</p>
+      </div>
+    </div>
+  </div>
+  <div class="typography-font-family typography-font-family-3">
+    <p class="title">Dosis</p>
+    <div class="columns">
+      <div class="column is-one-third">
+       <p class="title">FONT STYLES</p>
+       <p class="typography-regular">Regular</p>
+       <p class="typography-regular-italic">Regular Italic</p>
+       <p class="typography-bold">Bold</p>
+       <p class="typography-bold-italic">Bold Italic</p>
+      </div>
+      <div class="column">
+       <p class="title">FONT SIZES</p>
+       <p class="typography-size-1">Math is everywhere</p>
+       <p class="typography-size-2">Math is everywhere</p>
+       <p class="typography-size-3">Math is everywhere</p>
+       <p class="typography-size-4">Math is everywhere</p>
+       <p class="typography-size-5">Math is everywhere</p>
+       <p class="typography-size-6">Math is everywhere</p>
+       <p class="typography-source">Source</p>
+       <p class="typography-source-link"><a href="https://fonts.google.com/specimen/Dosis?selection.family=Open+Sans">https://fonts.google.com/specimen/Dosis?selection.family=Open+Sans</a></p>
+      </div>
+    </div>
+    <p class="title">NUMBERS</p>
+    <p class="typography-numbers">1234567890</p>
+    <p class="title">PAIRINGS</p>
+    <div class="columns typography-example-first">
+      <div class="column is-one-quarter">
+        <p class="typography-pairing">Dosis</p>
+        <p class="typography-pairing">Noto Sans</p>
+      </div>
+      <div class="column">
+       <p class="title typography-example-title">Learning Objectives</p>
+       <p class="typography-example">Math is everywhere, even in places we might not immediately recognize. For
+       example, mathematical relationships describe the transmission of images, light,
+       and sound. The sinusoidal graph in Figure 7.1 models music playing on a phone,
+       radio, or computer. Such graphs are described using trigonometric equations and
+       functions.</p>
+      </div>
+    </div>
+    <div class="columns typography-example-second">
+      <div class="column is-one-quarter">
+        <p class="typography-pairing">Dosis</p>
+        <p class="typography-pairing">Noto Serif</p>
+      </div>
+      <div class="column">
+       <p class="title typography-example-title">Learning Objectives</p>
+       <p class="typography-example">Math is everywhere, even in places we might not immediately recognize. For
+       example, mathematical relationships describe the transmission of images, light,
+       and sound. The sinusoidal graph in Figure 7.1 models music playing on a phone,
+       radio, or computer. Such graphs are described using trigonometric equations and
+       functions.</p>
+      </div>
+    </div>
+  </div>
+
+  Vertical Composition
+  ---------
+
+  Typography is vertically composed into a space that is divided into measures of the unit of "baseline height".
+
+  Baseline height is the font size of the primary text combined with any leading. Leading in this sense is identical to the line-height property of the CSS specification when provided a Number data type as a value, meaning that this number should be multiplied by the font size -- (base font size * leading). Using the scale example above, the following example shows the composition of text using a base font size of 9px and leading of 1.5, producing a baseline height of 13.5px.
+
+  <div class="typography-grid-scale-1">
+    <img src="https://cnx.org/resources/d985b82f4ac322a5c1b79be395b065d01ba84a72/Figure_05_02_06.jpg" />
+    <p>In osmosis, water always moves from an area of higher water concentration to one of lower concentration. In the diagram shown, the solute cannot pass through the selectively permeable membrane, but the water can. In osmosis, water always moves from an area of higher water concentration to one of lower concentration. In the diagram shown, the solute cannot pass through the selectively permeable membrane, but the water can. In osmosis, water always moves from an area of higher water concentration to one of lower concentration. In the diagram shown, the solute cannot pass through the selectively permeable membrane, but the water can.</p>
+  </div>
+
+  When elements such as titles are added, any required padding/margin will be added in amounts that maintain text starting in new paragraphs on an integer multiple of the base line height. When a new paragraph begins, it should always vertically position on this base line height. In the following example, a title is added.
+
+  <div class="typography-grid-scale-1 typography-example-with-title">
+    <h3>Osmosis in H<sub>2</sub>0</h3>
+    <img src="https://cnx.org/resources/d985b82f4ac322a5c1b79be395b065d01ba84a72/Figure_05_02_06.jpg" />
+    <p>In osmosis, water always moves from an area of higher water concentration to one of lower concentration. In the diagram shown, the solute cannot pass through the selectively permeable membrane, but the water can. In osmosis, water always moves from an area of higher water concentration to one of lower concentration. In the diagram shown, the solute cannot pass through the selectively permeable membrane, but the water can. In osmosis, water always moves from an area of higher water concentration to one of lower concentration. In the diagram shown, the solute cannot pass through the selectively permeable membrane, but the water can.</p>
+  </div>
+
+  When fonts need to be used together composition will still be focused on the base line height of the primary text. In this case each line will not sit on a base line, instead the accompanying text will sit on a base line at regular intervals.
+
+  <div class="typography-grid-scale-1">
+    <span class="typography-scale-2 typography-accompanying-text">In the diagram shown, the solute cannot pass through the selectively permeable membrane, but the water can.</span>
+    <p><br />In osmosis, water always moves from an area of higher water concentration to one of lower concentration. In the diagram shown, the solute cannot pass through the selectively permeable membrane, but the water can. In osmosis, water always moves from an area of higher water concentration to one of lower concentration. In the diagram shown, the solute cannot pass through the selectively permeable membrane, but the water can. In osmosis, water always moves from an area of higher water concentration to one of lower concentration. In the diagram shown, the solute cannot pass through the selectively permeable membrane, but the water can. In osmosis, water always moves from an area of higher water concentration to one of lower concentration. In the diagram shown, the solute cannot pass through the selectively permeable membrane, but the water can. In osmosis, water always moves from an area of higher water concentration to one of lower concentration. In osmosis, water always moves from an area of higher water concentration to one of lower concentration. In osmosis, water always moves from an area of higher water concentration to one of lower concentration. In the diagram shown, the solute cannot pass through the selectively permeable membrane, but the water can. In osmosis, water always moves from an area of higher water concentration to one of lower concentration. In the diagram shown, the solute cannot pass through the selectively permeable membrane, but the water can.</p>
+  </div>
+
+  Titles, labels, and icon should follow the same general rules for padding/spacing.
+
+  <div class="typography-grid-scale-1">
+    <div class="typography-scale-2 typography-accompanying-text">
+      <h3>Osmosis in H<sub>2</sub>0</h3>
+      In the diagram shown, the solute cannot pass through the selectively permeable membrane, but the water can.
+    </div>
+    <p><br />In osmosis, water always moves from an area of higher water concentration to one of lower concentration. In the diagram shown, the solute cannot pass through the selectively permeable membrane, but the water can. In osmosis, water always moves from an area of higher water concentration to one of lower concentration. In the diagram shown, the solute cannot pass through the selectively permeable membrane, but the water can. In osmosis, water always moves from an area of higher water concentration to one of lower concentration. In the diagram shown, the solute cannot pass through the selectively permeable membrane, but the water can. In osmosis, water always moves from an area of higher water concentration to one of lower concentration. In the diagram shown, the solute cannot pass through the selectively permeable membrane, but the water can. In osmosis, water always moves from an area of higher water concentration to one of lower concentration. In the diagram shown, the solute cannot pass through the selectively permeable membrane, but the water can. In osmosis, water always moves from an area of higher water concentration to one of lower concentration. In the diagram shown, the solute cannot pass through the selectively permeable membrane, but the water can. In osmosis, water always moves from an area of higher water concentration to one of lower concentration. In the diagram shown, the solute cannot pass through the selectively permeable membrane, but the water can. In osmosis, water always moves from an area of higher water concentration to one of lower concentration. In the diagram shown, the solute cannot pass through the selectively permeable membrane, but the water can. In osmosis, water always moves from an area of higher water concentration to one of lower concentration. In the diagram shown, the solute cannot pass through the selectively permeable membrane, but the water can. In osmosis, water always moves from an area of higher water concentration to one of lower concentration.</p>
+  </div>
 
   Mathematics
   ---------
