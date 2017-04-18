@@ -23,7 +23,7 @@ $family-primary: $family-sans-serif;
 @import "highlight";
 
 
-.headroom {
+.sticky {
   will-change: transform;
   transition: transform 200ms linear;
   position: fixed;
@@ -33,11 +33,11 @@ $family-primary: $family-sans-serif;
   top: 0;
 }
 
-.headroom--pinned {
+.sticky--pinned {
   transform: translateY(0%);
 }
 
-.headroom--unpinned {
+.sticky--unpinned {
   transform: translateY(-100%);
 }
 

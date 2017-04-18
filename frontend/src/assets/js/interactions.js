@@ -140,6 +140,24 @@ let headroom  = new Headroom(myElement, {
     down : 0
   },
 
+  // css classes to apply
+  classes : {
+    // when element is initialised
+    initial : "sticky",
+    // when scrolling up
+    pinned : "sticky--pinned",
+    // when scrolling down
+    unpinned : "sticky--unpinned",
+    // when above offset
+    top : "sticky--top",
+    // when below offset
+    notTop : "sticky--not-top",
+    // when at bottom of scoll area
+    bottom : "sticky--bottom",
+    // when not at bottom of scroll area
+    notBottom : "sticky--not-bottom"
+  },
+
   // callback when pinned, `this` is headroom object
   onPin : function() {
     window.isPinned = true;
