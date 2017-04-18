@@ -1,18 +1,5 @@
 'use strict';
 
-import Headroom from './headroom.js';
-
-export const offsetValue = () => {
-  let offsetValue = 80;
-
-  if (window.isPinned) {
-    offsetValue = 80
-  } else {
-    offsetValue = 80;
-  }
-  return offsetValue;
-}
-
 export const hasClass = (el, className) => {
   if (el.classList)
     return el.classList.contains(className)
@@ -46,14 +33,18 @@ export const getCoords = (elem) => {
 }
 
 export const toggleFixedClass = () => {
-    const floatingMenu = document.querySelector('.menu.subsection');
+    const floatingMenu = document.querySelector('.subsection');
+    const body = document.body;
+    const html = document.documentElement;
+    const height = Math.max(body.scrollHeight, body.offsetHeight,
+                   html.clientHeight, html.scrollHeight, html.offsetHeight);
 
     if (floatingMenu) {
-        const floatingMenuHeight = Math.max(floatingMenu.scrollHeight, floatingMenu.offsetHeight);
-        const content = document.querySelector('.section .content');
-        const contentHeight = Math.max(content.scrollHeight, content.offsetHeight)
-        const contentBottom = contentHeight - getCoords(content).top;
-        const floatingMenuBottom = window.pageYOffset + (floatingMenuHeight-208);
+        const footer = document.querySelector('.footer');
+        const footerHeight = Math.max(footer.scrollHeight, footer.offsetHeight);
+        const floatingMenuHeight = Math.max(floatingMenu.scrollHeight, floatingMenu.offsetHeight)+210;
+        const menuOffset = height - footerHeight - floatingMenuHeight;
+        const content = document.querySelector('.section>.columns');
 
         if (window.pageYOffset > getCoords(content).top) {
           addClass(floatingMenu, 'is-fixed');
@@ -61,8 +52,8 @@ export const toggleFixedClass = () => {
           removeClass(floatingMenu, 'is-fixed');
         }
 
-        if (floatingMenuBottom > contentBottom) {
-          addClass(floatingMenu, 'is-bottom');
+        if ((window.pageYOffset > menuOffset)) {
+            addClass(floatingMenu, 'is-bottom');
         } else {
           removeClass(floatingMenu, 'is-bottom');
         }
@@ -82,13 +73,13 @@ export const isActive = () => {
       let link = menuItems[i];
 
       if (nextEl != undefined) {
-        if ((window.pageYOffset > (getCoords(el).top - (offsetValue() + 1)))  && (window.pageYOffset < getCoords(nextEl).top - (offsetValue() + 1))) {
+        if ((window.pageYOffset > (getCoords(el).top - 21))  && (window.pageYOffset < getCoords(nextEl).top - 21)) {
           addClass(link, 'is-active');
         } else {
           removeClass(link, 'is-active');
         }
       } else {
-        if ((window.pageYOffset > (getCoords(el).top - (offsetValue() + 1)))) {
+        if ((window.pageYOffset > (getCoords(el).top - 21))) {
           addClass(link, 'is-active');
         } else {
           removeClass(link, 'is-active');
@@ -129,31 +120,6 @@ export const removeOpenClasses = (event) => {
   removeClass(document.querySelector('.body'), 'is-active');
   document.querySelector('.main').removeEventListener('click', removeOpenClasses);
 }
-
-let myElement = document.querySelector("header");
-
-// construct an instance of Headroom, passing the element
-let headroom  = new Headroom(myElement, {
-  offset: 80,
-  tolerance : {
-    up : 5,
-    down : 0
-  },
-
-  // callback when pinned, `this` is headroom object
-  onPin : function() {
-    window.isPinned = true;
-    addClass(document.querySelector('.body'), 'is-pinned');
-  },
-
-  // callback when unpinned, `this` is headroom object
-  onUnpin : function() {
-    window.isPinned = false;
-    removeClass(document.querySelector('.body'), 'is-pinned');
-  },
-});
-// initialise
-headroom.init();
 
 window.onload = function () {
   toggleFixedClass();
