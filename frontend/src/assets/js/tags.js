@@ -281,9 +281,13 @@ riot.tag('style-guide-sections',
         </div>
         <virtual if={hasSubSection}>
           <a href="/#/{opts.Category.replace(/ +/g, '-').toLowerCase()}/{opts.Name.replace(/ +/g, '-').toLowerCase()}/#top" class="back-to-top" onclick="{goToSection}">
-            <span class="icon is-large">
-              <i class="fa fa-arrow-circle-o-up"></i>
+            <span class="icon is-small">
+              <i class="fa fa-chevron-up"></i>
             </span>
+            <span class="icon is-large">
+              <img src="assets/img/svg/back-to-top.svg" />
+            </span>
+            <span class="tooltiptext">Back to top</span>
           </a>
         </virtual>
       </div>
