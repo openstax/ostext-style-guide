@@ -28,8 +28,7 @@ PATHS:
 
   # Paths to Sass libraries, which can then be loaded with @import
   sass:
-    - "./node_modules/bulma"
-    - "./node_modules/font-awesome"
+    - "./node_modules/"
   # Paths to JavaScript libraries, which are combined into one file
   javascript:
     # Paths to your own project code are here

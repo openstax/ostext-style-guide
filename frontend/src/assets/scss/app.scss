@@ -14,15 +14,33 @@ $family-helvetica: "Helvetica Neue", Helvetica, Arial, sans-serif;
 $primary: $os-blue;
 $family-primary: $family-sans-serif;
 
-@import "scss/font-awesome";
-@import "sass/utilities/_all";
-@import "sass/base/_all";
-@import "sass/elements/_all";
-@import "sass/components/_all";
-@import "sass/grid/_all";
-@import "sass/layout/_all";
+@import "font-awesome/scss/font-awesome";
+@import "bulma/sass/utilities/_all";
+@import "bulma/sass/base/_all";
+@import "bulma/sass/elements/_all";
+@import "bulma/sass/components/_all";
+@import "bulma/sass/grid/_all";
+@import "bulma/sass/layout/_all";
 @import "highlight";
 
+// Animate.scss Always required
+@import
+  "animatewithsass/_properties";
+
+// Import the animations
+@import
+  // "_attention/attention.scss", // This will not import
+  //"animatewithsass/_bouncing-entrances/bouncing-entrances.scss",
+  //"animatewithsass/_bouncing-exits/bouncing-exits.scss",
+  "animatewithsass/_fading-entrances/fading-entrances.scss",
+  //"animatewithsass/_fading-exits/fading-exits.scss",
+  //"animatewithsass/_sliding-entrances/sliding-entrances.scss",
+  "animatewithsass/_sliding-exits/sliding-exits.scss";
+  //"animatewithsass/_flippers/flippers.scss",
+  //"animatewithsass/_lightspeed/lightspeed.scss",
+  //"animatewithsass/_rotating-entrances/rotating-entrances.scss",
+  //"animatewithsass/_rotating-exits/rotating-exits.scss",
+  //"animatewithsass/_specials/specials.scss";
 
 .sticky {
   will-change: transform;
@@ -199,6 +217,8 @@ body {
 
   .control.is-grouped {
     margin-bottom: 0;
+    position: relative;
+    z-index: 2;
   }
 
   .control.has-icon .input + .icon {
@@ -280,18 +300,51 @@ body {
   top: 100%;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   opacity: 0;
-  height: 0;
   overflow: hidden;
+  transform: translate3d(0,-100%,0);
   text-align: left;
 
   &.is-visible {
     opacity: 1;
-    height: auto;
+    transform: translate3d(0,0,0);
+
+    @include fadeIn(
+      $duration: 0.2s,
+      $delay: 0s,
+      $function: linear,
+      $fill: both
+    );
+
+    @at-root .sticky--unpinned #{&} {
+      @include slideOutUp(
+        $duration: 1.6s,
+        $delay: 1s,
+        $function: linear,
+        $fill: both
+      );
+    }
   }
 
   @include desktop {
     border-top: none;
     top: 48px;
+  }
+
+  li {
+    @include fadeIn(
+      $duration: 0.2s,
+      $delay: 0s,
+      $function: linear,
+      $fill: both
+   );
+
+   &.no-results {
+     color: #5F6163;
+     font-weight: 600;
+     border-bottom: 1px solid #ebebeb;
+     border-top: 1px solid #ebebeb;
+     padding: 1rem 1rem 1rem 5rem;
+   }
   }
 
   li.getting-started {
@@ -320,6 +373,7 @@ body {
   a {
     color: #5F6163;
     font-weight: 600;
+    border-radius: 0;
     border-bottom: 1px solid #ebebeb;
     padding: 1rem 1rem 1rem 6rem;
 

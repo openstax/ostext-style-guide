@@ -93,6 +93,9 @@ riot.tag('style-guide-search',
   <div class="search-results menu">
     <ul class="menu-list sg-search-result">
      <li each={results} onclick="{reset}" class="{category.replace(/ +/g, '-').toLowerCase()}"><a href="/#/{category.replace(/ +/g, '-').toLowerCase()}/{name.replace(/ +/g, '-').toLowerCase()}"><span>in {category}</span>{name}</a></li>
+     <virtual if="{results.length == 0 && this.refs.input.value != ''}">
+      <li class="no-results">Nothing found for <strong><i>{this.refs.input.value}</i></strong></li>
+     </virtual>
      <virtual if="{results.length == 4}">
       <li><a class="view-more" href="/#/search?keyword={refs.input.value}">See all results for {this.refs.input.value}
       <span class="icon">
