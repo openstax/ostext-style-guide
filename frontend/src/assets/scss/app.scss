@@ -278,10 +278,12 @@ body {
     @at-root .content #{&} {
       ul {
         list-style: none;
+        margin: 0;
 
         li {
           padding: 1rem 1rem 1rem 5rem;
           border-bottom: 1px solid #ebebeb;
+          background-size: 22px;
         }
 
         li:first-child a {
@@ -294,6 +296,8 @@ body {
 
         p {
           padding-left: 0.75em;
+          font-size: 14px;
+          line-height: 1.75;
         }
       }
     }
@@ -325,6 +329,9 @@ body {
   }
 
   li {
+    background-position: 1.5rem 50%;
+    background-repeat: no-repeat;
+
     @include fadeIn(
       $duration: 0.2s,
       $delay: 0s,
@@ -342,20 +349,25 @@ body {
   }
 
   li.getting-started {
-    background: url('/assets/img/svg/icon-getting-started.svg') 1.5rem 50% no-repeat;
+    background-image: url('/assets/img/svg/icon-getting-started.svg');
   }
+
   li.general-composition {
-    background: url('/assets/img/svg/icon-general-composition.svg') 1.5rem 50% no-repeat;
+    background-image: url('/assets/img/svg/icon-general-composition.svg');
   }
+
   li.content-elements {
-    background: url('/assets/img/svg/icon-content-elements.svg') 1.5rem 50% no-repeat;
+    background-image: url('/assets/img/svg/icon-content-elements.svg');
   }
+
   li.book-skeleton {
-    background: url('/assets/img/svg/icon-book-skeleton.svg') 1.5rem 50% no-repeat;
+    background-image: url('/assets/img/svg/icon-book-skeleton.svg');
   }
+
   li.themes {
-    background: url('/assets/img/svg/icon-themes.svg') 1.5rem 50% no-repeat;
+    background-image: url('/assets/img/svg/icon-themes.svg');
   }
+
   li:first-child a {
     border-top: 1px solid #ebebeb;
   }
