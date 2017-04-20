@@ -115,7 +115,7 @@ riot.tag('style-guide-search',
       this.result_refs.slice(0, 4).map((result_ref) => {
         opts.sections.map((section) => {
 
-          if (section['Number'] == result_ref.ref) {
+          if ((section['Number'] == result_ref.ref) && (!result_ref.ref.endsWith('.0.0'))) {
             this.results.push({number: section['Number'],
                                name: section['Name'],
                                category: section['Category'],
@@ -231,6 +231,7 @@ riot.tag('style-guide',
     this.resetSearchIndex = function() {
       this.index = lunr(function() {
         this.field('name', {boost:10});
+        this.field('description', {boost:8});
         this.field('category', {boost:6});
         this.ref('number');
       });
@@ -247,8 +248,6 @@ riot.tag('style-guide',
         this.index.add({
           description: section['description'],
           name: section['Name'],
-          id: section['Id'],
-          markup: section['Markup'],
           number: section['Number'],
           category: section['Category']
         });
