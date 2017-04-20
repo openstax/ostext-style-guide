@@ -190,8 +190,6 @@ riot.tag('style-guide',
   </nav>
   <main class="main section" id="top">
     <div class="container">
-      <!-- Search elements -->
-      <style-guide-search class="search"></style-guide-search>
       <div id="section" sections={sections}></div>
     </div>
     <footer class="footer">
