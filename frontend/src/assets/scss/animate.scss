@@ -1,0 +1,18 @@
+// Animate.scss Always required
+@import
+  "animatewithsass/_properties";
+
+// Import the animations
+@import
+  // "animatewithsass/_attention/attention.scss", // This will not import
+  // "animatewithsass/_bouncing-entrances/bouncing-entrances",
+  // "animatewithsass/_bouncing-exits/bouncing-exits",
+  "animatewithsass/_fading-entrances/fading-entrances",
+  // "animatewithsass/_fading-exits/fading-exits",
+  // "animatewithsass/_sliding-entrances/sliding-entrances",
+  "animatewithsass/_sliding-exits/sliding-exits";
+  // "animatewithsass/_flippers/flippers",
+  // "animatewithsass/_lightspeed/lightspeed",
+  // "animatewithsass/_rotating-entrances/rotating-entrances",
+  // "animatewithsass/_rotating-exits/rotating-exits",
+  // "animatewithsass/_specials/specials";

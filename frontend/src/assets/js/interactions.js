@@ -62,11 +62,12 @@ export const toggleFixedClass = () => {
 
 export const isActive = () => {
   let content = document.getElementsByTagName('raw')[0];
-  let headings = content.getElementsByTagName('h2');
-  let subSection = document.querySelector('.menu.subsection');
-  let menuItems = subSection.getElementsByTagName('a');
 
-  if (headings != undefined) {
+  if (content) {
+    let headings = content.getElementsByTagName('h2');
+    let subSection = document.querySelector('.menu.subsection');
+    let menuItems = subSection.getElementsByTagName('a');
+    
     for (var i=0; i < headings.length; i++ ) {
       let el = headings[i];
       let nextEl = headings[i+1];

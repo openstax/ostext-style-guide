@@ -77,7 +77,6 @@ r('*', number)
 r('*/*', detail)
 r('*/*/#*', heading)
 r('/search..', searchPage);
-// r(notfound)
 
 function searchPage() {
   let q = route.query()
@@ -85,13 +84,13 @@ function searchPage() {
   let buildDescription = '';
 
   if (results.length > 0) {
-    buildDescription = `<ol>`;
+    buildDescription = `<div class="search-results menu"><ul class="menu-list">`;
 
     results.forEach(function(result) {
-      buildDescription += `<li><a href="/#/${result.category.replace(/ +/g, '-').toLowerCase()}/${result.name.replace(/ +/g, '-').toLowerCase()}">${result.name} in ${result.category}</li>`;
+      buildDescription += `<li class="${result.category.replace(/ +/g, '-').toLowerCase()}"><a href="/#/${result.category.replace(/ +/g, '-').toLowerCase()}/${result.name.replace(/ +/g, '-').toLowerCase()}">${result.name} in ${result.category}</a><p>${result.description}</p></li>`;
     })
 
-    buildDescription += `</ol>`;
+    buildDescription += `</div></ul>`;
   } else {
     buildDescription = `<p>Nothing found here.</p>`;
   }
@@ -113,7 +112,6 @@ function isEmpty(obj) {
 
 function home() {
   route('/getting-started/background');
-  //goToSection('background');
   window.scrollTo(0,0);
 }
 
@@ -122,18 +120,27 @@ function number(id) {
     let categoryID = id.split('.')[0];
     id = categoryID + '.1.0';
   }
-  goToSection(category, id);
+
+  let selected = app.model.data.filter(function(d) { return d.Number == id })[0] || {};
+
+  if ( isNaN(parseInt(id)) ) {
+    goToSection(id, id);
+  } else {
+    goToSection(selected.Category.replace(/ +/g, '-').toLowerCase(), selected.Name.replace(/ +/g, '-').toLowerCase());
+    history.pushState(null, '', `#/${selected.Category.replace(/ +/g, '-').toLowerCase()}/${selected.Name.replace(/ +/g, '-').toLowerCase()}`);
+  }
   window.scrollTo(0,0);
 }
 
 function goToSection(category, id) {
   if (app.model.data != undefined) {
-    let selected = app.model.data.filter(function(d) { return (d.Name.replace(/ +/g, '-').toLowerCase() == id) && (d.Category.replace(/ +/g, '-').toLowerCase() == category) })[0] || {}
-    let newTitle = `${id.replace(/-/g, ' ').replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()})} | ${category.replace(/-/g, ' ').replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()})} | OpenGuide`;
-
-    if ( !isNaN(parseInt(id)) ) {
-      selected = app.model.data.filter(function(d) { return d.Number == id })[0] || {}
+    if (category == id) {
+      let incrementId = app.model.data.filter(function(d) { return (d.Name.replace(/ +/g, '-').toLowerCase() == id) })[0] || {}
+      route(incrementId.Number);
     }
+
+    let selected = app.model.data.filter(function(d) { return (d.Name.replace(/ +/g, '-').toLowerCase() == id) && (d.Category.replace(/ +/g, '-').toLowerCase() == category) })[0] || {}
+    let newTitle = `${selected.Name} | ${selected.Category} | OpenGuide`;
 
     if(isEmpty(selected)) {
       let results = search(id);
@@ -141,13 +148,13 @@ function goToSection(category, id) {
 
       if (results.length > 0) {
         buildDescription = `<p>Did you mean to visit one of these pages? </p>`;
-        buildDescription += `<ol>`;
+        buildDescription += `<div class="search-results menu"><ul class="menu-list">`;
 
         results.forEach(function(result) {
-          buildDescription += `<li><a href="/#/${result.category.replace(/ +/g, '-').toLowerCase()}/${result.name.replace(/ +/g, '-').toLowerCase()}">${result.name} in ${result.category}</li>`;
+          buildDescription += `<li class="${result.category.replace(/ +/g, '-').toLowerCase()}"><a href="/#/${result.category.replace(/ +/g, '-').toLowerCase()}/${result.name.replace(/ +/g, '-').toLowerCase()}">${result.name} in ${result.category}</a><p>${result.description}</p></li>`;
         })
 
-        buildDescription += `</ol>`;
+        buildDescription += `</div></ul>`;
       } else {
         buildDescription = `<p>Nothing found here.</p>`;
       }
@@ -163,23 +170,7 @@ function goToSection(category, id) {
     riot.mount('#section','style-guide-sections', selected);
   } else {
     app.model.on('updated', function(data) {
-      let selected = data.filter(function(d) { return (d.Name.replace(/ +/g, '-').toLowerCase() == id) && (d.Category.replace(/ +/g, '-').toLowerCase() == category) })[0] || {}
-      let newTitle = `${id.replace(/-/g, ' ').replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()})} | ${category.replace(/-/g, ' ').replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()})} | OpenGuide`;
-
-      if ( !isNaN(parseInt(id)) ) {
-        selected = app.model.data.filter(function(d) { return d.Number == id })[0] || {}
-      }
-
-      if(isEmpty(selected)) {
-        selected = {Name:'Page not found', description: 'Nothing to see here.', Category: ''};
-        newTitle = '404 | Not Found | OpenGuide';
-      }
-
-      if (document.title != newTitle) {
-        document.title = newTitle;
-      }
-
-      riot.mount('#section','style-guide-sections', selected);
+      goToSection(category, id);
     });
   }
 }
@@ -190,10 +181,16 @@ let search = (term) => {
 
   result_refs.map((result_ref) => {
     app.model.data.map((section) => {
+      const stringLength = 250;
+      let strippedDescription = section['description'].replace(/<(?:.|\n)*?>/gm, '');
+      let trimmedDescription = strippedDescription.length > stringLength ?
+                    strippedDescription.substring(0, stringLength - 3) + "..." :
+                    strippedDescription;
 
-      if (section['Number'] == result_ref.ref) {
+      if ((section['Number'] == result_ref.ref) && (!result_ref.ref.endsWith('.0.0'))) {
         results.push({number: section['Number'],
                            name: section['Name'],
+                           description: trimmedDescription,
                            category: section['Category'],
                            urlId: section['id']});
       }
@@ -218,12 +215,6 @@ function heading(category, id, heading) {
       window.scrollTo(0, rect.top + pageYOffset - interactions.offsetValue());
     }
   }, 400);
-}
-
-function notfound(category, id) {
-  //let selected = {Name:'Page not found', description: 'Nothing to see here.', Category: getting started };
-  //goToSection(category, id)
-  //riot.mount('#section','style-guide-sections', selected);
 }
 
 riot.mount('style-guide', app);

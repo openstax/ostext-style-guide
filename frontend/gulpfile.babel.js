@@ -6,7 +6,6 @@ import browser  from 'browser-sync';
 import gulp     from 'gulp';
 import webpack  from 'webpack-stream';
 import rimraf   from 'rimraf';
-// import sherpa   from 'style-sherpa';
 import yaml     from 'js-yaml';
 import fs       from 'fs';
 import through  from 'through2';
@@ -18,7 +17,6 @@ const $ = plugins();
 const PRODUCTION = !!(yargs.argv.production);
 
 // Load settings from config.yml
-// const { COMPATIBILITY, PORT, UNCSS_OPTIONS, PATHS } = loadConfig();
 export const loadConfig = () => yaml.load(ymlFile)
   let ymlFile = fs.readFileSync('config.yml', 'utf8');
 
@@ -46,14 +44,6 @@ export const fonts = () => gulp.src(PATHS.fonts)
 export const pages = () => gulp.src('src/*.{html,hbs,handlebars}')
   .pipe(gulp.dest(PATHS.dist));
 
-// Generate a style guide from the Markdown content and HTML template in styleguide/
-// function styleGuide(done) {
-//   sherpa('src/styleguide/index.md', {
-//     output: PATHS.dist + '/styleguide.html',
-//     template: 'src/styleguide/template.html'
-//   }, done);
-// }
-
 // Compile Sass into CSS
 // In production, the CSS is compressed
 export const sass = () => gulp.src('src/assets/scss/app.scss')
@@ -69,7 +59,7 @@ export const sass = () => gulp.src('src/assets/scss/app.scss')
   .pipe($.if(PRODUCTION, $.cssnano()))
   .pipe($.if(!PRODUCTION, $.sourcemaps.write('./')))
   .pipe(gulp.dest(PATHS.dist + '/assets/css'))
-  .pipe(browser.reload({ stream: true }));
+  .pipe(browser.reload({ stream: true, match: '**/*.css' }));
 
 // Combine JavaScript into one file
 // In production, the file is minified

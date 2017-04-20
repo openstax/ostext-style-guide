@@ -1,27 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Dosis|Noto+Sans|Noto+Serif');
-
 @charset "utf-8";
+@import "variables",
+        "font-awesome",
+        "bulma",
+        "animate",
+        "highlight",
 
-// Override initial variables here
-// You can add new ones or update existing ones:
-$os-blue: #0DC0DC;
-$os-blue-s60: #054C58;
-$os-blue-s20: #0A99B0;
-$os-blue-s40: #147383;
-$family-sans-serif: "Noto Sans", "Noto Sans CJK {JP, KR, SC, TC}", sans-serif;
-$family-helvetica: "Helvetica Neue", Helvetica, Arial, sans-serif;
-// Override generated variables here
-$primary: $os-blue;
-$family-primary: $family-sans-serif;
-
-@import "scss/font-awesome";
-@import "sass/utilities/_all";
-@import "sass/base/_all";
-@import "sass/elements/_all";
-@import "sass/components/_all";
-@import "sass/grid/_all";
-@import "sass/layout/_all";
-@import "highlight";
+        //For general-composition/typography styles
+        "typography-scales";
 
 
 .sticky {
@@ -199,6 +185,8 @@ body {
 
   .control.is-grouped {
     margin-bottom: 0;
+    position: relative;
+    z-index: 2;
   }
 
   .control.has-icon .input + .icon {
@@ -272,26 +260,85 @@ body {
 }
 
 .search-results {
-  position: absolute;
-  background-color: #fff;
-  z-index: 1;
-  width: 100%;
-  left: 0;
-  top: 100%;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  opacity: 0;
-  height: 0;
-  overflow: hidden;
-  text-align: left;
+
+  @at-root .nav #{&} {
+    position: absolute;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transform: translate3d(0,-100%,0);
+    opacity: 0;
+    top: 48px;
+    left: 0;
+    background-color: #fff;
+    z-index: 1;
+    text-align: left;
+    overflow: hidden;
+    width: 100%;
+  }
+
+    @at-root .content #{&} {
+      ul {
+        list-style: none;
+
+        li {
+          padding: 1rem 1rem 1rem 5rem;
+          border-bottom: 1px solid #ebebeb;
+        }
+
+        li:first-child a {
+          border-top: 0;
+        }
+
+        li:last-child {
+          border-bottom: 0;
+        }
+
+        p {
+          padding-left: 0.75em;
+        }
+      }
+    }
 
   &.is-visible {
     opacity: 1;
-    height: auto;
+    transform: translate3d(0,0,0);
+
+    @include fadeIn(
+      $duration: 0.2s,
+      $delay: 0s,
+      $function: linear,
+      $fill: both
+    );
+
+    @at-root .sticky--unpinned #{&} {
+      @include slideOutUp(
+        $duration: 1.6s,
+        $delay: 1s,
+        $function: linear,
+        $fill: both
+      );
+    }
   }
 
   @include desktop {
     border-top: none;
     top: 48px;
+  }
+
+  li {
+    @include fadeIn(
+      $duration: 0.2s,
+      $delay: 0s,
+      $function: linear,
+      $fill: both
+   );
+
+   &.no-results {
+     color: #5F6163;
+     font-weight: 600;
+     border-bottom: 1px solid #ebebeb;
+     border-top: 1px solid #ebebeb;
+     padding: 1rem 1rem 1rem 5rem;
+   }
   }
 
   li.getting-started {
@@ -320,8 +367,12 @@ body {
   a {
     color: #5F6163;
     font-weight: 600;
-    border-bottom: 1px solid #ebebeb;
-    padding: 1rem 1rem 1rem 6rem;
+    border-radius: 0;
+
+    @at-root .nav #{&} {
+      border-bottom: 1px solid #ebebeb;
+      padding: 1rem 1rem 1rem 6rem;
+    }
 
     &:hover {
       background: transparent;
@@ -452,6 +503,14 @@ body {
 
   .main {
     background-color: #fbfbfb;
+    opacity: 0;
+
+    @include fadeIn(
+      $duration: 0.2s,
+      $delay: 0.2s,
+      $function: linear,
+      $fill: both
+   );
 
     &::before {
       opacity: 0;
@@ -497,14 +556,53 @@ body {
     .back-to-top {
       color: #363636;
       position: fixed;
-      bottom: 10px;
-      right: 10px;
+      bottom: 20px;
+      right: 20px;
       opacity: 0;
       transform: translate3d(100%, 0, 0);
       transition: opacity 0.2s, transform 0.2s;
 
       &:hover {
         color: $os-blue;
+
+        .tooltiptext {
+          visibility: visible;
+          opacity: 1;
+
+          &::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            margin-top: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent transparent transparent #555;
+          }
+        }
+      }
+
+      span:not(.tooltiptext) {
+        display: block;
+        margin: 0 auto 0.5rem;
+      }
+
+      .tooltiptext {
+        visibility: hidden;
+        position: absolute;
+        width: 90px;
+        background-color: #555;
+        color: #fff;
+        text-align: center;
+        padding: 5px 0;
+        border-radius: 6px;
+        z-index: 1;
+        opacity: 0;
+        transition: opacity 0.2s 0.2s;
+        font-size: 12px;
+        top: 50%;
+        bottom: auto;
+        right: 128%;
       }
 
       @at-root .menu.subsection.is-fixed {
@@ -520,6 +618,13 @@ body {
       padding: 3rem 1.5rem;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       word-wrap: break-word;
+
+      @include fadeIn(
+        $duration: 0.2s,
+        $delay: 0.2s,
+        $function: linear,
+        $fill: both
+     );
 
       h2 {
         font-family: $family-helvetica;
@@ -630,6 +735,14 @@ body {
       padding: 2rem 0 0;
       transition: transform 0.2s linear;
 
+      @include fadeIn(
+        $duration: 0.2s,
+        $delay: 0.2s,
+        $function: linear,
+        $fill: both
+     );
+
+
       &.is-fixed {
         position: fixed;
         top: 0;
@@ -712,299 +825,4 @@ body {
       }
     }
   }
-}
-
-.typography-primary {
-  font-family: "Noto Sans";
-  h1 { font-family: "Noto Serif"; }
-}
-.typography-secondary {
-  font-family: "Dosis";
-  h1 { font-family: "Noto Sans"; }
-}
-.typography-tertiary {
-  font-family: "Dosis";
-  h1 { font-family: "Noto Serif"; }
-}
-.typography-scale-1 {
-  font-size: 9px;
-  line-height: 1.5;
-}
-.typography-scale-2 {
-  font-size: 8px;
-  line-height: 1.5;
-}
-.typography-grid-scale-1 {
-  border: 1px solid rgba(0, 0, 0, .5);
-  font-size: 9px;
-  line-height: 1.5;
-
-  background-size: 100% 13.5px;
-  background-position: 0 -2.5px;
-  background-image: linear-gradient(to bottom,
-                                    black 0%,
-                                    transparent 7%,
-                                    transparent 100%);
-
-  img {
-    display: block;
-    margin: auto;
-    margin-bottom: 14px;
-
-    width: 408px;
-    min-width: 408px;
-    max-width: 408px;
-  }
-}
-.typography-accompanying-text {
-  padding: 0 1.2em;
-  width: 150px;
-  float: right;
-}
-
-
-.body .main .content {
-  .typography-font-family {
-    // 28.428
-    // 27
-    // 21.324
-    // 18
-    // 15.996
-    // 12
-    // 9
-    .title {
-      font-size: 21.324px;
-      color: black;
-      line-height: 1.5;
-      padding-bottom: .4em;
-      border-bottom: 2px solid #f9f9f9;
-    } // font name title
-    .title::before { display: none; }
-    .title ~ .title,
-    .columns .column .title {
-      color: #bcbdc0;
-      font-size: 11px;
-      letter-spacing: .1px;
-      border: none;
-      margin-bottom: 0px;
-    } // the other titles...
-    .columns .column .title { }
-    .columns .column > p:first-of-type:not(.typography-pairing):not(.typography-example-title) {
-      margin-bottom: 0px;
-      padding-bottom: 0px;
-    }
-    .columns .column p { margin-bottom: 0px; }
-    .typography-regular, .typography-regular-italic,
-    .typography-bold, .typography-bold-italic {
-      font-size: 28.428px;
-      line-height: 1.3em;
-    }
-    .typography-regular { }
-    .typography-regular-italic {
-      font-style: italic;
-    }
-    .typography-bold {
-      font-weight: bold;
-    }
-    .typography-bold-italic {
-      font-style: italic;
-      font-weight: bold;
-    }
-    .typography-size-1, .typography-size-2,
-    .typography-size-3, .typography-size-4,
-    .typography-size-5, .typography-size-6 {
-      line-height: 1.4em;
-    }
-    .typography-size-1 {
-      font-size: 9px;
-      // This font is rather small, so pad it a bit!
-      padding-top: .7em;
-    }
-    .typography-size-2 { font-size: 12px; }
-    .typography-size-3 { font-size: 15.996px; }
-    .typography-size-4 { font-size: 18px; }
-    .typography-size-5 { font-size: 21.324px; }
-    .typography-size-6 { font-size: 27px; }
-    .typography-source {
-      font-size: 9px;
-      font-style: italic;
-    }
-    .typography-source-link {
-      font-size: 9px;
-    }
-    .typography-numbers {
-      font-size: 28.428px;
-      line-height: 1em;
-    }
-    .typography-pairing {
-      font-weight: bold;
-      font-size: 12px;
-      padding-bottom: 9px;
-    }
-  }
-
-  @mixin typography-example-title-reset {
-    font-size: 15.996px;
-    color: black;
-    padding-bottom: 9px;
-  }
-  @mixin typography-example-reset {
-    font-size: 11px;
-  }
-
-  .typography-font-family-1 {
-    font-family: 'Noto Sans', sans-serif;
-    .title {
-      font-weight: bold;
-    }
-    div.columns.typography-example-first {
-      .typography-example-title {
-        @include typography-example-title-reset();
-        font-family: 'Dosis', sans-serif;
-      }
-      .typography-example {
-        @include typography-example-reset();
-      }
-    }
-    div.columns.typography-example-second {
-      .typography-example-title {
-        @include typography-example-title-reset();
-      }
-      .typography-example {
-        @include typography-example-reset();
-        font-family: 'Noto Serif', serif;
-      }
-    }
-  }
-  .typography-font-family-2 {
-    font-family: 'Noto Sans', sans-serif;
-    .title {
-      font-family: 'Noto Serif', serif;
-      font-weight: bold;
-    }
-    div.columns.typography-example-first {
-      .typography-example-title {
-        @include typography-example-title-reset();
-        font-family: 'Noto Sans', sans-serif;
-      }
-      .typography-example {
-        @include typography-example-reset();
-        font-family: 'Noto Serif', serif;
-      }
-    }
-    div.columns.typography-example-second {
-      .typography-example-title {
-        @include typography-example-title-reset();
-        font-family: 'Dosis', sans-serif;
-      }
-      .typography-example {
-        @include typography-example-reset();
-        font-family: 'Noto Serif', serif;
-      }
-    }
-
-    .typography-regular, .typography-regular-italic,
-    .typography-bold, .typography-bold-italic {
-      font-family: 'Noto Serif', serif;
-    }
-    .typography-size-1, .typography-size-2,
-    .typography-size-3, .typography-size-4,
-    .typography-size-5, .typography-size-6 {
-      font-family: 'Noto Serif', serif;
-    }
-  }
-  .typography-font-family-3 {
-    font-family: 'Noto Sans', sans-serif;
-    .title {
-      font-weight: bold;
-    }
-    div.columns.typography-example-first {
-      .typography-example-title {
-        @include typography-example-title-reset();
-        font-family: 'Dosis', sans-serif;
-      }
-      .typography-example {
-        @include typography-example-reset();
-      }
-    }
-    div.columns.typography-example-second {
-      .typography-example-title {
-        @include typography-example-title-reset();
-        font-family: 'Dosis', sans-serif;
-      }
-      .typography-example {
-        @include typography-example-reset();
-        font-family: 'Noto Serif', serif;
-      }
-    }
-
-    .typography-regular, .typography-regular-italic,
-    .typography-bold, .typography-bold-italic {
-      font-family: 'Dosis', sans-serif;
-    }
-    .typography-size-1, .typography-size-2,
-    .typography-size-3, .typography-size-4,
-    .typography-size-5, .typography-size-6 {
-      font-family: 'Dosis', sans-serif;
-    }
-  }
-}
-
-.typography-primary {
-  font-family: "Noto Sans";
-  h1 { font-family: "Noto Serif"; }
-}
-.typography-secondary {
-  font-family: "Dosis";
-  h1 { font-family: "Noto Sans"; }
-}
-.typography-tertiary {
-  font-family: "Dosis";
-  h1 { font-family: "Noto Serif"; }
-}
-.typography-scale-1 {
-  font-size: 9px;
-  line-height: 1.5;
-}
-.typography-scale-2 {
-  font-size: 8px;
-  line-height: 1.5;
-}
-.typography-grid-scale-1 {
-  font-size: 9px;
-  line-height: 1.5;
-
-  background-size: 100% 13.5px;
-  background-position: 0 -2.5px;
-  background-image: linear-gradient(to bottom,
-                                    black 0%,
-                                    transparent 7%,
-                                    transparent 100%);
-
-  img {
-    display: block;
-    margin: auto;
-    margin-bottom: 14px;
-
-    width: 408px;
-    min-width: 408px;
-    max-width: 408px;
-  }
-}
-.typography-accompanying-text {
-  line-height: 1.8em;
-  padding-top: .7em;
-  padding-bottom: 1.2em;
-  width: 150px;
-  float: right;
-  font-size: 12px;
-
-  h3 {
-    margin-top: -1px;
-    margin-bottom: 0px;
-  }
-}
-.typography-example-with-title h3 {
-  padding-bottom: 0.4em;
-  text-align: center;
 }

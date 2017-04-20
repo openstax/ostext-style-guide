@@ -93,6 +93,9 @@ riot.tag('style-guide-search',
   <div class="search-results menu">
     <ul class="menu-list sg-search-result">
      <li each={results} onclick="{reset}" class="{category.replace(/ +/g, '-').toLowerCase()}"><a href="/#/{category.replace(/ +/g, '-').toLowerCase()}/{name.replace(/ +/g, '-').toLowerCase()}"><span>in {category}</span>{name}</a></li>
+     <virtual if="{results.length == 0 && this.refs.input.value != ''}">
+      <li class="no-results">Nothing found for <strong><i>{this.refs.input.value}</i></strong></li>
+     </virtual>
      <virtual if="{results.length == 4}">
       <li><a class="view-more" href="/#/search?keyword={refs.input.value}">See all results for {this.refs.input.value}
       <span class="icon">
@@ -112,7 +115,7 @@ riot.tag('style-guide-search',
       this.result_refs.slice(0, 4).map((result_ref) => {
         opts.sections.map((section) => {
 
-          if (section['Number'] == result_ref.ref) {
+          if ((section['Number'] == result_ref.ref) && (!result_ref.ref.endsWith('.0.0'))) {
             this.results.push({number: section['Number'],
                                name: section['Name'],
                                category: section['Category'],
@@ -187,8 +190,6 @@ riot.tag('style-guide',
   </nav>
   <main class="main section" id="top">
     <div class="container">
-      <!-- Search elements -->
-      <style-guide-search class="search"></style-guide-search>
       <div id="section" sections={sections}></div>
     </div>
     <footer class="footer">
@@ -228,6 +229,7 @@ riot.tag('style-guide',
     this.resetSearchIndex = function() {
       this.index = lunr(function() {
         this.field('name', {boost:10});
+        this.field('description', {boost:8});
         this.field('category', {boost:6});
         this.ref('number');
       });
@@ -244,8 +246,6 @@ riot.tag('style-guide',
         this.index.add({
           description: section['description'],
           name: section['Name'],
-          id: section['Id'],
-          markup: section['Markup'],
           number: section['Number'],
           category: section['Category']
         });
@@ -281,9 +281,13 @@ riot.tag('style-guide-sections',
         </div>
         <virtual if={hasSubSection}>
           <a href="/#/{opts.Category.replace(/ +/g, '-').toLowerCase()}/{opts.Name.replace(/ +/g, '-').toLowerCase()}/#top" class="back-to-top" onclick="{goToSection}">
-            <span class="icon is-large">
-              <i class="fa fa-arrow-circle-o-up"></i>
+            <span class="icon is-small">
+              <i class="fa fa-chevron-up"></i>
             </span>
+            <span class="icon is-large">
+              <img src="assets/img/svg/back-to-top.svg" />
+            </span>
+            <span class="tooltiptext">Back to top</span>
           </a>
         </virtual>
       </div>

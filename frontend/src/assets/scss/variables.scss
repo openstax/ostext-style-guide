@@ -1,0 +1,11 @@
+// Override initial variables here
+// You can add new ones or update existing ones:
+$os-blue: #0DC0DC;
+$os-blue-s60: #054C58;
+$os-blue-s20: #0A99B0;
+$os-blue-s40: #147383;
+$family-sans-serif: 'Noto Sans', "Noto Sans CJK {JP, KR, SC, TC}", sans-serif;
+$family-helvetica: "Helvetica Neue", Helvetica, Arial, sans-serif;
+// Override generated variables here
+$primary: $os-blue;
+$family-primary: $family-sans-serif;
