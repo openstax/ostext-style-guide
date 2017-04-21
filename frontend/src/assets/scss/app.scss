@@ -736,6 +736,10 @@ body {
       .styled-example {
         font-size: 12px;
 
+        img {
+          max-width: 100% !important;
+        }
+
         .body {
           flex: none;
           display: block;
