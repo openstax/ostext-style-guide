@@ -198,7 +198,7 @@ riot.tag('style-guide',
               <a href="http://www.openstax.org/contact" target="_blank">Contact</a>
             </div>
             <p>
-              Design Guide by <a href="http://www.openstax.org">OpenStax</a>. All Rights Reserved.
+              &copy; 1996 - ${new Date().getFullYear()} <a href="http://www.openstax.org" target="_blank">OpenStax</a>. All Rights Reserved.
             </p>
           </div>
           <div class="column has-text-right">

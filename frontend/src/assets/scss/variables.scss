@@ -1,21 +1,30 @@
 // Override initial variables here
 // You can add new ones or update existing ones:
-$os-blue: #0dc0dc; //header blue, links
-$os-blue-s60: #054c58; //h1
-$os-blue-s20: #0A99B0; //h1 border left
-$os-blue-s40: #077384; //subsection h2
-$os-gray: #5e6062; //github-bar-font-color, submit an issue // nav, body, h2?
-$os-gray2: #9a9a9b; // github-version-font-color, changelog, footer font color
-$body-bg: #f3f3f3;
-$nav-bg: #fbfbfb;
-$github-bar: #fafafa;
-//$body-font-color: #4a4a4a; // nav, body
-//$heading-color: #3B3B3B; //nav categories, h2
-$nav-border-bottom: #D8D8D8;
-$github-bar-border-bottom: #f6f6f6;
+$os-blue: #0dc0dc;
+$os-blue-s60: #054c58;
+$os-blue-s20: #0A99B0;
+$os-blue-s40: #077384;
+$os-gray: #5e6062; //github-bar-font-color, submit an issue
+$os-gray2: #9a9a9b;
+$os-gray3: #f3f3f3;
+$os-gray4: #fafafa;
+$os-gray5: #fbfbfb;
+$os-gray6: #4a4a4a;
+$os-gray7: #D8D8D8;
+$os-gray8: #f6f6f6;
 $family-noto-sans: 'Noto Sans', "Noto Sans CJK {JP, KR, SC, TC}", sans-serif;
 $family-helvetica: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 // Override generated variables here
-$primary: $os-blue;
 $family-primary: $family-noto-sans;
+$primary: $os-blue; //header, links
+$secondary: $os-gray2; // github-version-font-color, changelog, footer font color
+$body-bg: $os-gray3; //body background
+$github-bar: $os-gray4; //github bar background
+$nav-bg: $os-gray5; //nav background
+$body-color: $os-gray6; // nav, body, nav categories, h2
+$nav-border: $os-gray7; //nav bottom border
+$github-bar-border: $os-gray8; //github bottom border
+$h1: $os-blue-s60; //h1
+$h1-border: $os-blue-s20; //h1 border left
+$h2-subsection: $os-blue-s40; //subsection h2

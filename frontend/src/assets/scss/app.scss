@@ -448,6 +448,10 @@ body {
       }
     }
 
+    @include tablet {
+      padding-bottom: 12rem;
+    }
+
     @include tablet-only {
       z-index: 999;
       margin-left: -250px;
