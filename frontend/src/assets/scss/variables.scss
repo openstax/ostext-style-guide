@@ -4,6 +4,7 @@ $os-blue: #0dc0dc;
 $os-blue-s60: #054c58;
 $os-blue-s20: #0A99B0;
 $os-blue-s40: #077384;
+$os-blue2: #008596;
 $os-gray: #5e6062; //github-bar-font-color, submit an issue
 $os-gray2: #9a9a9b;
 $os-gray3: #f3f3f3;
@@ -12,6 +13,7 @@ $os-gray5: #fbfbfb;
 $os-gray6: #4a4a4a;
 $os-gray7: #D8D8D8;
 $os-gray8: #f6f6f6;
+$os-gray9: #ebebeb;
 $family-noto-sans: 'Noto Sans', "Noto Sans CJK {JP, KR, SC, TC}", sans-serif;
 $family-helvetica: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
@@ -28,3 +30,5 @@ $github-bar-border: $os-gray8; //github bottom border
 $h1: $os-blue-s60; //h1
 $h1-border: $os-blue-s20; //h1 border left
 $h2-subsection: $os-blue-s40; //subsection h2
+$search-icon: $os-blue2;
+$border-color: $os-gray9;

@@ -759,6 +759,16 @@
 
   A `<figure>` tag is a container for a media tag, and figures are numbered by default. To remove numbering from a figure, the unnumbered class must be applied in the figure tag (the markup is `<figure class="unnumbered">`), and an empty label tag (`<label/>`) must also be enclosed inside the figure tag. Figures may have captions (the markup `<caption>` goes inside the figure tag), but they are not required.
 
+  Figure Caption
+  ------------
+
+  Figures with Captions with 70 characters or less will fit within image dimensions as shown in sample A, and they should use `class="small"`.
+  Otherwise captions will run full width.
+
+  _Note: The 70 characters do not include the figure title or figure number; they are in addition to the title and number of the image._
+
+  ![](assets/img/figure-captions.jpg)
+
   @Number '3.10.0'
 */
 /**
@@ -766,14 +776,24 @@
   Images
   =========
 
-  + Images must be uploaded to the module they will appear in on the platform, and they show up in the content when referred to by filename in a `<media>` tag:
-       ```
-       <media alt="alt text">
-         <image src="filename.jpg"/>
-       </media>
-       ```
+  + Images must be uploaded to the module they will appear in on the platform, and they show up in the content when referred to by filename in a `<media>` tag.
   + An alt text description of the image is required on each piece of media, for accessibility.
   + Images are unnumbered by default and do not have a caption, but can be numbered if enclosed by a figure tag.
+
+  <h2>Code Example</h2>
+  [#images-example-1]
+
+  <h2>Styled Example</h2>
+  [#images-example-2]
+
+  @Markup
+    @Type highlighted
+    @Source images-raw.html
+    @Id #images-example-1
+  @Markup
+    @Type styled
+    @Source images-cooked.html
+    @Id #images-example-2
 
   @Number '3.11.0'
 */
@@ -796,6 +816,21 @@
   + Subtitled features: some features have an automatically generated feature title as well as manually applied subtitles for each individual feature. These subtitles are sometimes applied in the `<title>` tag of the note, but other times they are text inside a paragraph in the note.
   + Features may or may not be numbered according to their class.
 
+  <h2>Code Example</h2>
+  [#features-example-1]
+
+  <h2>Styled Example</h2>
+  [#features-example-2]
+
+  @Markup
+    @Type highlighted
+    @Source features-raw.html
+    @Id #features-example-1
+  @Markup
+    @Type styled
+    @Source features-cooked.html
+    @Id #features-example-2
+    
   @Number '3.13.0'
 */
 /**
@@ -945,6 +980,13 @@
   ----------
 
   At the beginning of each chapter in the introduction module, a figure with the splash class (markup: `<figure class="splash">` may cover the horizontal width of the page.
+
+  ![](assets/img/chapter-intro-page.jpg)
+
+  <span class="icon is-small download-icon">
+  <i class="fa fa-download" aria-hidden="true"></i>
+  </span>
+  [Download sample splash image file](assets/img/docs/splash-images-sample.eps)
 
   Chapter outline
   ------------
