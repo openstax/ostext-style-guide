@@ -9,6 +9,9 @@
         //For general-composition/typography styles
         "typography-scales";
 
+a:hover {
+  color: $body-color;
+}
 
 .sticky {
   will-change: transform;
@@ -118,7 +121,7 @@ body {
   }
 
   .nav-toggle {
-    background-color: #f7f7f7;
+    background-color: $os-gray3;
     border-radius: 10rem;
     width: 2rem;
     height: 2rem;
@@ -196,20 +199,20 @@ body {
 
   .control.has-icon .input + .icon {
     @include desktop {
-      color: #008596;
+      color: $search-icon;
       top: 1.5rem;
     }
   }
 
   .control.has-icon .input:focus + .icon {
     @include desktop {
-      color: #008596;
+      color: $search-icon;
     }
   }
 
   &.is-focus .control.has-icon .input + .icon {
     @include desktop {
-      color: #7a7a7a;
+      color: $os-gray;
     }
   }
 
@@ -224,17 +227,17 @@ body {
       background-color: transparent;
       height: 50px;
       padding-left: 3.5em !important;
-      color: #077384;
+      color: $os-blue-s40;
 
       &::placeholder {
-        color: #077384;
+        color: $os-blue-s40;
       }
       @at-root .search.is-focus {
         .input {
-          color: #4B4B4B;
+          color: $os-gray6;
 
           &::placeholder {
-            color: #4B4B4B;
+            color: $os-gray6;
           }
         }
       }
@@ -287,7 +290,7 @@ body {
 
         li {
           padding: 1rem 1rem 1rem 4rem;
-          border-bottom: 1px solid #ebebeb;
+          border-bottom: 1px solid $border-color;
           background-size: 22px;
         }
 
@@ -345,10 +348,10 @@ body {
    );
 
    &.no-results {
-     color: #5F6163;
+     color: $os-gray;
      font-weight: 600;
-     border-bottom: 1px solid #ebebeb;
-     border-top: 1px solid #ebebeb;
+     border-bottom: 1px solid $border-color;
+     border-top: 1px solid $border-color;
      padding: 1rem 1rem 1rem 5rem;
    }
   }
@@ -374,7 +377,7 @@ body {
   }
 
   li:first-child a {
-    border-top: 1px solid #ebebeb;
+    border-top: 1px solid $border-color;
   }
 
   li:nth-child(4) a {
@@ -382,12 +385,12 @@ body {
   }
 
   a {
-    color: #5F6163;
+    color: $os-gray;
     font-weight: 600;
     border-radius: 0;
 
     @at-root .nav #{&} {
-      border-bottom: 1px solid #ebebeb;
+      border-bottom: 1px solid $border-color;
       padding: 1rem 1rem 1rem 6rem;
     }
 
@@ -410,7 +413,7 @@ body {
 
     span:first-child {
       font-size: 12px;
-      color: #aaa;
+      color: $os-gray2;
       font-weight: 400;
       text-transform: uppercase;
       display: block;
@@ -425,7 +428,7 @@ body {
 
   .side-nav {
     background-color: $nav-bg;
-    color: #3b3b3b;
+    color: $body-color;
 
     @include mobile {
       width: 0;
@@ -472,7 +475,7 @@ body {
     .menu {
       padding-top: 1.3em;
       padding-bottom: 1.3em;
-      border-bottom: 1px solid #d8d8d8;
+      border-bottom: 1px solid $nav-border;
 
       &:last-child {
         border-bottom: none;
@@ -490,7 +493,7 @@ body {
     }
 
     a {
-      color: #3b3b3b;
+      color: $body-color;
       font-size: 16px;
       letter-spacing: -1px;
       border-left: 4px solid transparent;
@@ -539,16 +542,6 @@ body {
       }
     }
 
-    .h1 {
-      color: #0A99B0;
-      letter-spacing: -1px;
-      font-weight: bold;
-      font-size: 18px;
-      background-color: #fff;
-      padding: 1.5rem;
-      border-bottom: 1px solid #ebebeb;
-    }
-
     .section {
       background-color: transparent;
       margin-bottom: 3rem;
@@ -565,7 +558,7 @@ body {
       font-family: $family-helvetica;
       font-weight: 600;
       letter-spacing: -1px;
-      font-size: 18px;
+      padding: 0 0.75rem;
 
       @include fadeIn(
         $duration: 0.2s,
@@ -574,10 +567,15 @@ body {
         $fill: both
       );
 
-      span,
-      .changelog {
-        font-weight: 500;
-        color: $os-gray2;
+      p {
+        font-size: 18px;
+
+        span {
+          padding-left: 0.25em;
+          font-size: 16px;
+          font-weight: 400;
+          color: $os-gray2;
+        }
       }
 
       .nav-right {
@@ -585,12 +583,10 @@ body {
       }
 
       .changelog {
+        font-weight: 400;
+        color: $os-gray2;
         font-size: 14px;
         letter-spacing: 0px;
-      }
-
-      .fa {
-        vertical-align: middle;
       }
 
       .github-issues {
@@ -605,7 +601,7 @@ body {
     }
 
     .back-to-top {
-      color: #363636;
+      color: $body-color;
       position: fixed;
       bottom: 20px;
       right: 20px;
@@ -628,7 +624,7 @@ body {
             margin-top: -5px;
             border-width: 5px;
             border-style: solid;
-            border-color: transparent transparent transparent #555;
+            border-color: transparent transparent transparent $os-gray;
           }
         }
       }
@@ -642,7 +638,7 @@ body {
         visibility: hidden;
         position: absolute;
         width: 90px;
-        background-color: #555;
+        background-color: $os-gray;
         color: #fff;
         text-align: center;
         padding: 5px 0;
@@ -660,6 +656,7 @@ body {
         & + .back-to-top {
           opacity: 1;
           transform: translate3d(0, 0, 0);
+          z-index: 1;
         }
       }
     }
@@ -699,7 +696,7 @@ body {
 
         &:hover {
           .heading-link {
-            color: #363636;
+            color: $body-color;
             opacity: 1;
           }
         }
@@ -708,7 +705,7 @@ body {
           opacity: 0;
 
           &:hover {
-            color: #0DC0DC;
+            color: $primary;
           }
 
           .icon {
@@ -740,29 +737,36 @@ body {
       .styled-example {
         font-size: 12px;
 
-        .title {
-          &::before {
-            display: none;
-          }
+        img {
+          max-width: 100% !important;
         }
 
         .body {
           flex: none;
           display: block;
+          margin: initial;
+        }
 
-          .title {
-            margin: initial;
-            font-size: initial;
-            letter-spacing: normal;
-            font-weight: initial;
-            line-height: initial;
-            font-size: 12px;
-            font-family: $family-sans-serif;
+        .title {
+          margin: initial;
+          font-size: initial;
+          letter-spacing: 0;
+          font-weight: initial;
+          line-height: initial;
+          font-size: 12px;
+          font-family: $family-sans-serif;
 
-            span {
-              font-weight: initial;
-            }
+          &::before {
+            display: none;
           }
+
+          span {
+            font-weight: inherit;
+          }
+        }
+
+        .note.making-connections > div.body::before {
+          background: url(/assets/img/examples/ccap-astronomy/making-connections.svg) no-repeat 0 !important;
         }
 
         p {
@@ -779,8 +783,16 @@ body {
       }
     }
 
+    .download-icon {
+      vertical-align: baseline;
+      padding-right: 0.5rem;
+    }
+
     .source-highlight {
       pre {
+        border-radius: 3px;
+        border: 1px solid $border-color;
+        background-color: $os-gray5;
         font-size: 14px;
         overflow-x: auto;
         padding: 1.25rem 1.5rem;
@@ -821,7 +833,7 @@ body {
         font-family: $family-helvetica;
         font-size: 18px;
         font-weight: 600;
-        color: #077384;
+        color: $h2-subsection;
         letter-spacing: -1px;
         text-transform: uppercase;
         margin-bottom: 0.5em;
@@ -852,7 +864,7 @@ body {
 .footer {
   color: #fff;
   background-color: transparent;
-  color: #9B9B9B;
+  color: $secondary;
   padding: 0;
   font-size: 14px;
 
@@ -864,10 +876,10 @@ body {
 
   a {
     &.icon {
-      color: #9B9B9B;
+      color: $secondary;
 
       &:hover {
-        color: #363636;
+        color: $body-color;
       }
     }
   }
