@@ -121,11 +121,11 @@ function number(id) {
     id = categoryID + '.1.0';
   }
 
-  let selected = app.model.data.filter(function(d) { return d.Number == id })[0] || {};
-
   if ( isNaN(parseInt(id)) ) {
     goToSection(id, id);
   } else {
+    let selected = app.model.data.filter(function(d) { return d.Number == id })[0] || {};
+
     goToSection(selected.Category.replace(/ +/g, '-').toLowerCase(), selected.Name.replace(/ +/g, '-').toLowerCase());
     history.pushState(null, '', `#/${selected.Category.replace(/ +/g, '-').toLowerCase()}/${selected.Name.replace(/ +/g, '-').toLowerCase()}`);
   }
@@ -135,8 +135,11 @@ function number(id) {
 function goToSection(category, id) {
   if (app.model.data != undefined) {
     if (category == id) {
-      let incrementId = app.model.data.filter(function(d) { return (d.Name.replace(/ +/g, '-').toLowerCase() == id) })[0] || {}
-      route(incrementId.Number);
+      let selected = app.model.data.filter(function(d) { return (d.Name.replace(/ +/g, '-').toLowerCase() == id) })[0] || {}
+
+      if(!isEmpty(selected)) {
+        route(selected.Number);
+      }
     }
 
     let selected = app.model.data.filter(function(d) { return (d.Name.replace(/ +/g, '-').toLowerCase() == id) && (d.Category.replace(/ +/g, '-').toLowerCase() == category) })[0] || {}

@@ -85,7 +85,7 @@ body {
 /* Custom styles */
 
 body {
-  background-color: #fbfbfb;
+  background-color: $body-bg;
 
   &.fixed {
     position: fixed;
@@ -101,6 +101,11 @@ body {
   @include tablet {
     background-color: $primary;
   }
+
+  @at-root .sticky--not-top#{&} {
+    box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1);
+  }
+
   .nav-left {
     @include tablet {
       flex: 0 0 250px;
@@ -109,7 +114,7 @@ body {
   }
 
   .logo {
-    max-height: 100%;
+    max-height: 2.2rem;
   }
 
   .nav-toggle {
@@ -172,15 +177,15 @@ body {
     padding: 0 1.5rem;
     margin-bottom: 0;
     border-radius: 3px;
-    width: 75%;
-
-    @media screen and (max-width: 1200px) {
-      width: 100%;
-    }
+    width: 100%;
 
     &.is-focus {
       background-color: rgba(255,255,255,1);
     }
+  }
+
+  @include widescreen {
+    width: 75%;
   }
 
   .control.is-grouped {
@@ -278,10 +283,12 @@ body {
     @at-root .content #{&} {
       ul {
         list-style: none;
+        margin: 0;
 
         li {
-          padding: 1rem 1rem 1rem 5rem;
+          padding: 1rem 1rem 1rem 4rem;
           border-bottom: 1px solid #ebebeb;
+          background-size: 22px;
         }
 
         li:first-child a {
@@ -294,6 +301,8 @@ body {
 
         p {
           padding-left: 0.75em;
+          font-size: 14px;
+          line-height: 1.75;
         }
       }
     }
@@ -325,6 +334,9 @@ body {
   }
 
   li {
+    background-position: 1.5rem 50%;
+    background-repeat: no-repeat;
+
     @include fadeIn(
       $duration: 0.2s,
       $delay: 0s,
@@ -342,20 +354,25 @@ body {
   }
 
   li.getting-started {
-    background: url('/assets/img/svg/icon-getting-started.svg') 1.5rem 50% no-repeat;
+    background-image: url('/assets/img/svg/icon-getting-started.svg');
   }
+
   li.general-composition {
-    background: url('/assets/img/svg/icon-general-composition.svg') 1.5rem 50% no-repeat;
+    background-image: url('/assets/img/svg/icon-general-composition.svg');
   }
+
   li.content-elements {
-    background: url('/assets/img/svg/icon-content-elements.svg') 1.5rem 50% no-repeat;
+    background-image: url('/assets/img/svg/icon-content-elements.svg');
   }
+
   li.book-skeleton {
-    background: url('/assets/img/svg/icon-book-skeleton.svg') 1.5rem 50% no-repeat;
+    background-image: url('/assets/img/svg/icon-book-skeleton.svg');
   }
+
   li.themes {
-    background: url('/assets/img/svg/icon-themes.svg') 1.5rem 50% no-repeat;
+    background-image: url('/assets/img/svg/icon-themes.svg');
   }
+
   li:first-child a {
     border-top: 1px solid #ebebeb;
   }
@@ -407,7 +424,7 @@ body {
   margin-top: 5rem;
 
   .side-nav {
-    background-color: #f7f7f7;
+    background-color: $nav-bg;
     color: #3b3b3b;
 
     @include mobile {
@@ -429,6 +446,10 @@ body {
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
       }
+    }
+
+    @include tablet {
+      padding-bottom: 12rem;
     }
 
     @include tablet-only {
@@ -455,18 +476,6 @@ body {
 
       &:last-child {
         border-bottom: none;
-      }
-    }
-
-    .changelog {
-      padding-left: 0.75em;
-      padding-right: 0.75em;
-      text-transform: none;
-      margin-bottom: 0;
-
-      a {
-        color: $os-blue;
-        margin-left: 1em;
       }
     }
 
@@ -502,7 +511,7 @@ body {
   }
 
   .main {
-    background-color: #fbfbfb;
+    background-color: $body-bg;
     opacity: 0;
 
     @include fadeIn(
@@ -547,9 +556,51 @@ body {
       position: relative;
     }
 
-    .column.is-three-quarters-desktop {
-      @media screen and (max-width: 1200px) {
-        width: 100%;
+    .github-bar {
+      background: $github-bar;
+      border-top: 1px solid #fff;
+      border-bottom: 1px solid $github-bar-border-bottom;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      color: $os-gray;
+      font-family: $family-helvetica;
+      font-weight: 600;
+      letter-spacing: -1px;
+      font-size: 18px;
+
+      @include fadeIn(
+        $duration: 0.2s,
+        $delay: 0.2s,
+        $function: linear,
+        $fill: both
+      );
+
+      span,
+      .changelog {
+        font-weight: 500;
+        color: $os-gray2;
+      }
+
+      .nav-right {
+        display: flex;
+      }
+
+      .changelog {
+        font-size: 14px;
+        letter-spacing: 0px;
+      }
+
+      .fa {
+        vertical-align: middle;
+      }
+
+      .github-issues {
+        letter-spacing: 0px;
+        color: $os-gray;
+        font-size: 14px;
+      }
+
+      a:hover {
+        color: $os-blue;
       }
     }
 
@@ -618,6 +669,8 @@ body {
       padding: 3rem 1.5rem;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       word-wrap: break-word;
+      z-index: 2;
+      position: relative;
 
       @include fadeIn(
         $duration: 0.2s,
@@ -625,6 +678,10 @@ body {
         $function: linear,
         $fill: both
      );
+
+      code {
+        display: inline-block;
+      }
 
       h2 {
         font-family: $family-helvetica;
@@ -734,6 +791,8 @@ body {
     .subsection {
       padding: 2rem 0 0;
       transition: transform 0.2s linear;
+      position: relative;
+      top: 3rem;
 
       @include fadeIn(
         $duration: 0.2s,
@@ -798,7 +857,7 @@ body {
   font-size: 14px;
 
   .columns {
-    @media screen and (min-width: 1200px) {
+    @include widescreen {
       width: 75%
     }
   }
