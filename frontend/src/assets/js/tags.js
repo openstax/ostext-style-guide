@@ -79,7 +79,7 @@ riot.tag('style-guide-navigation',
 riot.tag('style-guide-search',
   `<div class="control is-grouped">
     <p class="control is-expanded has-icon">
-      <input class="input" ref="input" type="text" onclick="{addClass}" onkeyup="{search}" placeholder="Search for content, elements, layout, typography...">
+      <input class="input" ref="input" type="text" onclick="{addClass}" onkeyup="{onSearch}" placeholder="Search for content, elements, layout, typography...">
       <span class="icon is-medium">
         <i class="fa fa-search"></i>
       </span>
@@ -89,8 +89,8 @@ riot.tag('style-guide-search',
   <div class="search-results menu">
     <ul class="menu-list sg-search-result">
      <li each={results} onclick="{reset}" class="{category.replace(/ +/g, '-').toLowerCase()}"><a href="/#/{category.replace(/ +/g, '-').toLowerCase()}/{name.replace(/ +/g, '-').toLowerCase()}"><span>in {category}</span>{name}</a></li>
-     <virtual if="{results.length == 0 && this.refs.input.value != ''}">
-      <li class="no-results">Nothing found for <strong><i>{this.refs.input.value}</i></strong></li>
+     <virtual if="{results.length == 0 && refs.input.value != ''}">
+      <li class="no-results">Nothing found for <strong><i>{refs.input.value}</i></strong></li>
      </virtual>
      <virtual if="{results.length == 4}">
       <li><a class="view-more" href="/#/search?keyword={refs.input.value}">See all results for {this.refs.input.value}
@@ -104,8 +104,8 @@ riot.tag('style-guide-search',
   function(opts) {
     this.results = [];
 
-    this.search = (e) => {
-      this.result_refs = opts.index.search(e.target.value);
+    this.search = (term) => {
+      this.result_refs = opts.index.search(term);
       this.results = [];
 
       this.result_refs.slice(0, 4).map((result_ref) => {
@@ -122,6 +122,10 @@ riot.tag('style-guide-search',
       this.update();
     }
 
+    this.onSearch = (e) => {
+      this.search(e.target.value);
+    }
+
     this.reset = (e) => {
       let category = e.currentTarget.childNodes[0].firstChild.textContent;
       let section = e.currentTarget.childNodes[0].lastChild.textContent;
@@ -129,6 +133,7 @@ riot.tag('style-guide-search',
       this.result = section + ' ' + category;
       this.results = [];
       this.refs.input.value = this.result;
+      this.search(this.refs.input.value);
       this.update();
     }
 

@@ -656,6 +656,7 @@ body {
         & + .back-to-top {
           opacity: 1;
           transform: translate3d(0, 0, 0);
+          z-index: 1;
         }
       }
     }
