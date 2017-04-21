@@ -15,10 +15,6 @@ riot.tag('raw',
 
 riot.tag('style-guide-navigation',
   `
-  <div class="menu">
-      <p class="changelog">v1.0.0 <a href="https://github.com/openstax/ostext-style-guide/releases" target="_blank">(Changelog)</a></p>
-    </ul>
-  </div>
   <div each="{category, i in sections}" class="menu">
   <p>{category.category}</p>
   <ul class="menu-list">
@@ -266,13 +262,32 @@ riot.tag('style-guide-sections',
   <!-- Style Guide section data -->
   <section id="{opts.Number}" class="section">
     <div class="columns">
-      <div class="column is-three-quarters-desktop is-12-tablet">
+      <div class="column is-three-quarters-widescreen is-12-tablet">
+        <nav class="nav github-bar">
+          <div class="nav-left">
+            <div class="nav-item">
+              <p>OpenGuide <span>v1.0.0</span></p>
+            </div>
+          </div>
+          <div class="nav-right">
+            <div class="nav-item is-hidden-mobile">
+              <a href="https://github.com/openstax/ostext-style-guide/releases" target="_blank" class="changelog">Changelog</a>
+            </div>
+            <div class="nav-item">
+              <a href="https://github.com/openstax/ostext-style-guide/issues/" target="_blank" class="github-issues">
+              <span class="icon">
+                <i class="fa fa-github"></i>
+              </span>
+              Submit an issue</a>
+            </div>
+          </div>
+        </nav>
         <div class="content">
           <h1 class="title">{ opts.Name }</h1>
           <raw content="{ opts.description }"/>
         </div>
       </div>
-      <div class="column is-hidden-touch {is-hidden-desktop: !hasSubSection}">
+      <div class="column is-hidden-touch is-hidden-desktop-only {is-hidden-desktop: !hasSubSection}">
         <div class="menu subsection">
           <h3>In this section</h3>
           <ul class="menu-list">
@@ -361,7 +376,7 @@ riot.tag('style-guide-sections',
         if (heading != 'top') {
           scrollToY(rect.top + pageYOffset - interactions.offsetValue(), 2000, 'easeInOutSine');
         } else {
-          window.scrollTo(0, rect.top + pageYOffset);
+          scrollToY(rect.top + pageYOffset - interactions.offsetValue(), 14000, 'easeInOutSine');
         }
       }
 

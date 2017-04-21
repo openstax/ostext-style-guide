@@ -44,7 +44,7 @@ export const toggleFixedClass = () => {
         const content = document.querySelector('.section .content');
         const contentHeight = Math.max(content.scrollHeight, content.offsetHeight)
         const contentBottom = contentHeight - getCoords(content).top;
-        const floatingMenuBottom = window.pageYOffset + (floatingMenuHeight-208);
+        const floatingMenuBottom = window.pageYOffset + (floatingMenuHeight-304);
 
         if (window.pageYOffset > getCoords(content).top) {
           addClass(floatingMenu, 'is-fixed');
@@ -67,7 +67,7 @@ export const isActive = () => {
     let headings = content.getElementsByTagName('h2');
     let subSection = document.querySelector('.menu.subsection');
     let menuItems = subSection.getElementsByTagName('a');
-    
+
     for (var i=0; i < headings.length; i++ ) {
       let el = headings[i];
       let nextEl = headings[i+1];
@@ -94,7 +94,7 @@ export const setWidth = () => {
   let sideNav = document.querySelector('.menu.subsection');
 
   if (sideNav) {
-    if (hasClass(sideNav, 'is-fixed') && !(hasClass(sideNav, 'is-bottom'))) {
+    if (hasClass(sideNav, 'is-fixed')) {
       sideNav.setAttribute('style', `width:${sideNav.parentNode.offsetWidth - 24}px;`);
     }
   }
@@ -126,9 +126,9 @@ let myElement = document.querySelector("header");
 
 // construct an instance of Headroom, passing the element
 let headroom  = new Headroom(myElement, {
-  offset: 80,
+  offset: 100,
   tolerance : {
-    up : 10,
+    up : 5,
     down : 0
   },
 
