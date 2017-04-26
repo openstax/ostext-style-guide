@@ -93,7 +93,7 @@ riot.tag('style-guide-search',
       <li class="no-results">Nothing found for <strong><i>{refs.input.value}</i></strong></li>
      </virtual>
      <virtual if="{results.length == 4}">
-      <li><a class="view-more" href="/#/search?keyword={refs.input.value}">See all results for {this.refs.input.value}
+      <li onclick="{removeOpenClasses}"><a class="view-more" href="/#/search?keyword={refs.input.value}">See all results for {refs.input.value}
       <span class="icon">
         <i class="fa fa-chevron-right"></i>
       </span>
@@ -102,6 +102,7 @@ riot.tag('style-guide-search',
     </ul>
   </div>`,
   function(opts) {
+    this.removeOpenClasses = interactions.removeOpenClasses;
     this.results = [];
 
     this.search = (term) => {
@@ -134,6 +135,7 @@ riot.tag('style-guide-search',
       this.results = [];
       this.refs.input.value = this.result;
       this.search(this.refs.input.value);
+      interactions.removeOpenClasses();
       this.update();
     }
 
@@ -157,6 +159,15 @@ riot.tag('style-guide-search',
           interactions.removeClass(results, 'is-visible');
           document.removeEventListener('click', this);
           document.removeEventListener('scroll', closeSearchOnScroll);
+        }
+      });
+
+      // prevent scrolling of search overlay background on mobile when overlay is open
+      // fixes bug where overlay would close when touch scrolling
+      document.addEventListener('touchmove', function(e) {
+        if (e.target != results) {
+          e.preventDefault();
+          e.stopPropagation();
         }
       });
 
@@ -196,7 +207,7 @@ riot.tag('style-guide',
     <footer class="footer">
       <div class="container">
         <div class="columns is-vcentered is-gapless is-mobile">
-          <div class="column is-half">
+          <div class="column is-7">
             <div class="meta">
               <a href="http://www.openstax.org/about" target="_blank">About</a>
               <a href="http://www.openstax.org/blog" target="_blank">Blog</a>

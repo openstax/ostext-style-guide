@@ -599,18 +599,18 @@
   Resolution
   --------
 
-  200 DPI for all images and art program
+  200 DPI for all images and art
 
   Size
   ---------
 
   ### Width
 
-  The width of images used should be one of the the 3 sets of dimensions provided: 2.1667in, 3.25in, or 6.5 inches. Images should be cropped to one of these sizes, or extra white space should be added to the sides of figures to force it into one of the size containers outlined here.
+  Images should be 2.1667in, 3.25in, or 6.5 inches wide. They should be cropped to one of these sizes, or extra white space should be added to the sides so that they fit into one of the width containers outlined here.
 
   ### Height
 
-  Any extra whitespace at the top and bottom of figures should be cropped off. This cropping should not affect the content of the figure.
+  Any extra whitespace at the top and bottom of figures should be cropped off. This cropping should not affect the content of the image.
 
   Note: OpenStax does not restrict image height if the height is necessary for the context of the subject. We do recommend not using tall images, to reduce page count.
 
@@ -618,8 +618,8 @@
 
   Multi Column Support
   ----------------
-  Currently, OpenStax does not support multiple columns. However, in some cases, such as dev math we are able to do an inline 2 or 3 column.
 
+  OpenStax does not currently support a multiple-column format, but in some cases we can allow a 2- or 3-column image.
   As long as the source art is one of the 3 sizes we require, the padding applied on these inline elements will shrink the images to fit the content.
 
   Note: Shrinking the images using our scale rule should not distort content that may appear in source art as long as the font sizes used in such images follow our font-size rules.
@@ -636,11 +636,9 @@
 
   ### Padding
 
-  OpenStax developers will add equal padding(top, right, bottom & left)to all features, keeping content, including full-width images, from displaying at full width.
-
+  OpenStax adds equal padding (top, right, bottom, and left) to all features. This keeps content, including full-width images, from displaying at full width
   Our padding method uses a scale value that changes based on the font size, leading and line height properties.
-
-  Adding both padding and the css rule box-sizing: border-box will resize the image to fit the  content.
+  Adding both padding and the css rule `box-sizing: border-box` will resize the image to fit the  content.
 
   ![](assets/img/image-rules-nested.jpg)
 
@@ -762,8 +760,7 @@
   Figure Caption
   ------------
 
-  Figures with Captions with 70 characters or less will fit within image dimensions as shown in sample A, and they should use `class="small"`.
-  Otherwise captions will run full width.
+  Figures that have captions of 70 characters or fewer will allow the caption to fit within image dimensions as shown in sample A. The `<figure>` tags of these should use `class=“small”`. Otherwise captions will be the full width of the page.
 
   _Note: The 70 characters do not include the figure title or figure number; they are in addition to the title and number of the image._
 
@@ -830,7 +827,7 @@
     @Type styled
     @Source features-cooked.html
     @Id #features-example-2
-    
+
   @Number '3.13.0'
 */
 /**
@@ -976,7 +973,7 @@
 
   Each chapter contains an introduction module. This module must use the class "introduction" (not "intro", which is a common markup mistake) in the document tag: `<document class="introduction">`. A chapter also contains one or more other modules. These are contained in a subcollection inside the collection structure. Modules may contain any available CNXML content.
 
-  Splash image
+  Splash Image
   ----------
 
   At the beginning of each chapter in the introduction module, a figure with the splash class (markup: `<figure class="splash">` may cover the horizontal width of the page.
@@ -988,7 +985,7 @@
   </span>
   [Download sample splash image file](assets/img/docs/splash-images-sample.eps)
 
-  Chapter outline
+  Chapter Outline
   ------------
 
   The platform generates a chapter outline for each chapter in the collection.
@@ -1001,7 +998,7 @@
   End-of-Chapter Collated Elements
   ---------------
 
-  + Collating elements are created by adding a specific class to a `<section>` tag at the end of a module (these elements must always appear in the same order in the module markup). Collating elements common to most OpenStax books include Section Summary (class="section-summary"), Key Terms (class="key-terms"), Key Concepts (class="concepts"), Key Equations, various types of problems and exercises (often separated in collation by type). More flexible book-specific collated elements sometimes include Practice Tests and References [link to References](insert link).
+  + Collating elements are created by adding a specific class to a `<section>` tag at the end of a module (these elements must always appear in the same order in the module markup). Collating elements common to most OpenStax books include Section Summary (class="section-summary"), Key Terms (class="key-terms"), Key Concepts (class="concepts"), Key Equations, various types of problems and exercises (often separated in collation by type). More flexible book-specific collated elements sometimes include Practice Tests and [References](/#/book-skeleton/references).
   + Collating elements are usually located inside the relevant modules and collated together at the end of the chapter, using a collation instruction in the introduction module of each chapter. The collated elements may be separated by headers indicating the module they came from, or they may not, according to their class.
 
   @Number '4.4.0'
