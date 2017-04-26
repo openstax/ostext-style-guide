@@ -9,6 +9,10 @@
         //For general-composition/typography styles
         "typography-scales";
 
+html {
+  -webkit-text-size-adjust: 100%; /* Prevent font scaling in landscape while allowing user zoom */
+}
+
 a:hover {
   color: $body-color;
 }
@@ -112,6 +116,13 @@ body {
 }
 
 .header {
+  z-index: 1;
+}
+
+.header .nav {
+  z-index: 9999;
+  min-height: 5rem;
+
   @include mobile {
     @at-root .is-active #{&} {
       will-change: transform;
@@ -119,17 +130,12 @@ body {
       transform: translateY(-100%);
     }
   }
-}
-
-.header .nav {
-  z-index: 9999;
-  min-height: 5rem;
 
   @include tablet {
     background-color: $primary;
   }
 
-  @at-root .sticky--not-top#{&} {
+  &.sticky--not-top {
     box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1);
   }
 
@@ -168,7 +174,6 @@ body {
   }
 
   .nav-toggle {
-    background-color: $os-gray3;
     border-radius: 10rem;
     width: 2rem;
     height: 2rem;
@@ -178,7 +183,7 @@ body {
     &.is-active {
       @include mobile {
         will-change: transform;
-        transition: transform 200ms 0.4s linear;
+        transition: transform 200ms linear;
         transform: translateY(5rem);
       }
 
@@ -237,7 +242,7 @@ body {
     }
   }
 
-  @at-root .search--icon.is-active.header {
+  @at-root .search--icon.is-active.header .nav {
     transform: translateY(-100%);
   }
 
@@ -393,10 +398,6 @@ body {
 
   }
 
-    @at-root .search--icon.is-active.header #{&} {
-
-    }
-
     @at-root .content #{&} {
       ul {
         list-style: none;
@@ -517,7 +518,7 @@ body {
 
     @at-root .nav #{&} {
       border-bottom: 1px solid $border-color;
-      padding: 1rem 1rem 1rem 6rem;
+      padding: 1rem 1rem 1rem 5rem;
     }
 
     &:hover {

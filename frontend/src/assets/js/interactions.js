@@ -117,7 +117,15 @@ export const mobileSearchEventHandler = (event) => {
 
 export const addOpenClasses = (event) => {
   document.body.setAttribute('style', `top:-${window.pageYOffset}px`);
-  addClass(document.querySelector('.nav-toggle'), 'is-active');
+
+  if (window.innerWidth <= 768) {
+    setTimeout(function() {
+      addClass(document.querySelector('.nav-toggle'), 'is-active');
+    }, 400);
+  } else {
+    addClass(document.querySelector('.nav-toggle'), 'is-active');
+  }
+
   addClass(document.body, 'fixed');
   document.querySelector('.main').addEventListener('click', removeOpenClasses);
 
@@ -146,7 +154,7 @@ export const removeOpenClasses = (event) => {
   document.querySelector('.main').removeEventListener('click', removeOpenClasses);
 }
 
-let myElement = document.querySelector('.header');
+let myElement = document.querySelector('.header .nav');
 
 // construct an instance of Headroom, passing the element
 let headroom  = new Headroom(myElement, {
