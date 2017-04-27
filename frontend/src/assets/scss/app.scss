@@ -162,15 +162,17 @@ body {
       @include tablet {
         display: none;
       }
-
-      @at-root .search--icon.is-active#{&} {
-        color: $os-gray;
-      }
     }
   }
 
   .logo {
     max-height: 2.2rem;
+
+    @at-root .is-active.search--icon #{&} {
+      transform: translateY(5rem);
+      will-change: transform;
+      transition: transform 200ms 0.4s linear;
+    }
   }
 
   .nav-toggle {
@@ -182,9 +184,11 @@ body {
 
     &.is-active {
       @include mobile {
-        will-change: transform;
-        transition: transform 200ms linear;
-        transform: translateY(5rem);
+        @at-root .is-active #{&} {
+          will-change: transform;
+          transition: transform 200ms linear;
+          transform: translateY(5rem);
+        }
       }
 
       span:nth-child(1) {
@@ -211,6 +215,51 @@ body {
       margin-top: 2px;
     }
   }
+
+  .nav-center {
+    @include mobile {
+      width: 0;
+      height: 0;
+      opacity: 0;
+      background-color: #fff;
+      overflow: hidden;
+      will-change: transform;
+      transition: transform 200ms 0.4s linear;
+
+      transform: translateY(-100%);
+      transition: transform 0.2s 0.4s linear;
+
+      @at-root .is-active.search--icon #{&} {
+        width: inherit;
+        height: inherit;
+        opacity: 1;
+        transform: translateY(5rem);
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        z-index: -1;
+        padding: 6rem 1.5rem 3rem;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+    }
+
+    @include tablet {
+      flex: 1 0;
+      display: flex;
+      margin: 0 1.5rem;
+    }
+
+    @include widescreen {
+      margin-right: 2rem;
+    }
+
+    .container {
+      display: flex;
+      flex: 1 0;
+    }
+  }
 }
 
 .search {
@@ -233,49 +282,16 @@ body {
     background-color: rgba(255,255,255,1);
   }
 
+  @at-root .is-active.search--icon #{&} {
+    opacity: 1;
+  }
+
   @include tablet {
     opacity: 1;
 
     &:hover,
     &.is-focus {
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-  }
-
-  @at-root .search--icon.is-active.header .nav {
-    transform: translateY(-100%);
-  }
-
-  @at-root .search--icon.is-active.header .logo {
-    transform: translateY(5rem);
-    will-change: transform;
-    transition: transform 200ms 0.4s linear;
-  }
-
-  @at-root .search--icon.is-active.header .nav-center {
-    width: auto;
-    height: 100%;
-    opacity: 1;
-    position: fixed;
-    top: 5rem;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #fff;
-    min-height: 100%;
-    min-height: 100vh;
-    overflow:hidden;
-
-    @include mobile {
-      transform: translateY(0);
-    }
-
-    .container {
-      padding: 6rem 1.5rem 3rem;
-    }
-    .search {
-      width: 100%;
-      opacity: 1;
     }
   }
 
@@ -340,46 +356,9 @@ body {
       }
     }
   }
-
-  @at-root .header .nav-center {
-    width: 0;
-    height: 0;
-    opacity: 0;
-    z-index: -1;
-    transition: transform 0.2s 0.4s linear;
-
-    @include mobile {
-      transform: translateY(-100%);
-    }
-
-    @include tablet {
-      width: auto;
-      height: auto;
-      opacity: 1;
-      flex: 1 0;
-      display: flex;
-      margin: 0 1.5rem;
-    }
-
-    @include widescreen {
-      margin-right: 2rem;
-    }
-
-    .container {
-      display: flex;
-      flex: 1 0;
-    }
-  }
-
-  @at-root .body & {
-    @include desktop {
-      display: none;
-    }
-  }
 }
 
 .search-results {
-
   @at-root .nav #{&} {
     position: absolute;
     transform: translate3d(0,-100%,0);
@@ -437,10 +416,9 @@ body {
     );
 
     @include mobile {
-      border-top: 1px solid $border-color;
-      max-height: calc(100vh - 10rem);
-      -webkit-overflow-scrolling: touch;
-      overflow-y: scroll;
+       border-top: 1px solid $border-color;
+       height: calc(100vh - 14rem);
+       overflow-y: scroll;
     }
 
     @at-root .sticky--unpinned #{&} {
@@ -566,7 +544,7 @@ body {
       transition: transform 200ms 0.4s linear;
       transform: translateY(-100%);
 
-      @at-root .is-active #{&} {
+      @at-root .is-active.nav--open #{&} {
         opacity: 1;
         width: inherit;
         height: inherit;
@@ -596,7 +574,7 @@ body {
       bottom: 0;
       width: 258px;
 
-      @at-root .is-active #{&} {
+      @at-root .is-active.nav--open #{&} {
         transform: translate3d(258px, 0, 0);
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;

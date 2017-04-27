@@ -164,11 +164,8 @@ riot.tag('style-guide-search',
 
       // prevent scrolling of search overlay background on mobile when overlay is open
       // fixes bug where overlay would close when touch scrolling
-      document.addEventListener('touchmove', function(e) {
-        if (e.target != results) {
-          e.preventDefault();
-          e.stopPropagation();
-        }
+      document.querySelector('.nav .nav-center').addEventListener('touchmove', function(e) {
+        e.preventDefault();
       });
 
       let closeSearchOnScroll = (e) => {
@@ -219,7 +216,7 @@ riot.tag('style-guide',
           </div>
           <div class="column has-text-right">
             <a class="icon is-medium" href="https://github.com/openstax/ostext-style-guide" target="_blank">
-              <i class="fa fa-github"></i>
+              <i class="fa fa-github-alt"></i>
             </a>
             <a class="icon is-medium" href="https://www.facebook.com/openstax" target="_blank">
               <i class="fa fa-facebook"></i>
@@ -292,7 +289,7 @@ riot.tag('style-guide-sections',
             <div class="nav-item">
               <a href="https://github.com/openstax/ostext-style-guide/issues/" target="_blank" class="github-issues">
               <span class="icon">
-                <i class="fa fa-github"></i>
+                <i class="fa fa-github-alt"></i>
               </span>
               Submit an issue</a>
             </div>

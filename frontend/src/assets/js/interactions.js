@@ -101,7 +101,7 @@ export const setWidth = () => {
 }
 
 export const navClickEventHandler = (event) => {
-  if (!hasClass(document.body, 'is-active') && !hasClass(document.querySelector('.header'), 'search--icon')) {
+  if (!hasClass(document.body, 'is-active')) {
     addOpenClasses(event);
   } else {
     removeOpenClasses(event);
@@ -109,14 +109,10 @@ export const navClickEventHandler = (event) => {
   event.stopPropagation();
 }
 
-export const mobileSearchEventHandler = (event) => {
-  if ((!hasClass(document.querySelector('.header'), 'search--icon') && (!hasClass(document.querySelector('.header'), 'is-active')))) {
-    addOpenClasses(event);
-  }
-}
-
 export const addOpenClasses = (event) => {
   document.body.setAttribute('style', `top:-${window.pageYOffset}px`);
+  addClass(document.body, 'fixed');
+  addClass(document.body, 'is-active');
 
   if (window.innerWidth <= 768) {
     setTimeout(function() {
@@ -126,17 +122,14 @@ export const addOpenClasses = (event) => {
     addClass(document.querySelector('.nav-toggle'), 'is-active');
   }
 
-  addClass(document.body, 'fixed');
-  document.querySelector('.main').addEventListener('click', removeOpenClasses);
-
   if (event.currentTarget == document.querySelector('.nav-toggle')) {
-    addClass(document.body, 'is-active');
+    addClass(document.body, 'nav--open');
   }
 
   if (event.currentTarget == document.querySelector('.search--icon')) {
-    addClass(document.querySelector('.header'), 'search--icon');
-    addClass(document.querySelector('.header'), 'is-active');
+    addClass(document.body, 'search--icon');
   }
+  document.querySelector('.main').addEventListener('click', removeOpenClasses);
 }
 
 export const removeOpenClasses = (event) => {
@@ -149,8 +142,8 @@ export const removeOpenClasses = (event) => {
 
   removeClass(document.body, 'is-active');
   removeClass(document.querySelector('.nav-toggle'), 'is-active');
-  removeClass(document.querySelector('.header'), 'search--icon');
-  removeClass(document.querySelector('.header'), 'is-active');
+  removeClass(document.body, 'search--icon');
+  removeClass(document.body, 'nav--open');
   document.querySelector('.main').removeEventListener('click', removeOpenClasses);
 }
 
@@ -202,7 +195,7 @@ window.onload = function () {
   setWidth();
   isActive();
   document.querySelector('.nav-toggle').addEventListener('click', navClickEventHandler);
-  document.querySelector('.search--icon').addEventListener('click', mobileSearchEventHandler);
+  document.querySelector('.search--icon').addEventListener('click', navClickEventHandler);
   document.querySelector('.logo').addEventListener('click', removeOpenClasses);
   window.addEventListener('resize', removeOpenClasses);
   window.addEventListener('scroll', toggleFixedClass);
