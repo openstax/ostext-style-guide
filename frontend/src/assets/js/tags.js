@@ -67,7 +67,7 @@ riot.tag('style-guide-navigation',
       self.update();
     }
 
-    this.removeOpenClasses = interactions.removeOpenClasses;
+    this.removeOpenClasses = (e) => interactions.removeOpenClasses(e);
 
     this.on('sections-updated', function() {
       this.setSections();
@@ -93,7 +93,7 @@ riot.tag('style-guide-search',
       <li class="no-results">Nothing found for <strong><i>{refs.input.value}</i></strong></li>
      </virtual>
      <virtual if="{results.length == 4}">
-      <li><a class="view-more" href="/#/search?keyword={refs.input.value}">See all results for {this.refs.input.value}
+      <li onclick="{removeOpenClasses}"><a class="view-more" href="/#/search?keyword={refs.input.value}">See all results for {refs.input.value}
       <span class="icon">
         <i class="fa fa-chevron-right"></i>
       </span>
@@ -102,6 +102,7 @@ riot.tag('style-guide-search',
     </ul>
   </div>`,
   function(opts) {
+    this.removeOpenClasses = (e) => interactions.removeOpenClasses(e);
     this.results = [];
 
     this.search = (term) => {
@@ -134,6 +135,7 @@ riot.tag('style-guide-search',
       this.results = [];
       this.refs.input.value = this.result;
       this.search(this.refs.input.value);
+      interactions.removeOpenClasses(e);
       this.update();
     }
 
@@ -159,6 +161,12 @@ riot.tag('style-guide-search',
           document.removeEventListener('scroll', closeSearchOnScroll);
         }
       });
+
+      // prevent scrolling of search overlay background on mobile when overlay is open
+      // fixes bug where overlay would close when touch scrolling
+      // document.querySelector('.nav .nav-center').addEventListener('touchmove', function(e) {
+      //   e.preventDefault();
+      // });
 
       let closeSearchOnScroll = (e) => {
         let st = window.pageYOffset || document.documentElement.scrollTop;
@@ -196,19 +204,22 @@ riot.tag('style-guide',
     <footer class="footer">
       <div class="container">
         <div class="columns is-vcentered is-gapless is-mobile">
-          <div class="column is-half">
+          <div class="column is-7">
             <div class="meta">
               <a href="http://www.openstax.org/about" target="_blank">About</a>
               <a href="http://www.openstax.org/blog" target="_blank">Blog</a>
               <a href="http://www.openstax.org/contact" target="_blank">Contact</a>
             </div>
             <p>
-              &copy; 1996 - ${new Date().getFullYear()} <a href="http://www.openstax.org" target="_blank">OpenStax</a>. All Rights Reserved.
+              &copy; 1996 - ${new Date().getFullYear()} <a href="http://www.openstax.org" target="_blank">OpenStax</a>.
+            </p>
+            <p>
+              All Rights Reserved.
             </p>
           </div>
           <div class="column has-text-right">
             <a class="icon is-medium" href="https://github.com/openstax/ostext-style-guide" target="_blank">
-              <i class="fa fa-github"></i>
+              <i class="fa fa-github-alt"></i>
             </a>
             <a class="icon is-medium" href="https://www.facebook.com/openstax" target="_blank">
               <i class="fa fa-facebook"></i>
@@ -281,7 +292,7 @@ riot.tag('style-guide-sections',
             <div class="nav-item">
               <a href="https://github.com/openstax/ostext-style-guide/issues/" target="_blank" class="github-issues">
               <span class="icon">
-                <i class="fa fa-github"></i>
+                <i class="fa fa-github-alt"></i>
               </span>
               Submit an issue</a>
             </div>

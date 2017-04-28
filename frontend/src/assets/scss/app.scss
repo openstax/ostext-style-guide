@@ -9,6 +9,10 @@
         //For general-composition/typography styles
         "typography-scales";
 
+html {
+  -webkit-text-size-adjust: 100%; /* Prevent font scaling in landscape while allowing user zoom */
+}
+
 a:hover {
   color: $body-color;
 }
@@ -48,6 +52,13 @@ body {
 .header,
 .footer {
   flex: none;
+
+  @include fadeIn(
+    $duration: 0.5s,
+    $delay: 0s,
+    $function: linear,
+    $fill: both
+ );
 }
 
 .body {
@@ -55,13 +66,20 @@ body {
   flex: 1 0 auto;
   flex-direction: column;
 
+  @include fadeIn(
+    $duration: 0.5s,
+    $delay: 0s,
+    $function: linear,
+    $fill: both
+  );
+
   @include tablet {
     flex-direction: row;
   }
 
   .side-nav {
     @include tablet {
-      flex: 0 0 250px;
+      flex: 0 0 258px;
     }
   }
 
@@ -97,43 +115,82 @@ body {
   }
 }
 
+.header {
+  z-index: 1;
+}
+
 .header .nav {
   z-index: 9999;
   min-height: 5rem;
+
+  @include mobile {
+    @at-root .is-active #{&} {
+      will-change: transform;
+      transition: transform 200ms 0.2s linear;
+      transform: translateY(-100%);
+    }
+  }
 
   @include tablet {
     background-color: $primary;
   }
 
-  @at-root .sticky--not-top#{&} {
+  &.sticky--not-top {
     box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1);
   }
 
   .nav-left {
+    justify-content: space-between;
+    overflow: visible;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+
     @include tablet {
-      flex: 0 0 250px;
+      flex: 0 0 258px;
       background-color: #fff;
+    }
+
+    .search--icon {
+      cursor: pointer;
+      color: $os-gray;
+      margin-right: 1.5rem;
+
+      &:hover {
+        color: $primary;
+      }
+
+      @include tablet {
+        display: none;
+      }
     }
   }
 
   .logo {
     max-height: 2.2rem;
+
+    @at-root .is-active.search--icon #{&} {
+      transform: translateY(5rem);
+      will-change: transform;
+      transition: transform 200ms 0.4s linear;
+    }
   }
 
   .nav-toggle {
-    background-color: $os-gray3;
     border-radius: 10rem;
     width: 2rem;
     height: 2rem;
     display: flex;
     align-self: center;
-    margin: 0.5rem 0.75rem;
-
-    @include tablet-only {
-      left: -4rem;
-    }
 
     &.is-active {
+      @include mobile {
+        @at-root .is-active #{&} {
+          will-change: transform;
+          transition: transform 200ms linear;
+          transform: translateY(5rem);
+        }
+      }
+
       span:nth-child(1) {
         transform-origin: 50% 50%;
         margin-top: -1px;
@@ -158,6 +215,51 @@ body {
       margin-top: 2px;
     }
   }
+
+  .nav-center {
+    @include mobile {
+      width: 0;
+      height: 0;
+      opacity: 0;
+      background-color: #fff;
+      overflow: hidden;
+      will-change: transform;
+      transition: transform 200ms 0.4s linear;
+
+      transform: translateY(-100%);
+      transition: transform 0.2s 0.4s linear;
+
+      @at-root .is-active.search--icon #{&} {
+        width: inherit;
+        height: inherit;
+        opacity: 1;
+        transform: translateY(5rem);
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        z-index: -1;
+        padding: 6rem 1.5rem 3rem;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+    }
+
+    @include tablet {
+      flex: 1 0;
+      display: flex;
+      margin: 0 1.5rem;
+    }
+
+    @include widescreen {
+      margin-right: 2rem;
+    }
+
+    .container {
+      display: flex;
+      flex: 1 0;
+    }
+  }
 }
 
 .search {
@@ -167,24 +269,48 @@ body {
   background-color: #fff;
   margin-bottom: 3rem;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  opacity: 0;
+  transition: opacity 0.2s 0.6s linear;
+  background-color: rgba(255,255,255,0.2);
+  box-shadow: none;
+  padding: 0 1.5rem;
+  margin-bottom: 0;
+  border-radius: 3px;
+  width: 100%;
 
-  &:hover,
   &.is-focus {
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    background-color: rgba(255,255,255,1);
   }
 
-  @include desktop {
-    background-color: rgba(255,255,255,0.2);
-    align-self: center;
-    box-shadow: none;
-    padding: 0 1.5rem;
-    margin-bottom: 0;
-    border-radius: 3px;
-    width: 100%;
+  @at-root .is-active.search--icon #{&} {
+    opacity: 1;
+    padding: 0 0.5rem;
+  }
 
-    &.is-focus {
-      background-color: rgba(255,255,255,1);
+  @include mobile {
+    &::before {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 1px;
+      position: absolute;
+      top: 47px;
+      left: 0;
+      border-bottom: 1px solid $border-color;
     }
+  }
+
+  @include tablet {
+    opacity: 1;
+
+    &:hover,
+    &.is-focus {
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+  }
+
+  @include tablet {
+    align-self: center;
   }
 
   @include widescreen {
@@ -198,20 +324,20 @@ body {
   }
 
   .control.has-icon .input + .icon {
-    @include desktop {
+   @include tablet {
       color: $search-icon;
       top: 1.5rem;
     }
-  }
+ }
 
   .control.has-icon .input:focus + .icon {
-    @include desktop {
+    @include tablet {
       color: $search-icon;
     }
   }
 
   &.is-focus .control.has-icon .input + .icon {
-    @include desktop {
+    @include tablet {
       color: $os-gray;
     }
   }
@@ -222,56 +348,33 @@ body {
     border: none;
     padding-left: 4.5em !important;
     letter-spacing: -1px;
+    background-color: transparent;
+    height: 50px;
+    padding-left: 3.5em !important;
 
-    @include desktop {
-      background-color: transparent;
-      height: 50px;
-      padding-left: 3.5em !important;
+    @include tablet {
       color: $os-blue-s40;
 
       &::placeholder {
         color: $os-blue-s40;
       }
-      @at-root .search.is-focus {
-        .input {
-          color: $os-gray6;
+    }
 
-          &::placeholder {
-            color: $os-gray6;
-          }
+    @at-root .search.is-focus {
+      .input {
+        color: $os-gray6;
+
+        &::placeholder {
+          color: $os-gray6;
         }
       }
-    }
-  }
-
-  @at-root .header .nav-center {
-    display: none;
-    flex: 1 0;
-    margin: 0 2rem 0 1.5rem;
-    min-height: inherit;
-
-    @include desktop {
-      display: flex;
-    }
-
-    .container {
-      display: flex;
-      flex: 1 0;
-    }
-  }
-
-  @at-root .body & {
-    @include desktop {
-      display: none;
     }
   }
 }
 
 .search-results {
-
   @at-root .nav #{&} {
     position: absolute;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     transform: translate3d(0,-100%,0);
     opacity: 0;
     top: 48px;
@@ -281,6 +384,11 @@ body {
     text-align: left;
     overflow: hidden;
     width: 100%;
+
+    @include tablet {
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
   }
 
     @at-root .content #{&} {
@@ -321,6 +429,12 @@ body {
       $fill: both
     );
 
+    @include mobile {
+       height: calc(100vh - 14rem);
+       overflow-y: scroll;
+       -webkit-overflow-scrolling: touch;
+    }
+
     @at-root .sticky--unpinned #{&} {
       @include slideOutUp(
         $duration: 1.6s,
@@ -347,14 +461,21 @@ body {
       $fill: both
    );
 
+   @include mobile {
+      background-position: 0.5rem 50%;
+   }
+
    &.no-results {
      color: $os-gray;
      font-weight: 600;
      border-bottom: 1px solid $border-color;
-     border-top: 1px solid $border-color;
      padding: 1rem 1rem 1rem 5rem;
+
+     @include tablet {
+       border-top: 1px solid $border-color;
+     }
    }
-  }
+ }
 
   li.getting-started {
     background-image: url('/assets/img/svg/icon-getting-started.svg');
@@ -377,7 +498,9 @@ body {
   }
 
   li:first-child a {
-    border-top: 1px solid $border-color;
+    @include tablet {
+      border-top: 1px solid $border-color;
+    }
   }
 
   li:nth-child(4) a {
@@ -391,8 +514,14 @@ body {
 
     @at-root .nav #{&} {
       border-bottom: 1px solid $border-color;
-      padding: 1rem 1rem 1rem 6rem;
+      padding: 1rem 1rem 1rem 5rem;
+
+      @include mobile {
+        padding-left: 4rem;
+      }
     }
+
+
 
     &:hover {
       background: transparent;
@@ -435,19 +564,23 @@ body {
       height: 0;
       opacity: 0;
       overflow: hidden;
+      will-change: transform;
+      transition: transform 200ms 0.4s linear;
+      transform: translateY(-100%);
 
-      @at-root .is-active#{&} {
+      @at-root .is-active.nav--open #{&} {
         opacity: 1;
         width: inherit;
         height: inherit;
         position: fixed;
-        top: 5rem;
+        top: 0;
         left: 0;
         bottom: 0;
         right: 0;
         z-index: 999;
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
+        transform: translateY(0);
       }
     }
 
@@ -457,16 +590,16 @@ body {
 
     @include tablet-only {
       z-index: 999;
-      margin-left: -250px;
+      margin-left: -258px;
       transition: 0.2s transform ease-out;
       position: fixed;
       top: 5rem;
       left: 0;
       bottom: 0;
-      width: 250px;
+      width: 258px;
 
-      @at-root .is-active#{&} {
-        transform: translate3d(250px, 0, 0);
+      @at-root .is-active.nav--open #{&} {
+        transform: translate3d(258px, 0, 0);
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
       }
@@ -506,7 +639,7 @@ body {
       }
 
       &.is-active {
-        background-color: whitesmoke;
+        background-color: $body-bg;
         color: $primary;
         border-color: $primary;
       }
@@ -529,10 +662,10 @@ body {
       content: '';
       transition: opacity 0.3s 0.1s;
 
-      @at-root .is-active#{&} {
+      @at-root .is-active #{&} {
         display: block;
         position: fixed;
-        top: 5rem;
+        top: 0;
         left: 0;
         right: 0;
         bottom: 0;
@@ -876,10 +1009,26 @@ body {
 
   a {
     &.icon {
-      color: $secondary;
+      color: #fff;
+      background-color: $os-gray9;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      transition: color 0.5s ease-in-out, background-color 0.3s ease-in-out;
+      margin-left: 0.125rem;
+      margin-bottom: 0.5rem;
 
       &:hover {
+        background-color: $os-gray7;
         color: $body-color;
+      }
+
+      &:not(:last-child) {
+        margin-right: 0.125rem;
+      }
+
+      .fa {
+        line-height: 45px;
       }
     }
   }

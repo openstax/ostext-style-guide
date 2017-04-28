@@ -101,28 +101,55 @@ export const setWidth = () => {
 }
 
 export const navClickEventHandler = (event) => {
-    if (!hasClass(event.currentTarget, 'is-active')) {
-      addClass(event.currentTarget, 'is-active');
-      addClass(document.querySelector('.body'), 'is-active');
-      addClass(document.body, 'fixed');
-      document.querySelector('.main').addEventListener('click', removeOpenClasses);
-    } else {
-      removeClass(document.body, 'fixed');
-      removeClass(event.currentTarget, 'is-active');
-      removeClass(document.querySelector('.body'), 'is-active');
-      document.querySelector('.main').removeEventListener('click', removeOpenClasses);
-    }
-    event.stopPropagation();
+  if (!hasClass(document.body, 'is-active')) {
+    addOpenClasses(event);
+  } else {
+    removeOpenClasses(event);
+  }
+}
+
+export const addOpenClasses = (event) => {
+  document.body.setAttribute('style', `top:-${window.pageYOffset}px`);
+  addClass(document.body, 'fixed');
+  addClass(document.body, 'is-active');
+
+  if (window.innerWidth <= 768) {
+    setTimeout(function() {
+      addClass(document.querySelector('.nav-toggle'), 'is-active');
+    }, 400);
+  } else {
+    addClass(document.querySelector('.nav-toggle'), 'is-active');
+    document.querySelector('.main').addEventListener('click', removeOpenClasses);
+  }
+
+  if (event.currentTarget == document.querySelector('.nav-toggle')) {
+    addClass(document.body, 'nav--open');
+  }
+
+  if (event.currentTarget == document.querySelector('.search--icon')) {
+    addClass(document.body, 'search--icon');
+  }
 }
 
 export const removeOpenClasses = (event) => {
-  removeClass(document.body, 'fixed');
-  removeClass(document.querySelector('.nav-toggle'), 'is-active');
-  removeClass(document.querySelector('.body'), 'is-active');
-  document.querySelector('.main').removeEventListener('click', removeOpenClasses);
+  if ((window.windowWidth != window.innerWidth) || (event.currentTarget != window)) {
+    window.windowWidth = window.innerWidth;
+    removeClass(document.body, 'fixed');
+
+    if (document.body.hasAttribute('style')) {
+      window.scrollTo(0, document.body.getAttribute('style').split('-')[1].split('px')[0]);
+      document.body.removeAttribute('style');
+    }
+
+    removeClass(document.body, 'is-active');
+    removeClass(document.querySelector('.nav-toggle'), 'is-active');
+    removeClass(document.body, 'search--icon');
+    removeClass(document.body, 'nav--open');
+    document.querySelector('.main').removeEventListener('click', removeOpenClasses);
+  }
 }
 
-let myElement = document.querySelector("header");
+let myElement = document.querySelector('.header .nav');
 
 // construct an instance of Headroom, passing the element
 let headroom  = new Headroom(myElement, {
@@ -166,10 +193,12 @@ let headroom  = new Headroom(myElement, {
 headroom.init();
 
 window.onload = function () {
+  window.windowWidth = window.innerWidth;
   toggleFixedClass();
   setWidth();
   isActive();
   document.querySelector('.nav-toggle').addEventListener('click', navClickEventHandler);
+  document.querySelector('.search--icon').addEventListener('click', navClickEventHandler);
   document.querySelector('.logo').addEventListener('click', removeOpenClasses);
   window.addEventListener('resize', removeOpenClasses);
   window.addEventListener('scroll', toggleFixedClass);
