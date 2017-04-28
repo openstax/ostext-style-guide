@@ -106,7 +106,6 @@ export const navClickEventHandler = (event) => {
   } else {
     removeOpenClasses(event);
   }
-  event.stopPropagation();
 }
 
 export const addOpenClasses = (event) => {
@@ -120,6 +119,7 @@ export const addOpenClasses = (event) => {
     }, 400);
   } else {
     addClass(document.querySelector('.nav-toggle'), 'is-active');
+    document.querySelector('.main').addEventListener('click', removeOpenClasses);
   }
 
   if (event.currentTarget == document.querySelector('.nav-toggle')) {
@@ -129,22 +129,24 @@ export const addOpenClasses = (event) => {
   if (event.currentTarget == document.querySelector('.search--icon')) {
     addClass(document.body, 'search--icon');
   }
-  document.querySelector('.main').addEventListener('click', removeOpenClasses);
 }
 
 export const removeOpenClasses = (event) => {
-  removeClass(document.body, 'fixed');
+  if ((window.windowWidth != window.innerWidth) || (event.currentTarget != window)) {
+    window.windowWidth = window.innerWidth;
+    removeClass(document.body, 'fixed');
 
-  if (document.body.hasAttribute('style')) {
-    window.scrollTo(0, document.body.getAttribute('style').split('-')[1].split('px')[0]);
-    document.body.removeAttribute('style');
+    if (document.body.hasAttribute('style')) {
+      window.scrollTo(0, document.body.getAttribute('style').split('-')[1].split('px')[0]);
+      document.body.removeAttribute('style');
+    }
+
+    removeClass(document.body, 'is-active');
+    removeClass(document.querySelector('.nav-toggle'), 'is-active');
+    removeClass(document.body, 'search--icon');
+    removeClass(document.body, 'nav--open');
+    document.querySelector('.main').removeEventListener('click', removeOpenClasses);
   }
-
-  removeClass(document.body, 'is-active');
-  removeClass(document.querySelector('.nav-toggle'), 'is-active');
-  removeClass(document.body, 'search--icon');
-  removeClass(document.body, 'nav--open');
-  document.querySelector('.main').removeEventListener('click', removeOpenClasses);
 }
 
 let myElement = document.querySelector('.header .nav');
@@ -191,6 +193,7 @@ let headroom  = new Headroom(myElement, {
 headroom.init();
 
 window.onload = function () {
+  window.windowWidth = window.innerWidth;
   toggleFixedClass();
   setWidth();
   isActive();

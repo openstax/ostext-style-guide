@@ -67,7 +67,7 @@ riot.tag('style-guide-navigation',
       self.update();
     }
 
-    this.removeOpenClasses = interactions.removeOpenClasses;
+    this.removeOpenClasses = (e) => interactions.removeOpenClasses(e);
 
     this.on('sections-updated', function() {
       this.setSections();
@@ -102,7 +102,7 @@ riot.tag('style-guide-search',
     </ul>
   </div>`,
   function(opts) {
-    this.removeOpenClasses = interactions.removeOpenClasses;
+    this.removeOpenClasses = (e) => interactions.removeOpenClasses(e);
     this.results = [];
 
     this.search = (term) => {
@@ -135,7 +135,7 @@ riot.tag('style-guide-search',
       this.results = [];
       this.refs.input.value = this.result;
       this.search(this.refs.input.value);
-      interactions.removeOpenClasses();
+      interactions.removeOpenClasses(e);
       this.update();
     }
 
@@ -164,9 +164,9 @@ riot.tag('style-guide-search',
 
       // prevent scrolling of search overlay background on mobile when overlay is open
       // fixes bug where overlay would close when touch scrolling
-      document.querySelector('.nav .nav-center').addEventListener('touchmove', function(e) {
-        e.preventDefault();
-      });
+      // document.querySelector('.nav .nav-center').addEventListener('touchmove', function(e) {
+      //   e.preventDefault();
+      // });
 
       let closeSearchOnScroll = (e) => {
         let st = window.pageYOffset || document.documentElement.scrollTop;
@@ -211,7 +211,10 @@ riot.tag('style-guide',
               <a href="http://www.openstax.org/contact" target="_blank">Contact</a>
             </div>
             <p>
-              &copy; 1996 - ${new Date().getFullYear()} <a href="http://www.openstax.org" target="_blank">OpenStax</a>. All Rights Reserved.
+              &copy; 1996 - ${new Date().getFullYear()} <a href="http://www.openstax.org" target="_blank">OpenStax</a>.
+            </p>
+            <p>
+              All Rights Reserved.
             </p>
           </div>
           <div class="column has-text-right">

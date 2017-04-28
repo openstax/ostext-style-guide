@@ -284,6 +284,20 @@ body {
 
   @at-root .is-active.search--icon #{&} {
     opacity: 1;
+    padding: 0 0.5rem;
+  }
+
+  @include mobile {
+    &::before {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 1px;
+      position: absolute;
+      top: 47px;
+      left: 0;
+      border-bottom: 1px solid $border-color;
+    }
   }
 
   @include tablet {
@@ -416,9 +430,9 @@ body {
     );
 
     @include mobile {
-       border-top: 1px solid $border-color;
        height: calc(100vh - 14rem);
        overflow-y: scroll;
+       -webkit-overflow-scrolling: touch;
     }
 
     @at-root .sticky--unpinned #{&} {
@@ -446,6 +460,10 @@ body {
       $function: linear,
       $fill: both
    );
+
+   @include mobile {
+      background-position: 0.5rem 50%;
+   }
 
    &.no-results {
      color: $os-gray;
@@ -497,7 +515,13 @@ body {
     @at-root .nav #{&} {
       border-bottom: 1px solid $border-color;
       padding: 1rem 1rem 1rem 5rem;
+
+      @include mobile {
+        padding-left: 4rem;
+      }
     }
+
+
 
     &:hover {
       background: transparent;
@@ -985,10 +1009,26 @@ body {
 
   a {
     &.icon {
-      color: $secondary;
+      color: #fff;
+      background-color: $os-gray9;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      transition: color 0.5s ease-in-out, background-color 0.3s ease-in-out;
+      margin-left: 0.125rem;
+      margin-bottom: 0.5rem;
 
       &:hover {
+        background-color: $os-gray7;
         color: $body-color;
+      }
+
+      &:not(:last-child) {
+        margin-right: 0.125rem;
+      }
+
+      .fa {
+        line-height: 45px;
       }
     }
   }
