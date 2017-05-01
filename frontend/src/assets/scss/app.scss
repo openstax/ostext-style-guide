@@ -57,7 +57,8 @@ body {
     $duration: 0.5s,
     $delay: 0s,
     $function: linear,
-    $fill: both
+    $count: 1,
+    $fill: backwards
  );
 }
 
@@ -70,7 +71,8 @@ body {
     $duration: 0.5s,
     $delay: 0s,
     $function: linear,
-    $fill: both
+    $count: 1,
+    $fill: backwards
   );
 
   @include tablet {
@@ -426,6 +428,7 @@ body {
       $duration: 0.2s,
       $delay: 0s,
       $function: linear,
+      $count: 1,
       $fill: both
     );
 
@@ -440,6 +443,7 @@ body {
         $duration: 1.6s,
         $delay: 1s,
         $function: linear,
+        $count: 1,
         $fill: both
       );
     }
@@ -458,6 +462,7 @@ body {
       $duration: 0.2s,
       $delay: 0s,
       $function: linear,
+      $count: 1,
       $fill: both
    );
 
@@ -654,6 +659,7 @@ body {
       $duration: 0.2s,
       $delay: 0.2s,
       $function: linear,
+      $count: 1,
       $fill: both
    );
 
@@ -697,6 +703,7 @@ body {
         $duration: 0.2s,
         $delay: 0.2s,
         $function: linear,
+        $count: 1,
         $fill: both
       );
 
@@ -806,6 +813,7 @@ body {
         $duration: 0.2s,
         $delay: 0.2s,
         $function: linear,
+        $count: 1,
         $fill: both
      );
 
@@ -943,6 +951,7 @@ body {
         $duration: 0.2s,
         $delay: 0.2s,
         $function: linear,
+        $count: 1,
         $fill: both
      );
 

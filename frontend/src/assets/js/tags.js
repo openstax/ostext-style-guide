@@ -218,16 +218,16 @@ riot.tag('style-guide',
             </p>
           </div>
           <div class="column has-text-right">
-            <a class="icon is-medium" href="https://github.com/openstax/ostext-style-guide" target="_blank">
+            <a class="icon" href="https://github.com/openstax/ostext-style-guide" target="_blank">
               <i class="fa fa-github-alt"></i>
             </a>
-            <a class="icon is-medium" href="https://www.facebook.com/openstax" target="_blank">
+            <a class="icon" href="https://www.facebook.com/openstax" target="_blank">
               <i class="fa fa-facebook"></i>
             </a>
-            <a class="icon is-medium" href="https://twitter.com/openstax" target="_blank">
+            <a class="icon" href="https://twitter.com/openstax" target="_blank">
               <i class="fa fa-twitter"></i>
             </a>
-            <a class="icon is-medium" href="https://www.linkedin.com/company/openstax" target="_blank">
+            <a class="icon" href="https://www.linkedin.com/company/openstax" target="_blank">
               <i class="fa fa-linkedin"></i>
             </a>
           </div>
