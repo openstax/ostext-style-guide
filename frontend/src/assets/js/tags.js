@@ -203,8 +203,8 @@ riot.tag('style-guide',
     </div>
     <footer class="footer">
       <div class="container">
-        <div class="columns is-vcentered is-gapless is-mobile">
-          <div class="column is-7">
+        <div class="columns">
+          <div class="column">
             <div class="meta">
               <a href="http://www.openstax.org/about" target="_blank">About</a>
               <a href="http://www.openstax.org/blog" target="_blank">Blog</a>
@@ -212,12 +212,10 @@ riot.tag('style-guide',
             </div>
             <p>
               &copy; 1996 - ${new Date().getFullYear()} <a href="http://www.openstax.org" target="_blank">OpenStax</a>.
-            </p>
-            <p>
               All Rights Reserved.
             </p>
           </div>
-          <div class="column has-text-right">
+          <div class="column">
             <a class="icon" href="https://github.com/openstax/ostext-style-guide" target="_blank">
               <i class="fa fa-github-alt"></i>
             </a>
@@ -286,7 +284,7 @@ riot.tag('style-guide-sections',
             </div>
           </div>
           <div class="nav-right">
-            <div class="nav-item is-hidden-mobile">
+            <div class="nav-item">
               <a href="https://github.com/openstax/ostext-style-guide/releases" target="_blank" class="changelog">Changelog</a>
             </div>
             <div class="nav-item">
