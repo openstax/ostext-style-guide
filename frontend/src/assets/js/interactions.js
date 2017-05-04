@@ -96,6 +96,8 @@ export const setWidth = () => {
   if (sideNav) {
     if (hasClass(sideNav, 'is-fixed')) {
       sideNav.setAttribute('style', `width:${sideNav.parentNode.offsetWidth - 24}px;`);
+    } else {
+      sideNav.removeAttribute('style');
     }
   }
 }

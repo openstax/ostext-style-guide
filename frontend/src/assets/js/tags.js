@@ -78,9 +78,9 @@ riot.tag('style-guide-navigation',
 
 riot.tag('style-guide-search',
   `<div class="control is-grouped">
-    <p class="control is-expanded has-icon">
+    <p class="control is-expanded has-icons-left">
       <input class="input" ref="input" type="text" onclick="{addClass}" onkeyup="{onSearch}" placeholder="Search for content, elements, layout, typography...">
-      <span class="icon is-medium">
+      <span class="icon is-medium is-left">
         <i class="fa fa-search"></i>
       </span>
     </p>
@@ -94,7 +94,7 @@ riot.tag('style-guide-search',
      </virtual>
      <virtual if="{results.length == 4}">
       <li onclick="{removeOpenClasses}"><a class="view-more" href="/#/search?keyword={refs.input.value}">See all results for {refs.input.value}
-      <span class="icon">
+      <span class="icon is-small">
         <i class="fa fa-chevron-right"></i>
       </span>
       </a></li>
@@ -234,34 +234,31 @@ riot.tag('style-guide',
     </footer>
   </main>`,
   function(opts) {
+    let self = this;
     this.sections = [];
 
-    this.resetSearchIndex = function() {
-      this.index = lunr(function() {
-        this.field('name', {boost:10});
-        this.field('description', {boost:8});
-        this.field('category', {boost:6});
-        this.ref('number');
-      });
-      window.index = this.index;
-    }.bind(this)
-
     this.setSections = function(data) {
-
       this.sections = data;
 
-      this.resetSearchIndex();
+      this.index = lunr(function() {
+        this.field('name'); // {boost:10}
+        this.field('description'); //{boost:8}
+        this.field('category'); // {boost:6}
+        this.ref('number');
 
-      this.sections.map(function(section) {
-        this.index.add({
-          description: section['description'],
-          name: section['Name'],
-          number: section['Number'],
-          category: section['Category']
-        });
-      }.bind(this));
+        self.sections.map(function(section) {
+          this.add({
+            description: section['description'],
+            name: section['Name'],
+            number: section['Number'],
+            category: section['Category']
+          });
+        }.bind(this));
+      });
+
+      window.index = this.index;
       this.update();
-      riot.mount('style-guide-search', {index:this.index, sections: this.sections});
+      riot.mount('style-guide-search', {index: this.index, sections: this.sections});
       this.tags['style-guide-navigation'].trigger('sections-updated');
     }.bind(this)
 
