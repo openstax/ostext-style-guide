@@ -5,6 +5,7 @@ import yargs    from 'yargs';
 import browser  from 'browser-sync';
 import gulp     from 'gulp';
 import webpack  from 'webpack-stream';
+import webpack2 from 'webpack';
 import rimraf   from 'rimraf';
 import yaml     from 'js-yaml';
 import fs       from 'fs';
@@ -64,7 +65,7 @@ export const sass = () => gulp.src('src/assets/scss/app.scss')
 // Combine JavaScript into one file
 // In production, the file is minified
 export const javascript = () => gulp.src(PATHS.javascript)
-  .pipe(webpack(require('./webpack.config.js')))
+  .pipe(webpack(require('./webpack.config.js'), webpack2))
   .pipe($.sourcemaps.init({loadMaps: true}))
   .pipe(through.obj(function (file, enc, cb) {
     // Dont pipe through any source map files as it will be handled

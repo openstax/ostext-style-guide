@@ -260,6 +260,7 @@ body {
     .container {
       display: flex;
       flex: 1 0;
+      width: 100%;
     }
   }
 }
@@ -325,20 +326,24 @@ body {
     z-index: 2;
   }
 
-  .control.has-icon .input + .icon {
-   @include tablet {
+  .control.has-icons-left .input + .icon {
+    @include tablet {
       color: $search-icon;
-      top: 1.5rem;
+    }
+
+    .fa {
+      height: 100%;
+      line-height: 48px;
     }
  }
 
-  .control.has-icon .input:focus + .icon {
+  .control.has-icons-left .input:focus + .icon {
     @include tablet {
       color: $search-icon;
     }
   }
 
-  &.is-focus .control.has-icon .input + .icon {
+  &.is-focus .control.has-icons-left .input + .icon {
     @include tablet {
       color: $os-gray;
     }
@@ -539,8 +544,6 @@ body {
       span:first-child {
         color: $primary;
         padding-bottom: 0;
-        font-size: 10px;
-        vertical-align: text-top;
         display: inline-block;
       }
     }
@@ -822,7 +825,7 @@ body {
       padding: 3rem 1.5rem;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       word-wrap: break-word;
-      z-index: 2;
+      z-index: 11;
       position: relative;
 
       @include fadeIn(
