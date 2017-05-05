@@ -18,6 +18,8 @@ from pygments.formatters import HtmlFormatter
 
 from pyparsing import makeHTMLTags, replaceWith, withAttribute
 
+cod = "../frontend/node_modules/.bin/cod"
+
 spanOpen,spanClose = makeHTMLTags("span")
 emptySpans = spanOpen.copy().setParseAction(withAttribute(empty=True))
 removeSpans = emptySpans | spanOpen+spanClose
@@ -81,7 +83,7 @@ A configuration file which consists of the following settings -
     file_paths.append(file_path)
   print("Found: {}".format(' '.join(file_paths)))
 
-  cod_output = subprocess.check_output("../frontend/node_modules/.bin/cod {}".format(' '.join(file_paths)), shell=True)
+  cod_output = subprocess.check_output(cod + " {}".format(' '.join(file_paths)), shell=True)
   style_guide_json = json.loads(cod_output.decode('utf-8'), object_hook=process_json_markup)
 
 
