@@ -13,7 +13,7 @@
     "animatewithsass": "^3.2.1",
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",
-    "babel-polyfill": "^6.23.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.4.0",
     "browser-sync": "^2.18.8",
     "bulma": "^0.4.1",
@@ -36,19 +36,16 @@
     "rimraf": "^2.6.1",
     "riot": "^3.4.4",
     "riot-route": "^3.1.1",
-    "through2": "^2.0.3",
     "webpack": "^2.5.0",
     "webpack-stream": "^3.2.0",
     "yargs": "^8.0.1"
   },
+  "dependencies": {
+    "babel-runtime": "^6.23.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/openstax/ostext-style-guide.git"
-  },
-  "babel": {
-    "presets": [
-      "env"
-    ]
   },
   "private": true
 }

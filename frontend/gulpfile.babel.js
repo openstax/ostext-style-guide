@@ -9,7 +9,6 @@ import webpack2 from 'webpack';
 import rimraf   from 'rimraf';
 import yaml     from 'js-yaml';
 import fs       from 'fs';
-import through  from 'through2';
 
 // Load all Gulp plugins into one variable
 const $ = plugins();
@@ -66,18 +65,9 @@ export const sass = () => gulp.src('src/assets/scss/app.scss')
 // In production, the file is minified
 export const javascript = () => gulp.src(PATHS.javascript)
   .pipe(webpack(require('./webpack.config.js'), webpack2))
-  .pipe($.sourcemaps.init({loadMaps: true}))
-  .pipe(through.obj(function (file, enc, cb) {
-    // Dont pipe through any source map files as it will be handled
-    // by gulp-sourcemaps
-    let isSourceMap = /\.map$/.test(file.path);
-    if (!isSourceMap) this.push(file);
-    cb();
-  }))
   .pipe($.if(PRODUCTION, $.uglify()
     .on('error', e => { console.log(e); })
   ))
-  .pipe($.if(!PRODUCTION, $.sourcemaps.write('./')))
   .pipe(gulp.dest(PATHS.dist + '/assets/js'));
 
 // Copy images to the "dist" folder
@@ -114,13 +104,9 @@ export const watch = () => {
 }
 
 // Build the "dist" folder by running all of the below tasks
-// gulp.task('build',
-//  gulp.series(clean, gulp.parallel(pages, sass, javascript, images, copy)));
 export const build = gulp.series(clean, gulp.parallel(pages, sass, javascript, images, data, fonts));
 
 // Build the site, run the server, and watch for file changes
-// gulp.task('default',
-//   gulp.series('build', server, watch));
 export const dev =  gulp.series(build, server, watch);
 
 export default dev;
