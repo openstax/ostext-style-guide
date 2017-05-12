@@ -20,6 +20,13 @@ riot.tag('style-guide-navigation',
   <ul class="menu-list">
     <li each="{el, i in category.sections}" class="{el.number}">
       <a href="{el.url}" class="{is-active: parent.selectedUrl === el.url}" onclick="{removeOpenClasses}">{el.name}</a>
+      <virtual if={el.children}>
+        <ul class="menu-list">
+          <li each="{sub, i in el.children.sections}">
+            <a href="{sub.url}" onclick="{removeOpenClasses}">{sub.name}</a>
+          </li>
+        </ul>
+      </virtual>
     </li>
    </ul>
    </div>`,
@@ -33,24 +40,50 @@ riot.tag('style-guide-navigation',
       opts.sections.map(function(section) {
         this.sections.push({number: section['Number'],
                             name: section['Name'],
-                            category: section['Category']});
+                            category: section['Category'],
+                            subCategory: section['subCategory'],
+                            url: section['url']});
       }.bind(this));
 
       let groups = {};
+      let subGroups = {}
+
+      for (var i = 0; i < this.sections.length; i++) {
+        let subGroupName = this.sections[i].subCategory;
+
+        if (this.sections[i].subCategory) {
+          if (!subGroups[subGroupName]) {
+            subGroups[subGroupName] = [];
+          }
+
+          subGroups[subGroupName].push({name: this.sections[i].name,
+                                        number: this.sections[i].number,
+                                        url: this.sections[i].url});
+        }
+      }
 
       for (var i = 0; i < this.sections.length; i++) {
         let groupName = this.sections[i].category;
-          if (!groups[groupName]) {
-            groups[groupName] = [];
+
+        if (!groups[groupName]) {
+          groups[groupName] = [];
+        }
+
+        if ((this.sections[i].number.endsWith('.0.0')) || (this.sections[i].subCategory)) {
+          continue;
+        }
+
+        for (var subGroupName in subGroups) {
+          if (this.sections[i].name == subGroupName) {
+            this.sections[i].children = {subCategory: subGroupName, sections: subGroups[subGroupName]};
           }
-          if (this.sections[i].number.endsWith('.0.0')) {
-            continue;
-          }
+        }
 
         groups[groupName].push({name: this.sections[i].name,
-                              number:this.sections[i].number,
-                              url: `/#/${this.sections[i].category.replace(/ +/g, '-').toLowerCase()}/${this.sections[i].name.replace(/ +/g, '-').toLowerCase()}`});
-      }
+                                number: this.sections[i].number,
+                                children: this.sections[i].children,
+                                url: this.sections[i].url});
+        }
 
       this.sections = [];
 
@@ -63,7 +96,7 @@ riot.tag('style-guide-navigation',
     subRoute(highlightCurrent);
 
     function highlightCurrent(category, id) {
-      self.selectedUrl = `/#/${category}/${id}`;
+      self.selectedUrl = `#/${category}/${id}`;
       self.update();
     }
 
@@ -88,7 +121,8 @@ riot.tag('style-guide-search',
 
   <div class="search-results menu">
     <ul class="menu-list sg-search-result">
-     <li each={results} onclick="{reset}" class="{category.replace(/ +/g, '-').toLowerCase()}"><a href="/#/{category.replace(/ +/g, '-').toLowerCase()}/{name.replace(/ +/g, '-').toLowerCase()}"><span>in {category}</span>{name}</a></li>
+     <li each={results} onclick="{reset}" class="{category.replace(/ +/g, '-').toLowerCase()}"><a href="{url}">
+     <span>in {category}<virtual if="{subCategory}"> / {subCategory}</virtual></span>{name}</a></li>
      <virtual if="{results.length == 0 && refs.input.value != ''}">
       <li class="no-results">Nothing found for <strong><i>{refs.input.value}</i></strong></li>
      </virtual>
@@ -116,7 +150,8 @@ riot.tag('style-guide-search',
             this.results.push({number: section['Number'],
                                name: section['Name'],
                                category: section['Category'],
-                               urlId: section['id']});
+                               subCategory: section['subCategory'],
+                               url: section['url']});
           }
         })
       })
@@ -128,8 +163,8 @@ riot.tag('style-guide-search',
     }
 
     this.reset = (e) => {
-      let category = e.currentTarget.childNodes[0].firstChild.textContent;
-      let section = e.currentTarget.childNodes[0].lastChild.textContent;
+      let category = e.currentTarget.getElementsByTagName('a')[0].childNodes[1].textContent;
+      let section = e.currentTarget.getElementsByTagName('a')[0].childNodes[2].textContent;
 
       this.result = section + ' ' + category;
       this.results = [];
@@ -242,8 +277,10 @@ riot.tag('style-guide',
 
       this.index = lunr(function() {
         this.field('name'); // {boost:10}
-        this.field('description'); //{boost:8}
+        this.field('description'); // {boost:8}
         this.field('category'); // {boost:6}
+        this.field('subCategory');
+        this.field('url');
         this.ref('number');
 
         self.sections.map(function(section) {
@@ -251,7 +288,9 @@ riot.tag('style-guide',
             description: section['description'],
             name: section['Name'],
             number: section['Number'],
-            category: section['Category']
+            category: section['Category'],
+            subCategory: section['subCategory'],
+            url: section['url']
           });
         }.bind(this));
       });
@@ -302,11 +341,11 @@ riot.tag('style-guide-sections',
         <div class="menu subsection">
           <h3>In this section</h3>
           <ul class="menu-list">
-            <li each={subSection}><a href="/#/{parent.opts.Category.replace(/ +/g, '-').toLowerCase()}/{parent.opts.Name.replace(/ +/g, '-').toLowerCase()}/#{headingID}" onclick="{goToSection}">{title}</a></li>
+            <li each={subSection}><a href="{parent.opts.url}/#{headingID}" onclick="{goToSection}">{title}</a></li>
           </ul>
         </div>
         <virtual if={hasSubSection}>
-          <a href="/#/{opts.Category.replace(/ +/g, '-').toLowerCase()}/{opts.Name.replace(/ +/g, '-').toLowerCase()}/#top" class="back-to-top" onclick="{goToSection}">
+          <a href="{opts.url}/#top" class="back-to-top" onclick="{goToSection}">
             <span class="icon is-small">
               <i class="fa fa-chevron-up"></i>
             </span>
@@ -355,7 +394,7 @@ riot.tag('style-guide-sections',
           title.id = headingID;
         }
 
-        title.innerHTML = `${titleContent}<a class="heading-link" href="/#/${opts.Category.replace(/ +/g, '-').toLowerCase()}/${opts.Name.replace(/ +/g, '-').toLowerCase()}/#${headingID}">
+        title.innerHTML = `${titleContent}<a class="heading-link" href="${opts.url}/#${headingID}">
                               <span class="icon is-small">
                                 <i class="fa fa-link"></i>
                               </span>
