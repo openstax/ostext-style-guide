@@ -287,10 +287,10 @@
 
 /**
 @Section
-  Source Art
+  Art
   =========
 
-  Source art should use colors from the primary palette from a specific markets theme.
+  For art, general label for graphs, standard text (descriptions, labels, etc.), and numerals within the images should be Noto Sans. Any math numerals/symbols should be in [STIX](#/general-composition/typography/#mathematics). Size should vary based on size of the art. [Font size](#/general-composition/typography/#typography) should be no smaller than 8pt.
 
   @Number '2.2.0'
 */
@@ -590,14 +590,36 @@
   =========
 
   Format
-  -----
-
-  Image files supported: png (including transparency), svg, jpg and gif. The original design files of all images/figures should be provided in AI, EPS, or PSD.
-
-  Resolution
   --------
 
-  200 DPI for all images and art
+  The original design files of all images/figures should be provided in AI, EPS, or PSD. For vector graphics EPS format is preferred.
+
+  Export settings
+  ----------
+
+  ### JPEG
+
+  All JPEGs including splash pages should be exported at 200DPI.
+
+  + **Color model:** CMYK
+  + **Quality:** 8
+  + **Compression method:** Baseline
+  + **Resolution:** 200DPI
+  + **Anti-aliasing:** Type Optimized(Hinted)
+  + **Embed ICC profile:** leave unchecked
+
+  ![](assets/img/jpeg-export-settings.png)
+
+  ### PNG
+
+  All nested images inside features, notes and examples should be provided in transparent PNG at 300DPI.
+
+  + **Resolution:** 300DPI
+  + **Anti-aliasing:** Type Optimized(Hinted)
+  + **Interlaced:** Checked
+  + **Background Color:** Transparent
+
+  ![](assets/img/png-export-settings.png)
 
   Size
   ---------
@@ -1053,6 +1075,13 @@
 @Section
   Business
   =========
+
+  Fonts
+  ------
+
+  All business books will use Dosis for headers and Noto Sans for content areas. (See: [Astronomy](https://openstax.org/details/books/astronomy))
+
+  [Download Fonts here](#/general-composition/typography/#fonts).
 
   @Number '5.1.0'
 */
