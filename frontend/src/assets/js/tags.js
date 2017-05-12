@@ -346,11 +346,8 @@ riot.tag('style-guide-sections',
         </div>
         <virtual if={hasSubSection}>
           <a href="{opts.url}/#top" class="back-to-top" onclick="{goToSection}">
-            <span class="icon is-small">
-              <i class="fa fa-chevron-up"></i>
-            </span>
             <span class="icon is-large">
-              <img src="assets/img/svg/back-to-top.svg" />
+              <i class="fa fa-angle-double-up"></i>
             </span>
             <span class="tooltiptext">Back to top</span>
           </a>

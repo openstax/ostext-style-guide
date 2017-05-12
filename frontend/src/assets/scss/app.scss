@@ -787,11 +787,6 @@ body {
         }
       }
 
-      span:not(.tooltiptext) {
-        display: block;
-        margin: 0 auto 0.5rem;
-      }
-
       .tooltiptext {
         visibility: hidden;
         position: absolute;
@@ -804,7 +799,7 @@ body {
         opacity: 0;
         transition: opacity 0.2s 0.2s;
         font-size: 12px;
-        top: 50%;
+        top: 10px;
         bottom: auto;
         right: 128%;
       }

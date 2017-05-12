@@ -138,7 +138,7 @@ function isEmpty(obj) {
 }
 
 function home() {
-  route('/getting-started/background');
+  route('1.0.0');
   window.scrollTo(0,0);
 }
 
