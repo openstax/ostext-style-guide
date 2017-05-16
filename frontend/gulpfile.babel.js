@@ -42,6 +42,8 @@ export const fonts = () => gulp.src(PATHS.fonts)
 
 // Copy page templates into finished HTML files
 export const pages = () => gulp.src('src/*.{html,hbs,handlebars}')
+  // Inject the favicon markups into HTML pages.
+  .pipe($.realFavicon.injectFaviconMarkups(JSON.parse(fs.readFileSync(FAVICON_DATA_FILE)).favicon.html_code))
   .pipe(gulp.dest(PATHS.dist));
 
 // Compile Sass into CSS
@@ -65,9 +67,9 @@ export const sass = () => gulp.src('src/assets/scss/app.scss')
 // In production, the file is minified
 export const javascript = () => gulp.src(PATHS.javascript)
   .pipe(webpack(require('./webpack.config.js'), webpack2))
-  .pipe($.if(PRODUCTION, $.uglify()
-    .on('error', e => { console.log(e); })
-  ))
+  // .pipe($.if(PRODUCTION, $.uglify()
+  //   .on('error', e => { console.log(e); })
+  // ))
   .pipe(gulp.dest(PATHS.dist + '/assets/js'));
 
 // Copy images to the "dist" folder
@@ -92,6 +94,88 @@ export const reload = (done) => {
   done();
 }
 
+// File where the favicon markups are stored
+let FAVICON_DATA_FILE = 'src/faviconData.json';
+
+// Generate the icons. This task takes a few seconds to complete.
+// You should run it at least once to create the icons. Then,
+// you should run it whenever RealFaviconGenerator updates its
+// package (see the check-for-favicon-update task below).
+export const generatefavicon = (done) => {
+	$.realFavicon.generateFavicon({
+		masterPicture: 'src/favicon.png',
+		dest: PATHS.dist + '/assets/img/icons',
+		iconsPath: '/assets/img/icons',
+		design: {
+			ios: {
+				pictureAspect: 'backgroundAndMargin',
+				backgroundColor: '#ffffff',
+				margin: '21%',
+				assets: {
+					ios6AndPriorIcons: false,
+					ios7AndLaterIcons: true,
+					precomposedIcons: false,
+					declareOnlyDefaultIcon: true
+				}
+			},
+			desktopBrowser: {},
+			windows: {
+				pictureAspect: 'whiteSilhouette',
+				backgroundColor: '#0dc0dc',
+				onConflict: 'override',
+				assets: {
+					windows80Ie10Tile: false,
+					windows10Ie11EdgeTiles: {
+						small: false,
+						medium: true,
+						big: false,
+						rectangle: false
+					}
+				}
+			},
+			androidChrome: {
+				pictureAspect: 'noChange',
+				themeColor: '#ffffff',
+				manifest: {
+					name: 'OpenGuide',
+					display: 'standalone',
+					orientation: 'notSet',
+					onConflict: 'override',
+					declared: true
+				},
+				assets: {
+					legacyIcon: false,
+					lowResolutionIcons: false
+				}
+			},
+			safariPinnedTab: {
+				pictureAspect: 'silhouette',
+				themeColor: '#0dc0dc'
+			}
+		},
+		settings: {
+			scalingAlgorithm: 'Mitchell',
+			errorOnImageTooSmall: false
+		},
+		markupFile: FAVICON_DATA_FILE
+	}, function() {
+		done();
+	});
+}
+
+// Check for updates on RealFaviconGenerator (think: Apple has just
+// released a new Touch icon along with the latest version of iOS).
+// Run this task from time to time. Ideally, make it part of your
+// continuous integration system.
+export const checkForFaviconUpdate = (done) => {
+	let currentVersion = JSON.parse(fs.readFileSync(FAVICON_DATA_FILE)).version;
+	$.realFavicon.checkForUpdates(currentVersion, function(err) {
+		if (err) {
+			throw err;
+		}
+	});
+}
+
 // Watch for changes to static assets, pages, Sass, and JavaScript
 export const watch = () => {
   gulp.watch(PATHS.data, data);
@@ -100,11 +184,10 @@ export const watch = () => {
   gulp.watch('src/assets/scss/**/*.scss').on('all', sass);
   gulp.watch('src/assets/js/**/*.js').on('all', gulp.series(javascript, reload));
   gulp.watch('src/assets/img/**/*').on('all', gulp.series(images, browser.reload));
-  // gulp.watch('src/styleguide/**').on('all', gulp.series(styleGuide, browser.reload));
 }
 
 // Build the "dist" folder by running all of the below tasks
-export const build = gulp.series(clean, gulp.parallel(pages, sass, javascript, images, data, fonts));
+export const build = gulp.series(clean, generatefavicon, gulp.parallel(pages, sass, javascript, images, data, fonts));
 
 // Build the site, run the server, and watch for file changes
 export const dev =  gulp.series(build, server, watch);
