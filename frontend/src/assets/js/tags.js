@@ -112,7 +112,7 @@ riot.tag('style-guide-navigation',
 riot.tag('style-guide-search',
   `<div class="control is-grouped">
     <p class="control is-expanded has-icons-left">
-      <input class="input" ref="input" type="text" onclick="{addClass}" onkeyup="{onSearch}" placeholder="Search for content, elements, layout, typography...">
+      <input class="input" ref="input" type="text" onfocus="{addClass}" onclick="{addClass}" onkeyup="{onSearch}" placeholder="Search for content, elements, layout, typography...">
       <span class="icon is-medium is-left">
         <i class="fa fa-search"></i>
       </span>
@@ -120,7 +120,7 @@ riot.tag('style-guide-search',
   </div>
 
   <div class="search-results menu">
-    <ul class="menu-list sg-search-result">
+    <ul class="menu-list">
      <li each={results} onclick="{reset}" class="{category.replace(/ +/g, '-').toLowerCase()}"><a href="{url}">
      <span>in {category}<virtual if="{subCategory}"> / {subCategory}</virtual></span>{name}</a></li>
      <virtual if="{results.length == 0 && refs.input.value != ''}">
@@ -230,7 +230,7 @@ riot.tag('style-guide-search',
 riot.tag('style-guide',
   `<nav class="side-nav menu">
     <!-- Left-side navigation of Style Guide sections -->
-    <style-guide-navigation class="sg-navigation" sections={sections}></style-guide-navigation>
+    <style-guide-navigation sections={sections}></style-guide-navigation>
   </nav>
   <main class="main section" id="top">
     <div class="container">
