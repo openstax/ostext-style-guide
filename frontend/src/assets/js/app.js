@@ -153,18 +153,25 @@ function number(id) {
   if ( isNaN(parseInt(id)) ) {
     goToSection(id, subCategory, id);
   } else {
-    let selected = app.model.data.filter(function(d) { return d.Number == id })[0] || {};
+    if (app.model.data != undefined) {
+      let selected = app.model.data.filter(function(d) { return d.Number == id })[0] || {};
 
-    if(isEmpty(selected)) {
-      goToSection('', subCategory, id);
-    } else {
-      if (!selected.subCategory) {
-        goToSection(selected.Category.replace(/ +/g, '-').toLowerCase(), subCategory, selected.Name.replace(/ +/g, '-').toLowerCase());
+      if(isEmpty(selected)) {
+        goToSection('', subCategory, id);
       } else {
-        goToSection(selected.Category.replace(/ +/g, '-').toLowerCase(), selected.subCategory.replace(/ +/g, '-').toLowerCase(), selected.Name.replace(/ +/g, '-').toLowerCase());
+        if (!selected.subCategory) {
+          goToSection(selected.Category.replace(/ +/g, '-').toLowerCase(), subCategory, selected.Name.replace(/ +/g, '-').toLowerCase());
+        } else {
+          goToSection(selected.Category.replace(/ +/g, '-').toLowerCase(), selected.subCategory.replace(/ +/g, '-').toLowerCase(), selected.Name.replace(/ +/g, '-').toLowerCase());
+        }
+
+        history.pushState(null, '', `${selected.url}`);
       }
 
-      history.pushState(null, '', `${selected.url}`);
+    } else {
+      app.model.on('updated', function(data) {
+        route(id);
+      });
     }
   }
   window.scrollTo(0,0);

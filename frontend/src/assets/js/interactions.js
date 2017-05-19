@@ -138,7 +138,7 @@ export const removeOpenClasses = (event) => {
     window.windowWidth = window.innerWidth;
     removeClass(document.body, 'fixed');
 
-    if (document.body.hasAttribute('style')) {
+    if ((document.body.hasAttribute('style')) && (document.body.getAttribute('style') != '')) {
       window.scrollTo(0, document.body.getAttribute('style').split('-')[1].split('px')[0]);
       document.body.removeAttribute('style');
     }
