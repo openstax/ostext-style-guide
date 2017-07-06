@@ -18,7 +18,7 @@ const exec = require('child_process').exec;
 
 // Run style-guide-codmark
 export const buildJSON = (cb) => {
-  exec('cd ../scripts/ && source venv/bin/activate && style-guide-codmark', function (err, stdout, stderr) {
+  exec('. ../scripts/venv/bin/activate && cd ../scripts/ && style-guide-codmark', function (err, stdout, stderr) {
     console.log(stdout);
     console.log(stderr);
     cb(err);
