@@ -932,6 +932,98 @@ body {
           border-bottom: 0;
         }
       }
+
+      table {
+        font-size: 12px;
+        color: $os-blue-s60;
+
+        thead {
+          @include touch {
+            display: none;
+          }
+        }
+
+        td {
+          padding: 1rem 0;
+          text-align: center;
+          vertical-align: middle;
+        }
+
+        th {
+          text-transform: lowercase;
+          font-weight: 800;
+          letter-spacing: .1px;
+          text-align: center;
+
+          @include desktop {
+            width: 11.11%;
+          }
+        }
+
+        tbody tr {
+          background: $os-gray9;
+
+          &:first-child {
+            background: $os-gray8;
+          }
+
+          &:last-child {
+            background: $os-gray7;
+          }
+
+          @include touch {
+            margin-bottom: 1.5em;
+            display: block;
+          }
+
+          th {
+            background: $os-blue-s20;
+            border: none;
+            color: white;
+            padding: 0;
+            text-align: center;
+            vertical-align: middle;
+
+            @include touch {
+              width: 100vw;
+              padding: 1rem;
+              text-align: left;
+            }
+          }
+
+          &:first-child th {
+            background: $os-blue;
+          }
+
+          &:last-child th {
+            background: $os-blue-s40;
+          }
+
+          td {
+            @include touch {
+              display: block;
+              text-align: right;
+              padding: 1rem;
+              border-bottom: 1px solid #ccc;
+
+              &::before {
+                content: attr(data-label);
+                float: left;
+                text-transform: lowercase;
+                font-weight: bold;
+              }
+
+              &:last-child {
+                border-bottom: 0;
+              }
+            }
+
+            @include desktop {
+              width: 11.11%;
+            }
+          }
+        }
+      }
     }
 
     .download-icon {
