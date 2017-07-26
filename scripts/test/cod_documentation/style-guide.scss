@@ -303,7 +303,59 @@
 
   Base font size can be changed during production for a number of reasons, the most common being textbook length. Longer titles may require text to have less leading, or a smaller font size. Limiting text sizes to specific ratios, and determining vertical spaces relative to that text size, ensures that we can change text properties in a predictable way. All vertical spaces will adjust at the same ratios as text sizes change.
 
-  ![OpenStax Typographic Scale](assets/img/typography-chart.png)
+  OpenStax Typographic Scale
+  -----------------------------
+
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Scale</th>
+        <th scope="col">Scale 5</th>
+        <th scope="col">Scale 4</th>
+        <th scope="col">Scale 3</th>
+        <th scope="col">Scale 2</th>
+        <th scope="col">Scale 1</th>
+        <th scope="col">Base</th>
+        <th scope="col">Scale -1</th>
+        <th scope="col">Scale -2</th>
+    	</tr>
+    </thead>
+    <tbody>
+    	<tr>
+    		<th scope="row">px</th>
+    		<td data-label="Scale 5">28.428</td>
+    		<td data-label="Scale 4">27</td>
+    		<td data-label="Scale 3">21.324</td>
+    		<td data-label="Scale 2">18</td>
+    		<td data-label="Scale 1">15.996</td>
+        <td data-label="Base">12</td>
+        <td data-label="Scale -1">9</td>
+        <td data-label="Scale -2">8.004</td>
+    	</tr>
+    	<tr>
+        <th scope="row">em</th>
+        <td data-label="Scale 5">2.369</td>
+        <td data-label="Scale 4">2.25</td>
+        <td data-label="Scale 3">1.777</td>
+        <td data-label="Scale 2">1.5</td>
+        <td data-label="Scale 1">1.333</td>
+        <td data-label="Base">1</td>
+        <td data-label="Scale -1">0.75</td>
+        <td data-label="Scale -2">0.667</td>
+    	</tr>
+    	<tr>
+        <th scope="row">pt</th>
+        <td data-label="Scale 5">21.321</td>
+        <td data-label="Scale 4">20.25</td>
+        <td data-label="Scale 3">15.993</td>
+        <td data-label="Scale 2">13.5</td>
+        <td data-label="Scale 1">11.997</td>
+        <td data-label="Base">9</td>
+        <td data-label="Scale -1">6.75</td>
+        <td data-label="Scale -2">6.003</td>
+    	</tr>
+    </tbody>
+  </table>
 
   Fonts
   ---------
