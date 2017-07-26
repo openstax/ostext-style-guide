@@ -247,13 +247,114 @@
 
   @Number '1.2.0'
 */
+/**
+@Section
+  Accessibility
+  ===============
 
+  @Number '2.0.0'
+*/
+/**
+@Section
+  Links
+  ==========
+  OpenStax content must conform to Level A, and should conform to Level AA, of the <a href="https://www.w3.org/TR/WCAG20/" target="_blank">Web Content Accessibility Guidelines (WCAG), version 2.0</a>.  Below are the most important guidelines that typically impact content development.
+
+  All links (intramodular, intermodular, external) within the content must conform to the following:
+
+  + Guideline: 2.4.4 Link Purpose (In Context): The purpose of each link can be determined from the link text alone or from the link text together with its programmatically determined link context, except where the purpose of the link would be ambiguous to users in general. (Level A)
+  + How to meet: Set anchor text for the link that accurately conveys its purpose.
+      - Avoid anchor text such as: “This website”, “Video”, “ Click here”, etc.
+      - Instead, use: “this page about Apollo 11 on NASA’s website”, “this video about kinetic and potential energy used in roller coasters”, etc.
+  + Additional resources:
+      - <a href="https://www.wuhcag.com/link-purpose-in-context/" target="_blank">The page about link context from Wuhcag</a>, a friendly site for folks developing accessible web content.
+
+
+  @Number '2.1.0'
+*/
+/**
+@Section
+  Color Contrast
+  ==========
+  OpenStax content must conform to Level A, and should conform to Level AA, of the <a href="https://www.w3.org/TR/WCAG20/" target="_blank">Web Content Accessibility Guidelines (WCAG), version 2.0</a>.  Below are the most important guidelines that typically impact content development.
+
+  Most images — exceptions noted below — must conform to the following:
+
+  + Guideline: 1.4.3 Contrast (Minimum): The visual presentation of text and images of text has a contrast ratio of at least 4.5:1, except for the following: (Level AA)
+      - Large Text: Large-scale text and images of large-scale text have a contrast ratio of at least 3:1;
+      - Incidental: Text or images of text that are part of an inactive user interface component, that are pure decoration, that are not visible to anyone, or that are part of a picture that contains significant other visual content, have no contrast requirement.
+      - Logotypes: Text that is part of a logo or brand name has no minimum contrast requirement.
+  + How to meet: Use a light background with dark text or a dark background with light text.  Use the color contrast checker to verify compliance.
+  + Additional resources:
+      - <a href="https://www.wuhcag.com/contrast-minimum/" target="_blank">The page about color contrast from Wuhcag</a>, a friendly site for folks developing accessible web content.
+
+  @Number '2.2.0'
+*/
+/**
+@Section
+  Non-Text Content
+  ==========
+  OpenStax content must conform to Level A, and should conform to Level AA, of the <a href="https://www.w3.org/TR/WCAG20/" target="_blank">Web Content Accessibility Guidelines (WCAG), version 2.0</a>.  Below are the most important guidelines that typically impact content development.
+
+  All non-text content must conform to the following:
+
+  + Guideline: 1.1.1 Non-text Content: All non-text content that is presented to the user has a text alternative that serves the equivalent purpose, except for the situations listed below. (Level A)
+      - Controls, Input: If non-text content is a control or accepts user input, then it has a name that describes its purpose. (Refer to Guideline 4.1 for additional requirements for controls and content that accepts user input.)
+      - Time-Based Media: If non-text content is time-based media, then text alternatives at least provide descriptive identification of the non-text content. (Refer to Guideline 1.2 for additional requirements for media.)
+      - Test: If non-text content is a test or exercise that would be invalid if presented in text, then text alternatives at least provide descriptive identification of the non-text content.
+      - Sensory: If non-text content is primarily intended to create a specific sensory experience, then text alternatives at least provide descriptive identification of the non-text content.
+      - CAPTCHA: If the purpose of non-text content is to confirm that content is being accessed by a person rather than a computer, then text alternatives that identify and describe the purpose of the non-text content are provided, and alternative forms of CAPTCHA using output modes for different types of sensory perception are provided to accommodate different disabilities.
+      - Decoration, Formatting, Invisible: If non-text content is pure decoration, is used only for visual formatting, or is not presented to users, then it is implemented in a way that it can be ignored by assistive technology.
+  + How to meet: Provide alternative text for images.  Provide text alternatives for audio and video.
+  + Additional resources:
+      - <a href="https://www.wuhcag.com/non-text-content/" target="_blank">The page about alternative text from Wuhcag</a>, a friendly site for folks developing accessible web content.
+
+  @Number '2.3.0'
+*/
+/**
+@Section
+  Images of Text
+  ==========
+  OpenStax content must conform to Level A, and should conform to Level AA, of the <a href="https://www.w3.org/TR/WCAG20/" target="_blank">Web Content Accessibility Guidelines (WCAG), version 2.0</a>.  Below are the most important guidelines that typically impact content development.
+
+  All images of text must conform to the following:
+
+  + Guideline: 1.4.5 Images of Text: If the technologies being used can achieve the visual presentation, text is used to convey information rather than images of text except for the following: (Level AA)
+      - Customizable: The image of text can be visually customized to the user's requirements;
+      - Essential: A particular presentation of text is essential to the information being conveyed.
+  + Note: Logotypes (text that is part of a logo or brand name) are considered essential.
+  + How to meet: Avoid images of text unless absolutely necessary.
+  + Additional resources:
+      - <a href="https://www.wuhcag.com/images-of-text/" target="_blank">The page about images of text from Wuhcag</a>, a friendly site for folks developing accessible web content.
+
+  @Number '2.4.0'
+*/
+/**
+@Section
+  Audio and Video Content
+  ==========
+  OpenStax content must conform to Level A, and should conform to Level AA, of the <a href="https://www.w3.org/TR/WCAG20/" target="_blank">Web Content Accessibility Guidelines (WCAG), version 2.0</a>.  Below are the most important guidelines that typically impact content development.
+
+  There are several guidelines that pertain to audio and/or video content.
+
+  + Videos must have a text transcript available.  If a text transcript is not available, and writers feel that a video must be used, editorial partners must contact OpenStax to discuss contingency plans.
+      - Relavant guideline:
+          + Level A - Audio Description or Media Alternative
+  + All videos with sound must have captions, either Closed Captioned or Live.
+      - Relavant guidelines:
+          + Level A - Closed Captioned
+          + Level AA - Live Captions
+  + Writers should try to select videos with an audio description available.  This page has more information about audio descriptions.
+  + Any content that is audio-only or video-only must follow the guidelines discussed on <a href="https://www.wuhcag.com/audio-only-video-only-prerecorded/" target="_blank">this page from Wuhcag</a>.
+
+  @Number '2.5.0'
+*/
 /**
 @Section
   General Composition
   =========
 
-  @Number '2.0.0'
+  @Number '3.0.0'
 */
 
 /**
@@ -282,7 +383,7 @@
 
   Source art should use colors from the primary palette from a specific markets theme.
 
-  @Number '2.1.0'
+  @Number '3.1.0'
 */
 
 /**
@@ -292,7 +393,7 @@
 
   For art, general label for graphs, standard text (descriptions, labels, etc.), and numerals within the images should be Noto Sans. Any math numerals/symbols should be in [STIX](#/general-composition/typography/#mathematics). Size should vary based on size of the art. [Font size](#/general-composition/typography/#typography) should be no smaller than 8pt.
 
-  @Number '2.2.0'
+  @Number '3.2.0'
 */
 /**
 @Section
@@ -619,7 +720,7 @@
 
   Mathematics is rendered using [STIX Fonts Project](https://sourceforge.net/projects/stixfonts/) fonts. These fonts are licensed [SIL Open Font License (OFL-1.1)](https://opensource.org/licenses/OFL-1.1).
 
-  @Number '2.3.0'
+  @Number '3.3.0'
 */
 
 /**
@@ -633,7 +734,7 @@
 
   ![Areas of the page](assets/img/pagelayout-pageareas.jpg)
 
-  @Number '2.4.0'
+  @Number '3.4.0'
 */
 
 /**
@@ -714,7 +815,7 @@
 
   ![](assets/img/image-rules-nested.jpg)
 
-  @Number '2.5.0'
+  @Number '3.5.0'
 */
 
 /**
@@ -722,7 +823,7 @@
   Content Elements
   =========
 
-  @Number '3.0.0'
+  @Number '4.0.0'
 */
 /**
 @Section
@@ -731,7 +832,7 @@
 
   All OpenStax books have folio text at the top of the page on all pages after the table of contents. This text includes the number and title of the chapter (or Preface, Appendix, or Index) aligned to the inside of the page, opposite the page number. These folios are automatically generated in the pdf and cannot be edited manually.
 
-  @Number '3.1.0'
+  @Number '4.1.0'
 */
 /**
 @Section
@@ -740,7 +841,7 @@
 
   OpenStax books use nested headers; they include chapter titles (H1), module titles (H2), inside-module section titles (H3), and further nested section headers (e.g. H4, H5). These header levels can be distinguished from each other by CSS-assigned font size and style.
 
-  @Number '3.2.0'
+  @Number '4.2.0'
 */
 /**
 @Section
@@ -749,7 +850,7 @@
 
   Paragraphs cannot be referred or linked to in OpenStax books, nor can they be indented without being enclosed by some other container.
 
-  @Number '3.3.0'
+  @Number '4.3.0'
 */
 /**
 @Section
@@ -761,7 +862,7 @@
      + Intramodule links, which go to an element inside the same module as the link, and are marked up with <link target-id="id of the target element"/> with no anchor text, since the linked feature’s title or number will be automatically generated when the link displays
      + extramodule links, which go to another module inside the book collection, marked up with <link document="other module number">Module Title anchor text</link> (these links may also go to a specific feature inside the other module, in which case the link markup will include  target-id="id of the target element" inside the link tag, and the link will not require anchor text)
 
-  @Number '3.4.0'
+  @Number '4.4.0'
 */
 /**
 @Section
@@ -770,7 +871,7 @@
 
   Lists may be bulleted, unmarked, stepwise, numbered, alphabetical, or tokened. Certain lists may also be comma-separated and not vertically separated by item.
 
-  @Number '3.5.0'
+  @Number '4.5.0'
 */
 /**
 @Section
@@ -793,14 +894,14 @@
     @Type styled
     @Source blockquote-cooked.html
     @Id #blockquote-example-2
-  @Number '3.6.0'
+  @Number '4.6.0'
 */
 /**
 @Section
   Dividers
   =========
 
-  @Number '3.7.0'
+  @Number '4.7.0'
 */
 /**
 @Section
@@ -809,7 +910,7 @@
 
   Numbered footnotes are available in OpenStax books with the `<footnote>` tag, which encloses the text of the footnote and moves it to the bottom of the page on which the tag appears.
 
-  @Number '3.8.0'
+  @Number '4.8.0'
 */
 /**
 @Section
@@ -820,7 +921,7 @@
 
   [Footer Image](link to image)
 
-  @Number '3.9.0'
+  @Number '4.9.0'
 */
 /**
 @Section
@@ -838,7 +939,7 @@
 
   ![](assets/img/figure-captions.jpg)
 
-  @Number '3.10.0'
+  @Number '4.10.0'
 */
 /**
 @Section
@@ -864,7 +965,7 @@
     @Source images-cooked.html
     @Id #images-example-2
 
-  @Number '3.11.0'
+  @Number '4.11.0'
 */
 /**
 @Section
@@ -874,7 +975,7 @@
   + Icons
   + Borders
 
-  @Number '3.12.0'
+  @Number '4.12.0'
 */
 /**
 @Section
@@ -900,7 +1001,7 @@
     @Source features-cooked.html
     @Id #features-example-2
 
-  @Number '3.13.0'
+  @Number '4.13.0'
 */
 /**
 @Section
@@ -924,7 +1025,7 @@
     @Type styled
     @Source examples-cooked.html
     @Id #examples-example-2
-  @Number '3.14.0'
+  @Number '4.14.0'
 */
 /**
 @Section
@@ -1001,21 +1102,21 @@
     @Type styled
     @Source tables-fake-title-cooked.html
     @Id #tables-fake-title-example-2
-  @Number '3.15.0'
+  @Number '4.15.0'
 */
 /**
 @Section
   Book Skeleton
   =========
 
-  @Number '4.0.0'
+  @Number '5.0.0'
 */
 /**
 @Section
   Front Matter
   =========
 
-  @Number '4.1.0'
+  @Number '5.1.0'
 */
 /**
 @Section
@@ -1024,7 +1125,7 @@
 
   The `<document>` tag of a preface must contain the preface class: `<document class="preface">`.
 
-  @Number '4.2.0'
+  @Number '5.2.0'
 */
 /**
 @Section
@@ -1033,7 +1134,7 @@
 
   The platform automatically generates a table of contents; it cannot be edited manually.
 
-  @Number '4.3.0'
+  @Number '5.3.0'
 */
 /**
 @Section
@@ -1073,7 +1174,7 @@
   + Collating elements are created by adding a specific class to a `<section>` tag at the end of a module (these elements must always appear in the same order in the module markup). Collating elements common to most OpenStax books include Section Summary (class="section-summary"), Key Terms (class="key-terms"), Key Concepts (class="concepts"), Key Equations, various types of problems and exercises (often separated in collation by type). More flexible book-specific collated elements sometimes include Practice Tests and [References](/#/book-skeleton/references).
   + Collating elements are usually located inside the relevant modules and collated together at the end of the chapter, using a collation instruction in the introduction module of each chapter. The collated elements may be separated by headers indicating the module they came from, or they may not, according to their class.
 
-  @Number '4.4.0'
+  @Number '5.4.0'
 */
 /**
 @Section
@@ -1083,7 +1184,7 @@
   + The Answer Key has exercise solutions that are separated by chapter in the back of the book.
   + Collation instructions for the Answer Key are included in the Introduction module of every chapter. There are two options; one will move any solutions inside the matched section to the end of chapter and add a copy of that to the answer key. Another will COPY any solutions inside the matched section to the answer key, also leaving it in place in the chapter.
 
-  @Number '4.5.0'
+  @Number '5.5.0'
 */
 /**
 @Section
@@ -1093,7 +1194,7 @@
   + May appear at the end of section, chapter, or book.
   + If displaying at the end of a book, they cannot be sorted at the book-level.
 
-  @Number '4.6.0'
+  @Number '5.6.0'
 */
 /**
 @Section
@@ -1105,7 +1206,7 @@
   + The folio displays usual page numbers and appendix titles (Appendix A for example) instead of chapter title.
   + The appendix styling is similar to the rest of the book.
 
-  @Number '4.7.0'
+  @Number '5.7.0'
 */
 /**
 @Section
@@ -1114,14 +1215,14 @@
 
   + Index terms are based on how they are referenced in the text and can only contain one word, e.g. “bank” and “banks” would be separate entries. An entry for “Clinton”, 2, 5, 25, 178 could refer to either Bill or Hillary.
 
-  @Number '4.8.0'
+  @Number '5.8.0'
 */
 /**
 @Section
   Themes
   =========
 
-  @Number '5.0.0'
+  @Number '6.0.0'
 */
 /**
 @Section
@@ -1135,7 +1236,7 @@
 
   [Download Fonts here](#/general-composition/typography/#fonts).
 
-  @Number '5.1.0'
+  @Number '6.1.0'
 */
 /**
 @Section
@@ -1148,89 +1249,89 @@
   Typography
   -----------
 
-  @Number '5.1.1'
+  @Number '6.1.1'
 */
 /**
 @Section
   Entrepreneurship
   =========
 
-  @Number '5.1.2'
+  @Number '6.1.2'
 */
 /**
 @Section
   Management
   =========
 
-  @Number '5.1.3'
+  @Number '6.1.3'
 */
 /**
 @Section
   Intro to Business
   =========
 
-  @Number '5.1.4'
+  @Number '6.1.4'
 */
 /**
 @Section
   Math
   =========
 
-  @Number '5.2.0'
+  @Number '6.2.0'
 */
 /**
 @Section
   Prealgebra
   =========
 
-  @Number '5.2.1'
+  @Number '6.2.1'
 */
 /**
 @Section
   College Algebra
   =========
 
-  @Number '5.2.2'
+  @Number '6.2.2'
 */
 /**
 @Section
   PreCalculus
   =========
 
-  @Number '5.2.3'
+  @Number '6.2.3'
 */
 /**
 @Section
   Calculus
   =========
 
-  @Number '5.2.4'
+  @Number '6.2.4'
 */
 /**
 @Section
   Science
   =========
 
-  @Number '5.3.0'
+  @Number '6.3.0'
 */
 /**
 @Section
   Biology
   =========
 
-  @Number '5.3.1'
+  @Number '6.3.1'
 */
 /**
 @Section
   Humanities
   =========
 
-  @Number '5.4.0'
+  @Number '6.4.0'
 */
 /**
 @Section
   Psychology
   =========
 
-  @Number '5.4.1'
+  @Number '6.4.1'
 */
