@@ -280,11 +280,11 @@
 
   Most images — exceptions noted below — must conform to the following:
 
-  + Guideline: 1.4.3 Contrast (Minimum): The visual presentation of text and images of text has a contrast ratio of at least 4.5:1, except for the following: (Level AA)
-      - Large Text: Large-scale text and images of large-scale text have a contrast ratio of at least 3:1;
-      - Incidental: Text or images of text that are part of an inactive user interface component, that are pure decoration, that are not visible to anyone, or that are part of a picture that contains significant other visual content, have no contrast requirement.
+  + Guideline: 1.4.3 Contrast (Minimum): The visual presentation of <a href="https://www.w3.org/TR/WCAG20/#textdef" target="_blank">text</a> and <a href="https://www.w3.org/TR/WCAG20/#images-of-textdef" target="_blank">images of text</a> has a <a href="https://www.w3.org/TR/WCAG20/#contrast-ratiodef" target="_blank">contrast ratio</a> of at least 4.5:1, except for the following: (Level AA)
+      - Large Text: <a href="https://www.w3.org/TR/WCAG20/#larger-scaledef" target="_blank">Large-scale</a> text and images of large-scale text have a contrast ratio of at least 3:1;
+      - Incidental: Text or images of text that are part of an inactive <a href="https://www.w3.org/TR/WCAG20/#user-interface-componentdef" target="_blank">user interface component</a>, that are <a href="https://www.w3.org/TR/WCAG20/#puredecdef" target="_blank">pure decoration</a>, that are not visible to anyone, or that are part of a picture that contains significant other visual content, have no contrast requirement.
       - Logotypes: Text that is part of a logo or brand name has no minimum contrast requirement.
-  + How to meet: Use a light background with dark text or a dark background with light text.  Use the color contrast checker to verify compliance.
+  + How to meet: Use a light background with dark text or a dark background with light text.  Use the <a href="http://webaim.org/resources/contrastchecker/" target="_blank">color contrast checker</a> to verify compliance.
   + Additional resources:
       - <a href="https://www.wuhcag.com/contrast-minimum/" target="_blank">The page about color contrast from Wuhcag</a>, a friendly site for folks developing accessible web content.
 
@@ -298,16 +298,17 @@
 
   All non-text content must conform to the following:
 
-  + Guideline: 1.1.1 Non-text Content: All non-text content that is presented to the user has a text alternative that serves the equivalent purpose, except for the situations listed below. (Level A)
-      - Controls, Input: If non-text content is a control or accepts user input, then it has a name that describes its purpose. (Refer to Guideline 4.1 for additional requirements for controls and content that accepts user input.)
-      - Time-Based Media: If non-text content is time-based media, then text alternatives at least provide descriptive identification of the non-text content. (Refer to Guideline 1.2 for additional requirements for media.)
-      - Test: If non-text content is a test or exercise that would be invalid if presented in text, then text alternatives at least provide descriptive identification of the non-text content.
-      - Sensory: If non-text content is primarily intended to create a specific sensory experience, then text alternatives at least provide descriptive identification of the non-text content.
-      - CAPTCHA: If the purpose of non-text content is to confirm that content is being accessed by a person rather than a computer, then text alternatives that identify and describe the purpose of the non-text content are provided, and alternative forms of CAPTCHA using output modes for different types of sensory perception are provided to accommodate different disabilities.
-      - Decoration, Formatting, Invisible: If non-text content is pure decoration, is used only for visual formatting, or is not presented to users, then it is implemented in a way that it can be ignored by assistive technology.
-  + How to meet: Provide alternative text for images.  Provide text alternatives for audio and video.
+  + Guideline: 1.1.1 Non-text Content: All <a href="https://www.w3.org/TR/WCAG20/#non-text-contentdef" target="_blank">non-text content</a> that is presented to the user has a <a href="https://www.w3.org/TR/WCAG20/#text-altdef" target="_blank">text alternative</a> that serves the equivalent purpose, except for the situations listed below. (Level A)
+      - Controls, Input: If non-text content is a control or accepts user input, then it has a <a href="https://www.w3.org/TR/WCAG20/#namedef" target="_blank">name</a> that describes its purpose. (Refer to <a href="https://www.w3.org/TR/WCAG20/#ensure-compat" target="_blank">Guideline 4.1</a> for additional requirements for controls and content that accepts user input.)
+      - Time-Based Media: If non-text content is time-based media, then text alternatives at least provide descriptive identification of the non-text content. (Refer to <a href="https://www.w3.org/TR/WCAG20/#media-equiv" target="_blank">Guideline 1.2</a> for additional requirements for media.)
+      - Test: If non-text content is a test or exercise that would be invalid if presented in <a href="https://www.w3.org/TR/WCAG20/#textdef" target="_blank">text</a>, then text alternatives at least provide descriptive identification of the non-text content.
+      - Sensory: If non-text content is primarily intended to create a <a href="https://www.w3.org/TR/WCAG20/#sensoryexpdef" target="_blank">specific sensory experience</a>, then text alternatives at least provide descriptive identification of the non-text content.
+      - <a href="https://www.w3.org/TR/WCAG20/#CAPTCHAdef" target="_blank">CAPTCHA</a>: If the purpose of non-text content is to confirm that content is being accessed by a person rather than a computer, then text alternatives that identify and describe the purpose of the non-text content are provided, and alternative forms of CAPTCHA using output modes for different types of sensory perception are provided to accommodate different disabilities.
+      - Decoration, Formatting, Invisible: If non-text content is <a href="https://www.w3.org/TR/WCAG20/#puredecdef" target="_blank">pure decoration</a>, is used only for visual formatting, or is not presented to users, then it is implemented in a way that it can be ignored by <a href="https://www.w3.org/TR/WCAG20/#atdef" target="_blank">assistive technology</a>.
+  + How to meet: Provide alternative text for images.  Provide text alternatives for audio and video. (UPDATES NEEDED FROM DAVID AND ANTHONY)
   + Additional resources:
       - <a href="https://www.wuhcag.com/non-text-content/" target="_blank">The page about alternative text from Wuhcag</a>, a friendly site for folks developing accessible web content.
+      - <a href="http://webaim.org/techniques/alttext/" target="_blank">This page on alt text from WebAIM</a>.
 
   @Number '2.3.0'
 */
@@ -319,9 +320,9 @@
 
   All images of text must conform to the following:
 
-  + Guideline: 1.4.5 Images of Text: If the technologies being used can achieve the visual presentation, text is used to convey information rather than images of text except for the following: (Level AA)
-      - Customizable: The image of text can be visually customized to the user's requirements;
-      - Essential: A particular presentation of text is essential to the information being conveyed.
+  + Guideline: 1.4.5 Images of Text: If the technologies being used can achieve the visual presentation, <a href="https://www.w3.org/TR/WCAG20/#textdef" target="_blank">text</a> is used to convey information rather than <a href="https://www.w3.org/TR/WCAG20/#images-of-textdef" target="_blank">images of text</a> except for the following: (Level AA)
+      - Customizable: The image of text can be <a href="https://www.w3.org/TR/WCAG20/#visually-customizeddef" target="_blank">visually customized</a> to the user's requirements;
+      - Essential: A particular presentation of text is <a href="https://www.w3.org/TR/WCAG20/#essentialdef" target="_blank">essential</a> to the information being conveyed.
   + Note: Logotypes (text that is part of a logo or brand name) are considered essential.
   + How to meet: Avoid images of text unless absolutely necessary.
   + Additional resources:
@@ -339,12 +340,12 @@
 
   + Videos must have a text transcript available.  If a text transcript is not available, and writers feel that a video must be used, editorial partners must contact OpenStax to discuss contingency plans.
       - Relavant guideline:
-          + Level A - Audio Description or Media Alternative
+          + <a href="https://www.wuhcag.com/audio-description-media-alternative-prerecorded/" target="_blank">Level A - Audio Description or Media Alternative</a>
   + All videos with sound must have captions, either Closed Captioned or Live.
       - Relavant guidelines:
-          + Level A - Closed Captioned
-          + Level AA - Live Captions
-  + Writers should try to select videos with an audio description available.  This page has more information about audio descriptions.
+          + <a href="https://www.wuhcag.com/captions-prerecorded/" target="_blank">Level A - Closed Captioned</a>
+          + <a href="https://www.wuhcag.com/captions-live/" target="_blank">Level AA - Live Captions</a>
+  + Writers should try to select videos with an audio description available.  <a href="https://www.wuhcag.com/audio-description-prerecorded/" target="_blank">This page has more information about audio descriptions</a>.
   + Any content that is audio-only or video-only must follow the guidelines discussed on <a href="https://www.wuhcag.com/audio-only-video-only-prerecorded/" target="_blank">this page from Wuhcag</a>.
 
   @Number '2.5.0'
