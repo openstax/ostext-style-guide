@@ -305,7 +305,18 @@
       - Sensory: If non-text content is primarily intended to create a <a href="https://www.w3.org/TR/WCAG20/#sensoryexpdef" target="_blank">specific sensory experience</a>, then text alternatives at least provide descriptive identification of the non-text content.
       - <a href="https://www.w3.org/TR/WCAG20/#CAPTCHAdef" target="_blank">CAPTCHA</a>: If the purpose of non-text content is to confirm that content is being accessed by a person rather than a computer, then text alternatives that identify and describe the purpose of the non-text content are provided, and alternative forms of CAPTCHA using output modes for different types of sensory perception are provided to accommodate different disabilities.
       - Decoration, Formatting, Invisible: If non-text content is <a href="https://www.w3.org/TR/WCAG20/#puredecdef" target="_blank">pure decoration</a>, is used only for visual formatting, or is not presented to users, then it is implemented in a way that it can be ignored by <a href="https://www.w3.org/TR/WCAG20/#atdef" target="_blank">assistive technology</a>.
-  + How to meet: Provide alternative text for images.  Provide text alternatives for audio and video. (UPDATES NEEDED FROM DAVID AND ANTHONY)
+  + How to meet: 
+      - Provide alternative text for images.  
+          + Most images only require short alt text, or “**alt**” of 32 words or less.
+              - This is marked up as `<media alt=”[insert alt text here]”>`.
+          + If the image cannot be described in 32 words or less -- for example, charts and graphs -- it requires both alt and a long description, or **longdesc**.
+              - This is marked up as `<media alt=”[insert alt text here]” longdesc=”[insert name of longdesc file here]”>`, _where the longdesc is a file, in **.txt format**, uploaded to our platform_.
+          + Example: `<media id="eip-idm218242960" alt="An image comparing the autonomic functions of the parasympathetic nervous system to the central nervous system." longdesc="35-4-1-longdesc.txt">`
+          + <a href="https://cnx.org/contents/pkNZr_pp@1.1:MV7qbhiY@1/Long-Desc-test/" target="_blank">Example test content</a>
+          + If an image contains both alt and longdesc, the alt should be 15 words or less.  The longdesc can be as many words as are needed to convey the image in an accurate yet succinct manner.
+              - The longdesc .txt file can take a table format if appropriate.
+      - Provide text alternatives for audio and video. 
+  + Note: use null (alt="") for decorative images.
   + Additional resources:
       - <a href="https://www.wuhcag.com/non-text-content/" target="_blank">The page about alternative text from Wuhcag</a>, a friendly site for folks developing accessible web content.
       - <a href="http://webaim.org/techniques/alttext/" target="_blank">This page on alt text from WebAIM</a>.
