@@ -1184,3 +1184,16 @@ body {
     }
   }
 }
+
+.body .main .content .styled-example div.table table th:not(:only-child) {
+  background-color: #1ac0dd;
+  color: black;
+}
+.body .main .content .styled-example div.table.column-header tbody td:first-child {
+  background-color: #1ac0dd;
+  color: black;
+}
+.body .main .content .styled-example .chapter .note.making-connections::before {
+  background-color: #1ac0dd;
+  color: black;
+}
