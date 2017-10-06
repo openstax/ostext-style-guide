@@ -381,6 +381,24 @@
   Themes
   ---------
 
+  ### Default
+
+  ![Default Theme](assets/img/color-default-palette.jpg)
+  ![Default Grey](assets/img/color-grey-swatches.jpg)
+  ![Alert Colors](assets/img/color-alert-palette.jpg)
+  ![BG Swatch](assets/img/color-bg-swatches.jpg)
+  ![Skin-tone 1](assets/img/color-skin-1.jpg)
+  ![Skin-tone 2](assets/img/color-skin-2.jpg)
+  ![Skin-tone 3](assets/img/color-skin-3.jpg)
+  ![Skin-tone 4](assets/img/color-skin-4.jpg)
+  ![Skin-tone 5](assets/img/color-skin-5.jpg)
+  ![Skin-tone Example](assets/img/color-skin-ex.jpg)
+  ![Nature Intro](assets/img/color-nature-intro.jpg)
+  ![Nature Palette](assets/img/color-nature-palette.jpg)
+  ![Nature Example](assets/img/color-nature-ex.jpg)
+  ![City Paletee](assets/img/color-city.jpg)
+  ![Automotive Palette](assets/img/color-automotive.jpg)
+
   ### Mathematics
 
   ### Science
@@ -1295,10 +1313,13 @@
 
   Tables
   ---------
-
+  
   <h3>Single Header Row</h3>
+  [#table-business-single-header-2]
+  
   ![Single Header Row Table](assets/img/acc-row-header-single.jpg)
 
+  
   <h3>Double Header Row</h3>
   ![Double Header Row Table](assets/img/acc-row-header-double.jpg)
   <h4>Specs</h4>
@@ -1314,7 +1335,14 @@
   <h4>Specs</h4>
   ![Ledger Table Spec](assets/img/acc-ledger-table-spec.jpg)
 
-
+  @Markup
+    @Type highlighted
+    @Source table-business-single-header.html
+    @Id #table-business-single-header
+  @Markup
+    @Type styled
+    @Source table-business-single-header.html
+    @Id #table-business-single-header-2
   @Number '6.1.1'
 */
 /**
