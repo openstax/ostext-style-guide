@@ -423,7 +423,9 @@
   Art
   =========
 
-  For art, general label for graphs, standard text (descriptions, labels, etc.), and numerals within the images should be Noto Sans. Any math numerals/symbols should be in [STIX](#/general-composition/typography/#mathematics). Size should vary based on size of the art. [Font size](#/general-composition/typography/#typography) should be no smaller than 8pt.
+  For art, general label for graphs, standard text (descriptions, labels, etc.), and numerals within the images should be Noto Sans. Any math numerals/symbols should be in [STIX](#/general-composition/typography/#mathematics). 
+
+  Size should vary based on size of the art. [Font size](#/general-composition/typography/#typography) should be no smaller than 6pt (for super and sub-scripts). We recommend keeping with the base size font for the title for consistency.
 
   @Number '3.2.0'
 */
@@ -771,13 +773,15 @@
 
 /**
 @Section
-  Image Layout
+  Image Layout & Settings
   =========
 
   Format
   --------
 
   The original design files of all images/figures should be provided in AI, EPS, or PSD. For vector graphics EPS format is preferred.
+
+  Please maintain separate layers for each element in all source files for the ease of modification and maintenance.
 
   Export settings
   ----------
@@ -797,12 +801,13 @@
 
   ### PNG
 
-  All nested images inside features, notes and examples should be provided in transparent PNG at 300DPI.
+  All nested images inside _features, notes and examples_ (items with a background color) should be provided in transparent PNG at 300DPI. In order for the integrity of the text in a transparent image to be maintained, the PNG needs to be exported at 300DPI.
 
   + **Resolution:** 300DPI
   + **Anti-aliasing:** Type Optimized(Hinted)
   + **Interlaced:** Checked
   + **Background Color:** Transparent
+  + **Font:** Do not put a stroke around the font. 
 
   ![](assets/img/png-export-settings.png)
 
