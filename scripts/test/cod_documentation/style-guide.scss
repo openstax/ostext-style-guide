@@ -269,6 +269,8 @@
   + Additional resources:
       - <a href="https://www.wuhcag.com/link-purpose-in-context/" target="_blank">The page about link context from Wuhcag</a>, a friendly site for folks developing accessible web content.
 
+  See [Content Elements: Links](#/general-composition/links/#links) for more information on link functionality and limitations.
+
 
   @Number '2.1.0'
 */
@@ -403,9 +405,7 @@
   Art
   =========
 
-  For art, general label for graphs, standard text (descriptions, labels, etc.), and numerals within the images should be Noto Sans. Any math numerals/symbols should be in [STIX](#/general-composition/typography/#mathematics). 
-
-  Size should vary based on size of the art. [Font size](#/general-composition/typography/#typography) should be no smaller than 6pt (for super and sub-scripts). We recommend keeping with the base size font for the title for consistency.
+  For art, general label for graphs, standard text (descriptions, labels, etc.), and numerals within the images should be Noto Sans. Any math numerals/symbols should be in [STIX](#/general-composition/typography/#mathematics). Size should vary based on size of the art. [Font size](#/general-composition/typography/#typography) should be no smaller than 8pt.
 
   @Number '3.2.0'
 */
@@ -433,21 +433,21 @@
         <th scope="col">Base</th>
         <th scope="col">Scale -1</th>
         <th scope="col">Scale -2</th>
-    	</tr>
+      </tr>
     </thead>
     <tbody>
-    	<tr>
-    		<th scope="row">px</th>
-    		<td data-label="Scale 5">28.428</td>
-    		<td data-label="Scale 4">27</td>
-    		<td data-label="Scale 3">21.324</td>
-    		<td data-label="Scale 2">18</td>
-    		<td data-label="Scale 1">15.996</td>
+      <tr>
+        <th scope="row">px</th>
+        <td data-label="Scale 5">28.428</td>
+        <td data-label="Scale 4">27</td>
+        <td data-label="Scale 3">21.324</td>
+        <td data-label="Scale 2">18</td>
+        <td data-label="Scale 1">15.996</td>
         <td data-label="Base">12</td>
         <td data-label="Scale -1">9</td>
         <td data-label="Scale -2">8.004</td>
-    	</tr>
-    	<tr>
+      </tr>
+      <tr>
         <th scope="row">em</th>
         <td data-label="Scale 5">2.369</td>
         <td data-label="Scale 4">2.25</td>
@@ -457,8 +457,8 @@
         <td data-label="Base">1</td>
         <td data-label="Scale -1">0.75</td>
         <td data-label="Scale -2">0.667</td>
-    	</tr>
-    	<tr>
+      </tr>
+      <tr>
         <th scope="row">pt</th>
         <td data-label="Scale 5">21.321</td>
         <td data-label="Scale 4">20.25</td>
@@ -468,7 +468,7 @@
         <td data-label="Base">9</td>
         <td data-label="Scale -1">6.75</td>
         <td data-label="Scale -2">6.003</td>
-    	</tr>
+      </tr>
     </tbody>
   </table>
 
@@ -753,15 +753,13 @@
 
 /**
 @Section
-  Image Layout & Settings
+  Image Layout
   =========
 
   Format
   --------
 
   The original design files of all images/figures should be provided in AI, EPS, or PSD. For vector graphics EPS format is preferred.
-
-  Please maintain separate layers for each element in all source files for the ease of modification and maintenance.
 
   Export settings
   ----------
@@ -781,13 +779,12 @@
 
   ### PNG
 
-  All nested images inside _features, notes and examples_ (items with a background color) should be provided in transparent PNG at 300DPI. In order for the integrity of the text in a transparent image to be maintained, the PNG needs to be exported at 300DPI.
+  All nested images inside features, notes and examples should be provided in transparent PNG at 300DPI.
 
   + **Resolution:** 300DPI
   + **Anti-aliasing:** Type Optimized(Hinted)
   + **Interlaced:** Checked
   + **Background Color:** Transparent
-  + **Font:** Do not put a stroke around the font. 
 
   ![](assets/img/png-export-settings.png)
 
@@ -875,9 +872,27 @@
   =========
 
   Our books use several types of links, each with different markup requirements:
-     +  external links, which go to a non-OpenStax website (usually with a forwarding shortlink from openstax.org), marked up with <link url="shortlink">anchor text</link>
-     + Intramodule links, which go to an element inside the same module as the link, and are marked up with <link target-id="id of the target element"/> with no anchor text, since the linked feature’s title or number will be automatically generated when the link displays
-     + extramodule links, which go to another module inside the book collection, marked up with <link document="other module number">Module Title anchor text</link> (these links may also go to a specific feature inside the other module, in which case the link markup will include  target-id="id of the target element" inside the link tag, and the link will not require anchor text)
+     + External links, which go to a non-OpenStax website (usually with a forwarding shortlink from openstax.org), marked up with `<link url="shortlink">anchor text</link>`.
+     + Intramodule links, which go to an element inside the same module as the link, and are marked up with `<link target-id="id of the target element">anchor text</link>`.
+     + Extramodule links, which go to another module inside the book collection, marked up with `<link document="other module number">anchor text</link>` (these links may also go to a specific feature inside the other module, in which case the link markup will include  `target-id="id of the target element"` inside the link tag)
+
+  Limitations
+  ------------
+
+  &gt;, &lt;, or curly quotes are not permitted in the anchor text. Emphasis (bold), italics, underline, etc. effects are also not supported. You can, however, use all other punctuation and straight quotes.
+
+
+  When to Use Anchor Text
+  ------------  
+
+  + Linking to modules: This will require using anchor text. We recommend using the module's title.
+  + Linking to chapters: This will require using anchor text. We recommend linking to the introduction module of the chapter and using the chapter title as the anchor text.
+  + Linking to a untitled list or a note: This will require using anchor text. Numbering not be pulled. 
+  + Linking to titled notes and lists: The title of the feature or note will be pulled. No anchor text required.
+  + Linking to a section within a module: The default text that results is `in the section called "Section Title"`. Anchor text will be required if you would like it to say just the title of the section.
+  + Linking to equations, examples, figures, exercises, and tables: They will be numbered per the general OpenStax scheme (Figure 1.2, Table 3.2, etc). No anchor text is required.
+  + Linking to an appendix: The default text that results is `Appendix [Letter]`. If you wish for the title of the appendix to appear, you will need to place it as anchor text.
+
 
   @Number '4.4.0'
 */
@@ -1230,7 +1245,7 @@
   Index
   =========
 
-  + Index terms are based on how they are referenced in the text and can only contain one word, e.g. “bank” and “banks” would be separate entries. An entry for “Clinton”, 2, 5, 25, 178 could refer to either Bill or Hillary.
+  + Index terms are based on how they are referenced in the text. They are marked up as `<term>index word</term>` and will appear emphasized (bold) in the. `<term class="no-emphasis">` will result in the text within that tag registering in the index, but it will not appear emphasized (bold) in the text. Words that are similar, but not the same will appear as two separte entries, e.g. “bank” and “banks” would be separate entries.
 
   @Number '5.8.0'
 */
