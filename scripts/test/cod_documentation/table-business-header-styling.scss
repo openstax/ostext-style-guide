@@ -1,0 +1,47 @@
+// Accounting
+h1.title#accounting + raw .business-single-header,
+h1.title#accounting + raw .business-double-header {
+  font-size: 9pt;
+  text-align: left;
+  border: 1px solid #e5e5e5;
+  tr:first-of-type th {
+    background-color: #0DC0DC;
+    color: #344456;
+    font-weight: bold;
+  }
+  th {
+    color: white;
+    font-weight: normal;
+    background-color: #24739E;
+    padding: 5px;
+    text-align: left;
+    font-family: 'Noto Sans', sans-serif, STIXGeneral, STIXSizeOneSym, STIXSize1;
+  }
+  tr {
+    background-color: white;
+    font-family: 'Noto Sans', sans-serif, STIXGeneral, STIXSizeOneSym, STIXSize1;
+  }
+  td {
+    vertical-align: top;
+    color: black;
+    padding: 5px;
+    text-align: left;
+    border: 1px solid #e5e5e5;
+    font-family: 'Noto Sans', sans-serif, STIXGeneral, STIXSizeOneSym, STIXSize1;
+  }
+  caption {
+    &::before {
+      content: "Table 18.2 ";
+      font-weight: bold;
+    }
+    color: black;
+    caption-side: bottom;
+    text-align: left;
+    font-size: 9.23076923px;
+    padding-bottom: 11px;
+    line-height: 17px;
+    padding-top: .5em;
+    padding-left: 0px;
+    font-family: 'Noto Sans', sans-serif, STIXGeneral, STIXSizeOneSym, STIXSize1;
+  }
+}
