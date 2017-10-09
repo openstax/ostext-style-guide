@@ -1199,18 +1199,26 @@ body {
 }
 
 // Accounting
-h1.title#accounting + raw .business-single-header {
+h1.title#accounting + raw .business-single-header,
+h1.title#accounting + raw .business-double-header {
   font-size: 9pt;
   text-align: left;
   border: 1px solid #e5e5e5;
-  th {
-    color: #344456;
+  tr:first-of-type th {
     background-color: #0DC0DC;
+    color: #344456;
+    font-weight: bold;
+  }
+  th {
+    color: white;
+    font-weight: normal;
+    background-color: #24739E;
     padding: 5px;
-    text-transform: capitalize;
     text-align: left;
-    font-weight: bolder;
     font-family: 'Noto Sans', sans-serif, STIXGeneral, STIXSizeOneSym, STIXSize1;
+    // Override weird styling that is inherited
+    text-transform: capitalize;
+    border: 0;
   }
   tr {
     background-color: white;

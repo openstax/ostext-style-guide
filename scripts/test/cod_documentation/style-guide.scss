@@ -1317,13 +1317,11 @@
   <h3>Single Header Row</h3>
   [#table-business-single-header-2]
   
-  ![Single Header Row Table](assets/img/acc-row-header-single.jpg)
-
-  
   <h3>Double Header Row</h3>
-  ![Double Header Row Table](assets/img/acc-row-header-double.jpg)
-  <h4>Specs</h4>
-  ![Header Row Spec](assets/img/acc-row-header-spec.jpg)
+  [#table-business-double-header-2]
+
+  <h4>Specs (SCSS)</h4>
+  [#table-business-header-styling]
 
   <h3>Text-Heavy</h3>
   ![Text Table](assets/img/acc-text-table.jpg)
@@ -1343,6 +1341,18 @@
     @Type styled
     @Source table-business-single-header.html
     @Id #table-business-single-header-2
+  @Markup
+    @Type highlighted
+    @Source table-business-double-header.html
+    @Id #table-business-double-header
+  @Markup
+    @Type styled
+    @Source table-business-double-header.html
+    @Id #table-business-double-header-2
+  @Markup
+    @Type highlighted
+    @Source table-business-header-styling.scss
+    @Id #table-business-header-styling
   @Number '6.1.1'
 */
 /**
