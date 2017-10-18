@@ -1,0 +1,41 @@
+h1.title#accounting + raw .business-text-heavy {
+  font-size: 9pt;
+  text-align: left;
+  thead tr:first-of-type td {
+    color: #344456;
+    padding: 10px;
+    text-align: left;
+    font-weight: bold;
+    border-bottom: 2px solid #e5e5e5;
+    font-family: 'Noto Sans', sans-serif, STIXGeneral, STIXSizeOneSym, STIXSize1;
+    // Override weird styling that is inherited
+    text-transform: capitalize;
+  }
+  tr {
+    background-color: white;
+  }
+  td {
+    vertical-align: top;
+    color: black;
+    padding: 10px;
+    text-align: left;
+    font-family: 'Noto Sans', sans-serif, STIXGeneral, STIXSizeOneSym, STIXSize1;
+    // Override weird styling that is inherited
+    border: 0;
+  }
+  caption {
+    &::before {
+      content: "Table 18.2 ";
+      font-weight: bold;
+    }
+    color: black;
+    caption-side: bottom;
+    text-align: left;
+    font-size: 9.23076923px;
+    padding-bottom: 11px;
+    line-height: 17px;
+    padding-top: .5em;
+    padding-left: 0px;
+    font-family: 'Noto Sans', sans-serif, STIXGeneral, STIXSizeOneSym, STIXSize1;
+  }
+}
