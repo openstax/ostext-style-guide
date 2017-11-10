@@ -1290,3 +1290,17 @@ h1.title#accounting + raw .business-text-heavy {
     font-family: 'Noto Sans', sans-serif, STIXGeneral, STIXSizeOneSym, STIXSize1;
   }
 }
+
+h1.title#business + raw .business-link {
+  color: #027eb5;
+  text-decoration: none;
+  border-bottom: #027eb5 solid 0.02em;
+  padding-bottom: 0.1em;
+}
+
+h1.title#business + raw .business-link-note {
+  color: #0064A0;
+  text-decoration: none;
+  border-bottom: #0064A0 solid 0.02em;
+  padding-bottom: 0.1em;
+}

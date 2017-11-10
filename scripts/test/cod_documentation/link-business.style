@@ -1,0 +1,6 @@
+.business-link {
+  color: #027eb5;
+  text-decoration: none;
+  border-bottom: #027eb5 solid 0.02em;
+  padding-bottom: 0.1em;
+}

@@ -1287,9 +1287,31 @@
   Fonts
   ------
 
-  All business books will use Dosis for headers and Noto Sans for content areas. (See: [Astronomy](https://openstax.org/details/books/astronomy))
+  All business books will use Roboto Condensed for headers and Noto Sans for content areas. (See: [Astronomy](https://openstax.org/details/books/astronomy))
 
   [Download Fonts here](#/general-composition/typography/#fonts).
+
+  Links
+  ------
+
+  Links in text will appear like so:
+  <a class="business-link">Example Text Link</a>
+
+  [#business-link-styling]
+
+  Links within features will appear slightly darker:
+  <a class="business-link-note">Example Note Link</a>
+
+  [#business-link-note-styling]
+
+  @Markup
+    @Type highlighted
+    @Source link-business.style
+    @Id #business-link-styling
+  @Markup
+    @Type highlighted
+    @Source link-note-business.style
+    @Id #business-link-note-styling
 
   @Number '6.1.0'
 */
