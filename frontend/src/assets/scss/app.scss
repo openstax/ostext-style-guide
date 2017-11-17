@@ -1304,3 +1304,17 @@ h1.title#business + raw .business-link-note {
   border-bottom: #0064A0 solid 0.02em;
   padding-bottom: 0.1em;
 }
+
+div.feature-icon-box {
+  margin-bottom: 1em;
+  p.feature-name {
+    display: inline-block;
+    line-height: 50px;
+    vertical-align: middle;
+    margin: 0;
+  }
+  img.feature-icon {
+    height: 50px;
+    vertical-align: middle;
+  }
+}
