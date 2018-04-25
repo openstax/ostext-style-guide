@@ -916,6 +916,15 @@
   + Linking to equations, examples, figures, exercises, and tables: They will be numbered per the general OpenStax scheme (Figure 1.2, Table 3.2, etc). No anchor text is required.
   + Linking to an appendix: The default text that results is `Appendix [Letter]`. If you wish for the title of the appendix to appear, you will need to place it as anchor text.
 
+  Linking Within the Book on Staging Servers
+  ------------  
+
+  + Please share the book's bookmap with OpenStax so OpenStax can create corresponding modules on production. [Sample bookmap.](https://docs.google.com/spreadsheets/d/1O0_ae6-NGF_MvXgs265iWNsU32AhctajXXpDnWZMVA4/edit?usp=sharing)
+  + Once production modules are created, use the production module ID to link to other modules and chapters. 
+  + To find the production module, use the bookmap. OpenStax should have filled it out. 
+  + When the PDF generates on the staging server, the link will not display properly. That is okay as we intend for it to display properly once the content is migrated to production.
+  + If there are any changes to the bookmap (new modules, removal of modules, etc), please let us know as soon as possible so we can make the proper adjustments on our end as well.
+
 
   @Number '4.4.0'
 */
