@@ -801,7 +801,9 @@
 
   ### PNG
 
-  All nested images inside _features, notes and examples_ (items with a background color) should be provided in transparent PNG at 300DPI. In order for the integrity of the text in a transparent image to be maintained, the PNG needs to be exported at 300DPI.
+  All nested images inside _features, notes and examples_ that require the use of a background color should be provided in transparent PNG. 
+
+  For art with _fine lines or text_: In order for the integrity of the text and fine lines in a transparent image to be maintained, the PNG needs to be exported at 300DPI with the following specifications.
 
   + **Resolution:** 300DPI
   + **Anti-aliasing:** Type Optimized(Hinted)
@@ -810,6 +812,15 @@
   + **Font:** Do not put a stroke around the font. 
 
   ![](assets/img/png-export-settings.png)
+
+  For art with mostly images or photographs: Since there are no lines or text, you can export it with the following specifications:
+
+  + **Resolution:** 300DPI
+  + **Anti-aliasing:** Art Optimized(Supersampling)
+  + **Interlaced:**  Unchecked
+  + **Background Color:** Transparent
+
+  For a lone photograph: Please refer to the above settings for exporting JPGs. Since a photograph is a rectangle shape and won't need to use the feature background color, it can be exported as a JPG.
 
   Size
   ---------
